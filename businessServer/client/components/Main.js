@@ -2,7 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import NavBar from './Navbar';
-import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap'; 
+import SingleForm from './SingleForm';
 //import bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
 const Main = React.createClass({
@@ -13,7 +14,8 @@ const Main = React.createClass({
           <Link to="/">ChatBot 3000</Link>
         </h1>
         <NavBar/>
-      </div>
+        <SingleForm/>
+      </div>     
     )
   }
 });
