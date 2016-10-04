@@ -11,6 +11,8 @@ Connection.belongsTo(Node, { as: 'to' })
 Connection.belongsTo(Node, { as: 'product' })
 Connection.belongsTo(Business, { as: 'business' })
 
+Node.hasMany(Connection, {as: 'from', foreignKey: 'fromId'});
+Node.hasMany(Connection, {as: 'to', foreignKey: 'toId'});
 
 Chatter.belongsToMany(Business, { through: Conversation })
 Business.belongsToMany(Chatter, { through: Conversation })
