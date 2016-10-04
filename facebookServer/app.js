@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var https = require('https');
 var request = require('request');
 var chalk = require('chalk');
-var db = require('./db');
+var db = require('./models');
 
 // setup databse on heroku
 
