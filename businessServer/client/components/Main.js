@@ -7,7 +7,7 @@ import SingleForm from './SingleForm';
 //import bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
 const Main = React.createClass({
-  render() {
+  render: function() {
     return (
       <div>
         <h1>
@@ -15,6 +15,9 @@ const Main = React.createClass({
         </h1>
         <NavBar/>
         <SingleForm/>
+        <pre>
+          {JSON.stringify(this.props.connection)}
+        </pre>
       </div>     
     )
   }
