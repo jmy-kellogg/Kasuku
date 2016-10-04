@@ -1,1 +1,3 @@
 bin
+businessServer/node_modules
+facebookServer/node_modules
