@@ -8,7 +8,6 @@ var Conversation = require('./conversation')
 
 Connection.belongsTo(Node, { as: 'from' })
 Connection.belongsTo(Node, { as: 'to' })
-Connection.belongsTo(Node, { as: 'product' })
 Connection.belongsTo(Business, { as: 'business' })
 
 Node.hasMany(Connection, {as: 'from', foreignKey: 'fromId'});

@@ -12,16 +12,16 @@ let chatters = [
 ]
 let nodes = [
     { question: 'What would you like to buy?' },
-    { question: 'caf or decaf?' },
-    { question: 'What size?' },
-    { question: 'Anything else you can think of?' }
+    { question: 'caf or decaf?', productId: 1 },
+    { question: 'What size?', productId: 1},
+    { question: 'Anything else you can think of?', productId: 1 }
 ]
 let connections = [
-    { answer: 'coffee', fromId: 1, toId: 2, productId: 1, businessId: 1 },
-    { answer: 'caf', fromId: 2, toId: 3, productId: 1, businessId: 1 },
-    { answer: 'decaf', fromId: 2, toId: 3, productId: 1, businessId: 1 },
-    { answer: 'large', fromId: 3, toId: 4, productId: 1, businessId: 1 },
-    { answer: 'medium', fromId: 3, toId: 4, productId: 1, businessId: 1 }
+    { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },
+    { answer: 'caf', fromId: 2, toId: 3, businessId: 1 },
+    { answer: 'decaf', fromId: 2, toId: 3, businessId: 1 },
+    { answer: 'large', fromId: 3, toId: 4, businessId: 1 },
+    { answer: 'medium', fromId: 3, toId: 4, businessId: 1 }
 ]
 
 let businesses = [
@@ -36,8 +36,11 @@ db.sync({ force: true })
                 Node.bulkCreate(nodes),
                 Chatter.bulkCreate(chatters),
                 Business.bulkCreate(businesses),
-                Connection.bulkCreate(connections)
+                
             ])
+    })
+    .then(function() {
+      Connection.bulkCreate(connections)
     })
     // .then(function(proms) {
     //     proms[0].map(elem => console.log(elem))
