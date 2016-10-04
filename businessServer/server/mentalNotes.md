@@ -54,3 +54,16 @@ checkout time
  -> all specific products with correct variations
  -> total checkout
  -> shipping address?
+
+
+ Routes:
+
+ create a business
+ create a node
+ create a connection (product)
+
+ read a business
+ read a node
+ read all nodes of particular business
+ read a connection
+ read all connects of a particular node

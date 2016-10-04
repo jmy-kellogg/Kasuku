@@ -6,6 +6,9 @@ var Business = db.model('business')
 var Node = db.model('node')
 var Connection = db.model('connection')
 
+router.use('/nodes', require('./routes/node.routes'));
+router.use('/connections', require('./routes/connection.routes'));
+
 router.post('/business', function(req, res) {
     Node.create({ question: req.body.welcomeMsg })
         .then(node => {

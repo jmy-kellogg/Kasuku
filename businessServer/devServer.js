@@ -5,7 +5,7 @@ var config = require('./webpack.config.dev');
 var bodyParser = require('body-parser')
 var app = express();
 var compiler = webpack(config);
-
+var db = require('./server/models');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -23,11 +23,16 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(1337, 'localhost', function(err) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-
-    console.log('Listening at http://localhost:1337');
-});
+db.sync()
+  .then(function() {
+    app.listen(1337, 'localhost', function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('Listening at http://localhost:1337');
+    })
+  })
+  .catch(function(err) {
+    console.log("Error syncing DB", err);
+  });
