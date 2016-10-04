@@ -18,11 +18,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  Connection.findOne( { where: { id: req.params.id },
-                        include: [
-                          {model: Node, as: "from"},
-                          {model: Node, as: "to"}
-                        ]
+  Connection.findOne( { 
+    where: { id: req.params.id },
+    include: [
+      {model: Node, as: "from"},
+      {model: Node, as: "to"}
+    ]
   })
   .then(function(connection) {
     res.json(connection)
@@ -31,8 +32,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   // ASSUME WE HAVE A FROM NODE ID PASSED IN req.body
-  Connection.create(
-    { 
+  Connection.create({ 
       answer: req.body.answer,
       fromId: req.body.nodeId,
       productId: req.body.productId,

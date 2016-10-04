@@ -19,6 +19,8 @@ var Business = db.define('business', {
     // },
     // email: {
     //     type: Sequelize.STRING,
+    //     allowNull: false,
+    //     unique: true
     // },
 });
 

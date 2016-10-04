@@ -4,7 +4,10 @@ var db = require('./_db');
 var Node = db.define('node', {
     question: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
+    },
+    productId: {
+      type: Sequelize.INTEGER,
     }
 });
 
