@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     
-    './client/reduxstagram'
+    './client/chatBotApp.js'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -37,8 +37,8 @@ module.exports = {
     { 
       test: /\.css$/,
       include: path.join(__dirname, 'client'),
-      loader: 'style-loader!css-loader!stylus-loader'
-    }
-    ]
-  }
-};
+       loader: 'style-loader!css-loader!stylus-loader'
+     }
+     ]
+   }
+ };

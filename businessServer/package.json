@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dejongnj/chatserver"
+    "url": "https://github.com/jmy-kellogg/ChatterBot"
   },
   "author": "Nick, Walter, Doug, Jess",
   "dependencies": {
