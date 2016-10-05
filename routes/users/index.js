@@ -134,7 +134,7 @@ function receivedMessage(event, pageToken) {
   }
 }
 
-function sendImageMessage(senderId, pageToken) {
+function sendImageMessage(recipientId, pageToken) {
   var messageData = {
     recipient: {
       id: recipientId
