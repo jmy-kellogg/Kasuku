@@ -43,7 +43,8 @@ const SingleForm = React.createClass({
 	    		<div>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			<button onClick={this.addNewAnswer}>Add Answer</button>	
+	    			{JSON.stringify()}
+
 	    		</div>
 	    		<div>
 	    			<button onClick={this.addNewNode}>Add Node</button>

@@ -8,6 +8,7 @@ import css from './styles/style.css';
 // Import Components
 import App from './components/App';
 import SingleForm from './components/SingleForm';
+import Home from './components/Home';
 
 
 
@@ -22,6 +23,8 @@ const router = (
 	<Provider store={store}>
 	  <Router history={ history}>
 	    <Route path="/" component={App}>
+			<IndexRoute component={Home} />
+			<Route path="form" component={SingleForm} />
 	    </Route>
 	  </Router>
 	</Provider>
