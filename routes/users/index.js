@@ -143,6 +143,7 @@ function sendImageMessage(senderId, pageToken) {
       text: "YOU SEND AN IMAGE.... actually, it was just the text image."
     }
   };
+  callSendAPI(messageData, pageToken);
 }
 
 function sendTextMessage(recipientId, messageText, pageToken) {
