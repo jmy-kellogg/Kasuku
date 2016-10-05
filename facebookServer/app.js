@@ -17,6 +17,7 @@ app.set('port', (process.env.PORT || 5000));
 
 db.sync()
   .then(function() {
+    console.log('synced');
     app.listen(app.get('port'), function() {
       console.log("We are listening on port", app.get('port'));
     });    

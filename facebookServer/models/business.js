@@ -8,12 +8,12 @@ var Business = db.define('business', {
     // fbAccount: {
     //     type: Sequelize.STRING,
     // },
-    // pageToken: {
-    //     type: Sequelize.STRING,
-    // },
-    // webhookToken: {
-    //     type: Sequelize.STRING,
-    // },
+    pageToken: {
+         type: Sequelize.STRING,
+    },
+    webhookToken: {
+        type: Sequelize.STRING,
+    },
     // password: {
     //     type: Sequelize.STRING,
     // },
