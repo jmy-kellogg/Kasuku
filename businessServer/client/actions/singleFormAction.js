@@ -8,3 +8,12 @@
 //   We use const to store the name of the event so it is immutable
 // */
 // //every time you dispatch and action every reducer will run. 
+
+export function addAnswer(answer, fromId){
+	return {
+		type: 'ADD_ANSWER',
+		answer,
+		fromId,
+	}
+}
+

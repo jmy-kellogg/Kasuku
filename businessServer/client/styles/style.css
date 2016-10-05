@@ -26,28 +26,8 @@ button, .button
     border-color blue
     outline 0
 
-/*
-  Cowboy style speech bubble - you should probably use an SVG for this if you are doing more icons.
-*/
-.speech-bubble
-  size = 1.25rem
-  width size * 1.2
-  height size 
-  background blue
-  display inline-block
-  border-radius 50%
-  position relative
-  &:after
-    display inline-block
-    position absolute
-    content ''
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 size size 0
-    border-color: transparent blue transparent transparent
-    top 30%
-    left 0
+
+
 
   
   
