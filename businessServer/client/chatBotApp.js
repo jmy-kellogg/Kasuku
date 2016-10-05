@@ -6,6 +6,8 @@ import { render } from 'react-dom';
 import css from './styles/style.css';
 
 // Import Components
+import Login from './components/Login';
+import Signup from './components/Signup';
 import App from './components/App';
 import SingleForm from './components/SingleForm';
 import Home from './components/Home';
@@ -26,6 +28,8 @@ const router = (
 			<IndexRoute component={Home} />
 			<Route path="form" component={SingleForm} />
 	    </Route>
+      <Route path='/Login' component={Login}></Route>
+      <Route path='/Signup' component={Signup}></Route>
 	  </Router>
 	</Provider>
 
