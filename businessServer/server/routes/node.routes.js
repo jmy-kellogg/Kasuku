@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   Node.create( {
-    question: req.body.question
+    question: req.body.question,
+    productId: req.body.productId
   })
   .then(function(node) {
     res.json(node);

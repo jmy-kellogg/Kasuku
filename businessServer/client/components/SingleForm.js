@@ -1,16 +1,16 @@
 import React from 'react';
 
 const SingleForm = React.createClass({
-	addNewAnswer: function(e){
-		// {answers}.push(this.refs.answer.value)
-		console.log(this.refs.answer.value);
-		e.preventDefault();
-	},
-	addNewNode: function(e){
-		console.log('second');
-		e.preventDefault();
+	// addNewAnswer: function(e){
+	// 	// {answers}.push(this.refs.answer.value)
+	// 	console.log(this.refs.answer.value);
+	// 	e.preventDefault();
+	// },
+	// addNewNode: function(e){
+	// 	console.log('second');
+	// 	e.preventDefault();
 
-	},
+	// },
 	render: function(){
 		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}]; 
 		const repeatOption = options.map((item, i) => {
@@ -21,7 +21,7 @@ const SingleForm = React.createClass({
 		// const answers= [];
 		// const repeatAnswer = answers.map((answer) => {
 		// 	return (
-	 //    			<p>Answer: {answer}</p>
+		//    		<p>Answer: {answer}</p>
 		// 		)
 		// });
 	    return (
@@ -43,7 +43,8 @@ const SingleForm = React.createClass({
 	    		<div>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			<button onClick={this.addNewAnswer}>Add Answer</button>	
+	    			{JSON.stringify()}
+
 	    		</div>
 	    		<div>
 	    			<button onClick={this.addNewNode}>Add Node</button>
