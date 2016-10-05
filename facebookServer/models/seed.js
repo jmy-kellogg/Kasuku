@@ -1,3 +1,4 @@
+'use strict'
 var db = require('./index');
 
 var Node = require('./node');
