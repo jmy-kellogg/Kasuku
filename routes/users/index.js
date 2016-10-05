@@ -2,13 +2,17 @@ var router = require('express').Router();
 var request = require('request');
 module.exports = router;
 
+// var db = require('../../models')
+// var Business = db.model('business')
+// var Node = db.model('node')
+// var Connection = db.model('connection')
+
 router.get('/', function (req, res, next) {
   console.log('***** GET ROUTE: /users/');
   res.send("Inside GET users route");
 });
 
 var globalPageVar;
-
 
 router.use('/:name', function(req, res, next) {
   console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
@@ -17,7 +21,12 @@ router.use('/:name', function(req, res, next) {
      PASSWORD WHICH  WILL BE  USED TO CREATE THEIR SPECIFIC WEBHOOK VERIFICATION. THEY ALSO NEED TO SUPPLY 
      THEIR PAGETOKEN WHICH WILL BE USED IN SENDING MESSAGES AND MESSAGE VALIDATION THEREFORE THE USER 
      DATABASE NEEDS TO */
+  // Business.findOne({where: {businessName: req.params.name}})
+  // .then(function(business) {
+  //   console.log(business);
+  // }) 
   if (req.params.name === "chatty-A-1") {
+    console.log("Inside Middlewhere for /users/:name/fbwebhook")
     requester.webhookToken = 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken';
     requester.pageToken = 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD';
     req.fbRequester = requester;
@@ -34,7 +43,7 @@ router.use('/:name', function(req, res, next) {
 router.get('/:name/fbwebhook', function(req, res, next) {
   console.log('*************INSIDE GET REQUEST FROM FACEBOOK*******************');
   console.log('***** GET ROUTE: /users/:name/fbwebhook', req.params.name);
-
+  console.log(req.query);
   var verifyToken = req.fbRequester.webhookToken;
   // THIS IS TO VERIFY FACEBOOK STUFF USING THE USER'S APP'S VERIFYTOKEN
   if (req.query['hub.mode'] === 'subscribe' &&
@@ -48,10 +57,11 @@ router.get('/:name/fbwebhook', function(req, res, next) {
 });
 
 router.post('/:name/fbwebhook', function(req, res, next) {
-
+  console.log("Got to post on /users/:name/fbwebhook"); 
   var data = req.body;
   var pageToken = req.fbRequester.pageToken;
-
+  console.log(data);
+  console.log(pageToken);
   //Make sure this is a page subscription 
   if (data.object == 'page') {
     // Iterate over each entry
