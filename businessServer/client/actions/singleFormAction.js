@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 // /**
 //   Action Creators
 //   These fire events which the reducer will handle
@@ -10,6 +12,7 @@
 // //every time you dispatch and action every reducer will run. 
 
 export function addAnswer(answer, fromId){
+	console.log(answer)
 	return {
 		type: 'ADD_ANSWER',
 		answer,

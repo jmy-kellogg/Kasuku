@@ -24,7 +24,6 @@ const Login = React.createClass({
           </div>
         </form>
         <NavBar/>
-        <SingleForm/>
       </div>
     )
   }

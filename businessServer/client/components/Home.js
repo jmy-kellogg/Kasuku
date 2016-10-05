@@ -4,7 +4,7 @@ const Home = React.createClass({
 	render: function (){
 		return (
 			<div>
-				This is Home
+			 {JSON.stringify(this.props.connection)}
 			</div>
 		)
 	}

@@ -1,11 +1,12 @@
 import React from 'react';
 
 const SingleForm = React.createClass({
-	// addNewAnswer: function(e){
-	// 	// {answers}.push(this.refs.answer.value)
-	// 	console.log(this.refs.answer.value);
-	// 	e.preventDefault();
-	// },
+	addNewAnswer: function(e){
+		e.preventDefault();
+		// {answers}.push(this.refs.answer.value)
+		//this.props.addAnswer.bind(null, this.answer.value, 1)
+		console.log(this.props.addAnswer(this.refs.answer.value, 1));
+	},
 	// addNewNode: function(e){
 	// 	console.log('second');
 	// 	e.preventDefault();
@@ -43,11 +44,11 @@ const SingleForm = React.createClass({
 	    		<div>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			{JSON.stringify()}
+	    			<button onClick={this.addNewAnswer}>Add Answer</button>
 
 	    		</div>
 	    		<div>
-	    			<button onClick={this.addNewNode}>Add Node</button>
+	    			<button>Add Node</button>
 	    		</div>
 	    		</form>
 	    	</div>

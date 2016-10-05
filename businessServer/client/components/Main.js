@@ -14,10 +14,6 @@ const Main = React.createClass({
           <Link to="/">ChatBot 3000</Link>
         </h1>
         <NavBar/>
-
-        <pre>
-          {JSON.stringify(this.props.connection)}
-        </pre>
         {React.cloneElement(this.props.children, this.props)}
       </div>     
     )

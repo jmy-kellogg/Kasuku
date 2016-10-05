@@ -25,7 +25,6 @@ const Signup = React.createClass({
           </div>
         </form>
         <NavBar/>
-        <SingleForm/>
       </div>
     )
   }
