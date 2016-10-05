@@ -42,8 +42,8 @@ db.sync({ force: true })
             ])
     })
     .then(function() {
-        Connection.bulkCreate(connections)
+        return Connection.bulkCreate(connections)
     })
-    // .then(function(proms) {
-    //     proms[0].map(elem => console.log(elem))
-    // })
+    .then(() => {
+        process.exit()
+    })
