@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
 
-var db = new Sequelize('postgres://104.236.47.240:5432/chatterbot', {
-    logging: false
+var db = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  logging: false
 });
 
 module.exports = db;
