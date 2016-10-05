@@ -8,12 +8,14 @@ var Conversation = require('./models/conversation');
 
 
 let chatters = [
-    { fbAccount: 11, firstName: 'Billy BuyStuff' }
+    { fbAccount: 11, firstName: 'Billy BuyStuff' },
+    { fbAccount: 12, firstName: 'Paulie Purchasethings' },
+    { fbAccount: 13, firstName: 'Adele Acquirer' }
 ]
 let nodes = [
     { question: 'What would you like to buy?' },
     { question: 'caf or decaf?', productId: 1 },
-    { question: 'What size?', productId: 1},
+    { question: 'What size?', productId: 1 },
     { question: 'Anything else you can think of?', productId: 1 }
 ]
 let connections = [
@@ -36,11 +38,11 @@ db.sync({ force: true })
                 Node.bulkCreate(nodes),
                 Chatter.bulkCreate(chatters),
                 Business.bulkCreate(businesses),
-                
+
             ])
     })
     .then(function() {
-      Connection.bulkCreate(connections)
+        Connection.bulkCreate(connections)
     })
     // .then(function(proms) {
     //     proms[0].map(elem => console.log(elem))
