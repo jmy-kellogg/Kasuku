@@ -1,3 +1,15 @@
+//prompt for user input
+// search for conversation with chatter id and businnes id  
+- - // if found, grab current node  
+- - - - // match chatterMsg to connections listing chatter's current node id as fromId
+- - - - - - // upon a match, follow toId 
+- - - - - - // send that question back to user, update currentNode
+- - // if not found, create a row with nodeid linking to business.headNodeId
+- - // then send head node question
+
+
+
+
 -> notes front end needs to provide
 
 $ new product (special connection)
