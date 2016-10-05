@@ -114,17 +114,17 @@ function receivedMessage(event, pageToken) {
         sendImageMessage(senderID, pageToken);
         break;
 
-      case 'button':
-        sendButtonMessage(senderID, pageToken);
-        break;
+      // case 'button':
+      //   sendButtonMessage(senderID, pageToken);
+      //   break;
 
-      case 'generic':
-        sendGenericMessage(senderID, pageToken);
-        break;
+      // case 'generic':
+      //   sendGenericMessage(senderID, pageToken);
+      //   break;
 
-      case 'receipt':
-        sendReceiptMessage(senderID, pageToken);
-        break;
+      // case 'receipt':
+      //   sendReceiptMessage(senderID, pageToken);
+      //   break;
 
       default:
         sendTextMessage(senderID, messageText, pageToken);
