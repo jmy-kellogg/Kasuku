@@ -1,19 +1,22 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as singleFormActionCreators from '../actions/singleFormAction';
+import * as actionCreators from '../actions/actions';
+
 import Main from './Main';
 import SingleForm from './SingleForm';
+import Product from './Product';
 
 
 function mapStateToProps(state) {
 	return {
 		connection: state.connection,
-		node: state.node
+		node: state.node,
+    product: state.product
 	};
 };
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators(singleFormActionCreators, dispatch)
+	return bindActionCreators(actionCreators, dispatch)
 }
 
 const App = connect(mapStateToProps, mapDispatchToProps)(Main);

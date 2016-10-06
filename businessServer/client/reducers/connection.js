@@ -1,6 +1,11 @@
 function connection(state=[], action){
-	console.log("conncetion is updated")
-	return state
+  switch(action.type){
+    case 'ADD_ANSWER':
+      console.log(state);
+      break;
+    default:
+      return state;
+  }
 }
 
 export default connection
