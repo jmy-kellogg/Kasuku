@@ -16,3 +16,10 @@ export function addAnswerAction(answer, fromId=null){
     fromId,
   }
 }
+
+export function getNodesAction(id){
+  return {
+    type: 'GET_NODE',
+    id
+  }
+}

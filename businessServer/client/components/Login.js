@@ -1,18 +1,12 @@
-//import 'bootstrap/dist/css/bootstrap.css'
 import React from 'react';
-import { Link } from 'react-router';
-import NavBar from './Navbar';
-import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import SingleForm from './SingleForm';
-//import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+
 
 const Login = React.createClass({
-  render() {
+  
+  render: function() {
     return (
       <div>
-        <h1>
-          <Link to="/">ChatBot 3000</Link>
-        </h1>
         <form>
           <div>
             <label for="username">User Name</label>
@@ -23,8 +17,6 @@ const Login = React.createClass({
             <input name="password" type="password"/>
           </div>
         </form>
-        <NavBar/>
-        <SingleForm/>
       </div>
     )
   }

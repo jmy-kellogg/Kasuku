@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Product = React.createClass({
+
   addProduct: function(e){
     var name = this.refs.productname.value;
     this.props.addProductAction(name);
@@ -21,8 +22,7 @@ const Product = React.createClass({
     // console.log(this.state);
     // console.log(state);
     // console.log(this.props.product);
-
-
+    
     const productDiv = this.props.product.map((product, i) => {
       return (
         <div className="product-box" key={i}>
