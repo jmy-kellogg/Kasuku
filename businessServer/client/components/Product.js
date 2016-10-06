@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Product = React.createClass({
+
   addProduct: function(e){
     var name = this.refs.productname.value;
     this.props.addProductAction(name);

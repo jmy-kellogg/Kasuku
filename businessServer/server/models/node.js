@@ -8,6 +8,9 @@ var Node = db.define('node', {
     },
     productId: {
       type: Sequelize.INTEGER,
+    }, 
+    topLevel: {
+    	type: Sequelize.BOOLEAN, 
     }
 });
 

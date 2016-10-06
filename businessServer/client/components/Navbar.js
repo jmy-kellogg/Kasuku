@@ -4,8 +4,9 @@ import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 // post name to database.  get id from database.  add id to product
 
 const NavBar = React.createClass({
-	 render() {
-    return (
+
+	render: function() {
+  return (
   <Navbar inverse>
     <Navbar.Header>
       <Navbar.Brand>

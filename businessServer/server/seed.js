@@ -14,9 +14,9 @@ let chatters = [
 ]
 let nodes = [
     { question: 'What would you like to buy?' },
-    { question: 'caf or decaf?', productId: 1 },
-    { question: 'What size?', productId: 1 },
-    { question: 'Anything else you can think of?', productId: 1 }
+    { question: 'caf or decaf?', productId: 1, topLevel: true },
+    { question: 'What size?', productId: 1, topLevel: true },
+    { question: 'Anything else you can think of?', productId: 1, topLevel: true }
 ]
 let connections = [
     { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },

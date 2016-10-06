@@ -1,31 +1,67 @@
-//import 'bootstrap/dist/css/bootstrap.css'
 import React from 'react';
-import { Link } from 'react-router';
-import NavBar from './Navbar';
-import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import SingleForm from './SingleForm';
-//import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+
 
 const Signup = React.createClass({
-  render() {
+  handleSubmit (e) {
+    e.preventDefault();
+    // console.log("submitting", this.refs);
+    const username = this.refs.username.value;
+    const email = this.refs.email.value;
+    const password = this.refs.password.value;
+    const password_confirmation = this.refs.password_confirmation.value;
+    console.log(username, email, password, password_confirmation);
+    this.props.signup(username, email, password, password_confirmation);
+  },
+  render () {
     return (
       <div>
-        <form>
-          <div>
-            <label for="username">User Name</label>
-            <input name="username" type="text"/>
+        <form onSubmit={this.handleSubmit.bind(null)} noValidate>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input className="form-control" 
+                    type="text"
+                    id="username"
+                    name="username"
+                    ref="username"
+                    value={this.props.username}
+                    placeholder="enter a username" />
           </div>
-          <div>
-            <label for="password">Password</label>
-            <input name="password" type="password"/>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input className="form-control" 
+                    type="email"
+                    id="email"
+                    name="email"
+                    ref="email"
+                    value={this.props.email}
+                    placeholder="enter a email" />
           </div>
-          <div>
-            <label for="verify">Password</label>
-            <input name="verify" type="text"/>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input className="form-control" 
+                    type="password"
+                    id="password"
+                    name="password"
+                    ref="password"
+                    value={this.props.password}
+                    placeholder="enter a password" />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="password_confirmation">Confirm password</label>
+            <input className="form-control" 
+                    type="password"
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    ref="password_confirmation"
+                    value={this.props.password_confirmation}
+                    placeholder="confirm your password" />
+          </div>
+          <button className="btn btn-success" type="submit">Signup</button>
         </form>
-        <NavBar/>
-        <SingleForm/>
       </div>
     )
   }
