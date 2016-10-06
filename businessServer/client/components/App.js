@@ -2,15 +2,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actions';
 import Main from './Main';
-import SingleForm from './SingleForm';
-import Product from './Product';
+
 
 
 function mapStateToProps(state) {
 	return {
 		connection: state.connection,
 		node: state.node,
-    	product: state.product
+    	product: state.product,
+    	business: state.business
 	};
 };
 

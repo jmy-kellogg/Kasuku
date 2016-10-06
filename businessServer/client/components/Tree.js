@@ -4,20 +4,21 @@ import polyfill from 'es6-promise';
 
 
 const Tree = React.createClass({
-
   render: function() {
-    const businessId = +this.props.params.businessId;
-    const headNode = null;
-    fetch('../api/business/1')
-      .then(function(response){
-        if (response.status >= 400) {
-          throw new Error("Bad response from server");
-        }
-        return response.json();
-      })
-      .then(function(business){
-          console.log(business.headNodeId)
-      })
+    const businessId = this.props.params.businessId;
+    const properties = this.props;
+    if(!this.props.business.length){
+      fetch('../api/business/'+ businessId)
+        .then(function(response){
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+        })
+        .then(function(business){
+          properties.setBusinessAction(business)   
+        })
+    }
     return (
       <div>
         <p>tree</p>
