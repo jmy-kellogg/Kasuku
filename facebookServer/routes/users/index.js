@@ -106,6 +106,9 @@ function receivedMessage(event, pageToken) {
 
   if (messageText) {
 
+    // CALL A FUNCTION THAT WILL PARSE THE MESSAGE TEXT AND RESPOND WITH THE APPROPRIATE 
+    // NODE TEXT
+
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.

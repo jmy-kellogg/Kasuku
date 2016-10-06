@@ -5,6 +5,7 @@ import Main from './Main';
 import SingleForm from './SingleForm';
 import Product from './Product';
 
+// console.log(actionCreators, "ACTIONCREATORS\n\n")
 
 function mapStateToProps(state) {
 	return {
