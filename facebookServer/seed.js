@@ -49,8 +49,6 @@ let connections = [
     { answer: 'small', fromId: 9, businessId: 1 },
     { answer: 'medium', fromId: 9, businessId: 1 },
     { answer: 'large', fromId: 9, businessId: 1 },
-
-
 ]
 
 let businesses = [
