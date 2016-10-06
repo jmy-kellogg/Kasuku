@@ -11,6 +11,7 @@ import Signup from './components/Signup';
 import App from './components/App';
 import SingleForm from './components/SingleForm';
 import Home from './components/Home';
+import Tree from './components/Tree';
 
 
 
@@ -27,6 +28,7 @@ const router = (
 	    <Route path="/" component={App}>
 			<IndexRoute component={Home} />
 			<Route path="form" component={SingleForm} />
+			<Route path="tree/:businessId" component={Tree} />
 	    </Route>
       <Route path='/Login' component={Login}></Route>
       <Route path='/Signup' component={Signup}></Route>

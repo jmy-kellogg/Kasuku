@@ -3,14 +3,11 @@ import React from 'react';
 const SingleForm = React.createClass({
 	addNewAnswer: function(e){
 		e.preventDefault();
-		// {answers}.push(this.refs.answer.value)
-		//this.props.addAnswer.bind(null, this.answer.value, 1)
-		console.log(this.props.addAnswer(this.refs.answer.value, 1));
+		this.props.addAnswer(this.refs.answer.value, 1);
 	},
 	// addNewNode: function(e){
 	// 	console.log('second');
 	// 	e.preventDefault();
-
 	// },
 	render: function(){
 		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}]; 

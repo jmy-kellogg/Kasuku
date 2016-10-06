@@ -1,9 +1,11 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as singleFormActionCreators from '../actions/singleFormAction';
+import * as singleFormActionCreator from '../actions/SingleFormAction';
+import * as treeActionCreator from '../actions/treeAction';
 import Main from './Main';
 import SingleForm from './SingleForm';
 
+const actionCreators = Object.assign({}, singleFormActionCreator, treeActionCreator);
 
 function mapStateToProps(state) {
 	return {
@@ -13,7 +15,7 @@ function mapStateToProps(state) {
 };
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators(singleFormActionCreators, dispatch)
+	return bindActionCreators(actionCreators, dispatch)
 }
 
 const App = connect(mapStateToProps, mapDispatchToProps)(Main);
