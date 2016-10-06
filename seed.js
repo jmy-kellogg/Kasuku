@@ -54,7 +54,7 @@ let connections = [
 ]
 
 let businesses = [
-    { businessName: 'starbucks', fb_account_id: 123, headNodeId: 1 }
+    { businessName: 'Chatty-A-1', fb_account_id: 123, headNodeId: 1 }
 ]
 
 
