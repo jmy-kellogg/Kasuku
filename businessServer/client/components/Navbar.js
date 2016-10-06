@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
+// post name to database.  get id from database.  add id to product
 
 const NavBar = React.createClass({
 	 render() {
@@ -14,7 +15,7 @@ const NavBar = React.createClass({
           </Navbar.Header>
               <Navbar.Collapse>
                 <Nav>
-                  <NavItem eventKey={1} href="#">Link</NavItem>
+                  <NavItem eventKey={1} href="/product">Start</NavItem>
                   <NavItem eventKey={2} href="#">Link</NavItem>
                   <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                     <MenuItem eventKey={3.1}>Action</MenuItem>

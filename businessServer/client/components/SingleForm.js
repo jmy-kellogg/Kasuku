@@ -3,11 +3,11 @@ import React from 'react';
 const SingleForm = React.createClass({
 	addNewAnswer: function(e){
 		// {answers}.push(this.refs.answer.value)
+		console.log(this);
 		e.preventDefault();
 		var ans = this.refs.answer.value;
+		console.log(ans);
 		this.props.addAnswerAction(ans);
-
-
 	},
 	// addNewNode: function(e){
 	// 	console.log('second');

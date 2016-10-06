@@ -18,10 +18,6 @@ const Product = React.createClass({
 
   // },
   render: function(){
-    // console.log(this.state);
-    // console.log(state);
-    // console.log(this.props.product);
-
 
     const productDiv = this.props.product.map((product, i) => {
       return (
@@ -32,19 +28,19 @@ const Product = React.createClass({
         </div>
       )
     })
-      return (
+    return (
+      <div>
         <div>
-          <div>
-            {productDiv}
-          </div>
-          <div>
-            <input ref="productname" name="productname"/>
-            <button onClick={this.addProduct}>add</button>
-
-          </div>
+          {productDiv}
+        </div>
+        <div>
+          <input ref="productname" name="productname"/>
+          <button onClick={this.addProduct}>add</button>
 
         </div>
-      )
+
+      </div>
+    )
   }
 });
 
