@@ -3,15 +3,17 @@ import React from 'react';
 const SingleForm = React.createClass({
 
 	addNewAnswer: function(e){
+
 		e.preventDefault();
 		var ans = this.refs.answer.value;
+		console.log(ans);
 		this.props.addAnswerAction(ans);
 	},
 	// addNewNode: function(e){
 	// 	console.log('second');
 	// 	e.preventDefault();
 	// },
-	
+
 	render: function(){
 		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}];
 		const repeatOption = options.map((item, i) => {
