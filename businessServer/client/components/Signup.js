@@ -5,7 +5,6 @@ import SingleForm from './SingleForm';
 const Signup = React.createClass({
   handleSubmit (e) {
     e.preventDefault();
-    // console.log("submitting", this.refs);
     const username = this.refs.username.value;
     const email = this.refs.email.value;
     const password = this.refs.password.value;
