@@ -5,8 +5,8 @@ import polyfill from 'es6-promise';
 
 const Tree = React.createClass({
   render: function() {
-    const businessId = this.props.params.businessId;
     const properties = this.props;
+    const businessId = properties.params.businessId;
     if(!this.props.business.length){
       fetch('../api/business/'+ businessId)
         .then(function(response){
@@ -21,7 +21,7 @@ const Tree = React.createClass({
     }
     return (
       <div>
-        <p>tree</p>
+        <p>This is the {this.props.business[0].businessName} tree!</p>
       </div>
     )
   }

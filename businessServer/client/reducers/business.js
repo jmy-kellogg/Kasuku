@@ -11,7 +11,6 @@ function business(state=[], action){
     		updatedAt: action.updatedAt
           }
         ];
-      console.log(newState);
         return newState
     default:
       return state;

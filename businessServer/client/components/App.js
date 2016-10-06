@@ -4,7 +4,6 @@ import * as actionCreators from '../actions/actions';
 import Main from './Main';
 
 
-
 function mapStateToProps(state) {
 	return {
 		connection: state.connection,
