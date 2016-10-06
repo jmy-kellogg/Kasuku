@@ -1,3 +1,4 @@
+'use strict';
 var router = require('express').Router();
 var request = require('request');
 module.exports = router;
@@ -6,13 +7,11 @@ var db = require('../../models')
 var Business = db.model('business')
 var Node = db.model('node')
 var Connection = db.model('connection')
-
-// router.get('/', function (req, res, next) {
-//   console.log('***** GET ROUTE: /users/');
-//   res.send("Inside GET users route");
-// });
+var Conversation = db.model('conversation')
 
 
+var USERID = 1;
+var BUSINESSID = 1;
 
 router.use('/:name', function(req, res, next) {
   console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
@@ -149,17 +148,51 @@ function sendImageMessage(recipientId, pageToken) {
   callSendAPI(messageData, pageToken);
 }
 
-function sendTextMessage(recipientId, messageText, pageToken) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: messageText
-    }
-  };
+function sendTextMessage(recipientId, chatterMsg, pageToken) {
+  let currentConvo;  
 
-  callSendAPI(messageData, pageToken);
+  Conversation.findOne({ where: { chatterId: USERID, businessId: BUSINESSID } })
+    .then(_convo => {
+      if (!_convo) {
+        return Business.findById(BUSINESSID)
+        .then(business => {
+          return Conversation.create({ chatterId: USERID, businessId: BUSINESSID, nodeId: business.headNodeId })
+        })
+        .then(__convo => {
+          currentConvo = __convo;
+          return Node.findById(__convo.nodeId);
+        })
+      }
+      currentConvo = _convo;
+      return Node.findById(_convo.nodeId)
+    })
+    .then(_node => {
+      return Connection.findAll({ where: { fromId: _node.id } })
+    })
+    .then(_connections => {
+      // if current object.answer === chatterMsg,
+      for (let i = 0; i < _connections.length; i++) {
+          if (_connections[i].answer === chatterMsg) {
+              //  set conversation to object.toId. else
+              return currentConvo.update({ nodeId: _connections[i].toId })
+          }
+      }
+      return Promise.resolve(currentConvo)
+    })
+    .then(_convo => {
+      return Node.findById(_convo.nodeId)
+    })
+    .then(node => {
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: node.question
+        }
+      };
+      callSendAPI(messageData, pageToken);
+    })
 }
 
 function callSendAPI(messageData, pageToken) {
