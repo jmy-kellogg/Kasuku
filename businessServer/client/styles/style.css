@@ -33,7 +33,9 @@ button, .button
   outline-color: black;
   width: 50vh;
   vertical-align: center;
-  padding: 5%
+  padding: 5%;
+  float: left;
+  clear: both;
 }
 
 .layerBox{
