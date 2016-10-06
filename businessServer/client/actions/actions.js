@@ -1,7 +1,5 @@
 
 export function addProductAction(name){
-  // console.log('inside the product action');
-  // console.log(name);
   return {
     type: 'ADD_PRODUCT',
     name
