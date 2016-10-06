@@ -1,16 +1,16 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as singleFormActionCreator from '../actions/SingleFormAction';
-import * as treeActionCreator from '../actions/treeAction';
+import * as actionCreators from '../actions/actions';
 import Main from './Main';
 import SingleForm from './SingleForm';
+import Product from './Product';
 
-const actionCreators = Object.assign({}, singleFormActionCreator, treeActionCreator);
 
 function mapStateToProps(state) {
 	return {
 		connection: state.connection,
-		node: state.node
+		node: state.node,
+    	product: state.product
 	};
 };
 

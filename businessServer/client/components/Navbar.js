@@ -3,8 +3,9 @@ import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 
 
 const NavBar = React.createClass({
-	 render() {
-    return (
+
+	render: function() {
+  return (
   <Navbar inverse>
     <Navbar.Header>
       <Navbar.Brand>

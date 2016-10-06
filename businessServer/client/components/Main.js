@@ -4,9 +4,10 @@ import { Link } from 'react-router';
 import NavBar from './Navbar';
 import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap'; 
 
-//import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+
 
 const Main = React.createClass({
+  
   render: function() {
     return (
       <div>

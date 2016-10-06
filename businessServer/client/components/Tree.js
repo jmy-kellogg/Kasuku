@@ -8,7 +8,7 @@ const Tree = React.createClass({
   render: function() {
     const businessId = +this.props.params.businessId;
     const headNode = null;
-      fetch('../api/business/1')
+    fetch('../api/business/1')
       .then(function(response){
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -17,11 +17,10 @@ const Tree = React.createClass({
       })
       .then(function(business){
           console.log(business.headNodeId)
-         
       })
     return (
       <div>
-
+        <p>tree</p>
       </div>
     )
   }

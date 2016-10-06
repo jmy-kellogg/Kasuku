@@ -12,7 +12,8 @@ import App from './components/App';
 import SingleForm from './components/SingleForm';
 import Home from './components/Home';
 import Tree from './components/Tree';
-
+import Product from './components/Product';
+import Layers from './components/Layers';
 
 
 //import react router deps
@@ -25,13 +26,15 @@ const router = (
 
 	<Provider store={store}>
 	  <Router history={ history}>
-	    <Route path="/" component={App}>
+	    <Route path='/' component={App}>
 			<IndexRoute component={Home} />
-			<Route path="form" component={SingleForm} />
-			<Route path="tree/:businessId" component={Tree} />
-	    </Route>
-      <Route path='/Login' component={Login}></Route>
-      <Route path='/Signup' component={Signup}></Route>
+			<Route path='/form' component={SingleForm} />
+			<Route path='/layers' component={Layers} />
+	      	<Route path='/login' component={Login} />
+	      	<Route path='/signup' component={Signup} />
+	      	<Route path='/product' component={Product} />
+	      	<Route path='/tree/:businessId' component={Tree} />
+		  </Route>
 	  </Router>
 	</Provider>
 

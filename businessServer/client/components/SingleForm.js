@@ -1,16 +1,19 @@
 import React from 'react';
 
 const SingleForm = React.createClass({
+
 	addNewAnswer: function(e){
 		e.preventDefault();
-		this.props.addAnswer(this.refs.answer.value, 1);
+		var ans = this.refs.answer.value;
+		this.props.addAnswerAction(ans);
 	},
 	// addNewNode: function(e){
 	// 	console.log('second');
 	// 	e.preventDefault();
 	// },
+	
 	render: function(){
-		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}]; 
+		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}];
 		const repeatOption = options.map((item, i) => {
 			return (
 				<option key={i}>{item.name}</option>
@@ -41,8 +44,8 @@ const SingleForm = React.createClass({
 	    		<div>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			<button onClick={this.addNewAnswer}>Add Answer</button>
-
+	    			{JSON.stringify()}
+	    			<button onClick={this.addNewAnswer}>add answer</button>
 	    		</div>
 	    		<div>
 	    			<button>Add Node</button>
@@ -53,4 +56,4 @@ const SingleForm = React.createClass({
 	}
 });
 
-export default SingleForm 
+export default SingleForm

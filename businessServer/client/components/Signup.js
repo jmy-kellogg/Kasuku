@@ -1,13 +1,10 @@
-//import 'bootstrap/dist/css/bootstrap.css'
 import React from 'react';
-import { Link } from 'react-router';
-import NavBar from './Navbar';
-import { Nav, Navbar, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import SingleForm from './SingleForm';
-//import bootstrap from 'bootstrap/dist/css/bootstrap.css'
+
 
 const Signup = React.createClass({
-  render() {
+
+  render: function() {
     return (
       <div>
         <form>
@@ -24,7 +21,6 @@ const Signup = React.createClass({
             <input name="verify" type="text"/>
           </div>
         </form>
-        <NavBar/>
       </div>
     )
   }

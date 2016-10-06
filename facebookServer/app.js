@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var https = require('https');
 var request = require('request');
 var chalk = require('chalk');
-var db = require('./db');
+var db = require('./models');
 
 // setup databse on heroku
 
@@ -17,6 +17,7 @@ app.set('port', (process.env.PORT || 5000));
 
 db.sync()
   .then(function() {
+    console.log('synced');
     app.listen(app.get('port'), function() {
       console.log("We are listening on port", app.get('port'));
     });    

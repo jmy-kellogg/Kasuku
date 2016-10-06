@@ -34,6 +34,7 @@
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.10.2",
+    "inquirer": "^1.2.1",
     "pg": "^6.1.0",
     "raven-js": "^2.3.0",
     "react": "^15.0.2",
