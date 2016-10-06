@@ -8,13 +8,15 @@ import rootReducer from './reducers/index';
 import node from './data/node';
 import connection from './data/connection';
 import product from './data/product';
+import business from './data/business';
 
 
 // create an object for the default data
 const defaultState = {
   node,
   connection,
-  product
+  product,
+  business
 };
 
  const store = createStore(rootReducer, defaultState,
