@@ -79,13 +79,15 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
   recipientId = '' + recipientId;
   Chatter.findOrCreate({ where: { fbAccount: recipientId }})
   .then(chatter => {
-    chatterId = chatter.id
+    chatterId = chatter[0].id
+    console.log("CHATTERID 1", chatterId);
     return Conversation.findOne({ where: { chatterId: chatterId, businessId: BUSINESSID } })
   })
     .then(_convo => {
       if (!_convo) {
         return Business.findById(BUSINESSID)
         .then(business => {
+          console.log("CHATTERID 2", chatterId);
           return Conversation.create({ chatterId: chatterId, businessId: BUSINESSID, nodeId: business.headNodeId })
         })
         .then(__convo => {
