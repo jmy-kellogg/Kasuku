@@ -1,6 +1,7 @@
+'use strict'
 // need to install rita
 // const rita = require('./node_modules/rita/js/rita-full');
-// const rita = require('./node_modules/rita/js/rita-full');
+
 const rita = require('rita');
 const RS = rita.RiString;
 const r = rita.RiTa;
@@ -15,7 +16,7 @@ var greeting = ['hello', 'hi', 'hey']
 var nouns = ['nn', 'nns', 'nnp', 'nnps'];
 
 var parseYesOrNo = function(utterance){
-  var riStr = new RS(str);
+  var riStr = new RS(utterance);
   var words = riStr.words();
   for (var x = 0; x < words.length; x++){
     if(yes.includes(words[x].toLowerCase())){
@@ -24,11 +25,8 @@ var parseYesOrNo = function(utterance){
     else if(no.includes(words[x].toLowerCase())){
       return 'no';
     }
-    else{
-      return 'unknown';
-      // return words; // return unknown words;
-    }
   }
+  return 'unknown'
 }
 
 var getAnswers = function(utterance, options){
@@ -184,4 +182,30 @@ module.exports = {
 // console.log(parseQuantity('I want one thousand eighty'));
 // console.log(parseQuantity('I want 55'));
 // console.log(parseQuantity('one thousand eighty'));
+
 console.log(parseOptions('I want some coffede', ['coffee', 'tea']));
+
+// console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
+
+// console.log(parseYesOrNo(" I would definitely like some yes please"));
+// console.log(parseYesOrNo(" I would definitely like some yes thank you please"));
+
+// console.log(parseEitherOr("I would like some coffee please", ['coffee', 'tea']));
+// console.log(parseEitherOr("I would like some tea please", ['coffee', 'tea', 'milk']));
+// console.log(parseEitherOr("I would like some milk please", ['coffee', 'tea', 'milk'])[0]);
+
+// console.log(parseEitherOr("I would like some 1 please", ['1', '2'])[0]);
+
+// console.log(parseQuantity("I kjh 05 fasfasd adf adsf asd"));
+
+// ask question node 1
+// they utter (utterance)
+// request all connections with fromId equal to question node
+//      --> pull question node, all connections and their respective next nodes
+// put connections answers in an array => answerArray
+// the switch -> yes/no; quantity; either/or; // based on node-type
+// then call appropriateFunction(utterance, answerArray)
+// parseOptions returns an answer fromt the answerArray
+// Select the Connection whose answer is the answer returned by parseOption
+// retrieve next node from Connection ID
+

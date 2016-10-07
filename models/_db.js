@@ -14,7 +14,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 var db = new Sequelize(process.env.DATABASE_URL, {
-  native: true
+  native: true,
+  dialectOptions: {
+    supportBigNumbers: true
+  }
 });
 
 module.exports = db;

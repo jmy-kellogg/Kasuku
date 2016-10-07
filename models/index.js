@@ -18,5 +18,6 @@ Business.belongsToMany(Chatter, { through: Conversation })
 Conversation.belongsTo(Node)
 
 Business.belongsTo(Node, { as: 'headNode' })
+Business.belongsTo(Node, { as: 'restartNode' })
 
 module.exports = db;
