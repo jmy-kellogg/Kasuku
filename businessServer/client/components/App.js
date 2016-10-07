@@ -8,8 +8,8 @@ function mapStateToProps(state) {
 	return {
 		connection: state.connection,
 		node: state.node,
-    	product: state.product,
-    	business: state.business
+  	product: state.product,
+  	business: state.business
 	};
 };
 
