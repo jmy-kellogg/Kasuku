@@ -25,6 +25,7 @@ function receivedMessage(event, pageToken) {
   var messageId = message.mid;
 
   // You may get a text or attachment but not both
+  
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
@@ -76,12 +77,12 @@ function sendImageMessage(recipientId, pageToken) {
 function sendTextMessage(recipientId, chatterMsg, pageToken) {
   let currentConvo;  
 
-  Conversation.findOne({ where: { chatterId: USERID, businessId: BUSINESSID } })
+  Conversation.findOne({ where: { chatterId: recipientId, businessId: BUSINESSID } })
     .then(_convo => {
       if (!_convo) {
         return Business.findById(BUSINESSID)
         .then(business => {
-          return Conversation.create({ chatterId: USERID, businessId: BUSINESSID, nodeId: business.headNodeId })
+          return Conversation.create({ chatterId: recipientId, businessId: BUSINESSID, nodeId: business.headNodeId })
         })
         .then(__convo => {
           currentConvo = __convo;
@@ -96,6 +97,8 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
     })
     .then(_connections => {
       // if current object.answer === chatterMsg,
+      // insert AI Logic here
+      
       for (let i = 0; i < _connections.length; i++) {
           if (_connections[i].answer === chatterMsg) {
               //  set conversation to object.toId. else
