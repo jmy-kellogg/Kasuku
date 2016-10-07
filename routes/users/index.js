@@ -14,13 +14,12 @@ var Conversation = db.model('conversation')
 var USERID = 1;
 var BUSINESSID = 1;
 
+// Use puts the business on the req object as fbRequester;
+
 router.use('/:name', function(req, res, next) {
   console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
   var requester = { userName: req.params.name};
-  /* THIS LOGIC HERE SHOULD BE EXPORTED TO THE DATABASE. USERS ARE REQUIRED TO CREATE THEIR OWN WEBHOOK 
-     PASSWORD WHICH  WILL BE  USED TO CREATE THEIR SPECIFIC WEBHOOK VERIFICATION. THEY ALSO NEED TO SUPPLY 
-     THEIR PAGETOKEN WHICH WILL BE USED IN SENDING MESSAGES AND MESSAGE VALIDATION THEREFORE THE USER 
-     DATABASE NEEDS TO */
+  
   Business.findOne({where: {businessName: req.params.name}})
   .then(function(business) {
     if (!business) { 
@@ -36,6 +35,7 @@ router.use('/:name', function(req, res, next) {
   })
 });
 
+// DON'T TOUCH THIS WORKS
 router.get('/:name/fbwebhook', function(req, res, next) {
   var verifyToken = req.fbRequester.webhookToken;
   // THIS IS TO VERIFY FACEBOOK STUFF USING THE USER'S APP'S VERIFYTOKEN
@@ -48,6 +48,7 @@ router.get('/:name/fbwebhook', function(req, res, next) {
     res.sendStatus(403);          
   } 
 });
+
 
 router.post('/:name/fbwebhook', function(req, res, next) {
   console.log("Got to post on /users/:name/fbwebhook"); 
@@ -77,7 +78,7 @@ router.post('/:name/fbwebhook', function(req, res, next) {
         }
       });
     });
-    console.log("-------------------POST FROM FACEBOOK MESSENGER--------------------");
+    // console.log("-------------------POST FROM FACEBOOK MESSENGER--------------------");
     // Assume all went well.
     //
     // You must send back a 200, within 20 seconds, to let us know you've 
@@ -86,6 +87,8 @@ router.post('/:name/fbwebhook', function(req, res, next) {
   }
 
 });
+
+// MOVE ALL OF THE BELOW TO ../../ourFbHelpers/fbAPI.js
 
 
 // function receivedMessage(event, pageToken) {
