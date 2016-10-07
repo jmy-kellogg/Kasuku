@@ -1,6 +1,7 @@
 // need to install rita
 // const rita = require('./node_modules/rita/js/rita-full');
-const rita = require('./node_modules/rita/js/rita-full');
+// const rita = require('./node_modules/rita/js/rita-full');
+const rita = require('rita');
 const RS = rita.RiString;
 const r = rita.RiTa;
 
@@ -91,13 +92,13 @@ var parseOptions = function(utterance, options){
 
 
 
-// var x = parseOptions("lettuce, tomato, Me, with ToMaTo, tomAtoes, and tomatoes", ['tomato','lettuce']);
+var x = parseOptions("lettuce, tomato, car, Me, with ToMaTo, tomAtoes, and tomatoes", ['tomato','lettuce']);
 // console.log(x);
 var riStr = new RS('fifty-five');
 // // if(!parseInt('rrr'))
 // //   console.log('yes');
 
-console.log(riStr.pos());
+// console.log(riStr.pos());
 // //
 
 var num = {
@@ -183,3 +184,4 @@ module.exports = {
 // console.log(parseQuantity('I want one thousand eighty'));
 // console.log(parseQuantity('I want 55'));
 // console.log(parseQuantity('one thousand eighty'));
+console.log(parseOptions('I want some coffede', ['coffee', 'tea']));
