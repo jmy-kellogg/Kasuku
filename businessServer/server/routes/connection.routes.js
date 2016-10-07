@@ -43,3 +43,10 @@ router.post('/', function(req, res, next) {
     res.json(_connection);
   })
 });
+
+router.put('/:connectionId', function(req, res, next){
+  // update toId on connection
+  Connection.findById(req.params.connectionId)
+  .then(connection => connection.update({toId: req.body.toId}))
+  .then(connection => res.json(connection))
+})

@@ -32,12 +32,12 @@ router.post('/', function(req, res, next) {
 
 
 router.get('/:id', function(req, res, next) {
-  Node.findOne({ where: {id: req.params.id},
-                  include: [
-                    {model: Connection, as: 'from'}
-                  ]
-                }
-  )
+  Node.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: Connection, as: 'from'}
+    ]
+  })
   .then(function(node) {
     res.json(node);
   })
