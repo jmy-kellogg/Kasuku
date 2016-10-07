@@ -6,7 +6,8 @@ import TopLayer from './topLayer';
 const Layers = React.createClass({
 
   render: function(){
-    const layersArr = [1]
+    const layersArr = [1];
+
     var layersDiv = layersArr.map((item, i) => {
       return (
               <span>
@@ -18,7 +19,7 @@ const Layers = React.createClass({
     return (
 
       <div>
-        // <TopLayer {...this.props}/>
+        <TopLayer {...this.props}/>
         {layersDiv}
       </div>
     )

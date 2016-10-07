@@ -12,7 +12,6 @@ const SingleForm = React.createClass({
 		// var fromId = this.props.node.length+1;
 		var fromId = this.props.i;
 		var id = this.props.connection.length + 1;
-		console.log(id);
 		this.props.addAnswerAction(ans, fromId, null, id);
 	},
 	addNewNode: function(e){
@@ -37,6 +36,8 @@ const SingleForm = React.createClass({
 	},
 
 	render: function(){
+		console.log(this.props.connection);
+		console.log(this.props.node);
 
 
 		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}];
