@@ -183,16 +183,16 @@ module.exports = {
 // console.log(parseQuantity('one thousand eighty'));
 // console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
 
-console.log(parseYesOrNo(" I would definitely like some yes please"));
-console.log(parseYesOrNo(" I would definitely like some yes thank you please"));
+// console.log(parseYesOrNo(" I would definitely like some yes please"));
+// console.log(parseYesOrNo(" I would definitely like some yes thank you please"));
 
-console.log(parseEitherOr("I would like some coffee please", ['coffee', 'tea']));
-console.log(parseEitherOr("I would like some tea please", ['coffee', 'tea', 'milk']));
-console.log(parseEitherOr("I would like some milk please", ['coffee', 'tea', 'milk'])[0]);
+// console.log(parseEitherOr("I would like some coffee please", ['coffee', 'tea']));
+// console.log(parseEitherOr("I would like some tea please", ['coffee', 'tea', 'milk']));
+// console.log(parseEitherOr("I would like some milk please", ['coffee', 'tea', 'milk'])[0]);
 
-console.log(parseEitherOr("I would like some 1 please", ['1', '2'])[0]);
+// console.log(parseEitherOr("I would like some 1 please", ['1', '2'])[0]);
 
-console.log(parseQuantity("I kjh 05 fasfasd adf adsf asd"));
+// console.log(parseQuantity("I kjh 05 fasfasd adf adsf asd"));
 
 // ask question node 1
 // they utter (utterance)
