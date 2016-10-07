@@ -110,7 +110,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
       
       for (let i = 0; i < _connections.length; i++) {
           // if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
-          if (_connections[i].answer === chatterMsg)
+          if (_connections[i].answer === chatterMsg) {
               //  set conversation to object.toId. else
               return currentConvo.update({ nodeId: _connections[i].toId })
           }
