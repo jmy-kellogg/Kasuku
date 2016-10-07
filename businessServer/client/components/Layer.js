@@ -4,18 +4,14 @@ import SingleForm from './SingleForm';
 const Layer = React.createClass({
 
   render: function(){
-    // console.log(this.props.node);
-    console.log(this.props);
 
-    const parentId = 1;
+    const parentId = 0;
 
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;
     }).map(conn => {
       return conn.toId
     })
-    console.log('props nodes',this.props.node);
-    console.log('connections array', connectionsArr);
 
     const nodesArr = this.props.node.filter(node => {
       return connectionsArr.includes(node.id);
@@ -23,18 +19,23 @@ const Layer = React.createClass({
 
     // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
 
-    const nodesDiv = nodesArr.map((node, i) => {
+    var nodesDiv = nodesArr.map((node, i) => {
       return (
-        <SingleForm {...this.props} key={i} i={node.id} node={node}/>
+        <SingleForm {...this.props} key={i} id={node.id} node={node}/>
       )
     })
+    var allConnId = this.props.connection.map(conn => {
+      return conn.id;
+    })
 
-    console.log(nodesArr);
-      return (
-        <div>
-          {nodesDiv}
-        </div>
-      )
+    var uniqueId = Math.max(...allConnId) + 1;
+
+    return (
+      <div>
+        {nodesDiv}
+        <SingleForm {...this.props} i={1}/>
+      </div>
+    )
   }
 });
 

@@ -1,3 +1,25 @@
+export function incIndex(id){
+  // console.log(state);
+  return {
+    type: 'INC_NODE_INDEX'
+  }
+}
+export function saveNode(question, thisNodeId){
+  return {
+    type: 'SAVE_NODE',
+    question,
+    thisNodeId
+  }
+
+}
+
+export function addNewNode(connId, newNodeId){
+  return {
+    type: 'ADD_NODE',
+    connId,
+    newNodeId
+  }
+}
 
 export function addProductAction(name){
   // console.log('inside the product action');
@@ -9,12 +31,14 @@ export function addProductAction(name){
 }
 
 
-export function addAnswerAction(answer, fromId=null){
-
+export function addAnswerAction(answer, fromId=null, businessId=null, id){
+  console.log(fromId);
   return {
     type: 'ADD_ANSWER',
+    id,
     answer,
     fromId,
+    businessId
   }
 }
 
