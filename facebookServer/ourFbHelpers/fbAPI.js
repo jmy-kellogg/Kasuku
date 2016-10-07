@@ -1,3 +1,4 @@
+'use strict'
 var db = require('../models')
 var wParse = require('./ai.js');
 

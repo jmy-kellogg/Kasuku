@@ -1,3 +1,4 @@
+'use strict'
 // need to install rita
 // const rita = require('./node_modules/rita/js/rita-full');
 const rita = require('rita');
