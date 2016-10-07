@@ -17,11 +17,11 @@ let nodes = [
     { question: 'Welcome to coffee shop. What order can I get started for you?' },
     { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
     { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
-    { question: 'Milk, cream, or powder?', productId: 1, topLevel: true },
-    { question: '1, 2, or 3?', productId: 1, topLevel: true },
+    { question: 'Milk, cream, or powder?', productId: 1 },
+    { question: '1, 2, or 3?', productId: 1 },
     { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
-    { question: 'Splenda, cane, or agave? ', productId: 1, topLevel: true },
-    { question: '1, 2, or 3 scoops?', productId: 1, topLevel: true },
+    { question: 'Splenda, cane, or agave? ', productId: 1},
+    { question: '1, 2, or 3 scoops?', productId: 1},
     { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true }
 ]
 let connections = [
