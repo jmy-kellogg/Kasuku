@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 
+
 const Layer = React.createClass({
 
   render: function(){
@@ -33,10 +34,18 @@ const Layer = React.createClass({
     return (
       <div>
         {nodesDiv}
-        <SingleForm {...this.props} i={1}/>
+
       </div>
     )
+      return (
+        <div className="layerBox">
+          <SingleForm {...this.props} i={1}/>
+
+          {nodesDiv}
+        </div>
+      )
   }
 });
+
 
 export default Layer

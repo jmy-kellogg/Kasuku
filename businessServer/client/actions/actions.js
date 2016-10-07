@@ -22,8 +22,6 @@ export function addNewNode(connId, newNodeId){
 }
 
 export function addProductAction(name){
-  // console.log('inside the product action');
-  // console.log(name);
   return {
     type: 'ADD_PRODUCT',
     name
@@ -75,13 +73,11 @@ export function setBusinessAction(buisness){
 // }
 
 // signup user actions
-export function signup(username, email, password, password_confirmation) {
-  return {
-    type: "SIGNUP_USER",
-    username,
-    email,
-    password,
-    password_confirmation
+// export function signup(username, email, password, password_confirmation) {
+//   return {
+//     type: "SIGNUP_USER",
+//     username,
+//     email,
+//     password,
+//     password_confirmation
 
-  }
-}

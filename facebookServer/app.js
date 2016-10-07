@@ -1,16 +1,11 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-// var config = require('config');
 var crypto = require('crypto');
 var https = require('https');
 var request = require('request');
 var chalk = require('chalk');
 var db = require('./models');
-
-// setup databse on heroku
-
-// Setup and use server
 
 
 app.set('port', (process.env.PORT || 5000));

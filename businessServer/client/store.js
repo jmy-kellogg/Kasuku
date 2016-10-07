@@ -1,7 +1,7 @@
-import { createStore, compse } from 'redux';
+import { applyMiddleware, createStore, compse } from 'redux';
 import { syncHistoryWithStore} from 'react-router-redux';
 import { browserHistory } from 'react-router';
-
+import thunk from 'redux-thunk';
 // import the root reducer
 import rootReducer from './reducers/index';
 
@@ -10,6 +10,7 @@ import connection from './data/connection';
 import product from './data/product';
 import business from './data/business';
 
+const middleware = applyMiddleware(thunk);
 
 // create an object for the default data
 const defaultState = {
@@ -19,7 +20,7 @@ const defaultState = {
   business
 };
 
- const store = createStore(rootReducer, defaultState,
+ const store = createStore(rootReducer, defaultState, middleware,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 

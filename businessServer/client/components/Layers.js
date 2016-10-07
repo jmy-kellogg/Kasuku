@@ -10,8 +10,8 @@ const Layers = React.createClass({
 
     var layersDiv = layersArr.map((item, i) => {
       return (
-              <span>
-        <Layer {...this.props} key={i} i={i}/>
+        <span>
+        	<Layer {...this.props} key={i} i={i}/>
         </span>
       )
     })

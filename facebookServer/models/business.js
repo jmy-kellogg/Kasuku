@@ -9,7 +9,7 @@ var Business = db.define('business', {
     //     type: Sequelize.STRING,
     // },
     pageToken: {
-         type: Sequelize.STRING,
+        type: Sequelize.STRING,
     },
     webhookToken: {
         type: Sequelize.STRING,

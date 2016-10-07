@@ -67,7 +67,7 @@ const SingleForm = React.createClass({
 		// 		)
 		// });
 	    return (
-	    	<div>
+	    	<div className="form">
 	    		<form>
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
