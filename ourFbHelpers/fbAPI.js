@@ -103,7 +103,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
       let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
       
       for (let i = 0; i < _connections.length; i++) {
-          if (_connections[i].answer === yesNoAnswer ++ _connections[i].answer == eitherOrAnswer) {
+          if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
               //  set conversation to object.toId. else
               return currentConvo.update({ nodeId: _connections[i].toId })
           }
