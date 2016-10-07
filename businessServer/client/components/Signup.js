@@ -1,6 +1,9 @@
 import React from 'react';
 import SingleForm from './SingleForm';
+import store from '../store';
+import signup from '../actions/signup.action.js';
 
+console.log(signup);
 
 const Signup = React.createClass({
   handleSubmit (e) {
@@ -10,7 +13,10 @@ const Signup = React.createClass({
     const password = this.refs.password.value;
     const password_confirmation = this.refs.password_confirmation.value;
     console.log(username, email, password, password_confirmation);
-    this.props.signup(username, email, password, password_confirmation);
+    
+    store.dispatch((dispatch) => {
+      signup(username, email, password, password_confirmation)});
+  
   },
   render () {
     return (

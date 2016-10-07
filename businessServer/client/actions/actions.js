@@ -49,13 +49,13 @@ export function setBusinessAction(buisness){
 // }
 
 // signup user actions
-export function signup(username, email, password, password_confirmation) {
-  return {
-    type: "SIGNUP_USER",
-    username,
-    email,
-    password,
-    password_confirmation
+// export function signup(username, email, password, password_confirmation) {
+//   return {
+//     type: "SIGNUP_USER",
+//     username,
+//     email,
+//     password,
+//     password_confirmation
 
-  }
-}
+//   }
+// }
