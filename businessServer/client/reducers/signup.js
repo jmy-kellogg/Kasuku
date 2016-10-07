@@ -1,7 +1,9 @@
 function signup(state=[], action) {
+  console.log('signup reducer');
   if (action.type === 'SIGNUP_USER'){
     return {
-      [action.username]: action
+      ...state,
+      action
     }
   }
 

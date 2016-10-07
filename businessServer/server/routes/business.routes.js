@@ -8,10 +8,15 @@ var Business = db.model('business');
 
 
 router.post('/', function(req, res, next) {
+    console.log(req.body);
     req.body.welcomeMsg = req.body.welcomeMsg || "Welcome! Picka  product"
     Node.create({ question: req.body.welcomeMsg })
         .then(node => {
+            console.log(req.body);
             return Business.create({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
                 businessName: req.body.name,
                 headNodeId: node.id
             })
