@@ -33,7 +33,7 @@ function main() {
       return Node.findById(_convo.nodeId)
     })
     .then(_node => {
-      return Connection.findAll({ where: { fromId: _node.id } })
+      return Connection.findAll({ where: { fromId: _node.id } })    
     })
     .then(_connections => {
       // if current object.answer === chatterMsg,
@@ -54,8 +54,14 @@ function main() {
     .then(_convo => {
       return Node.findById(_convo.nodeId)
     }).then(node => {
-        console.log(node.question)
-        main();
+        if(node){
+            console.log(node.question);
+            main();
+        }
+        else{
+            currentConvo.update({nodeId:1})
+            .then(() => {main()})
+        }
     })
     .catch((err) => {
         console.log('- - - the following messed up - - - '.repeat(2));
