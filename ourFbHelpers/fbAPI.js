@@ -3,11 +3,11 @@ var request = require('request');
 var db = require('../models')
 var wParse = require('./ai.js');
 
-var Business = db.model('business')
-var Node = db.model('node')
-var Connection = db.model('connection')
-var Conversation = db.model('conversation')
-
+var Business = db.model('business');
+var Node = db.model('node');
+var Connection = db.model('connection');
+var Conversation = db.model('conversation');
+var Chatter = db.model('chatter');
 
 var USERID = 1;
 var BUSINESSID = 1;
@@ -75,9 +75,12 @@ function sendImageMessage(recipientId, pageToken) {
 }
 
 function sendTextMessage(recipientId, chatterMsg, pageToken) {
-  let currentConvo;  
+  let currentConvo, chatterId;
 
-  Conversation.findOne({ where: { chatterId: recipientId, businessId: BUSINESSID } })
+  Chatter.findOrCreate({ where: { fbAccount: recipientId }})
+  .then(chatter => {
+    return Conversation.findOne({ where: { chatterId: chatter.id, businessId: BUSINESSID } })
+  })
     .then(_convo => {
       if (!_convo) {
         return Business.findById(BUSINESSID)
