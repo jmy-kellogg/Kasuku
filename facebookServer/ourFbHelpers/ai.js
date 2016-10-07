@@ -98,7 +98,7 @@ var riStr = new RS('fifty-five');
 // // if(!parseInt('rrr'))
 // //   console.log('yes');
 
-console.log(riStr.pos());
+// console.log(riStr.pos());
 // //
 
 var num = {
@@ -184,7 +184,7 @@ module.exports = {
 // console.log(parseQuantity('I want one thousand eighty'));
 // console.log(parseQuantity('I want 55'));
 // console.log(parseQuantity('one thousand eighty'));
-console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
+// console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
 
 
 
