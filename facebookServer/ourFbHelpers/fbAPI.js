@@ -98,9 +98,12 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
     .then(_connections => {
       // if current object.answer === chatterMsg,
       // insert AI Logic here
+      let answerMap = _connections.map(_connection => _connection.answer);
+      let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
+      let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
       
       for (let i = 0; i < _connections.length; i++) {
-          if (_connections[i].answer === chatterMsg) {
+          if (_connections[i].answer === yesNoAnswer ++ _connections[i].answer == eitherOrAnswer) {
               //  set conversation to object.toId. else
               return currentConvo.update({ nodeId: _connections[i].toId })
           }
