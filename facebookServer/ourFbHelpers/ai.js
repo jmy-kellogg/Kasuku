@@ -1,6 +1,7 @@
+'use strict'
 // need to install rita
 // const rita = require('./node_modules/rita/js/rita-full');
-const rita = require('./node_modules/rita/js/rita-full');
+const rita = require('rita');
 const RS = rita.RiString;
 const r = rita.RiTa;
 
@@ -97,7 +98,7 @@ var riStr = new RS('fifty-five');
 // // if(!parseInt('rrr'))
 // //   console.log('yes');
 
-console.log(riStr.pos());
+// console.log(riStr.pos());
 // //
 
 var num = {
@@ -183,3 +184,19 @@ module.exports = {
 // console.log(parseQuantity('I want one thousand eighty'));
 // console.log(parseQuantity('I want 55'));
 // console.log(parseQuantity('one thousand eighty'));
+// console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
+
+
+
+// ask question node 1
+// they utter (utterance)
+// request all connections with fromId equal to question node 
+//      --> pull question node, all connections and their respective next nodes
+// put connections answers in an array => answerArray
+// the switch -> yes/no; quantity; either/or; // based on node-type
+// then call appropriateFunction(utterance, answerArray)
+// parseOptions returns an answer fromt the answerArray
+// Select the Connection whose answer is the answer returned by parseOption
+// retrieve next node from Connection ID
+
+
