@@ -1,11 +1,11 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 
+
 const Layer = React.createClass({
 
   render: function(){
-    // console.log(this.props.node);
-    console.log(this.props);
+  
 
     const parentId = 1;
 
@@ -14,8 +14,6 @@ const Layer = React.createClass({
     }).map(conn => {
       return conn.toId
     })
-    console.log('props nodes',this.props.node);
-    console.log('connections array', connectionsArr);
 
     const nodesArr = this.props.node.filter(node => {
       return connectionsArr.includes(node.id);
@@ -29,13 +27,13 @@ const Layer = React.createClass({
       )
     })
 
-    console.log(nodesArr);
       return (
-        <div>
+        <div className="layerBox">
           {nodesDiv}
         </div>
       )
   }
 });
+
 
 export default Layer
