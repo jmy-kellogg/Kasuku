@@ -3,11 +3,11 @@ var request = require('request');
 var db = require('../models')
 var wParse = require('./ai.js');
 
-var Business = db.model('business')
-var Node = db.model('node')
-var Connection = db.model('connection')
-var Conversation = db.model('conversation')
-
+var Business = db.model('business');
+var Node = db.model('node');
+var Connection = db.model('connection');
+var Conversation = db.model('conversation');
+var Chatter = db.model('chatter');
 
 var USERID = 1;
 var BUSINESSID = 1;
@@ -75,9 +75,12 @@ function sendImageMessage(recipientId, pageToken) {
 }
 
 function sendTextMessage(recipientId, chatterMsg, pageToken) {
-  let currentConvo;  
-
-  Conversation.findOne({ where: { chatterId: recipientId, businessId: BUSINESSID } })
+  let currentConvo, chatterId;
+  recipientId = '' + recipientId;
+  Chatter.findOrCreate({ where: { fbAccount: recipientId }})
+  .then(chatter => {
+    return Conversation.findOne({ where: { chatterId: chatter.id, businessId: BUSINESSID } })
+  })
     .then(_convo => {
       if (!_convo) {
         return Business.findById(BUSINESSID)
@@ -98,9 +101,12 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
     .then(_connections => {
       // if current object.answer === chatterMsg,
       // insert AI Logic here
+      let answerMap = _connections.map(_connection => _connection.answer);
+      let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
+      let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
       
       for (let i = 0; i < _connections.length; i++) {
-          if (_connections[i].answer === chatterMsg) {
+          if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
               //  set conversation to object.toId. else
               return currentConvo.update({ nodeId: _connections[i].toId })
           }

@@ -14,8 +14,7 @@ const Signup = React.createClass({
     const password_confirmation = this.refs.password_confirmation.value;
     console.log(username, email, password, password_confirmation);
     
-    store.dispatch((dispatch) => {
-      signup(username, email, password, password_confirmation)});
+    store.dispatch(signup(username, email, password, password_confirmation));
   
   },
   render () {
@@ -25,7 +24,7 @@ const Signup = React.createClass({
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input className="form-control" 
-                    type="text"
+                    type="text" 
                     id="username"
                     name="username"
                     ref="username"

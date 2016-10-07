@@ -3,7 +3,7 @@ var db = require('./_db');
 
 var Chatter = db.define('chatter', {
     fbAccount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         defaultValue: 1,
         foreignKey: true,
     },

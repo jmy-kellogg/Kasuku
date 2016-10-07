@@ -9,9 +9,9 @@ var Conversation = require('./models/conversation');
 
 
 let chatters = [
-    { fbAccount: 11, firstName: 'Billy BuyStuff' },
-    { fbAccount: 12, firstName: 'Paulie Purchasethings' },
-    { fbAccount: 13, firstName: 'Adele Acquirer' }
+    { fbAccount: '1035384179912235', firstName: 'Billy BuyStuff' },
+    { fbAccount: '12', firstName: 'Paulie Purchasethings' },
+    { fbAccount: '13', firstName: 'Adele Acquirer' }
 ]
 let nodes = [
     { question: 'Welcome to coffee shop. What can I get started for you?' },

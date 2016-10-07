@@ -17,6 +17,7 @@ export default function signup(username, email, password, password_confirmation)
           password_confirmation
         })
       })
+      .then(res => res.json())
       .then(function(user) {
         console.log("this is user", user);
         if (!user) {
