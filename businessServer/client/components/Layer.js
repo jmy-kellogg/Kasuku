@@ -5,6 +5,7 @@ import SingleForm from './SingleForm';
 const Layer = React.createClass({
 
   render: function(){
+    console.log(this.props.i);
 
     const parentId = 0;
 

@@ -23,7 +23,7 @@ const Product = React.createClass({
     const productDiv = this.props.product.map((product, i) => {
       return (
         <div className="product-box" key={i}>
-          <Link to={'/layers'}>
+          <Link to={`/layers/${product.id}`}>
           {product.name}
           </Link>
         </div>

@@ -1,8 +1,15 @@
-export function incIndex(id){
-  // console.log(state);
+export function addTopLayerNodeAction(id){
   return {
-    type: 'INC_NODE_INDEX'
+    type: 'ADD_TOP_LAYER_NODE',
+    id,
+    topLevel: true
   }
+}
+
+export function changeTopLevelQuestion(question, thisNodeId){
+  'SAVE_TOP_LEVEL_QUESTION',
+  question,
+  thisNodeId
 }
 export function saveNode(question, thisNodeId){
   return {

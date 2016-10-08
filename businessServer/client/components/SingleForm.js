@@ -1,6 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import polyfill from 'es6-promise';
+import InlineEdit from './InlineEdit';
 
 const SingleForm = React.createClass({
 
@@ -36,11 +37,8 @@ const SingleForm = React.createClass({
 	},
 
 	render: function(){
-		console.log(this.props.connection);
-		console.log(this.props.node);
 
-
-		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}];
+		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
 			return (
 				<option key={i}>{item.name}</option>
@@ -57,15 +55,13 @@ const SingleForm = React.createClass({
 				</option>
 			)
 		})
-		console.log(answers)
-		// <button ref={i} onClick={this.addNewNode}>Add Node</button>
+		var _thisId;
+		// console.log(this.props.id);
+		if(this.props.id){
+			_thisId = this.props.id.match(/\d/g).join('');
+			console.log(_thisId);
+		}
 
-		// const answers= [];
-		// const repeatAnswer = answers.map((answer) => {
-		// 	return (
-		//    		<p>Answer: {answer}</p>
-		// 		)
-		// });
 	    return (
 	    	<div className="form">
 	    		<form>
@@ -76,8 +72,8 @@ const SingleForm = React.createClass({
 	    			</select>
 	    		</div>
 	    		<div>
-	    			<label htmlFor="question">Question: </label>
-	    			<textarea ref="question" name="question"></textarea>
+	    			<p>Question: </p>
+          	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange}/>
 	    		</div>
 	    		<div>
 	    			{/*repeatAnswer*/}
@@ -89,7 +85,6 @@ const SingleForm = React.createClass({
 	    			<button onClick={this.addNewNode}>add node</button>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			{JSON.stringify()}
 	    			<button onClick={this.addNewAnswer}>add answer</button>
 	    		</div>
 	    		<button onClick={this.saveNode}>save</button>

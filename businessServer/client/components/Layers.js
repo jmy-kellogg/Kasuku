@@ -1,6 +1,7 @@
 import React from 'react';
 import Layer from './Layer';
 import TopLayer from './topLayer';
+import ProductLayer from './productLayer';
 
 
 const Layers = React.createClass({
@@ -11,15 +12,15 @@ const Layers = React.createClass({
     var layersDiv = layersArr.map((item, i) => {
       return (
         <span>
-        	<Layer {...this.props} key={i} i={i}/>
+        	<Layer {...this.props} key={i} i={i+3}/>
         </span>
       )
     })
 
     return (
-
       <div>
-        <TopLayer {...this.props}/>
+        <ProductLayer {...this.props} i={1}/>
+        <TopLayer {...this.props} i={2}/>
         {layersDiv}
       </div>
     )

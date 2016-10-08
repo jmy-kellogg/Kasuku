@@ -1,74 +1,89 @@
 import React from 'react';
 import SingleForm from './SingleForm';
-import { Carousel } from 'react-bootstrap';
+import InlineEdit from './InlineEdit';
+
+var ContentEditable = require("react-contenteditable");
+
 
 const TopLayer = React.createClass({
+  setChange: function(){
+    this.props.setChangeAction();
+
+  },
+  displayStuff: function(){
+    console.dir(this.refs);
+    // console.log(this.refs[1].value());
+
+  },
+  handleSelected: function(e){
+    console.log(e.target);
+
+    //fire action to set state to the selected val
+
+  },
+  getInitialState: function(){
+      var _stateArr = this.props.node.filter(node => {
+        return node.topLevel;
+      })
+      console.log(_stateArr);
+      return {childData: _stateArr};
+    },
+
+    handleChange: function(e){
+      var val = e.target.value;
+      var thisId = e.target.id.match(/\d/g);
+      this.props.saveNode(val, thisId);
+      // (e.target);
+
+      // this.setState({html: e.target.value});
+    },
 
   render: function(){
 
-    // const parentId = 1;
 
-    // const connectionsArr = this.props.connection.filter(conn => {
-    //   return conn.fromId === parentId;
-    // }).map(conn => {
-    //   return conn.toId
-    // })
-    // console.log('props nodes',this.props.node);
-    // console.log('connections array', connectionsArr);
+    console.log(this.props.i);
 
-    // const nodesArr = this.props.node.filter(node => {
-    //   return connectionsArr.includes(node.id);
-    // })
-
-    // call function to call action to make ajax request for all top layer nodes
-    // but for the time being...
     const nodesArr = this.props.node.filter(node => {
-      return node.productId === +this.props.params.productId;
-    });
-    const nodesDiv = nodesArr.map((node, i) => {
-      return (
-        <p>Question: {node.question}</p>
-      )
+       return node.topLevel;
     })
-    const questionArr = nodesArr.map((node, i) => {
-      return (
-        <Carousel.Item key={i}>
-          <SingleForm{...this.props} />
-        <Carousel.Caption>
-          <h3>Node</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      )
-    })
-    const carouselInstance = (
-    <Carousel>
-      {questionArr}
-      <Carousel.Item>
-        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
-  );
+    const newId = this.props.node.length + 1;
 
-    return (
+     const nodesDiv = nodesArr.map((node, i) => {
+        var q;
+        if(node.question){
+          q = node.question;
+        }
+        else{
+          q = "Fill me out";
+        }
+
+       return (
         <div>
-          {nodesDiv}
-          <div className="layerBox">
-            {carouselInstance}
-          </div>
+          <SingleForm {...this.props} id={`node${node.id}`} question={q} level={this.props.i} onClick={this.handleSelected}/>
+
         </div>
       )
-  }
-});
+    })
 
-export default TopLayer
+
+     return (
+       <div>
+         {nodesDiv}
+         <SingleForm {...this.props} i={newId} />
+         <button onClick={this.displayStuff}>stuff</button>
+       </div>
+     )
+   }
+ });
+
+ export default TopLayer
+/*
+<div>
+            <p>Question: </p>
+            <InlineEdit defaultValue={q} id={`question${node.id}`} ref={`question${node.id}`} onBlur={this.handleChange}/>
+          </div>
+          <div>
+            <p>Answers</p>
+
+          </div>
+          */

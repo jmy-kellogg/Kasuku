@@ -10,13 +10,22 @@ function node(state=[], action){
     case 'SAVE_NODE':
       var newState = [...state];
       newState.forEach(node => {
-        if(node.id === action.thisNodeId){
-          // node.question = action.question;
+        if(node.id == action.thisNodeId){
+          node.question = action.question;
           console.log(node);
           console.log(action);
         }
       })
       return newState;
+    case 'ADD_TOP_LAYER_NODE':
+      return [
+        ...state,
+        {
+          id:action.id,
+          topLevel: action.topLevel
+        }
+      ]
+
 
     default:
       return state;
