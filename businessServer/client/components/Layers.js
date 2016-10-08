@@ -7,12 +7,13 @@ import ProductLayer from './productLayer';
 const Layers = React.createClass({
 
   render: function(){
-    const layersArr = [1];
+    // const layersArr = [1];
+    console.log(this.props.layers);
 
-    var layersDiv = layersArr.map((item, i) => {
+    var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <span>
-        	<Layer {...this.props} key={i} i={i+3}/>
+        	<Layer {...this.props} key={i} i={i+3} data={layer} />
         </span>
       )
     })

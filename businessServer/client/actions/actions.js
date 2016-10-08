@@ -6,8 +6,18 @@ export function addTopLayerNodeAction(id){
   }
 }
 
+export function addLayers(layer){
+    type: 'ADD_NEW_LAYER',
+    layer
+}
+export function changeSelected(thisId, layer){
+    type: 'CHANGE_SELECTED',
+    thisId,
+    layer
+}
+
 export function changeTopLevelQuestion(question, thisNodeId){
-  'SAVE_TOP_LEVEL_QUESTION',
+  type: 'SAVE_TOP_LEVEL_QUESTION',
   question,
   thisNodeId
 }
@@ -21,11 +31,12 @@ export function saveNode(question, thisNodeId){
 
 }
 
-export function addNewNode(connId, newNodeId) {
+export function addNewNode(connId, newNodeId, layer) {
     return {
         type: 'ADD_NODE',
         connId,
-        newNodeId
+        newNodeId,
+        layer
     }
 }
 

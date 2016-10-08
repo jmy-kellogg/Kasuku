@@ -9,7 +9,8 @@ function mapStateToProps(state) {
         connection: state.connection,
         node: state.node,
         product: state.product,
-        business: state.business
+        business: state.business,
+        layers: state.layers
     };
 };
 

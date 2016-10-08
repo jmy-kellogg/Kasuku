@@ -12,10 +12,10 @@ const Signup = React.createClass({
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     const password_confirmation = this.refs.password_confirmation.value;
-    console.log(username, email, password, password_confirmation);
-    
+    // console.log(username, email, password, password_confirmation);
+
     store.dispatch(signup(username, email, password, password_confirmation));
-  
+
   },
   render () {
     return (
@@ -23,8 +23,8 @@ const Signup = React.createClass({
         <form onSubmit={this.handleSubmit.bind(null)} noValidate>
           <div className="form-group">
             <label htmlFor="username">Username</label>
-            <input className="form-control" 
-                    type="text" 
+            <input className="form-control"
+                    type="text"
                     id="username"
                     name="username"
                     ref="username"
@@ -34,7 +34,7 @@ const Signup = React.createClass({
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input className="form-control" 
+            <input className="form-control"
                     type="email"
                     id="email"
                     name="email"
@@ -45,7 +45,7 @@ const Signup = React.createClass({
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input className="form-control" 
+            <input className="form-control"
                     type="password"
                     id="password"
                     name="password"
@@ -56,7 +56,7 @@ const Signup = React.createClass({
 
           <div className="form-group">
             <label htmlFor="password_confirmation">Confirm password</label>
-            <input className="form-control" 
+            <input className="form-control"
                     type="password"
                     id="password_confirmation"
                     name="password_confirmation"

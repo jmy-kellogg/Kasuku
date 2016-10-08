@@ -2,46 +2,26 @@ import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from './InlineEdit';
 
-var ContentEditable = require("react-contenteditable");
-
 
 const TopLayer = React.createClass({
-  setChange: function(){
-    this.props.setChangeAction();
 
-  },
-  displayStuff: function(){
-    console.dir(this.refs);
-    // console.log(this.refs[1].value());
-
-  },
   handleSelected: function(e){
-    console.log(e.target);
+    console.dir(e.target);
+    // var thisId = e.target.id.match(/\d/g).join('');
+    var thisLayer = 2;
+    // this.props.changeSelected(thisId, thisLayer);
 
     //fire action to set state to the selected val
 
   },
-  getInitialState: function(){
-      var _stateArr = this.props.node.filter(node => {
-        return node.topLevel;
-      })
-      console.log(_stateArr);
-      return {childData: _stateArr};
-    },
-
     handleChange: function(e){
       var val = e.target.value;
-      var thisId = e.target.id.match(/\d/g);
+      var thisId = e.target.id.match(/\d/g).join('');
       this.props.saveNode(val, thisId);
-      // (e.target);
 
-      // this.setState({html: e.target.value});
     },
 
   render: function(){
-
-
-    console.log(this.props.i);
 
     const nodesArr = this.props.node.filter(node => {
        return node.topLevel;
@@ -54,36 +34,21 @@ const TopLayer = React.createClass({
           q = node.question;
         }
         else{
-          q = "Fill me out";
+          q = "I'm a question. Fill me out?";
         }
-
        return (
-        <div>
-          <SingleForm {...this.props} id={`node${node.id}`} question={q} level={this.props.i} onClick={this.handleSelected}/>
-
+        <div onClick={this.handleSelected}>
+          <SingleForm {...this.props} id={`node${node.id}`} question={q} layer={this.props.i}/>
         </div>
       )
     })
 
-
      return (
        <div>
          {nodesDiv}
-         <SingleForm {...this.props} i={newId} />
-         <button onClick={this.displayStuff}>stuff</button>
        </div>
      )
    }
  });
 
  export default TopLayer
-/*
-<div>
-            <p>Question: </p>
-            <InlineEdit defaultValue={q} id={`question${node.id}`} ref={`question${node.id}`} onBlur={this.handleChange}/>
-          </div>
-          <div>
-            <p>Answers</p>
-
-          </div>
-          */

@@ -6,7 +6,6 @@ import InlineEdit from './InlineEdit';
 const SingleForm = React.createClass({
 
 	addNewAnswer: function(e){
-		console.log(this.props.connection);
 
 		e.preventDefault();
 		var ans = this.refs.answer.value;
@@ -25,8 +24,9 @@ const SingleForm = React.createClass({
 			}
 		})
 		var newId = this.props.node.length + 1;
+		var layer = this.props.layer+1;
 
-		this.props.addNewNode(c.id, newId);
+		this.props.addNewNode(c.id, newId, layer);
 
 	},
 	saveNode: function(e){
@@ -59,7 +59,6 @@ const SingleForm = React.createClass({
 		// console.log(this.props.id);
 		if(this.props.id){
 			_thisId = this.props.id.match(/\d/g).join('');
-			console.log(_thisId);
 		}
 
 	    return (

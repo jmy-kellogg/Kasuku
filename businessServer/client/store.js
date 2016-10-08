@@ -17,7 +17,9 @@ const defaultState = {
   node,
   connection,
   product,
-  business
+  business,
+  layers: [],
+  selected: []
 };
 
  const store = createStore(rootReducer, defaultState, middleware,
