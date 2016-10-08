@@ -14,16 +14,28 @@ let chatters = [
     { fbAccount: '13', firstName: 'Adele Acquirer' }
 ]
 let nodes = [
-    { question: 'Welcome to coffee shop. What can I get started for you?' },
+    { question: 'Welcome to coffee shop. What order can I get for you?' },
     { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
     { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
-    { question: 'Milk, cream, or powder?', productId: 1, topLevel: true },
-    { question: '1, 2, or 3?', productId: 1, topLevel: true },
+    { question: 'Milk, cream, or powder?', productId: 1 },
+    { question: '1, 2, or 3?', productId: 1 },
     { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
-    { question: 'Splenda, cane, or agave? ', productId: 1, topLevel: true },
-    { question: '1, 2, or 3 scoops?', productId: 1, topLevel: true },
+    { question: 'Splenda, cane, or agave? ', productId: 1 },
+    { question: '1, 2, or 3 scoops?', productId: 1 },
     { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true },
-    { question: 'Perfect! Your order has been placed' },
+    { question: 'Perfect! Your order has been placed.', productId: 1},
+    { question: 'Would you like green tea or black tea?', productId: 2, topLevel: true },
+    { question: 'Would any milk added?', productId: 2, topLevel: true },
+    { question: 'whole, skim, or 2%?', productId: 2 },
+    { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
+    { question: 'splenda, cane, or agave? ', productId: 2 },
+    { question: '1, 2, or 3 scoops?', productId: 2 },
+    { question: 'Would you like a slice of Lemon?', productId: 2},
+    { question: 'Great, size works best? small, medium, or large?', productId: 2, topLevel: true },
+
+
+
+
 ]
 let connections = [
     { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },
@@ -50,8 +62,31 @@ let connections = [
     { answer: 'small', fromId: 9, businessId: 1 },
     { answer: 'medium', fromId: 9, businessId: 1 },
     { answer: 'large', fromId: 9, businessId: 1 },
-]
+    { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
+    { answer: 'green', fromId: 11, toId: 12, businessId: 1 },
+    { answer: 'black', fromId: 11, toId: 12, businessId: 1 },
+    { answer: 'green tea', fromId: 11, toId: 12, businessId: 1 },
+    { answer: 'black tea', fromId: 11, toId: 12, businessId: 1 },
+    { answer: 'yes', fromId: 12, toId: 13, businessId: 1 },
+    { answer: 'whole', fromId: 13, toId: 14, businessId: 1 },
+    { answer: 'skim', fromId: 13, toId: 14, businessId: 1 },
+    { answer: '2%', fromId: 13, toId: 14, businessId: 1 },
+    { answer: 'no', fromId: 12, toId: 14, businessId: 1 },
+    { answer: 'yes', fromId: 14, toId: 15, businessId: 1 },
+    { answer: 'splenda', fromId: 15, toId: 16, businessId: 1 },
+    { answer: 'cane', fromId: 15, toId: 16, businessId: 1 },
+    { answer: 'agave', fromId: 15, toId: 16, businessId: 1 },
+    { answer: '1', fromId: 16, toId: 18, businessId: 1 },
+    { answer: '2', fromId: 16, toId: 18, businessId: 1 },
+    { answer: '3', fromId: 16, toId: 18, businessId: 1 },
+    { answer: 'no', fromId: 14, toId: 17, businessId: 1 },
+    { answer: 'yes', fromId: 17, toId: 18, businessId: 1 },
+    { answer: 'no', fromId: 17, toId: 18, businessId: 1 },
+    { answer: 'small', fromId: 18, businessId: 1 },
+    { answer: 'medium', fromId: 18, businessId: 1 },
+    { answer: 'large', fromId: 18, businessId: 1 },
 
+]
 let businesses = [
     { businessName: 'chatty-A-1', fb_account_id: 123, headNodeId: 1, restartNodeId: 10,
       pageToken: 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD',
