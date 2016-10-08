@@ -14,7 +14,7 @@ let chatters = [
     { fbAccount: 13, firstName: 'Adele Acquirer' }
 ]
 let nodes = [
-    { question: 'Welcome to coffee shop. What order can I get started for you?' },
+    { question: 'Welcome to coffee shop. What order can I get for you?' },
     { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
     { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
     { question: 'Milk, cream, or powder?', productId: 1 },
@@ -23,15 +23,16 @@ let nodes = [
     { question: 'Splenda, cane, or agave? ', productId: 1 },
     { question: '1, 2, or 3 scoops?', productId: 1 },
     { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true },
-    { question: 'Perfect! Your order has been placed' },
+    { question: 'Perfect! Your order has been placed.', productId: 1},
     { question: 'Would you like green tea or black tea?', productId: 2, topLevel: true },
     { question: 'Would any milk added?', productId: 2, topLevel: true },
     { question: 'whole, skim, or 2%?', productId: 2 },
     { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
     { question: 'splenda, cane, or agave? ', productId: 2 },
     { question: '1, 2, or 3 scoops?', productId: 2 },
-    { question: 'Would you prefer a slice of Lemon?', productId: 2},
+    { question: 'Would you like a slice of Lemon?', productId: 2},
     { question: 'Great, size works best? small, medium, or large?', productId: 2, topLevel: true },
+
 
 
 
@@ -58,9 +59,9 @@ let connections = [
     { answer: '1', fromId: 8, toId: 9, businessId: 1 },
     { answer: '2', fromId: 8, toId: 9, businessId: 1 },
     { answer: '3', fromId: 8, toId: 9, businessId: 1 },
-    { answer: 'small', fromId: 9, toId:10, businessId: 1 },
-    { answer: 'medium', fromId: 9, toId:10, businessId: 1 },
-    { answer: 'large', fromId: 9, toId:10, businessId: 1 },
+    { answer: 'small', fromId: 9, businessId: 1 },
+    { answer: 'medium', fromId: 9, businessId: 1 },
+    { answer: 'large', fromId: 9, businessId: 1 },
     { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
     { answer: 'green', fromId: 11, toId: 12, businessId: 1 },
     { answer: 'black', fromId: 11, toId: 12, businessId: 1 },
@@ -81,10 +82,9 @@ let connections = [
     { answer: 'no', fromId: 14, toId: 17, businessId: 1 },
     { answer: 'yes', fromId: 17, toId: 18, businessId: 1 },
     { answer: 'no', fromId: 17, toId: 18, businessId: 1 },
-    { answer: 'small', fromId: 18, toId:10, businessId: 1 },
-    { answer: 'medium', fromId: 18, toId:10, businessId: 1 },
-    { answer: 'large', fromId: 18, toId:10, businessId: 1 }
-
+    { answer: 'small', fromId: 18, businessId: 1 },
+    { answer: 'medium', fromId: 18, businessId: 1 },
+    { answer: 'large', fromId: 18, businessId: 1 },
 
 ]
 let businesses = [{
@@ -117,5 +117,6 @@ db.sync({ force: true })
         return Connection.bulkCreate(connections)
     })
     .then(() => {
+        console.log("finished")
         process.exit()
     })
