@@ -1,12 +1,10 @@
 /**
  * Calculate node height and other dimension by adding a ghost element onto the page
  *
- * TODO: Check if there is a smarter way to calculate node height without creating a ghost <textarea> element.
- *
- * Thanks to @andreypopp and @jackmoore for autosizing logic
- * Thanks to @vasanthk
+ * Thanks to @andreypopp and @jackmoore for jQuery autosize and react-textarea autosize
+ * Almost all of this code was adapted under the MIT license from the Inline Edit component found here:
+ * https://github.com/vasanthk/react-inline-edit
  */
-
 const HIDDEN_TEXTAREA_STYLE = `
   visibility:hidden !important;
   position:absolute !important;

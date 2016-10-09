@@ -7,21 +7,14 @@ const Layer = React.createClass({
 
     console.log(node);
     this.props.changeSelected(node.id, node.layer);
-    var thisLayer = 2;
+    var thisLayer = this.props.i;
     // top layer has to be 2.
   },
-  // handleChange: function(e){
-  //   var val = e.target.value;
-  //   if(e.target.id){
-  //     var thisId = e.target.id.match(/\d/g).join('');
-  //   }
-  //   this.props.saveNode(val, thisId);
-  // },
 
   render: function(){
     // console.log(this.props.data);
     console.log(this.props.selected);
-    console.log(this.props);
+    console.log(this.props.layers);
 
     console.log(this.props.selected[this.props.i-3]);
     const parentId = this.props.selected[this.props.i-3];
@@ -39,8 +32,15 @@ const Layer = React.createClass({
     // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
 
     var nodesDiv = nodesArr.map((node, i) => {
+      var q;
+      if(node.question){
+        q = node.question;
+      }
+      else{
+        q = "I'm a question? Fill me out.";
+      }
       return (
-        <SingleForm {...this.props} key={i} id={node.id} node={node}/>
+        <SingleForm {...this.props} key={i} id={`node${node.id}`} question={q} layer={this.props.i} node={node}/>
       )
     })
     var allConnId = this.props.connection.map(conn => {
@@ -57,7 +57,6 @@ const Layer = React.createClass({
     )
       return (
         <div className="layerBox">
-          <SingleForm {...this.props} i={1}/>
 
           {nodesDiv}
         </div>

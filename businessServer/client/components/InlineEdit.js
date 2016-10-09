@@ -1,3 +1,11 @@
+/**
+ * A component that allows inline/in-place edits.
+ *
+ * Thanks to @andreypopp and @jackmoore for jQuery autosize and react-textarea autosize
+ * Almost all of this code was adapted under the MIT license from the Inline Edit component found here:
+ * https://github.com/vasanthk/react-inline-edit
+ */
+
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -20,13 +28,6 @@ _Object$defineProperty(exports, '__esModule', {
   value: true
 });
 
-/**
- * A component that allows inline/in-place edits.
- *
- * @Author: Vasanth Krishnamoorthy
- *
- * Thanks to @andreypopp and @jackmoore for jQuery autosize and react-textarea autosize
- */
 
 var _React$Component = require('react');
 

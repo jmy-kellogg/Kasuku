@@ -19,7 +19,9 @@ function node(state=[], action){
       return [
         ...state,
         {
-          id:action.id,
+          id:action.newNodeId,
+          layer: action.layer,
+          productId: action.productId,
           topLevel: action.topLevel
         }
       ]

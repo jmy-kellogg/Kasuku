@@ -5,6 +5,7 @@ function layers(state=[], action){
       break;
     case 'ADD_NODE':
       var newState = [...state];
+      console.log(action.layer, typeof action.layer)
       if(!newState[action.layer-3]){
         newState[action.layer-3] = [action.newNodeId];
       }
@@ -12,6 +13,14 @@ function layers(state=[], action){
         newState[action.layer-3].push(action.newNodeId);
       }
       return newState;
+    // case 'ADD_TOP_LAYER_NODE':
+    //   var newState = [...state];
+    //   if(!newState[action.layer-3]){
+    //     newState[action.layer-3] = [action.newNodeId];
+    //   }
+    //   else{
+    //     newState[action.layer-3].push(action.newNodeId);
+    //   }
     default:
       return state;
       break;

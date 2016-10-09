@@ -3,24 +3,30 @@ import SingleForm from './SingleForm';
 import InlineEdit from 'react-inline-edit';
 
 const ProductLayer = React.createClass({
-  addTopLayerNode: function(e){
-    console.log(this.props.node);
-    var id = this.props.node.length + 1
+  addTopLayerNode: function(productId, e){
+    var nodeId = 0;
+    this.props.node.forEach(n => {
+      if(node.id > nodeId){
+        nodeId = node.id;
+      }
+    })
+    // var nodeId = this.props.node.length + 1
 
-    this.props.addTopLayerNodeAction(id);
+    this.props.addTopLayerNodeAction(nodeId, productId, 2);
+    // this.props.addNewNode(c.id, newId, layer);
 
     e.preventDefault();
 
   },
 
   render: function(){
-    var productName;
+    var productName, productId;
     this.props.product.forEach(product => {
       if(product.id == this.props.params.productId){
         productName = product.name;
+        productId = product.id;
       }
     })
-    console.log(productName);
 
        return (
          <div>
@@ -28,7 +34,7 @@ const ProductLayer = React.createClass({
             The Chat Tree for {productName}
           </div>
 
-          <button onClick={this.addTopLayerNode}>add</button>
+          <button onClick={this.addTopLayerNode.bind(this, productId)}>add</button>
 
          </div>
 

@@ -1,7 +1,9 @@
-export function addTopLayerNodeAction(id){
+export function addTopLayerNodeAction(newNodeId, productId, layer){
   return {
     type: 'ADD_TOP_LAYER_NODE',
-    id,
+    newNodeId,
+    layer,
+    productId,
     topLevel: true
   }
 }

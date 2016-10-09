@@ -15,10 +15,10 @@ const middleware = applyMiddleware(thunk);
 // create an object for the default data
 const defaultState = {
 
-  node,
-  connection,
-  product,
-  business,
+  node: [],
+  connection: [],
+  product: [],
+  business: [],
   layers: [],
   selected: []
 

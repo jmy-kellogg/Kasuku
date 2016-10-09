@@ -62,11 +62,12 @@ const SingleForm = React.createClass({
 				</option>
 			)
 		})
-		var _thisId;
-		if(this.props.id){
-			console.log(this.props.id);
-			// _thisId = this.props.id.match(/\d/g).join('');
-		}
+
+		var _thisId = this.props.i;
+		// if(this.props.id){
+		// 	// console.log(this.props.id);
+		// 	_thisId = this.props.id.match(/\d/g).join('');
+		// }
 
 	    return (
 	    	<div className="form">
