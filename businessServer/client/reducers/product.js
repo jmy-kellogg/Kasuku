@@ -4,7 +4,8 @@ function product(state=[], action){
       return [
           ...state,
           {
-            name: action.name
+            name: action.name,
+            id: action.productId
           }
         ]
     default:

@@ -57,7 +57,7 @@ const SingleForm = React.createClass({
 		})
 		const answersDiv = answers.map((ans, i) => {
 			return (
-				<option value={ans.id}>
+				<option key={i} value={ans.id}>
 					{ans.answer}
 				</option>
 			)

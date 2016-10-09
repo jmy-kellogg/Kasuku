@@ -49,10 +49,11 @@ export function addNewNode(connId, newNodeId, layer) {
     }
 }
 
-export function addProductAction(name) {
+export function addProductAction(name, productId) {
     return {
         type: 'ADD_PRODUCT',
-        name
+        name,
+        productId
     }
 }
 

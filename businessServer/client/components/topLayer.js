@@ -11,6 +11,7 @@ const TopLayer = React.createClass({
     this.props.changeSelected(node.id, node.layer);
     var thisLayer = 2;
     // top layer has to be 2.
+    // all other layers start at 3
   },
 render: function(){
   console.log(this.props);

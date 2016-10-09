@@ -5,7 +5,15 @@ const Product = React.createClass({
 
   addProduct: function(e){
     var name = this.refs.productname.value;
-    this.props.addProductAction(name);
+    var productId = 1;
+    this.props.product.forEach(prod => {
+      if(prod.id > productId){
+        productId = prod.id + 1;
+      }
+    })
+
+    this.props.addProductAction(name, productId);
+
 
   },
   // addNewAnswer: function(e){
