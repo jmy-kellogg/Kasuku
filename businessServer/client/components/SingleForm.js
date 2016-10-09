@@ -9,10 +9,16 @@ const SingleForm = React.createClass({
 
 		e.preventDefault();
 		var ans = this.refs.answer.value;
-		// var fromId = this.props.node.length+1;
 		var fromId = this.props.i;
-		var id = this.props.connection.length + 1;
-		this.props.addAnswerAction(ans, fromId, null, id);
+
+		var newConnId = 0;
+		if(this.props.connIds.length > 0){
+			var newConnId = Math.max(...this.props.connIds) + 1;
+		}
+
+		// set business ID once business ids are set up.  but keep as null for now.
+		var businessId = null;
+		this.props.addAnswerAction(ans, fromId, businessId, newConnId);
 	},
 	addNewNode: function(e){
 		e.preventDefault();
@@ -23,14 +29,14 @@ const SingleForm = React.createClass({
 				c = conn;
 			}
 		})
-		// var newId = this.props.node.length + 1;
 		var newId = 1;
-		newId = Math.max(...this.props.nodeIds) + 1;
+		if(this.props.nodeIds.length > 0){
+			newId = Math.max(...this.props.nodeIds) + 1;
+		}
 
 		var layer = this.props.layer+1;
 
 		this.props.addNewNode(c.id, newId, layer);
-
 	},
 	handleChange: function(e){
     var val = e.target.value;
@@ -48,7 +54,7 @@ const SingleForm = React.createClass({
 				<option key={i}>{item.name}</option>
 				)
 		});
-		// console.log(this);
+
 		const answers = this.props.connection.filter(conn => {
 			return conn.fromId === this.props.i;
 		})
@@ -61,10 +67,6 @@ const SingleForm = React.createClass({
 		})
 
 		var _thisId = this.props.i;
-		// if(this.props.id){
-		// 	// console.log(this.props.id);
-		// 	_thisId = this.props.id.match(/\d/g).join('');
-		// }
 
 	    return (
 	    	<div className="form">
@@ -78,9 +80,6 @@ const SingleForm = React.createClass({
 	    		<div>
 	    			<p>Question: </p>
           	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange}/>
-	    		</div>
-	    		<div>
-	    			{/*repeatAnswer*/}
 	    		</div>
 	    		<div>
 	    			<select ref="answerSelect">

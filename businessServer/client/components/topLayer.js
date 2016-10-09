@@ -2,7 +2,6 @@ import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from './InlineEdit';
 
-
 const TopLayer = React.createClass({
 
   handleSelected: function(node, e){
@@ -14,7 +13,6 @@ const TopLayer = React.createClass({
     // all other layers start at 3
   },
 render: function(){
-  // console.log(this.props);
 
   const nodesArr = this.props.node.filter(node => {
      return node.topLevel;

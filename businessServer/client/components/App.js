@@ -12,7 +12,8 @@ function mapStateToProps(state) {
         business: state.business,
         layers: state.layers,
         selected: state.selected,
-        nodeIds: state.nodeIds
+        nodeIds: state.nodeIds,
+        connIds: state.connIds
     };
 };
 

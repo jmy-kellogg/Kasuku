@@ -3,10 +3,8 @@ import Layer from './Layer';
 import TopLayer from './topLayer';
 import ProductLayer from './productLayer';
 
-
 const Layers = React.createClass({
   // iterate over array of arrays
-
 
   render: function(){
     console.log(this.props.layers);
@@ -14,8 +12,9 @@ const Layers = React.createClass({
       console.log(layer);
       return (
         <span>
-        hello
+        layer {i+3}
         	<Layer {...this.props} key={i} i={i+3} data={layer} />
+        }
         </span>
       )
     })

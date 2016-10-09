@@ -17,10 +17,11 @@ router.get('/', function(req, res, next) {
   Node.findAll()
   .then(function(nodes) {
     res.json(nodes);
-  }) 
+  })
 })
 
 router.post('/', function(req, res, next) {
+  console.log(req.body);
   Node.create( {
     question: req.body.question,
     productId: req.body.productId

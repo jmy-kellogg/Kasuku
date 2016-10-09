@@ -1,11 +1,9 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 
-
 const Layer = React.createClass({
   handleSelected: function(node, e){
 
-    console.log(this.props.i);
     this.props.changeSelected(node.id, node.layer);
     var thisLayer = this.props.i;
     // top layer has to be 2.
@@ -27,7 +25,6 @@ const Layer = React.createClass({
       parentId = null;
     }
 
-
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;
     }).map(conn => {
@@ -37,7 +34,6 @@ const Layer = React.createClass({
     const nodesArr = this.props.node.filter(node => {
       return connectionsArr.includes(node.id);
     })
-
 
     // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
 
@@ -59,20 +55,11 @@ const Layer = React.createClass({
       return conn.id;
     })
 
-    var uniqueId = Math.max(...allConnId) + 1;
-
     return (
       <div>
         {nodesDiv}
-
       </div>
     )
-      return (
-        <div className="layerBox">
-
-          {nodesDiv}
-        </div>
-      )
   }
 });
 

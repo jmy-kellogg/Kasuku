@@ -21,7 +21,8 @@ const defaultState = {
   business: [],
   layers: [],
   selected: [],
-  nodeIds: []
+  nodeIds: [],
+  connIds: []
 
 };
 

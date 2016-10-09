@@ -16,16 +16,6 @@ const Product = React.createClass({
 
 
   },
-  // addNewAnswer: function(e){
-  //  // {answers}.push(this.refs.answer.value)
-  //  console.log(this.refs.answer.value);
-  //  e.preventDefault();
-  // },
-  // addNewNode: function(e){
-  //  console.log('second');
-  //  e.preventDefault();
-
-  // },
   render: function(){
 
     const productDiv = this.props.product.map((product, i) => {
