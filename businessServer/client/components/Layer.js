@@ -3,11 +3,28 @@ import SingleForm from './SingleForm';
 
 
 const Layer = React.createClass({
+  handleSelected: function(node, e){
+
+    console.log(node);
+    this.props.changeSelected(node.id, node.layer);
+    var thisLayer = 2;
+    // top layer has to be 2.
+  },
+  // handleChange: function(e){
+  //   var val = e.target.value;
+  //   if(e.target.id){
+  //     var thisId = e.target.id.match(/\d/g).join('');
+  //   }
+  //   this.props.saveNode(val, thisId);
+  // },
 
   render: function(){
-    console.log(this.props.data);
+    // console.log(this.props.data);
+    console.log(this.props.selected);
+    console.log(this.props);
 
-    const parentId = 0;
+    console.log(this.props.selected[this.props.i-3]);
+    const parentId = this.props.selected[this.props.i-3];
 
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;

@@ -9,7 +9,6 @@ const Layers = React.createClass({
   render: function(){
     // const layersArr = [1];
     console.log(this.props.layers);
-
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <span>
@@ -24,6 +23,7 @@ const Layers = React.createClass({
         <TopLayer {...this.props} i={2}/>
         {layersDiv}
       </div>
+
     )
   }
 });

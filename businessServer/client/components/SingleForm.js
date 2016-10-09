@@ -25,6 +25,7 @@ const SingleForm = React.createClass({
 		})
 		var newId = this.props.node.length + 1;
 		var layer = this.props.layer+1;
+		console.log(layer);
 
 		this.props.addNewNode(c.id, newId, layer);
 
@@ -35,9 +36,15 @@ const SingleForm = React.createClass({
 		this.props.saveNode(q, thisId);
 		e.preventDefault();
 	},
+	handleChange: function(e){
+    var val = e.target.value;
+    if(e.target.id){
+      var thisId = e.target.id.match(/\d/g).join('');
+    }
+    this.props.saveNode(val, thisId);
+  },
 
 	render: function(){
-
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
 			return (
@@ -56,9 +63,9 @@ const SingleForm = React.createClass({
 			)
 		})
 		var _thisId;
-		// console.log(this.props.id);
 		if(this.props.id){
-			_thisId = this.props.id.match(/\d/g).join('');
+			console.log(this.props.id);
+			// _thisId = this.props.id.match(/\d/g).join('');
 		}
 
 	    return (
@@ -86,7 +93,6 @@ const SingleForm = React.createClass({
 	    			<input ref="answer" name="answer"></input>
 	    			<button onClick={this.addNewAnswer}>add answer</button>
 	    		</div>
-	    		<button onClick={this.saveNode}>save</button>
 	    		</form>
 
 	    	</div>
