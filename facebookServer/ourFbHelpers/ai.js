@@ -1,19 +1,38 @@
 'use strict'
-// need to install rita
-// const rita = require('./node_modules/rita/js/rita-full');
+//checks distance between stings for spell checking
+var levenshtein = require('fast-levenshtein');
 
 const rita = require('rita');
 const RS = rita.RiString;
 const r = rita.RiTa;
 
 
-var yes = ['yes', 'y', 'yep', 'sure', 'ok', 'okay'];
-var no = ['no', 'n', 'nope', 'never', 'not'];
+var yes = ['yes', 'y', 'yep', 'sure', 'ok', 'okay', 'yeah', 'ya'];
+var no = ['no', 'n', 'nope', 'never', 'not', 'nah'];
 var greeting = ['hello', 'hi', 'hey']
 // need to change: get yes, no, greeting variations from the database
 
 
 var nouns = ['nn', 'nns', 'nnp', 'nnps'];
+
+
+var spellCheck = function (inputWord, options){
+  var closestMatch;
+  var closestMatchScore = 100;
+  for(var i = 0; i < options.length; i++){
+    //console.log(options[i], levenshtein.get(inputWord, options[i]));
+    var lettersDifferce = levenshtein.get(inputWord, options[i]);
+    var differenceScore = Math.floor(lettersDifferce/options[i].length*100);
+    if(closestMatchScore > differenceScore){
+     closestMatch = options[0];
+     closestMatchScore = differenceScore
+      }
+   }
+   if (closestMatchScore < 25){
+     return closestMatch
+  }
+};
+
 
 var parseYesOrNo = function(utterance){
   var riStr = new RS(utterance);
@@ -46,17 +65,31 @@ var getAnswers = function(utterance, options){
 
       if (options.includes(words[x]) ||
           options.includes(r.singularize(words[x])) ||
-          options.includes(r.pluralize(words[x])))
-        entities.push(words[x]);
+          options.includes(r.pluralize(words[x]))
+          ){
+        entities.push(words[x]); 
+      }
       // for creating a database of unknown words
       // else
       //   unknownEntities.push(words[x]);
+    }
+  }
+  //console.log(entities)
+  if(!entities.length){
+    for (var x = 0; x < words.length; x++){
+      if (nouns.includes(posArr[x])){
+          var closestMatch = spellCheck(words[x], options);
+          if(closestMatch){
+            entities.push(closestMatch)
+          }
+      }
     }
   }
   return entities;
   // return [entities, unknownEntities];
 
 }
+
 
 var parseQuantity = function(utterance){
   var str = utterance.toLowerCase();
@@ -166,6 +199,9 @@ var engToNum = function(str){
   return answer;
 
 }
+
+
+
 module.exports = {
   parseYesOrNo: parseYesOrNo,
   getAnswers: getAnswers,
@@ -176,18 +212,21 @@ module.exports = {
 }
 
 // test cases
-// console.log(parseQuantity('one thousand eighty'));
-// console.log(parseQuantity('fifty thousand eighty four'));
+// var q = parseQuantity('100')
+// console.log(q);
+//console.log(parseQuantity('fifty thousand eighty four'));
 // console.log(parseQuantity('nine hundred and twelve'));
-// console.log(parseQuantity('I want one thousand eighty'));
-// console.log(parseQuantity('I want 55'));
-// console.log(parseQuantity('one thousand eighty'));
+//console.log(parseQuantity('I want one thousand eighty'));
+//console.log(parseQuantity('I want 55'));
+//console.log(parseQuantity('one thousand eighty') === 1080);
 
-console.log(parseOptions('I want some coffede', ['coffee', 'tea']));
+//console.log(parseYesOrNo('yeah'));
 
-// console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
+//console.log(parseOptions('I want some coffede', ['coffee', 'tea']));
 
-// console.log(parseYesOrNo(" I would definitely like some yes please"));
+//console.log(getAnswers("i would like some coffee", ["coffee", "tea"]));
+
+//console.log(parseYesOrNo(" I would definitely like some yes please"));
 // console.log(parseYesOrNo(" I would definitely like some yes thank you please"));
 
 // console.log(parseEitherOr("I would like some coffee please", ['coffee', 'tea']));
