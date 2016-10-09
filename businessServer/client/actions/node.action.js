@@ -6,26 +6,29 @@ export default function saveNodeAction(nodeObj){
     if(!nodeObj.question){
         nodeObj.question = "default value";
     }
-    store.dispatch(postingNode());
-    return fetch('/api/nodes/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            question: nodeObj.question,
-            productId: nodeObj.productId
+    store.dispatch(dispatch =>{
+        dispatch(postingNode());
+
+        return fetch('/api/nodes/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: nodeObj.question,
+                productId: nodeObj.productId
+            })
         })
-    })
-    .then(res => res.json())
-    .then(item => {
-        console.log(item);
-        if(!item){
-            dispatch(errorPostingNode())
-        }
-        else{
-            dispatch(successPostingNode(item))
-        }
+        .then(res => res.json())
+        .then(item => {
+            console.log(item);
+            if(!item){
+                dispatch(errorPostingNode())
+            }
+            else{
+                dispatch(successPostingNode(item))
+            }
+        })
     })
 
 }

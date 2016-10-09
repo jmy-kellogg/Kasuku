@@ -12,6 +12,8 @@ router.use('/', function(req, res, next) {
 })
 
 // also get connections?
+// create get route for specific business
+// create get route for specific product?
 
 router.get('/', function(req, res, next) {
   Node.findAll()
