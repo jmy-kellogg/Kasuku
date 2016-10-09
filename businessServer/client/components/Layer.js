@@ -14,17 +14,19 @@ const Layer = React.createClass({
   render: function(){
     // console.log(this.props.data);
     // this.props.data is the array of all the node ids that should populate this layer
-    console.log(this.props.node);
-    console.log(this.props.selected);
-    console.log(this.props.data);
 
     // parentId must be the node selected from the row above.
     // row 1  : undefined : undefined : product layer
     // row 2  : undefined : selected[0] : top layer
     // row 3+ : layers[0] : selected[1] : all other layers
-    console.log(this.props.selected[this.props.i-3]);
-    const parentId = this.props.selected[this.props.i-3];
-    console.log(this.props.connection);
+    var parentId;
+    if(this.props.selected){
+      parentId = this.props.selected[this.props.i-3];
+    }
+    else{
+      parentId = null;
+    }
+
 
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;
