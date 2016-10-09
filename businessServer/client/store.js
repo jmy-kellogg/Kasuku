@@ -14,10 +14,14 @@ const middleware = applyMiddleware(thunk);
 
 // create an object for the default data
 const defaultState = {
+
   node,
   connection,
   product,
-  business
+  business,
+  layers: [],
+  selected: []
+
 };
 
  const store = createStore(rootReducer, defaultState, middleware,
