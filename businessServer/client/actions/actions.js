@@ -7,19 +7,27 @@ export function addTopLayerNodeAction(id){
 }
 
 export function addLayers(layer){
+    return {
     type: 'ADD_NEW_LAYER',
     layer
+    }
 }
+
 export function changeSelected(thisId, layer){
-    type: 'CHANGE_SELECTED',
-    thisId,
-    layer
+    console.log(thisId, layer);
+    return {
+        type: 'CHANGE_SELECTED',
+        thisId,
+        layer
+    }
 }
 
 export function changeTopLevelQuestion(question, thisNodeId){
-  type: 'SAVE_TOP_LEVEL_QUESTION',
-  question,
-  thisNodeId
+    return {
+      type: 'SAVE_TOP_LEVEL_QUESTION',
+      question,
+      thisNodeId
+    }
 }
 export function saveNode(question, thisNodeId){
   return {
@@ -27,7 +35,6 @@ export function saveNode(question, thisNodeId){
     question,
     thisNodeId
   }
-
 
 }
 
@@ -46,7 +53,6 @@ export function addProductAction(name) {
         name
     }
 }
-
 
 export function addAnswerAction(answer, fromId = null, businessId = null, id) {
     console.log(fromId);

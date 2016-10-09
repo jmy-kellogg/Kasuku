@@ -10,7 +10,8 @@ function mapStateToProps(state) {
         node: state.node,
         product: state.product,
         business: state.business,
-        layers: state.layers
+        layers: state.layers,
+        selected: state.selected
     };
 };
 
