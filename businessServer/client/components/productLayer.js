@@ -1,6 +1,9 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from 'react-inline-edit';
+import store from '../store';
+import saveNodeAction from '../actions/node.action';
+import saveConnAction from '../actions/conn.action';
 
 const ProductLayer = React.createClass({
   addTopLayerNode: function(productId=1, e){
@@ -21,12 +24,13 @@ const ProductLayer = React.createClass({
     console.log(this.props.connection);
     if(this.props.node){
       this.props.node.forEach(n => {
-        this.props.saveNodeAction(n);
+        store.dispatch(saveNodeAction(n));
       })
     }
     if(this.props.connection){
       this.props.connection.forEach(conn => {
-        this.props.saveConnAction(conn);
+        // this.props.saveConnAction(conn);
+        store.dispatch(conn);
       })
     }
     // this.props.saveDataAction(this.props.node, this.props.conn);
