@@ -13,6 +13,7 @@ function connection(state=[], action){
       ]
       break;
     case 'ADD_NODE':
+      console.log(action);
       var newState = [...state];
       var c;
       newState.forEach(item => {

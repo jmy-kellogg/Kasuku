@@ -20,7 +20,8 @@ const defaultState = {
   product: [],
   business: [],
   layers: [],
-  selected: []
+  selected: [],
+  nodeIds: []
 
 };
 

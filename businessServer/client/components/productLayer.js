@@ -3,18 +3,15 @@ import SingleForm from './SingleForm';
 import InlineEdit from 'react-inline-edit';
 
 const ProductLayer = React.createClass({
-  addTopLayerNode: function(productId, e){
-    var nodeId = 0;
-    this.props.node.forEach(n => {
-      if(node.id > nodeId){
-        nodeId = node.id;
-      }
-    })
-    // var nodeId = this.props.node.length + 1
-    console.log(productId);
+  addTopLayerNode: function(productId=1, e){
+    var newNodeId = 0;
 
-    this.props.addTopLayerNodeAction(nodeId, productId, 2);
-    // this.props.addNewNode(c.id, newId, layer);
+    if(this.props.nodeIds.length > 0){
+      newNodeId = Math.max(...this.props.nodeIds) + 1;
+    }
+
+
+    this.props.addTopLayerNodeAction(newNodeId, productId, 2);
 
     e.preventDefault();
 
@@ -28,7 +25,6 @@ const ProductLayer = React.createClass({
         productId = product.id;
       }
     })
-
        return (
          <div>
           <div>

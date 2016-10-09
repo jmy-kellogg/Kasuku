@@ -8,9 +8,10 @@ import business from './business';
 import signup from './signup';
 import layers from './layers';
 import selected from './selected';
+import nodeIds from './nodeIds';
 
 
-const rootReducer = combineReducers({connection, selected, layers, node, product, business, signup, routing: routerReducer });
+const rootReducer = combineReducers({connection, nodeIds, selected, layers, node, product, business, signup, routing: routerReducer });
 
 
 export default rootReducer;

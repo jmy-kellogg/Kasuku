@@ -3,7 +3,7 @@ import SingleForm from './SingleForm';
 import store from '../store';
 import signup from '../actions/signup.action.js';
 
-console.log(signup);
+// console.log(signup);
 
 const Signup = React.createClass({
   handleSubmit (e) {

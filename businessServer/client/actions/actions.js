@@ -57,7 +57,7 @@ export function addProductAction(name, productId) {
     }
 }
 
-export function addAnswerAction(answer, fromId = null, businessId = null, id) {
+export function addAnswerAction(answer, fromId, businessId = null, id) {
     console.log(fromId);
     return {
         type: 'ADD_ANSWER',

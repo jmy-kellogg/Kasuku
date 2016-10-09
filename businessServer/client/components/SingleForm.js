@@ -23,18 +23,14 @@ const SingleForm = React.createClass({
 				c = conn;
 			}
 		})
-		var newId = this.props.node.length + 1;
+		// var newId = this.props.node.length + 1;
+		var newId = 1;
+		newId = Math.max(...this.props.nodeIds) + 1;
+
 		var layer = this.props.layer+1;
-		console.log(layer);
 
 		this.props.addNewNode(c.id, newId, layer);
 
-	},
-	saveNode: function(e){
-		var q = this.refs.question.value;
-		var thisId = this.props.i;
-		this.props.saveNode(q, thisId);
-		e.preventDefault();
 	},
 	handleChange: function(e){
     var val = e.target.value;
@@ -45,6 +41,7 @@ const SingleForm = React.createClass({
   },
 
 	render: function(){
+
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
 			return (

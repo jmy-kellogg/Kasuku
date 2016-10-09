@@ -24,6 +24,7 @@ const Layer = React.createClass({
     // row 3+ : layers[0] : selected[1] : all other layers
     console.log(this.props.selected[this.props.i-3]);
     const parentId = this.props.selected[this.props.i-3];
+    console.log(this.props.connection);
 
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;
@@ -34,6 +35,7 @@ const Layer = React.createClass({
     const nodesArr = this.props.node.filter(node => {
       return connectionsArr.includes(node.id);
     })
+
 
     // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
 
@@ -46,7 +48,9 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
-        <SingleForm {...this.props} key={i} id={`node${node.id}`} question={q} layer={this.props.i} node={node}/>
+        <div ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+          <SingleForm {...this.props} key={i} id={`node${node.id}`} question={q} layer={this.props.i} i={node.id} data={node}/>
+        </div>
       )
     })
     var allConnId = this.props.connection.map(conn => {
