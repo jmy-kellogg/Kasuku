@@ -1,35 +1,39 @@
-import store from '../store'
-import fetch from 'isomorphic-fetch'
+// import store from '../store'
+import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
-export default function signup(username, email, password, password_confirmation) {
+function getData (res) { return res.data; };
+
+
+export function signup(username, email, password, password_confirmation) {
   console.log("HELLOW", username, email, password, password_confirmation)
-  store.dispatch((dispatch) => {
-
+  
+  return function (dispatch) {
+    console.log("Inside dispatch")
     dispatch(postingUser())
-    
-    return fetch('/api/business/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
+    axios.post('/api/business/', {
           username,
           email,
           password,
           password_confirmation
-        })
       })
-      .then(res => res.json())
+      .then(getData)
       .then(function(user) {
-        console.log("this is user", user);
-        if (!user) {
+        if (!user.username === username) {
+          console.log('no user found');
           dispatch(errorSigningUp())
         } else {
+          console.log('found a user', user.data)
           dispatch(signedup(user))
         }
       })
-    
-  })
- 
-  console.log("function inside is getting called");
+      .catch(function(user) {
+        dispatch(errorSigningUp());
+      })
+
+
+  }
+  
 }
 
 
@@ -45,7 +49,7 @@ export function postingUser() {
 
 
 export function signedup(user) {
-  console.log("calling signed up user")
+  console.log("calling signed up user", user)
   return {
     type: "SIGNEDUP_USER",
     posting: false,

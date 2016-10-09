@@ -8,7 +8,6 @@ var Business = db.model('business');
 
 
 router.post('/', function(req, res, next) {
-    console.log(req.body);
     req.body.welcomeMsg = req.body.welcomeMsg || "Welcome! Picka  product"
     Node.create({ question: req.body.welcomeMsg })
         .then(node => {
@@ -22,6 +21,10 @@ router.post('/', function(req, res, next) {
             })
         })
         .then(business => res.json(business))
+        .catch( (err) => {
+          console.log(err);
+          res.status(500).send()
+        })
 });
 
 router.get('/', function(req, res, next) {
