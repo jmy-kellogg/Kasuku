@@ -7,6 +7,8 @@ var Business = db.model('business');
 var Conversation = db.model('conversation');
 var Node = db.model('node');
 
+var wParse = require('../../facebookServer/ourFbHelpers/ai.js');
+
 const USERID = 1;
 const BUSINESSID = 1;
 
@@ -22,7 +24,7 @@ function main() {
       if (!_convo || _convo.done === true) {
         return Business.findById(BUSINESSID)
         .then(business => {
-          return Conversation.create({ chatterId: USERID, businessId: BUSINESSID, nodeId: business.headNodeId })
+          return Conversation.create({ chatterId: USERID, businessId: BUSINESSID, nodeId: business.headNodeId });
         })
         .then(__convo => {
           currentConvo = __convo;
@@ -36,16 +38,14 @@ function main() {
       return Connection.findAll({ where: { fromId: _node.id } })    
     })
     .then(_connections => {
-      // if current object.answer === chatterMsg,
-      // insert AI Logic here
-      // let answerMap = _connections.map(_connection => _connection.answer);
-      // let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
-      // let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
-      
+      //ai logic
+      let answerMap = _connections.map(_connection => _connection.answer);
+      let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
+      let eitherOrAnswer = wParse.parseEitherOr(chatterMsg, answerMap)[0];
+      let quantity = wParse.parseQuantity(chatterMsg)
       for (let i = 0; i < _connections.length; i++) {
-          // if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
-          if (_connections[i].answer === chatterMsg) {
-              //  set conversation to object.toId. else
+          if (_connections[i].answer === chatterMsg || _connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer || _connections[i].answer == quantity) {
+              console.log(_connections[i].answer, 'got it.')
               return currentConvo.update({ nodeId: _connections[i].toId })
           }
       }
@@ -59,13 +59,12 @@ function main() {
             main();
         }
         else{
-            console.log('Perfect you order has been placed! Let me know if you need anything else');
+            console.log('Perfect, your order has been placed! Let me know if you need anything else.');
             return Conversation.findOne({ where: { done: false, chatterId: USERID, businessId: BUSINESSID } })
               .then(_convo=>{  
                   _convo.done = true;
                   return _convo.save()
                 })
-            //currentConvo.update({nodeId:1})
             .then(() => {main()})
         }
     })
