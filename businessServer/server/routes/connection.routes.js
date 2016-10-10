@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
   // ASSUME WE HAVE A FROM NODE ID PASSED IN req.body
   Connection.create({
       answer: req.body.answer,
-      fromId: req.body.nodeId,
+      fromId: req.body.fromId,
       productId: req.body.productId,
       businessId: req.body.businessId
     }
