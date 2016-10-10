@@ -96,6 +96,7 @@ let businesses = [
 
 db.sync({ force: true })
     .then(function() {
+        console.log('dropped db'.repeat(100))
         return Promise.all([
                 Node.bulkCreate(nodes),
                 Chatter.bulkCreate(chatters),
