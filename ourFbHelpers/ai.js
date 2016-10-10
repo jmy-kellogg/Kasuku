@@ -1,5 +1,5 @@
 'use strict'
-//checks distance between stings for spell checking
+//checks distance between stings for spell checking  < lol irony
 var levenshtein = require('fast-levenshtein');
 
 const rita = require('rita');
@@ -38,10 +38,10 @@ var parseYesOrNo = function(utterance){
   var riStr = new RS(utterance);
   var words = riStr.words();
   for (var x = 0; x < words.length; x++){
-    if(yes.includes(words[x].toLowerCase())){
+    if(yes.indexOf(words[x].toLowerCase()) >= 0){
       return 'yes';
     }
-    else if(no.includes(words[x].toLowerCase())){
+    else if(no.indexOf(words[x].toLowerCase()) >= 0){
       return 'no';
     }
   }
@@ -61,11 +61,11 @@ var getAnswers = function(utterance, options){
 
   // pull all entities from the utterance and store it.
   for (var x = 0; x < words.length; x++){
-    if (nouns.includes(posArr[x])){
+    if (nouns.indexOf(posArr[x]) >=0){
 
-      if (options.includes(words[x]) ||
-          options.includes(r.singularize(words[x])) ||
-          options.includes(r.pluralize(words[x]))
+      if (options.indexOf(words[x]) >= 0 ||
+          options.indexOf(r.singularize(words[x])) >= 0 ||
+          options.indexOf(r.pluralize(words[x])) >= 0
           ){
         entities.push(words[x]); 
       }
@@ -77,7 +77,7 @@ var getAnswers = function(utterance, options){
   //console.log(entities)
   if(!entities.length){
     for (var x = 0; x < words.length; x++){
-      if (nouns.includes(posArr[x])){
+      if (nouns.indexOf(posArr[x]) >= 0){
           var closestMatch = spellCheck(words[x], options);
           if(closestMatch){
             entities.push(closestMatch)
