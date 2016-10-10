@@ -30,7 +30,10 @@ const Product = React.createClass({
       )
     })
     return (
-      <div>
+      <div className="productPage">
+        <div>
+          <h1>Your Products</h1>
+        </div>
         <div>
           {productDiv}
         </div>

@@ -3,11 +3,11 @@ import Layer from './Layer';
 import TopLayer from './topLayer';
 import ProductLayer from './productLayer';
 
-
 const Layers = React.createClass({
 
   render: function(){
     // const layersArr = [1];
+
     console.log(this.props.layers);
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
