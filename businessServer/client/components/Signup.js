@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleForm from './SingleForm';
-import store from '../store';
-import signup from '../actions/signup.action.js';
+import { connect } from 'react-redux'
+import { signup } from '../actions/signup.action.js';
 
 // console.log(signup);
 
@@ -12,15 +12,21 @@ const Signup = React.createClass({
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     const password_confirmation = this.refs.password_confirmation.value;
-    // console.log(username, email, password, password_confirmation);
 
-    store.dispatch(signup(username, email, password, password_confirmation));
+// <<<<<<< HEAD
+    
+    this.props.dispatch(signup(username, email, password, password_confirmation)); 
+// =======
+//     // console.log(username, email, password, password_confirmation);
 
+//     store.dispatch(signup(username, email, password, password_confirmation));
+
+// >>>>>>> master
   },
   render () {
     return (
       <div>
-        <form onSubmit={this.handleSubmit.bind(null)} noValidate>
+        <form onSubmit={this.handleSubmit} noValidate>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input className="form-control"
@@ -71,4 +77,6 @@ const Signup = React.createClass({
   }
 });
 
-export default Signup;
+function mapStateToProps (store) { return { business: store.business } }
+
+export default connect(mapStateToProps)(Signup);

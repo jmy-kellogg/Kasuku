@@ -15,9 +15,11 @@ Node.hasMany(Connection, {as: 'to', foreignKey: 'toId'});
 
 Chatter.belongsToMany(Business, { through: Conversation })
 Business.belongsToMany(Chatter, { through: Conversation })
+// Chatter.hasMany(Conversation, {as: 'chatterId', foreignKey: 'chatterId'});
+// Business.hasMany(Conversation, {as: 'businessId', foreignKey: 'businessId'});
 Conversation.belongsTo(Node)
 
-Business.belongsTo(Node, { as: 'headNode' })
-Business.belongsTo(Node, { as: 'restartNode' })
+Business.belongsTo(Node, { as: 'headNode', foreignKey: 'headNodeId' })
+Business.belongsTo(Node, { as: 'restartNode', foreignKey: 'restartNodeId' })
 
 module.exports = db;

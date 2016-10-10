@@ -6,9 +6,11 @@ function business(state=[], action){
           {
     		businessName: action.businessName,
     		createdAt: action.createdAt,
+        email: action.email,
     		headNodeId: action.headNodeId,
     		id: action.id,
-    		updatedAt: action.updatedAt
+    		updatedAt: action.updatedAt,
+        username: action.username
           }
         ];
         return newState

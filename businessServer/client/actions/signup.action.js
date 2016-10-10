@@ -1,35 +1,41 @@
-import store from '../store'
-import fetch from 'isomorphic-fetch'
+// import store from '../store'
+import fetch from 'isomorphic-fetch';
+import axios from 'axios';
+import { browserHistory } from 'react-router'
 
-export default function signup(username, email, password, password_confirmation) {
-    // console.log("HELLOW", username, email, password, password_confirmation)
-    store.dispatch((dispatch) => {
+function getData (res) { return res.data; };
 
-        dispatch(postingUser())
 
-        return fetch('/api/business/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username,
-                    email,
-                    password,
-                    password_confirmation
-                })
-            })
-            .then(res => res.json())
-            .then(function(user) {
-                // console.log("this is user", user);
-                if (!user) {
-                    dispatch(errorSigningUp())
-                } else {
-                    dispatch(signedup(user))
-                }
-            })
+export function signup(username, email, password, password_confirmation) {
+  console.log("HELLOW", username, email, password, password_confirmation)
 
-    })
+  return function (dispatch) {
+    console.log("Inside dispatch")
+    dispatch(postingUser())
+    axios.post('/api/business/', {
+          username,
+          email,
+          password,
+          password_confirmation
+      })
+      .then(getData)
+      .then(function(user) {
+        if (!user.username === username) {
+          console.log('no user found');
+          dispatch(errorSigningUp())
+        } else {
+          console.log('found a user', user)
+          dispatch(signedup(user))
+          browserHistory.push('/businesses/' + user.id)
+        }
+      })
+      .catch(function(user) {
+        dispatch(errorSigningUp());
+      })
 
-    // console.log("function inside is getting called");
+
+  }
+
 }
 
 
@@ -45,12 +51,14 @@ export function postingUser() {
 
 
 export function signedup(user) {
-    // console.log("calling signed up user")
-    return {
-        type: "SIGNEDUP_USER",
-        posting: false,
-        user
-    }
+
+  console.log("calling signed up user", user)
+  return {
+    type: "SET_BUSINESS",
+    posting: false,
+    ...user
+  }
+
 }
 
 export function errorSigningUp() {

@@ -24,7 +24,7 @@ let nodes = [
     { question: '1, 2, or 3 scoops?', productId: 1 },
     { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true },
     { question: 'Perfect! Your order has been placed.', productId: 1},
-    { question: 'Would you like green tea or black tea?', productId: 2, topLevel: true },
+    { question: 'Would you like green or black?', productId: 2, topLevel: true },
     { question: 'Would any milk added?', productId: 2, topLevel: true },
     { question: 'whole, skim, or 2%?', productId: 2 },
     { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
