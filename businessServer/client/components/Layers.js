@@ -3,24 +3,25 @@ import Layer from './Layer';
 import TopLayer from './topLayer';
 import ProductLayer from './productLayer';
 
-
 const Layers = React.createClass({
 
+  // iterate over array of arrays
+
   render: function(){
-    // const layersArr = [1];
-    console.log(this.props.layers);
+    // console.log(this.props.layers);
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <span>
-        	<Layer {...this.props} key={i} i={i+3} data={layer} />
+        layer {i+3}
+        	<Layer {...this.props} key={i} layer={i+3} data={layer} />
         </span>
       )
     })
 
     return (
       <div>
-        <ProductLayer {...this.props} i={1}/>
-        <TopLayer {...this.props} i={2}/>
+        <ProductLayer {...this.props} layer={1}/>
+        <TopLayer {...this.props} layer={2}/>
         {layersDiv}
       </div>
 

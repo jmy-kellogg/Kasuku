@@ -16,12 +16,15 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // create an object for the default data
 const defaultState = {
 
-  node,
-  connection,
-  product,
-  business,
+  node: [],
+  connection: [],
+  product: [],
+  business: [],
   layers: [],
-  selected: []
+  selected: [],
+  nodeIds: [],
+  connIds: [],
+  prodSelected: "default"
 
 };
   

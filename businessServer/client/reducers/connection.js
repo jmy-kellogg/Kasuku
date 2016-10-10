@@ -1,12 +1,11 @@
 function connection(state=[], action){
   switch(action.type){
     case 'ADD_ANSWER':
-      console.log(state);
       return [
         ...state,
         {
           answer: action.answer,
-          id: action.id,
+          id: action.connId,
           fromId: action.fromId,
           businessId: action.businessId
         }
@@ -17,7 +16,6 @@ function connection(state=[], action){
       var c;
       newState.forEach(item => {
         if(item.id === action.connId){
-          // console.log(item);
           item.toId = action.newNodeId;
         }
       })
