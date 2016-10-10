@@ -26,7 +26,8 @@ router.post('/', function(req, res, next) {
   Node.create( {
     question: req.body.question,
     productId: req.body.productId,
-    topLevel: req.body.topLevel
+    topLevel: req.body.topLevel,
+    layer: req.body.layer
   })
   .then(function(node) {
     res.json(node);
@@ -81,5 +82,18 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-
+router.put('/:id', function(req, res, next){
+  return Node.findById(req.params.id)
+    .then(node => {
+      if(!node){
+        res.sendStatus(404);
+      }
+      else{
+        return node.update(req.body)
+      }
+    })
+    .then(updatedNode => {
+      res.json(updatedNode);
+    })
+})
 
