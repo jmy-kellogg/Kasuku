@@ -1,0 +1,37 @@
+FIRST:
+  
+  CREATE YOUR REACT COMPONENT AS USUAL WITH THE FOLLOWING INCLUDED:
+    import { connect } from 'react-redux'
+    before default exporting your component 
+      create a function 
+        mapStateToProps (state) { return { propName: state.propNameOnState}}
+      connect state to store
+        default export = connect(mapStateToProps)(ComponentYouJustCreated)
+
+  CREATING ACTIONS
+    create action that returns a function which uses dispatch as its argument
+    inside the returned function do your async stuff dispatching as appropriate
+    e.g. function should have the form
+    function signup(name, password) {
+      return function(dispatch) {
+        dispatch(actionToSayWereDoingAsyncStuff)
+        asynchronousFunction()
+        .then()
+        .then()....
+        .then(function(result) {
+          if (result successful)
+            dispatch(actionToSayAsyncWasSuccessful)
+          else 
+            dispatch(actionToSayAsyncWasUnsuccessful)
+        })
+      }
+    }
+
+  REMEMBER TO CREATE THE ABOVE CORRESPONDING ACTIONS CREATORS AS NORMAL
+  
+  function actionToSayWereDoingAsyncStuff()
+    return {
+      asyncing: true
+    }
+  }
+  ... etc.
