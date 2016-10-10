@@ -6,6 +6,11 @@ var Conversation = db.define('conversation', {
         type: Sequelize.BOOLEAN, 
         allowNull: false, 
         defaultValue: false
+    },
+       id: {
+    	type: Sequelize.INTEGER,
+    	primaryKey: true,
+    	autoIncrement: true
     }
 });
 
