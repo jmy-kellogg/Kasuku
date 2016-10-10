@@ -96,6 +96,7 @@ let businesses = [
 
 db.sync({ force: true })
     .then(function() {
+        console.log('dropped db'.repeat(100))
         return Promise.all([
                 Node.bulkCreate(nodes),
                 Chatter.bulkCreate(chatters),
@@ -106,5 +107,6 @@ db.sync({ force: true })
         return Connection.bulkCreate(connections)
     })
     .then(() => {
+        console.log("finished")
         process.exit()
     })

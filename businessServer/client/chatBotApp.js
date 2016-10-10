@@ -14,7 +14,7 @@ import Home from './components/Home';
 import Tree from './components/Tree';
 import Product from './components/Product';
 import Layers from './components/Layers';
-
+import businessProfilePage from './components/BusinessProfilePage';
 
 //import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -34,6 +34,7 @@ const router = (
 	      	<Route path='/signup' component={Signup} />
 	      	<Route path='/product' component={Product} />
 	      	<Route path='/tree/:businessId' component={Tree} />
+          <Route path='/businesses/:businessId' component={businessProfilePage} />
 		  </Route>
 	  </Router>
 	</Provider>

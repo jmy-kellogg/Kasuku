@@ -87,11 +87,12 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             })
         })
         .then(_convo => {
+            console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
                     .then(business => {
                         console.log("CHATTERID 2", chatterId);
-                        return Conversation.create({ chatterId: chatterId, businessId: BUSINESSID, nodeId: business.headNodeId })
+                        return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
                     .then(__convo => {
                         currentConvo = __convo;
@@ -136,22 +137,21 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
-                return Conversation.findOne({ where: { done: false, chatterId: USERID, businessId: BUSINESSID } })
-                    .then(_convo => {
-                        _convo.done = true;
-                        return _convo.save()
-                    })
-                    .then(() => {
-                        var messageData = {
-                            recipient: {
-                                id: recipientId
-                            },
-                            message: {
-                                text: 'Perfect you order has been placed! Let me know if you need anything else'
-                            }
-                        };
-                        callSendAPI(messageData, pageToken);
-                    })
+                Business.findById(BUSINESSID)
+                .then(_business => {
+                    return currentConvo.update({nodeId: _business.headNodeId})
+                })
+                .then(() => {
+                    var messageData = {
+                        recipient: {
+                            id: recipientId
+                        },
+                        message: {
+                            text: 'Perfect you order has been placed! Let me know if you need anything else'
+                        }
+                    };
+                    callSendAPI(messageData, pageToken);
+                })
             }
         })
         //   var messageData = {
