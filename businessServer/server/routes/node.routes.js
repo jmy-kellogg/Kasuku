@@ -45,6 +45,23 @@ router.post('/toplevel', function(req, res, next) {
   })
 });
 
+router.delete('/:id', (req, res, next) => {
+  Node.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(destroyedNode => {
+    if(destroyedNode){
+      res.sendStatus(204);
+    }
+    else{
+      res.sendStatus(404);
+    }
+  })
+  .catch(next);
+})
+
 // router.post('/all', (req, res, next) => {
 //   if(req.body.nodes){
 //     Promise.all(req.body.nodes.map(function(node){

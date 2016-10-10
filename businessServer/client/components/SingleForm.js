@@ -5,8 +5,14 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 
 const SingleForm = React.createClass({
+	removeNode: function(e){
+		console.log(this.props.data);
+		console.log(this.props);
+		// recursively delete down tree
+		// axios.delete('/api/nodes/')
 
 
+	},
 	addNewAnswer: function(e){
 
 		e.preventDefault();
@@ -94,6 +100,7 @@ const SingleForm = React.createClass({
 
 	    return (
 	    	<div className="form">
+	    	<button onClick={this.removeNode}>x</button>
 
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
