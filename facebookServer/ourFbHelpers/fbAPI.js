@@ -138,8 +138,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
-                currentConvo.nodeId = currentHeadNode;
-                currentConvo.save()
+                currentConvo.update({nodeId: currentHeadNode})
                 .then(() => {
                     var messageData = {
                         recipient: {
