@@ -106,5 +106,6 @@ db.sync({ force: true })
         return Connection.bulkCreate(connections)
     })
     .then(() => {
+        console.log("finished")
         process.exit()
     })
