@@ -91,7 +91,6 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
                     .then(business => {
-                        currentHeadNode = business.headNodeId;
                         console.log("CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
@@ -138,7 +137,10 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
-                currentConvo.update({nodeId: currentHeadNode})
+                Business.findById(BUSINESSID)
+                .then(_business => {
+                    return currentConvo.update({nodeId: _business.headNodeId})
+                })
                 .then(() => {
                     var messageData = {
                         recipient: {
