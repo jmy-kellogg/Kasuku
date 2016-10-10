@@ -9,7 +9,6 @@ var Connection = db.model('connection');
 var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
 
-var USERID = 1;
 var BUSINESSID = 1;
 
 function receivedMessage(event, pageToken) {
@@ -31,21 +30,9 @@ function receivedMessage(event, pageToken) {
 
     if (messageText) {
         switch (messageText) {
-            case 'image':
-                sendImageMessage(senderID, pageToken);
-                break;
-
                 case 'thanks':
-                  divertMessage(senderID, messageText, pageToken);
+                  divertMessage(senderID, pageToken);
                   break;
-
-                // case 'generic':
-                //   sendGenericMessage(senderID, pageToken);
-                //   break;
-
-                // case 'receipt':
-                //   sendReceiptMessage(senderID, pageToken);
-                //   break;
 
             default:
                 sendTextMessage(senderID, messageText, pageToken);
@@ -55,19 +42,7 @@ function receivedMessage(event, pageToken) {
     }
 }
 
-function sendImageMessage(recipientId, pageToken) {
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: "YOU SEND AN IMAGE.... actually, it was just the text image."
-        }
-    };
-    callSendAPI(messageData, pageToken);
-}
-
-function divertMessage(recipientId, chatterMsg, pageToken){
+function divertMessage(recipientId, pageToken){
     var messageData = {
         recipient: {
             id: recipientId
@@ -159,16 +134,6 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 })
             }
         })
-        //   var messageData = {
-        //     recipient: {
-        //       id: recipientId
-        //     },
-        //     message: {
-        //       text: node.question
-        //     }
-        //   };
-        //   callSendAPI(messageData, pageToken);
-        // })
 }
 
 function callSendAPI(messageData, pageToken) {

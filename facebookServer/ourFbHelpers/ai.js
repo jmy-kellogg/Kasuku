@@ -114,14 +114,9 @@ var parseEitherOr = function(utterance, options){
     return [];
 }
 
-
-
-
 var parseOptions = function(utterance, options){
   return getAnswers(utterance, options);
 }
-
-
 
 var x = parseOptions("lettuce, tomato, car, Me, with ToMaTo, tomAtoes, and tomatoes", ['tomato','lettuce']);
 // console.log(x);
