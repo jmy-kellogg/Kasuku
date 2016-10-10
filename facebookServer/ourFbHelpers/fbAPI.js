@@ -106,20 +106,20 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             return Connection.findAll({ where: { fromId: _node.id } })
         })
         .then(_connections => {
-            // if current object.answer === chatterMsg,
-            // insert AI Logic here
-            // let answerMap = _connections.map(_connection => _connection.answer);
-            // let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
-            // let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
-
-            for (let i = 0; i < _connections.length; i++) {
-                // if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
-                if (_connections[i].answer === chatterMsg) {
-                    //  set conversation to object.toId. else
-                    return currentConvo.update({ nodeId: _connections[i].toId })
-                }
-            }
-            return Promise.resolve(currentConvo)
+          let answerMap = _connections.map(_connection => _connection.answer);
+          let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
+          let eitherOrAnswer = wParse.parseEitherOr(chatterMsg, answerMap)[0];
+          let quantity = wParse.parseQuantity(chatterMsg)
+          for (let i = 0; i < _connections.length; i++) {
+              if (_connections[i].answer === chatterMsg || 
+                  _connections[i].answer === yesNoAnswer || 
+                  _connections[i].answer === eitherOrAnswer || 
+                  _connections[i].answer === quantity) {
+                  console.log(_connections[i].answer, 'got it.')
+                  return currentConvo.update({ nodeId: _connections[i].toId })
+              }
+          }
+        return Promise.resolve(currentConvo)
         })
         .then(_convo => {
             return Node.findById(_convo.nodeId)

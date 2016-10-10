@@ -7,8 +7,8 @@ const RS = rita.RiString;
 const r = rita.RiTa;
 
 
-var yes = ['yes', 'y', 'yep', 'sure', 'ok', 'okay', 'yeah', 'ya'];
-var no = ['no', 'n', 'nope', 'never', 'not', 'nah'];
+var yes = 'yes y yep sure ok okay yeah ya yea yeaa yay yess yse yees yas yeahh'.split(' ') ;
+var no = 'no n nope never not nah noo nooo nopee nahh ney not'.split(' ');
 var greeting = ['hello', 'hi', 'hey']
 // need to change: get yes, no, greeting variations from the database
 
