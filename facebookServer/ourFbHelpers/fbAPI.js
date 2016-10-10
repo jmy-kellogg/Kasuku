@@ -137,22 +137,19 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
-                return Conversation.findOne({ where: { done: false, chatterId: USERID, businessId: BUSINESSID } })
-                    .then(_convo => {
-                        _convo.done = true;
-                        return _convo.save()
-                    })
-                    .then(() => {
-                        var messageData = {
-                            recipient: {
-                                id: recipientId
-                            },
-                            message: {
-                                text: 'Perfect you order has been placed! Let me know if you need anything else'
-                            }
-                        };
-                        callSendAPI(messageData, pageToken);
-                    })
+                currentConvo.done = true;
+                currentConvo.save()
+                .then(() => {
+                    var messageData = {
+                        recipient: {
+                            id: recipientId
+                        },
+                        message: {
+                            text: 'Perfect you order has been placed! Let me know if you need anything else'
+                        }
+                    };
+                    callSendAPI(messageData, pageToken);
+                })
             }
         })
         //   var messageData = {
