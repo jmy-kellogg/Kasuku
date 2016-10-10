@@ -93,7 +93,9 @@ let businesses = [{
     headNodeId: 1,
     restartNodeId: 10,
     pageToken: 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD',
-    webhookToken: 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken'
+    webhookToken: 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken',
+    email: "chatty-A-1@stuff.com",
+    greeting: "Hi, there. Welcome to Chatty-A-1"
 }]
 
 
