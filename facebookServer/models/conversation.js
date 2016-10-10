@@ -7,11 +7,11 @@ var Conversation = db.define('conversation', {
         allowNull: false, 
         defaultValue: false
     }, 
-    // id: {
-    // 	type: Sequelize.INTEGER,
-    // 	primaryKey: true,
-    // 	autoIncrement: true
-    // }
+    id: {
+    	type: Sequelize.INTEGER,
+    	primaryKey: true,
+    	autoIncrement: true
+    }
 });
 
 module.exports = Conversation;
