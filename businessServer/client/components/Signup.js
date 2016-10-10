@@ -69,6 +69,6 @@ const Signup = React.createClass({
   }
 });
 
-function mapStateToProps (state) { return { business: state.business } }
+function mapStateToProps (store) { return { business: store.business } }
 
 export default connect(mapStateToProps)(Signup);

@@ -1,6 +1,7 @@
 // import store from '../store'
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
+import { browserHistory } from 'react-router'
 
 function getData (res) { return res.data; };
 
@@ -23,8 +24,9 @@ export function signup(username, email, password, password_confirmation) {
           console.log('no user found');
           dispatch(errorSigningUp())
         } else {
-          console.log('found a user', user.data)
+          console.log('found a user', user)
           dispatch(signedup(user))
+          browserHistory.push('/businesses/' + user.id) 
         }
       })
       .catch(function(user) {
@@ -51,9 +53,9 @@ export function postingUser() {
 export function signedup(user) {
   console.log("calling signed up user", user)
   return {
-    type: "SIGNEDUP_USER",
+    type: "SET_BUSINESS",
     posting: false,
-    user
+    ...user
   }
 }
 

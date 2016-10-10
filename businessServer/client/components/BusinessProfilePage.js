@@ -12,6 +12,7 @@ const BusinessProfilePage = React.createClass({
     //console.log('Selected tab: ' + index + ', Last tab: ' + last);
   },
   render () {
+    const businessId = this.props.params.businessId
     return (
       <div>
         <Tabs onSelect={this.handleSelect}>
@@ -21,7 +22,7 @@ const BusinessProfilePage = React.createClass({
             <Tab>Persistent Menu Settings</Tab>
           </TabList>
           <TabPanel>
-            <BusinessProfileInfo />
+            <BusinessProfileInfo data-id={businessId} />
           </TabPanel>
           <TabPanel>
             <BusinessProfileGreetingText />
