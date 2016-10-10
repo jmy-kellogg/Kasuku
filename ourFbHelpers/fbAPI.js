@@ -30,21 +30,14 @@ function receivedMessage(event, pageToken) {
     var messageAttachments = message.attachments;
 
     if (messageText) {
-
-        // CALL A FUNCTION THAT WILL PARSE THE MESSAGE TEXT AND RESPOND WITH THE APPROPRIATE 
-        // NODE TEXT
-
-        // If we receive a text message, check to see if it matches any special
-        // keywords and send back the corresponding example. Otherwise, just echo
-        // the text we received.
         switch (messageText) {
             case 'image':
                 sendImageMessage(senderID, pageToken);
                 break;
 
-                // case 'button':
-                //   sendButtonMessage(senderID, pageToken);
-                //   break;
+                case 'thanks':
+                  divertMesage(senderID, messageText, pageToken);
+                  break;
 
                 // case 'generic':
                 //   sendGenericMessage(senderID, pageToken);
@@ -69,6 +62,18 @@ function sendImageMessage(recipientId, pageToken) {
         },
         message: {
             text: "YOU SEND AN IMAGE.... actually, it was just the text image."
+        }
+    };
+    callSendAPI(messageData, pageToken);
+}
+
+function divertMessage(recipientId, chatterMsg, pageToken){
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: `You're very welcome!`
         }
     };
     callSendAPI(messageData, pageToken);
