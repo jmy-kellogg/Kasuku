@@ -2,6 +2,11 @@ var Sequelize = require('sequelize');
 var db = require('./_db');
 
 var Conversation = db.define('conversation', {
+	id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  	},
 	done: {
         type: Sequelize.BOOLEAN, 
         allowNull: false, 
