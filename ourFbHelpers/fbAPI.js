@@ -75,7 +75,7 @@ function sendImageMessage(recipientId, pageToken) {
 }
 
 function sendTextMessage(recipientId, chatterMsg, pageToken) {
-    let currentConvo, chatterId, currentHeadNode;
+    let currentConvo, chatterId;
     recipientId = '' + recipientId;
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         .then(chatter => {
