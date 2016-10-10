@@ -75,7 +75,7 @@ function sendImageMessage(recipientId, pageToken) {
 }
 
 function sendTextMessage(recipientId, chatterMsg, pageToken) {
-    let currentConvo, chatterId;
+    let currentConvo, chatterId, currentHeadNode;
     recipientId = '' + recipientId;
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         .then(chatter => {
@@ -83,16 +83,17 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
-                where: {id: 1, done: false, chatterId: chatterId, businessId: BUSINESSID }
+                where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
             })
         })
         .then(_convo => {
             console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
+                    currentHeadNode = business.headNodeId;
                     .then(business => {
                         console.log("CHATTERID 2", chatterId);
-                        return Conversation.create({ chatterId: chatterId, businessId: BUSINESSID, nodeId: business.headNodeId })
+                        return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
                     .then(__convo => {
                         currentConvo = __convo;
@@ -137,7 +138,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
-                currentConvo.done = true;
+                currentConvo.nodeId = currentHeadNode;
                 currentConvo.save()
                 .then(() => {
                     var messageData = {
