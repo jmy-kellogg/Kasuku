@@ -36,7 +36,7 @@ function receivedMessage(event, pageToken) {
                 break;
 
                 case 'thanks':
-                  divertMesage(senderID, messageText, pageToken);
+                  divertMessage(senderID, messageText, pageToken);
                   break;
 
                 // case 'generic':
