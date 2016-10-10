@@ -6,58 +6,71 @@ import axios from 'axios';
 
 const SingleForm = React.createClass({
 
+
 	addNewAnswer: function(e){
 
 		e.preventDefault();
-		var ans = this.refs.answer.value;
-		var fromId = this.props.i;
+		var answer = this.refs.answer.value;
+		var fromId = this.props.id;
 
-
-		// set the new connection id
-		var newConnId = 0;
-		if(this.props.connIds.length > 0){
-			var newConnId = Math.max(...this.props.connIds) + 1;
-		}
-
-		// set business ID once business ids are set up.  but keep as null for now.
-		var businessId = null;
-		this.props.addAnswerAction(ans, fromId, businessId, newConnId);
+		axios.post('/api/connections', {
+			answer: answer,
+			fromId: fromId,
+			productId: this.props.prodSelected
+		})
+		.then(conn => conn.data)
+		.then(conn => {
+			// set business ID once business ids are set up.  but keep as null for now.
+			var businessId = null;
+			this.props.addAnswerAction(conn.answer, conn.fromId, businessId, conn.id);
+		})
+		.catch(e => {
+			if(e) throw e;
+		})
 	},
 	addNewNode: function(e){
 		e.preventDefault();
 		var c;
 		var connId = this.refs.answerSelect.value;
+
 		this.props.connection.forEach(conn => {
 			if(conn.id == connId){
 				c = conn;
 			}
 		})
 
-		// define new id for node
-		// var newId = 1;
-		// if(this.props.nodeIds.length > 0){
-		// 	newId = Math.max(...this.props.nodeIds) + 1;
-		// }
-		axios.post('/api/nodes/', {
-			question: "default question",
-			productId: this.props.selectedProd
-		})
-
-		// FILL IN THE .THEN
-
 		var layer = this.props.layer+1;
 
-		this.props.addNewNode(c.id, newId, layer, false);
+		axios.post('/api/nodes/', {
+			question: "default question",
+			productId: this.props.prodSelected,
+			topLevel: false,
+			layer: layer
+		})
+		.then(node => node.data)
+		.then(node => {
+			this.props.addNewNode(c.id, node.id, node.layer, false, node.productId);
+		})
+
+		// this.props.addNewNode(c.id, newId, layer, false);
 	},
-	handleChange: function(e){
+	handleChange: function(nodeId, e){
     var val = e.target.value;
-    if(e.target.id){
-      var thisId = e.target.id.match(/\d/g).join('');
-    }
-    this.props.saveNode(val, thisId);
+    console.log(nodeId);
+    axios.put(`/api/nodes/${nodeId}`, {
+        question: val
+    })
+    .then(updatedNode => updatedNode.data)
+    .then(updatedNode => {
+    	this.props.saveNode(val, nodeId);
+    })
+
   },
 
 	render: function(){
+		// console.log(this.props.connection)
+		// console.log(this.props.i);
+		console.log(this.props);
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -67,7 +80,7 @@ const SingleForm = React.createClass({
 		});
 
 		const answers = this.props.connection.filter(conn => {
-			return conn.fromId === this.props.i;
+			return conn.fromId === this.props.id;
 		})
 		const answersDiv = answers.map((ans, i) => {
 			return (
@@ -77,11 +90,11 @@ const SingleForm = React.createClass({
 			)
 		})
 
-		var _thisId = this.props.i;
+		var _thisId = this.props.id;
 
 	    return (
 	    	<div className="form">
-	    		<form>
+
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
 	    			<select name="type">
@@ -90,7 +103,7 @@ const SingleForm = React.createClass({
 	    		</div>
 	    		<div>
 	    			<p>Question: </p>
-          	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange}/>
+          	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div>
 	    			<select ref="answerSelect">
@@ -101,7 +114,7 @@ const SingleForm = React.createClass({
 	    			<input ref="answer" name="answer"></input>
 	    			<button onClick={this.addNewAnswer}>add answer</button>
 	    		</div>
-	    		</form>
+
 
 	    	</div>
 	    )

@@ -1,5 +1,6 @@
-import store from '../store'
-import fetch from 'isomorphic-fetch'
+import store from '../store';
+import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
 export function setSelectedProduct(product){
     return {
@@ -89,6 +90,7 @@ export function successGetConnections(connections){
 }
 
 export function addTopLayerNodeAction(newNodeId, productId, layer){
+    console.log("asdfasfasdfads",newNodeId, productId, layer);
   return {
     type: 'ADD_TOP_LAYER_NODE',
     newNodeId,
@@ -108,21 +110,23 @@ export function changeSelected(thisId, layer){
 }
 
 export function saveNode(question, thisNodeId){
-  return {
-    type: 'SAVE_NODE',
-    question,
-    thisNodeId
-  }
 
+    // console.log(updatedNode);
+    return {
+        type: 'SAVE_NODE',
+        question,
+        thisNodeId
+    }
 }
 
-export function addNewNode(connId, newNodeId, layer, topLevel=false, productId=null) {
+export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) {
     return {
         type: 'ADD_NODE',
         connId,
         newNodeId,
         layer,
-        topLevel
+        topLevel,
+        productId
     }
 }
 

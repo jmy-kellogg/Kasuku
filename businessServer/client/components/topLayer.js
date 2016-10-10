@@ -27,8 +27,8 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-      <div ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
-        <SingleForm {...this.props} id={`node${node.id}`} question={q} layer={this.props.i} i={node.id}/>
+      <div id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+        <SingleForm {...this.props} id={node.id} question={q} data={node} />
       </div>
     )
   })

@@ -26,9 +26,6 @@ const Product = React.createClass({
 
   },
   render: function(){
-    console.log(this.props.prodSelected);
-    console.log(this.props.product);
-
     const productDiv = this.props.product.map((product, i) => {
       return (
         <div className="product-box" key={i} onClick={this.onClick.bind(this, product)}>
