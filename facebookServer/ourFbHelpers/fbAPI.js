@@ -9,7 +9,6 @@ var Connection = db.model('connection');
 var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
 
-var USERID = 1;
 var BUSINESSID = 1;
 
 function receivedMessage(event, pageToken) {
@@ -30,29 +29,10 @@ function receivedMessage(event, pageToken) {
     var messageAttachments = message.attachments;
 
     if (messageText) {
-
-        // CALL A FUNCTION THAT WILL PARSE THE MESSAGE TEXT AND RESPOND WITH THE APPROPRIATE 
-        // NODE TEXT
-
-        // If we receive a text message, check to see if it matches any special
-        // keywords and send back the corresponding example. Otherwise, just echo
-        // the text we received.
         switch (messageText) {
-            case 'image':
-                sendImageMessage(senderID, pageToken);
-                break;
-
-                // case 'button':
-                //   sendButtonMessage(senderID, pageToken);
-                //   break;
-
-                // case 'generic':
-                //   sendGenericMessage(senderID, pageToken);
-                //   break;
-
-                // case 'receipt':
-                //   sendReceiptMessage(senderID, pageToken);
-                //   break;
+                case 'thanks':
+                  divertMessage(senderID, pageToken);
+                  break;
 
             default:
                 sendTextMessage(senderID, messageText, pageToken);
@@ -62,13 +42,13 @@ function receivedMessage(event, pageToken) {
     }
 }
 
-function sendImageMessage(recipientId, pageToken) {
+function divertMessage(recipientId, pageToken){
     var messageData = {
         recipient: {
             id: recipientId
         },
         message: {
-            text: "YOU SEND AN IMAGE.... actually, it was just the text image."
+            text: `You're very welcome!`
         }
     };
     callSendAPI(messageData, pageToken);
@@ -154,16 +134,6 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 })
             }
         })
-        //   var messageData = {
-        //     recipient: {
-        //       id: recipientId
-        //     },
-        //     message: {
-        //       text: node.question
-        //     }
-        //   };
-        //   callSendAPI(messageData, pageToken);
-        // })
 }
 
 function callSendAPI(messageData, pageToken) {
