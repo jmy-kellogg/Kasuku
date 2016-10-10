@@ -36,12 +36,12 @@ const SingleForm = React.createClass({
 	},
 	addNewNode: function(e){
 		e.preventDefault();
-		var c;
+		var currentConn;
 		var connId = this.refs.answerSelect.value;
 
 		this.props.connection.forEach(conn => {
 			if(conn.id == connId){
-				c = conn;
+				currentConn = conn;
 			}
 		})
 
@@ -55,7 +55,17 @@ const SingleForm = React.createClass({
 		})
 		.then(node => node.data)
 		.then(node => {
-			this.props.addNewNode(c.id, node.id, node.layer, false, node.productId);
+			this.props.addNewNode(currentConn.id, node.id, node.layer, false, node.productId);
+			return node;
+		})
+		.then(node => {
+			console.log(node);
+			axios.put(`/api/connections/${currentConn.id}`, {
+				toId: node.id
+			})
+			.then(conn => {
+				console.log(conn);
+			})
 		})
 
 		// this.props.addNewNode(c.id, newId, layer, false);
