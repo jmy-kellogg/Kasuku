@@ -87,6 +87,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             })
         })
         .then(_convo => {
+            console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
                     .then(business => {
