@@ -1,5 +1,36 @@
 function node(state=[], action){
-	return state
+  switch(action.type){
+    case 'ADD_NODE':
+      return [
+        ...state,
+        {id:action.newNodeId,
+          layer: action.layer}
+      ]
+      break;
+    case 'SAVE_NODE':
+      var newState = [...state];
+      newState.forEach(node => {
+        if(node.id == action.thisNodeId){
+          node.question = action.question;
+        }
+      })
+      return newState;
+    case 'ADD_TOP_LAYER_NODE':
+      return [
+        ...state,
+        {
+          id:action.id,
+          topLevel: action.topLevel
+        }
+      ]
+
+
+    default:
+      return state;
+
+  }
 }
 
 export default node;
+
+

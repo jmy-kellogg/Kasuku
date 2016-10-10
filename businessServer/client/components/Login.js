@@ -3,7 +3,7 @@ import SingleForm from './SingleForm';
 
 
 const Login = React.createClass({
-  
+
   render: function() {
     return (
       <div>

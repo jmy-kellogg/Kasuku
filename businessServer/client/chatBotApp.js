@@ -29,7 +29,7 @@ const router = (
 	    <Route path='/' component={App}>
 			<IndexRoute component={Home} />
 			<Route path='/form' component={SingleForm} />
-			<Route path='/layers' component={Layers} />
+			<Route path='/layers/:productId' component={Layers} />
 	      	<Route path='/login' component={Login} />
 	      	<Route path='/signup' component={Signup} />
 	      	<Route path='/product' component={Product} />

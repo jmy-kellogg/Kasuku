@@ -30,14 +30,25 @@ router.post('/', function(req, res, next) {
   })
 });
 
+router.post('/toplevel', function(req, res, next) {
+  Node.create( {
+    question: req.body.question,
+    productId: req.body.productId,
+    topLevel: true
+  })
+  .then(function(node) {
+    res.json(node);
+  })
+});
+
 
 router.get('/:id', function(req, res, next) {
-  Node.findOne({ where: {id: req.params.id},
-                  include: [
-                    {model: Connection, as: 'from'}
-                  ]
-                }
-  )
+  Node.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: Connection, as: 'from'}
+    ]
+  })
   .then(function(node) {
     res.json(node);
   })

@@ -36,17 +36,18 @@ export function signup(username, email, password, password_confirmation) {
 
   }
   
+
 }
 
 
 // signup action returns function with dispatch as argument
 
 export function postingUser() {
-  console.log("calling postingUser");
-  return {
-    type: "POSTING_USER",
-    posting: true
-  }
+    console.log("calling postingUser");
+    return {
+        type: "POSTING_USER",
+        posting: true
+    }
 }
 
 
@@ -57,13 +58,14 @@ export function signedup(user) {
     posting: false,
     ...user
   }
+
 }
 
 export function errorSigningUp() {
-  console.log("calling error signing up");
-  return {
-    type: "SIGNUP_ERROR",
-    posting: false,
-    user: null
-  }
+    console.log("calling error signing up");
+    return {
+        type: "SIGNUP_ERROR",
+        posting: false,
+        user: null
+    }
 }

@@ -1,44 +1,50 @@
 import React from 'react';
 import SingleForm from './SingleForm';
+import InlineEdit from './InlineEdit';
+
 
 const TopLayer = React.createClass({
 
-  render: function(){
-    // console.log(this.props.node);
+  handleSelected: function(node, e){
 
-    // const parentId = 1;
+    console.log(node);
+    this.props.changeSelected(node.id, node.layer);
+    var thisLayer = 2;
+    // top layer has to be 2.
+  },
+  // handleChange: function(e){
+  //   var val = e.target.value;
+  //   var thisId = e.target.id.match(/\d/g).join('');
+  //   this.props.saveNode(val, thisId);
+  // },
+render: function(){
+  console.log(this.props);
 
-    // const connectionsArr = this.props.connection.filter(conn => {
-    //   return conn.fromId === parentId;
-    // }).map(conn => {
-    //   return conn.toId
-    // })
-    // console.log('props nodes',this.props.node);
-    // console.log('connections array', connectionsArr);
+  const nodesArr = this.props.node.filter(node => {
+     return node.topLevel;
+  })
+  const newId = this.props.node.length + 1;
+   const nodesDiv = nodesArr.map((node, i) => {
+      var q;
+      if(node.question){
+        q = node.question;
+      }
+      else{
+        q = "I'm a question? Fill me out.";
+      }
+     return (
+      <div ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+        <SingleForm {...this.props} id={`node${node.id}`} question={q} layer={this.props.i}/>
+        <button onClick={this.displayStuff}>hello</button>
+      </div>
+    )
+  })
+  return (
+   <div>
+     {nodesDiv}
+   </div>
+)
+   }
+ });
 
-    // const nodesArr = this.props.node.filter(node => {
-    //   return connectionsArr.includes(node.id);
-    // })
-
-    // call function to call action to make ajax request for all top layer nodes
-    // but for the time being...
-    const nodesArr = this.props.node.filter(node => {
-      return node.topLevel;
-    })
-
-
-    const nodesDiv = nodesArr.map((node, i) => {
-      return (
-        <p>Question: {node.question}</p>
-      )
-    })
-      return (
-        <div>
-          {nodesDiv}
-          <SingleForm {...this.props} />
-        </div>
-      )
-  }
-});
-
-export default TopLayer
+ export default TopLayer

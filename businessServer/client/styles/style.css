@@ -26,6 +26,25 @@ button, .button
     border-color blue
     outline 0
 
+.form{
+  background-color: lightgreen;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
+  width: 50vh;
+  vertical-align: center;
+  padding: 5%;
+  float: left;
+  clear: both;
+}
+
+.layerBox{
+  background-color: lightblue;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
+  height:31vh;
+}
 
 
 

@@ -1,39 +1,86 @@
-
-export function addProductAction(name){
-  // console.log('inside the product action');
-  // console.log(name);
+export function addTopLayerNodeAction(id){
   return {
-    type: 'ADD_PRODUCT',
-    name
+    type: 'ADD_TOP_LAYER_NODE',
+    id,
+    topLevel: true
   }
 }
 
-
-export function addAnswerAction(answer, fromId=null){
-
-  return {
-    type: 'ADD_ANSWER',
-    answer,
-    fromId,
-  }
+export function addLayers(layer){
+    return {
+    type: 'ADD_NEW_LAYER',
+    layer
+    }
 }
 
-export function getNodesAction(id){
-  return {
-    type: 'GET_NODE',
-    id
-  }
+export function changeSelected(thisId, layer){
+    console.log(thisId, layer);
+    return {
+        type: 'CHANGE_SELECTED',
+        thisId,
+        layer
+    }
 }
 
-export function setBusinessAction(buisness){
-  return{
-    type: 'SET_BUSINESS',
-    businessName: buisness.businessName,
-    createdAt: buisness.createdAt,
-    headNodeId: buisness.headNodeId,
-    id: buisness.id,
-    updatedAt: buisness.updatedAt
+export function changeTopLevelQuestion(question, thisNodeId){
+    return {
+      type: 'SAVE_TOP_LEVEL_QUESTION',
+      question,
+      thisNodeId
+    }
+}
+export function saveNode(question, thisNodeId){
+  return {
+    type: 'SAVE_NODE',
+    question,
+    thisNodeId
   }
+
+}
+
+export function addNewNode(connId, newNodeId, layer) {
+    return {
+        type: 'ADD_NODE',
+        connId,
+        newNodeId,
+        layer
+    }
+}
+
+export function addProductAction(name) {
+    return {
+        type: 'ADD_PRODUCT',
+        name
+    }
+}
+
+export function addAnswerAction(answer, fromId = null, businessId = null, id) {
+    console.log(fromId);
+    return {
+        type: 'ADD_ANSWER',
+        id,
+        answer,
+        fromId,
+        businessId
+    }
+}
+
+export function getNodesAction(id) {
+    return {
+        type: 'GET_NODE',
+        id
+    }
+}
+
+export function setBusinessAction(buisness) {
+    return {
+        type: 'SET_BUSINESS',
+        businessName: buisness.businessName,
+        createdAt: buisness.createdAt,
+        headNodeId: buisness.headNodeId,
+        id: buisness.id,
+        updatedAt: buisness.updatedAt
+    }
 }
 // export function requestNode(id) {
 //   return {
@@ -58,6 +105,3 @@ export function setBusinessAction(buisness){
 //     email,
 //     password,
 //     password_confirmation
-
-//   }
-// }

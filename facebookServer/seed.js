@@ -14,7 +14,7 @@ let chatters = [
     { fbAccount: '13', firstName: 'Adele Acquirer' }
 ]
 let nodes = [
-    { question: 'Welcome to coffee shop. What order can I get started for you?' },
+    { question: 'Welcome to coffee shop. What can I get started for you?' },
     { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
     { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
     { question: 'Milk, cream, or powder?', productId: 1, topLevel: true },
@@ -22,7 +22,8 @@ let nodes = [
     { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
     { question: 'Splenda, cane, or agave? ', productId: 1, topLevel: true },
     { question: '1, 2, or 3 scoops?', productId: 1, topLevel: true },
-    { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true }
+    { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true },
+    { question: 'Perfect! Your order has been placed' },
 ]
 let connections = [
     { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },
@@ -52,7 +53,7 @@ let connections = [
 ]
 
 let businesses = [
-    { businessName: 'chatty-A-1', fb_account_id: 123, headNodeId: 1, 
+    { businessName: 'chatty-A-1', fb_account_id: 123, headNodeId: 1, restartNodeId: 10,
       pageToken: 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD',
       webhookToken: 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken'}
 ]
@@ -60,12 +61,10 @@ let businesses = [
 
 db.sync({ force: true })
     .then(function() {
-        return Promise.all(
-            [
+        return Promise.all([
                 Node.bulkCreate(nodes),
                 Chatter.bulkCreate(chatters),
-                Business.bulkCreate(businesses),
-
+                Business.bulkCreate(businesses)
             ])
     })
     .then(function() {
