@@ -1,11 +1,11 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import polyfill from 'es6-promise';
+import InlineEdit from './InlineEdit';
 
 const SingleForm = React.createClass({
 
 	addNewAnswer: function(e){
-		console.log(this.props.connection);
 
 		e.preventDefault();
 		var ans = this.refs.answer.value;
@@ -24,8 +24,10 @@ const SingleForm = React.createClass({
 			}
 		})
 		var newId = this.props.node.length + 1;
+		var layer = this.props.layer+1;
+		console.log(layer);
 
-		this.props.addNewNode(c.id, newId);
+		this.props.addNewNode(c.id, newId, layer);
 
 	},
 	saveNode: function(e){
@@ -34,13 +36,16 @@ const SingleForm = React.createClass({
 		this.props.saveNode(q, thisId);
 		e.preventDefault();
 	},
+	handleChange: function(e){
+    var val = e.target.value;
+    if(e.target.id){
+      var thisId = e.target.id.match(/\d/g).join('');
+    }
+    this.props.saveNode(val, thisId);
+  },
 
 	render: function(){
-		console.log(this.props.connection);
-		console.log(this.props.node);
-
-
-		const options = [{name:"Yes/No", value:"Yes/No"}, {name:"Either", value:"Either"}, {name:"Or", value:"Or"}];
+		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
 			return (
 				<option key={i}>{item.name}</option>
@@ -57,15 +62,12 @@ const SingleForm = React.createClass({
 				</option>
 			)
 		})
-		console.log(answers)
-		// <button ref={i} onClick={this.addNewNode}>Add Node</button>
+		var _thisId;
+		if(this.props.id){
+			console.log(this.props.id);
+			// _thisId = this.props.id.match(/\d/g).join('');
+		}
 
-		// const answers= [];
-		// const repeatAnswer = answers.map((answer) => {
-		// 	return (
-		//    		<p>Answer: {answer}</p>
-		// 		)
-		// });
 	    return (
 	    	<div className="form">
 	    		<form>
@@ -76,8 +78,8 @@ const SingleForm = React.createClass({
 	    			</select>
 	    		</div>
 	    		<div>
-	    			<label htmlFor="question">Question: </label>
-	    			<textarea ref="question" name="question"></textarea>
+	    			<p>Question: </p>
+          	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange}/>
 	    		</div>
 	    		<div>
 	    			{/*repeatAnswer*/}
@@ -89,10 +91,8 @@ const SingleForm = React.createClass({
 	    			<button onClick={this.addNewNode}>add node</button>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<input ref="answer" name="answer"></input>
-	    			{JSON.stringify()}
 	    			<button onClick={this.addNewAnswer}>add answer</button>
 	    		</div>
-	    		<button onClick={this.saveNode}>save</button>
 	    		</form>
 
 	    	</div>
