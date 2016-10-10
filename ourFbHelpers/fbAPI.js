@@ -83,7 +83,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
-                where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
+                where: {id: 1, done: false, chatterId: chatterId, businessId: BUSINESSID }
             })
         })
         .then(_convo => {
