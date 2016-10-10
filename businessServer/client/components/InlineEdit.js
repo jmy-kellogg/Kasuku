@@ -35,7 +35,7 @@ var _React$Component2 = _interopRequireDefault(_React$Component);
 
 var _render = require('react-dom');
 
-var _calcNodeHeight = require('./calcNodeHeight');
+var _calcNodeHeight = require('./utils/calcNodeHeight');
 
 var _calcNodeHeight2 = _interopRequireDefault(_calcNodeHeight);
 

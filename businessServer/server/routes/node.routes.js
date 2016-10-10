@@ -23,10 +23,10 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   Node.create( {
     question: req.body.question,
-    productId: req.body.productId
+    productId: req.body.productId,
+    topLevel: req.body.topLevel
   })
   .then(function(node) {
     res.json(node);
@@ -43,6 +43,26 @@ router.post('/toplevel', function(req, res, next) {
     res.json(node);
   })
 });
+
+// router.post('/all', (req, res, next) => {
+//   if(req.body.nodes){
+//     Promise.all(req.body.nodes.map(function(node){
+//       console.log(node);
+//       return Node.create({
+//         question: node.question,
+//         productId: node.productId,
+//         topLevel: node.topLevel
+//       })
+//     }))
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch(next);
+//   }
+//   else{
+//     res.sendStatus(500);
+//   }
+// })
 
 
 router.get('/:id', function(req, res, next) {

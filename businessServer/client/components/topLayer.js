@@ -17,13 +17,7 @@ render: function(){
   const nodesArr = this.props.node.filter(node => {
      return node.topLevel;
   })
-  var newId = 0;
-  this.props.node.forEach(node => {
-    if(node.id > newId){
-      newId = node.id + 1;
-    }
-  })
-  // const newId = this.props.node.length + 1;
+
    const nodesDiv = nodesArr.map((node, i) => {
       var q;
       if(node.question){

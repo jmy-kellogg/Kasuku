@@ -4,7 +4,9 @@ function node(state=[], action){
       return [
         ...state,
         {id:action.newNodeId,
-          layer: action.layer}
+          layer: action.layer,
+          topLevel: action.topLevel,
+          productId: action.productId}
       ]
       break;
     case 'SAVE_NODE':

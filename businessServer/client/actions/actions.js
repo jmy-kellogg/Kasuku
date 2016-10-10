@@ -1,6 +1,13 @@
 import store from '../store'
 import fetch from 'isomorphic-fetch'
 
+export function setSelectedProduct(product){
+    return {
+        type: 'SET_SELECTED',
+        product
+    }
+}
+
 export function getNodesData(){
     store.dispatch(dispatch => {
         dispatch(gettingNodes())
@@ -109,20 +116,20 @@ export function saveNode(question, thisNodeId){
 
 }
 
-export function addNewNode(connId, newNodeId, layer) {
+export function addNewNode(connId, newNodeId, layer, topLevel=false, productId=null) {
     return {
         type: 'ADD_NODE',
         connId,
         newNodeId,
-        layer
+        layer,
+        topLevel
     }
 }
 
-export function addProductAction(name, productId) {
+export function addProductAction(id) {
     return {
         type: 'ADD_PRODUCT',
-        name,
-        productId
+        id
     }
 }
 
@@ -177,3 +184,105 @@ export function setBusinessAction(buisness) {
 //     email,
 //     password,
 //     password_confirmation
+
+
+
+//-----------------------code below is for saving all data
+
+// export function saveAllData(nodesArr, connectionsArr){
+//     store.dispatch(dispatch =>{
+//         dispatch(postingNode());
+
+//         return fetch('/api/nodes/all', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(
+//             {
+//                 nodes: nodesArr
+//             }
+//             )
+//         })
+//         .then(res => res.json())
+//         .then(item => {
+//             console.log(item);
+//             if(!item){
+//                 dispatch(errorPostingNode())
+//             }
+//             else{
+//                 dispatch(successPostingNode(item))
+//             }
+//         })
+//         .then(item => {
+//             dispatch(postingConnection());
+//             return fetch('/api/connections/all', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({
+//                     connections: connectionsArr
+//                 })
+//             })
+//             .then(res => res.json())
+//             .then(item => {
+//                 if(!item){
+//                     dispatch(errorPostingConnection());
+//                 }
+//                 else{
+//                     dispatch(successPostingConnection(item));
+//                 }
+//             })
+//         })
+//     })
+// }
+
+// export function postingNode(){
+//     return {
+//         type: "POSTING_NODE",
+//         posting: true
+//     }
+
+// }
+// export function errorPostingNode(){
+//     return {
+//         type: "POSTING_NODE_ERROR",
+//         posting: false,
+//         item: null
+//     }
+
+// }
+// export function successPostingNode(item){
+//     return {
+//         type: "POSTING_NODE_SUCCESS",
+//         posting: false,
+//         item: item
+//     }
+
+// }
+// export function postingConnection(){
+//     return {
+//         type: "POSTING_CONNECTION",
+//         posting: true
+//     }
+
+// }
+// export function errorPostingConnection(){
+//     return {
+//         type: "POSTING_CONNECTION_ERROR",
+//         posting: false,
+//         item: null
+//     }
+
+// }
+// export function successPostingConnection(item){
+//     return {
+//         type: "POSTING_CONNECTION_SUCCESS",
+//         posting: false,
+//         item: item
+//     }
+
+// }
+
+//-----------------------code above is for saving all data

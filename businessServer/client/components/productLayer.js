@@ -1,60 +1,43 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from 'react-inline-edit';
-import store from '../store';
-import saveNodeAction from '../actions/node.action';
-import saveConnAction from '../actions/conn.action';
+import axios from 'axios';
+
 
 const ProductLayer = React.createClass({
-  addTopLayerNode: function(productId=1, e){
-    var newNodeId = 0;
-
-    if(this.props.nodeIds.length > 0){
-      newNodeId = Math.max(...this.props.nodeIds) + 1;
-    }
-
-    this.props.addTopLayerNodeAction(newNodeId, productId, 2);
+  addTopLayerNode: function(productId, e){
 
     e.preventDefault();
+    axios.post('/api/nodes', {
+      question: "default question",
+      productId: this.props.prodSelected,
+      topLevel: true,
+      layer: 2
+    })
+    .then(node => {
+      this.props.addTopLayerNodeAction(node.id, node.productId, 2, true);
+    })
+    .catch(e => {
+      if(e) throw e;
+    })
+
   },
-  saveEverything: function(e){
-    // send all data in a post request
-    // split the nodes and send
-    console.log(this.props.node);
-    console.log(this.props.connection);
-    if(this.props.node){
-      this.props.node.forEach(n => {
-        store.dispatch(saveNodeAction(n));
-      })
-    }
-    if(this.props.connection){
-      this.props.connection.forEach(conn => {
-        // this.props.saveConnAction(conn);
-        store.dispatch(conn);
-      })
-    }
-    // this.props.saveDataAction(this.props.node, this.props.conn);
-    e.preventDefault();
 
+  loadData: function(e){
+    // hard code in the business id
+    // make ajax request for data
 
   },
 
   render: function(){
-    var productName, productId;
-    this.props.product.forEach(product => {
-      if(product.id == this.props.params.productId){
-        productName = product.name;
-        productId = product.id;
-      }
-    })
+    var productId = this.props.prodSelected;
+
      return (
        <div>
         <div>
-          The Chat Tree for {productName}
+          The Chat Tree for {productId}
         </div>
         <button onClick={this.addTopLayerNode.bind(this, productId)}>add</button>
-        <button onClick={this.saveEverything}>save</button>
-
        </div>
 
      )

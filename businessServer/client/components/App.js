@@ -13,7 +13,8 @@ function mapStateToProps(state) {
         layers: state.layers,
         selected: state.selected,
         nodeIds: state.nodeIds,
-        connIds: state.connIds
+        connIds: state.connIds,
+        prodSelected: state.prodSelected
     };
 };
 

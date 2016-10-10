@@ -22,7 +22,8 @@ const defaultState = {
   layers: [],
   selected: [],
   nodeIds: [],
-  connIds: []
+  connIds: [],
+  prodSelected: "default"
 
 };
 

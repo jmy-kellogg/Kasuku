@@ -35,8 +35,6 @@ const Layer = React.createClass({
       return connectionsArr.includes(node.id);
     })
 
-    // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
-
     var nodesDiv = nodesArr.map((node, i) => {
       var q;
       if(node.question){

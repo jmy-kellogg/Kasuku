@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import polyfill from 'es6-promise';
 import InlineEdit from './InlineEdit';
+import axios from 'axios';
 
 const SingleForm = React.createClass({
 
@@ -11,6 +12,8 @@ const SingleForm = React.createClass({
 		var ans = this.refs.answer.value;
 		var fromId = this.props.i;
 
+
+		// set the new connection id
 		var newConnId = 0;
 		if(this.props.connIds.length > 0){
 			var newConnId = Math.max(...this.props.connIds) + 1;
@@ -29,14 +32,22 @@ const SingleForm = React.createClass({
 				c = conn;
 			}
 		})
-		var newId = 1;
-		if(this.props.nodeIds.length > 0){
-			newId = Math.max(...this.props.nodeIds) + 1;
-		}
+
+		// define new id for node
+		// var newId = 1;
+		// if(this.props.nodeIds.length > 0){
+		// 	newId = Math.max(...this.props.nodeIds) + 1;
+		// }
+		axios.post('/api/nodes/', {
+			question: "default question",
+			productId: this.props.selectedProd
+		})
+
+		// FILL IN THE .THEN
 
 		var layer = this.props.layer+1;
 
-		this.props.addNewNode(c.id, newId, layer);
+		this.props.addNewNode(c.id, newId, layer, false);
 	},
 	handleChange: function(e){
     var val = e.target.value;

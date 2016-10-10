@@ -3,21 +3,22 @@ import fetch from 'isomorphic-fetch'
 
 
 export default function saveNodeAction(nodeObj){
-    if(!nodeObj.question){
-        nodeObj.question = "default value";
-    }
+    // if(!nodeObj.question){
+    //     nodeObj.question = "default value";
+    // }
     store.dispatch(dispatch =>{
         dispatch(postingNode());
 
-        return fetch('/api/nodes/', {
+        return fetch('/api/nodes/all', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                question: nodeObj.question,
-                productId: nodeObj.productId
-            })
+            body: JSON.stringify(
+            {
+                nodes: nodeObj
+            }
+            )
         })
         .then(res => res.json())
         .then(item => {
@@ -41,6 +42,7 @@ export function postingNode(){
 }
 
 export function errorPostingNode(){
+    console.log('error');
     return {
         type: "POSTING_NODE_ERROR",
         posting: false,
@@ -49,6 +51,7 @@ export function errorPostingNode(){
 }
 
 export function successPostingNode(item){
+    console.log('success');
     return {
         type: "POSTING_NODE_SUCCESS",
         posting: false,

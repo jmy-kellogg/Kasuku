@@ -10,7 +10,7 @@ const NavBar = React.createClass({
   <Navbar inverse>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <a href="#">Coffee</a>
         </Navbar.Brand>
           <Navbar.Toggle />
           </Navbar.Header>
