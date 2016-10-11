@@ -12,18 +12,22 @@ router.use('/', function(req, res, next) {
 })
 
 // also get connections?
+// create get route for specific business
+// create get route for specific product?
 
 router.get('/', function(req, res, next) {
   Node.findAll()
   .then(function(nodes) {
     res.json(nodes);
-  }) 
+  })
 })
 
 router.post('/', function(req, res, next) {
   Node.create( {
     question: req.body.question,
-    productId: req.body.productId
+    productId: req.body.productId,
+    topLevel: req.body.topLevel,
+    layer: req.body.layer
   })
   .then(function(node) {
     res.json(node);
@@ -40,6 +44,26 @@ router.post('/toplevel', function(req, res, next) {
     res.json(node);
   })
 });
+
+// router.post('/all', (req, res, next) => {
+//   if(req.body.nodes){
+//     Promise.all(req.body.nodes.map(function(node){
+//       console.log(node);
+//       return Node.create({
+//         question: node.question,
+//         productId: node.productId,
+//         topLevel: node.topLevel
+//       })
+//     }))
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch(next);
+//   }
+//   else{
+//     res.sendStatus(500);
+//   }
+// })
 
 
 router.get('/:id', function(req, res, next) {
@@ -58,5 +82,18 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-
+router.put('/:id', function(req, res, next){
+  return Node.findById(req.params.id)
+    .then(node => {
+      if(!node){
+        res.sendStatus(404);
+      }
+      else{
+        return node.update(req.body)
+      }
+    })
+    .then(updatedNode => {
+      res.json(updatedNode);
+    })
+})
 

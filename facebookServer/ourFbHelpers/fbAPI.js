@@ -9,7 +9,6 @@ var Connection = db.model('connection');
 var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
 
-var USERID = 1;
 var BUSINESSID = 1;
 
 function receivedMessage(event, pageToken) {
@@ -30,29 +29,10 @@ function receivedMessage(event, pageToken) {
     var messageAttachments = message.attachments;
 
     if (messageText) {
-
-        // CALL A FUNCTION THAT WILL PARSE THE MESSAGE TEXT AND RESPOND WITH THE APPROPRIATE 
-        // NODE TEXT
-
-        // If we receive a text message, check to see if it matches any special
-        // keywords and send back the corresponding example. Otherwise, just echo
-        // the text we received.
         switch (messageText) {
-            case 'image':
-                sendImageMessage(senderID, pageToken);
-                break;
-
-                // case 'button':
-                //   sendButtonMessage(senderID, pageToken);
-                //   break;
-
-                // case 'generic':
-                //   sendGenericMessage(senderID, pageToken);
-                //   break;
-
-                // case 'receipt':
-                //   sendReceiptMessage(senderID, pageToken);
-                //   break;
+                case 'thanks':
+                  divertMessage(senderID, pageToken);
+                  break;
 
             default:
                 sendTextMessage(senderID, messageText, pageToken);
@@ -62,13 +42,13 @@ function receivedMessage(event, pageToken) {
     }
 }
 
-function sendImageMessage(recipientId, pageToken) {
+function divertMessage(recipientId, pageToken){
     var messageData = {
         recipient: {
             id: recipientId
         },
         message: {
-            text: "YOU SEND AN IMAGE.... actually, it was just the text image."
+            text: `You're very welcome!`
         }
     };
     callSendAPI(messageData, pageToken);
@@ -106,20 +86,20 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             return Connection.findAll({ where: { fromId: _node.id } })
         })
         .then(_connections => {
-            // if current object.answer === chatterMsg,
-            // insert AI Logic here
-            // let answerMap = _connections.map(_connection => _connection.answer);
-            // let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
-            // let eitherOrAnswer = wParse.parse(chatterMsg, answerMap)[0];
-
-            for (let i = 0; i < _connections.length; i++) {
-                // if (_connections[i].answer === yesNoAnswer || _connections[i].answer == eitherOrAnswer) {
-                if (_connections[i].answer === chatterMsg) {
-                    //  set conversation to object.toId. else
-                    return currentConvo.update({ nodeId: _connections[i].toId })
-                }
-            }
-            return Promise.resolve(currentConvo)
+          let answerMap = _connections.map(_connection => _connection.answer);
+          let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
+          let eitherOrAnswer = wParse.parseEitherOr(chatterMsg, answerMap)[0];
+          let quantity = wParse.parseQuantity(chatterMsg)
+          for (let i = 0; i < _connections.length; i++) {
+              if (_connections[i].answer === chatterMsg || 
+                  _connections[i].answer === yesNoAnswer || 
+                  _connections[i].answer === eitherOrAnswer || 
+                  _connections[i].answer === quantity) {
+                  console.log(_connections[i].answer, 'got it.')
+                  return currentConvo.update({ nodeId: _connections[i].toId })
+              }
+          }
+        return Promise.resolve(currentConvo)
         })
         .then(_convo => {
             return Node.findById(_convo.nodeId)
@@ -154,16 +134,6 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 })
             }
         })
-        //   var messageData = {
-        //     recipient: {
-        //       id: recipientId
-        //     },
-        //     message: {
-        //       text: node.question
-        //     }
-        //   };
-        //   callSendAPI(messageData, pageToken);
-        // })
 }
 
 function callSendAPI(messageData, pageToken) {

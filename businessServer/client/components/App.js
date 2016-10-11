@@ -11,7 +11,10 @@ function mapStateToProps(state) {
         product: state.product,
         business: state.business,
         layers: state.layers,
-        selected: state.selected
+        selected: state.selected,
+        nodeIds: state.nodeIds,
+        connIds: state.connIds,
+        prodSelected: state.prodSelected
     };
 };
 

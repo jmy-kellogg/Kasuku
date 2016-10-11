@@ -8,7 +8,7 @@ function getData (res) { return res.data; };
 
 export function signup(username, email, password, password_confirmation) {
   console.log("HELLOW", username, email, password, password_confirmation)
-  
+
   return function (dispatch) {
     console.log("Inside dispatch")
     dispatch(postingUser())
@@ -26,7 +26,7 @@ export function signup(username, email, password, password_confirmation) {
         } else {
           console.log('found a user', user)
           dispatch(signedup(user))
-          browserHistory.push('/businesses/' + user.id) 
+          browserHistory.push('/businesses/' + user.id)
         }
       })
       .catch(function(user) {
@@ -35,7 +35,6 @@ export function signup(username, email, password, password_confirmation) {
 
 
   }
-  
 
 }
 
@@ -43,7 +42,7 @@ export function signup(username, email, password, password_confirmation) {
 // signup action returns function with dispatch as argument
 
 export function postingUser() {
-    console.log("calling postingUser");
+    // console.log("calling postingUser");
     return {
         type: "POSTING_USER",
         posting: true
@@ -52,6 +51,7 @@ export function postingUser() {
 
 
 export function signedup(user) {
+
   console.log("calling signed up user", user)
   return {
     type: "SET_BUSINESS",
@@ -62,7 +62,7 @@ export function signedup(user) {
 }
 
 export function errorSigningUp() {
-    console.log("calling error signing up");
+    // console.log("calling error signing up");
     return {
         type: "SIGNUP_ERROR",
         posting: false,

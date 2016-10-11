@@ -1,30 +1,30 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 
-
 const Layer = React.createClass({
   handleSelected: function(node, e){
 
-    console.log(node);
+    // var thisLayer = this.props.layer;
     this.props.changeSelected(node.id, node.layer);
-    var thisLayer = 2;
     // top layer has to be 2.
   },
-  // handleChange: function(e){
-  //   var val = e.target.value;
-  //   if(e.target.id){
-  //     var thisId = e.target.id.match(/\d/g).join('');
-  //   }
-  //   this.props.saveNode(val, thisId);
-  // },
 
   render: function(){
-    // console.log(this.props.data);
-    console.log(this.props.selected);
     console.log(this.props);
+    // console.log(this.props.data);
+    // this.props.data is the array of all the node ids that should populate this layer
 
-    console.log(this.props.selected[this.props.i-3]);
-    const parentId = this.props.selected[this.props.i-3];
+    // parentId must be the node selected from the row above.
+    // row 1  : undefined : undefined : product layer
+    // row 2  : undefined : selected[0] : top layer
+    // row 3+ : layers[0] : selected[1] : all other layers
+    var parentId;
+    if(this.props.selected){
+      parentId = this.props.selected[this.props.layer-3];
+    }
+    else{
+      parentId = null;
+    }
 
     const connectionsArr = this.props.connection.filter(conn => {
       return conn.fromId === parentId;
@@ -36,32 +36,29 @@ const Layer = React.createClass({
       return connectionsArr.includes(node.id);
     })
 
-    // use actions to make ajax request to route /products/:id for parent node and its array of connected nodes.
-
     var nodesDiv = nodesArr.map((node, i) => {
+      var q;
+      if(node.question){
+        q = node.question;
+      }
+      else{
+        q = "I'm a question? Fill me out.";
+      }
       return (
-        <SingleForm {...this.props} key={i} id={node.id} node={node}/>
+        <div ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+          <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
+        </div>
       )
     })
     var allConnId = this.props.connection.map(conn => {
       return conn.id;
     })
 
-    var uniqueId = Math.max(...allConnId) + 1;
-
     return (
       <div>
         {nodesDiv}
-
       </div>
     )
-      return (
-        <div className="layerBox">
-          <SingleForm {...this.props} i={1}/>
-
-          {nodesDiv}
-        </div>
-      )
   }
 });
 

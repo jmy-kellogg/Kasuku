@@ -1,3 +1,4 @@
+
 function signup(state=[{
   business: null,
   posting: false,
@@ -34,7 +35,7 @@ function signup(state=[{
       return [
         ...state,
         {
-          posting: action.posting 
+          posting: action.posting
         }
       ]
     }

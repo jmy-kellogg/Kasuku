@@ -1,38 +1,47 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from 'react-inline-edit';
+import axios from 'axios';
+
 
 const ProductLayer = React.createClass({
-  addTopLayerNode: function(e){
-    console.log(this.props.node);
-    var id = this.props.node.length + 1
-
-    this.props.addTopLayerNodeAction(id);
+  addTopLayerNode: function(productId, e){
 
     e.preventDefault();
+    axios.post('/api/nodes', {
+      question: "default question",
+      productId: this.props.prodSelected,
+      topLevel: true,
+      layer: 2
+    })
+    .then(node => node.data)
+    .then(node => {
+      this.props.addTopLayerNodeAction(node.id, node.productId, 2, true);
+    })
+    .catch(e => {
+      if(e) throw e;
+    })
+
+  },
+
+  loadData: function(e){
+    // hard code in the business id
+    // make ajax request for data
 
   },
 
   render: function(){
-    var productName;
-    this.props.product.forEach(product => {
-      if(product.id == this.props.params.productId){
-        productName = product.name;
-      }
-    })
-    console.log(productName);
+    var productId = this.props.prodSelected;
 
-       return (
-         <div>
-          <div>
-            The Chat Tree for {productName}
-          </div>
+     return (
+       <div>
+        <div>
+          The Chat Tree for {productId}
+        </div>
+        <button onClick={this.addTopLayerNode.bind(this, productId)}>add</button>
+       </div>
 
-          <button onClick={this.addTopLayerNode}>add</button>
-
-         </div>
-
-       )
+     )
    }
  });
 

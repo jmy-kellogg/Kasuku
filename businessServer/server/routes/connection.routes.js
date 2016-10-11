@@ -10,6 +10,27 @@ router.use('/', function(req,res,next) {
   next();
 })
 
+// router.post('/all', (req, res, next) => {
+//   if(req.body.connections){
+//     Promise.all(req.body.connections.map(function(conn){
+
+//       return Node.create({
+//          answer: conn.answer,
+//          fromId: conn.nodeId,
+//          productId: conn.productId,
+//          businessId: conn.businessId
+//       })
+//     }))
+//     .then(res => {
+//       console.log(res);
+//     })
+//     .catch(next);
+//   }
+//   else{
+//     res.sendStatus(500);
+//   }
+// })
+
 router.get('/', function(req, res, next) {
   Connection.findAll()
     .then(function(connections) {
@@ -18,7 +39,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  Connection.findOne( { 
+  Connection.findOne( {
     where: { id: req.params.id },
     include: [
       {model: Node, as: "from"},
@@ -32,12 +53,12 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   // ASSUME WE HAVE A FROM NODE ID PASSED IN req.body
-  Connection.create({ 
+  Connection.create({
       answer: req.body.answer,
-      fromId: req.body.nodeId,
+      fromId: req.body.fromId,
       productId: req.body.productId,
       businessId: req.body.businessId
-    }  
+    }
   )
   .then(function(_connection) {
     res.json(_connection);

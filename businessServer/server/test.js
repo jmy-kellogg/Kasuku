@@ -50,9 +50,9 @@ function main() {
       let quantity = wParse.parseQuantity(chatterMsg)
       for (let i = 0; i < _connections.length; i++) {
           if (_connections[i].answer === chatterMsg || 
-            _connections[i].answer === yesNoAnswer || 
-            _connections[i].answer == eitherOrAnswer || 
-            _connections[i].answer == quantity) {
+              _connections[i].answer === yesNoAnswer || 
+              _connections[i].answer === eitherOrAnswer || 
+              _connections[i].answer === quantity) {
               console.log(_connections[i].answer, 'got it.')
               return currentConvo.update({ nodeId: _connections[i].toId })
           }

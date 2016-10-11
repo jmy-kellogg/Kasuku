@@ -7,8 +7,8 @@ const RS = rita.RiString;
 const r = rita.RiTa;
 
 
-var yes = ['yes', 'y', 'yep', 'sure', 'ok', 'okay', 'yeah', 'ya'];
-var no = ['no', 'n', 'nope', 'never', 'not', 'nah'];
+var yes = 'yes y yep sure ok okay yeah ya yea yeaa yay yess yse yees yas yeahh'.split(' ') ;
+var no = 'no n nope never not nah noo nooo nopee nahh ney not'.split(' ');
 var greeting = ['hello', 'hi', 'hey']
 // need to change: get yes, no, greeting variations from the database
 
@@ -114,14 +114,9 @@ var parseEitherOr = function(utterance, options){
     return [];
 }
 
-
-
-
 var parseOptions = function(utterance, options){
   return getAnswers(utterance, options);
 }
-
-
 
 var x = parseOptions("lettuce, tomato, car, Me, with ToMaTo, tomAtoes, and tomatoes", ['tomato','lettuce']);
 // console.log(x);
