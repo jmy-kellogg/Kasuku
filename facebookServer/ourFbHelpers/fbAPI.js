@@ -132,7 +132,11 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                                 include: [{model: Connection}]
               })
                 .then(function(histories) {
-                  histories.forEach(h=>console.log("CONNECTIONS: ".repeat(23), h.connection.answer))
+                  var price = histories.reduce(function(pre, val) {
+                    if (val.price) return pre + val.price;
+                  }, 0)
+                  console.log("PRICE".repeat(500), price)
+                  // histories.forEach(h=>console.log("CONNECTIONS: ".repeat(23), h.connection.answer))
                 })
                 .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
                 Business.findById(BUSINESSID)
