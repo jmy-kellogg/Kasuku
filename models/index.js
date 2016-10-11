@@ -23,6 +23,7 @@ Business.belongsToMany(Chatter, { through: Conversation });
 Conversation.belongsTo(Node)
 
 Connection.hasMany(History);
+History.belongsTo(Connection);
 
 Business.belongsTo(Node, { as: 'headNode', foreignKey: 'headNodeId' });
 Business.belongsTo(Node, { as: 'restartNode', foreignKey: 'restartNodeId' });
