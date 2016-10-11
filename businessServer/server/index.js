@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 // eslint-disable-line new-cap
 var router = require('express').Router();
 var db = require('./models')
@@ -10,5 +10,5 @@ router.use('/nodes', require('./routes/node.routes'));
 router.use('/connections', require('./routes/connection.routes'));
 router.use('/business', require('./routes/business.routes'));
 router.use('/product', require('./routes/tree.routes'));
-
+router.use('/menuSettings', require('./routes/menuSetting.routes'))
 module.exports = router;
