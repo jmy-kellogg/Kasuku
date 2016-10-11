@@ -48,7 +48,7 @@ const ProductLayer = React.createClass({
     })
 
      return (
-       <div>
+       <div className="productLayer">
         <div>
           The Chat Tree for {productName}
         </div>

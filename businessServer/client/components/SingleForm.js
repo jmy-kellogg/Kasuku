@@ -15,8 +15,8 @@ const SingleForm = React.createClass({
 
 		e.preventDefault();
 		var answer = this.refs.answer.value;
+		this.refs.answer.value = "";
 		var fromId = this.props.id;
-
 		axios.post('/api/connections', {
 			answer: answer,
 			fromId: fromId,
@@ -66,7 +66,6 @@ const SingleForm = React.createClass({
 			})
 		})
 
-		// this.props.addNewNode(c.id, newId, layer, false);
 	},
 	handleChange: function(nodeId, e){
     var val = e.target.value;
@@ -107,7 +106,7 @@ const SingleForm = React.createClass({
 		var _thisId = this.props.id;
 
 	    return (
-	    	<div className="form">
+	    	<div className="nodeBox">
 	    	<button onClick={this.removeNode}>x</button>
 
 	    		<div>
@@ -126,8 +125,11 @@ const SingleForm = React.createClass({
 	    			</select>
 	    			<button onClick={this.addNewNode}>add node</button>
 	    			<label htmlFor="answer">Answer: </label>
-	    			<input ref="answer" name="answer"></input>
-	    			<button onClick={this.addNewAnswer}>add answer</button>
+	    			<form onSubmit={this.addNewAnswer}>
+		    			<input ref="answer" name="answer"></input>
+		    			<input type="submit" hidden />
+		    			<button onClick={this.addNewAnswer}>add answer</button>
+	    			</form>
 	    		</div>
 
 

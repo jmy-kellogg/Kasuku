@@ -6,11 +6,12 @@ import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
 
+
   getInitialState: function(){
     return {
       showLayers: false,
       headNode: "undefined",
-      showGreetingNode: false,
+      showGreetingNode: false
     }
   },
   onClick: function(product, e){
@@ -53,9 +54,9 @@ const Product = React.createClass({
     })
   },
 
-
   addProduct: function(e){
     var name = this.refs.productname.value;
+    this.refs.productname.value = "";
     var businessId = null;
     axios.post('/api/connections/', {
       answer: name,
@@ -66,18 +67,9 @@ const Product = React.createClass({
     .then(conn => conn.data)
     .then(conn => {
       this.props.addProductAction(conn.id, name, this.state.headNode, businessId);
-
     })
 
     e.preventDefault();
-
-    // var productId = 1;
-    // this.props.product.forEach(prod => {
-    //   if(prod.id > productId){
-    //     productId = prod.id + 1;
-    //   }
-    // })
-
 
   },
   render: function(){
@@ -92,18 +84,20 @@ const Product = React.createClass({
     })
     return (
       <div>
-        <div onClick={this.createHeadNode}>Get Started</div>
+        {!this.state.showGreetingNode ? <div onClick={this.createHeadNode}>Get Started</div> : null}
         {this.state.showGreetingNode ? <div>
           <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
         </div> : null}
         <div>
           {productDiv}
         </div>
-        <div>
-          <input ref="productname" name="productname"/>
-          <button onClick={this.addProduct}>add</button>
-
-        </div>
+        {this.state.showGreetingNode ? <div>
+          <form onSubmit={this.addProduct}>
+            <input ref="productname" name="productname"/>
+            <input type="submit" hidden />
+            <button onClick={this.addProduct}>add</button>
+          </form>
+        </div> : null}
         <div>
         {this.state.showLayers ? <Layers {...this.props}/> : null }
         </div>
@@ -114,5 +108,3 @@ const Product = React.createClass({
 });
 
 export default Product
-
-// <Link to={`/layers/${product.id}`}>
