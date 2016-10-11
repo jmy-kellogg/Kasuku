@@ -97,7 +97,6 @@ export function successGetConnections(connections){
 }
 
 export function addTopLayerNodeAction(newNodeId, productId, layer){
-    console.log("asdfasfasdfads",newNodeId, productId, layer);
   return {
     type: 'ADD_TOP_LAYER_NODE',
     newNodeId,
@@ -118,7 +117,6 @@ export function changeSelected(thisId, layer){
 
 export function saveNode(question, thisNodeId){
 
-    // console.log(updatedNode);
     return {
         type: 'SAVE_NODE',
         question,
@@ -137,24 +135,28 @@ export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) 
     }
 }
 
-export function addProductAction(id, name, fromId, businessId=null) {
+export function addProductAction(id, name, fromId, businessId=null, price=null, description=null) {
     return {
         type: 'ADD_PRODUCT',
         id,
         name,
         fromId,
-        businessId
+        businessId,
+        price,
+        description
     }
 }
 
-export function addAnswerAction(answer, fromId, businessId = null, connId) {
+export function addAnswerAction(connId, answer, fromId, businessId = null, price=null, description=null) {
     console.log(fromId);
     return {
         type: 'ADD_ANSWER',
         connId,
         answer,
         fromId,
-        businessId
+        businessId,
+        price,
+        description
     }
 }
 
