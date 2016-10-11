@@ -21,16 +21,26 @@ function node(state=[], action){
       // return newState;
       break;
     case 'ADD_NODE':
-      return {
-        ...state,
-        [action.newNodeId]: {
-          id: action.newNodeId,
-          layer: action.layer,
-          topLevel: action.topLevel,
-          productId: action.productId,
-          conns: []
-        }
+      console.log(state);
+      var newState = {...state};
+      newState[action.newNodeId] = {
+        id: action.newNodeId,
+        layer: action.layer,
+        topLevel: action.topLevel,
+        productId: action.productId,
+        conns: []
       }
+      return newState;
+      // return {
+      //   ...state,
+      //   [action.newNodeId]: {
+      //     id: action.newNodeId,
+      //     layer: action.layer,
+      //     topLevel: action.topLevel,
+      //     productId: action.productId,
+      //     conns: []
+      //   }
+      // }
       // return [
       //   ...state,
       //   {
@@ -45,6 +55,7 @@ function node(state=[], action){
     case 'SAVE_NODE':
 
       var newState = {...state};
+      console.log(newState);
       newState[action.thisNodeId].question = action.question;
 
       // newState.forEach(node => {
@@ -54,16 +65,25 @@ function node(state=[], action){
       // })
       return newState;
     case 'ADD_TOP_LAYER_NODE':
-      return {
-        ...state,
-        [action.newNodeId]: {
+      var newState = {...state};
+      newState[action.newNodeId] = {
           id:action.newNodeId,
           layer: action.layer,
           productId: action.productId,
           topLevel: action.topLevel,
           conns: []
-        }
       }
+      return newState;
+      // return {
+      //   ...state,
+      //   [action.newNodeId]: {
+      //     id:action.newNodeId,
+      //     layer: action.layer,
+      //     productId: action.productId,
+      //     topLevel: action.topLevel,
+      //     conns: []
+      //   }
+      // }
       // return [
       //   ...state,
       //   {

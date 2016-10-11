@@ -3,7 +3,6 @@ import SingleForm from './SingleForm';
 
 const Layer = React.createClass({
   handleSelected: function(node, e){
-
     this.props.changeSelected(node.id, node.layer);
     // top layer has to be 2.
   },
@@ -56,7 +55,7 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
-        <div ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+        <div key={i} ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
       )

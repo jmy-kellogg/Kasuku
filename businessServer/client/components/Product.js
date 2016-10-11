@@ -29,6 +29,7 @@ const Product = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
+      console.log(node);
       this.props.saveNode(greeting, node.id);
     })
   },
@@ -42,7 +43,8 @@ const Product = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-      console.log(node);
+      this.props.addNewNode(null, node.id, 0, false, "head");
+      // console.log(node);
       this.setState({
         showGreetingNode: true,
         headNode: node.id
@@ -55,17 +57,22 @@ const Product = React.createClass({
 
   addProduct: function(e){
     var name = this.refs.productname.value;
+    var price = +this.refs.price.value;
+    var description = this.refs.description.value;
     this.refs.productname.value = "";
     var businessId = null;
     axios.post('/api/connections/', {
       answer: name,
       fromId: this.state.headNode,
       productId: name,
-      businessId: businessId
+      businessId,
+      price,
+      description
+
     })
     .then(conn => conn.data)
     .then(conn => {
-      this.props.addProductAction(conn.id, name, this.state.headNode, businessId);
+      this.props.addProductAction(conn.id, name, this.state.headNode, businessId, price, description);
     })
 
     e.preventDefault();
@@ -93,6 +100,8 @@ const Product = React.createClass({
         {this.state.showGreetingNode ? <div>
           <form onSubmit={this.addProduct}>
             <input ref="productname" name="productname"/>
+            <input ref="price" name="price"></input>
+            <input ref="description" name="description"></input>
             <input type="submit" hidden />
             <button onClick={this.addProduct}>add</button>
           </form>

@@ -6,8 +6,9 @@ import axios from 'axios';
 
 const SingleForm = React.createClass({
 	removeNode: function(e){
-		console.log(this.props.data);
-		console.log(this.props.node);
+		// console.log(this.props.data);
+		var nodes = this.props.node;
+		var connections = this.props.connection;
 		// id of this node is this.props.id
 		// get all connections that are associated with this node
 		// get all nodes that are connected to those connections
@@ -17,16 +18,18 @@ const SingleForm = React.createClass({
 		// var queue = [];
 
 		var getAllForRemoval = function(nodeId){
-
-
-			nodesForRemoval.push(id);
-			this.props.connection.forEach(conn => {
-				if(conn.fromId === id){
-					connsForRemoval.push(conn.id);
-					nodesForRemoval.push(conn.toId);
+			nodes[nodeId].conns.forEach(connId => {
+				connsForRemoval.push(connId);
+				if(connections[connId].toId){
+					getAllForRemoval(connections[connId].toId);
 				}
 			})
+			nodesForRemoval.push(nodeId);
 		}
+		getAllForRemoval(this.props.id);
+		console.log(nodesForRemoval);
+		console.log(connsForRemoval);
+		// axios.delete('/api/nodes/all')
 		// recursively delete down tree
 		// axios.delete('/api/nodes/')
 	},
@@ -34,18 +37,23 @@ const SingleForm = React.createClass({
 
 		e.preventDefault();
 		var answer = this.refs.answer.value;
+		var price = +this.refs.price.value;
+		var description = this.refs.description.value;
+
 		this.refs.answer.value = "";
 		var fromId = this.props.id;
 		axios.post('/api/connections', {
-			answer: answer,
-			fromId: fromId,
-			productId: this.props.prodSelected
+			answer,
+			fromId,
+			productId: this.props.prodSelected,
+			price,
+			description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
 			// set business ID once business ids are set up.  but keep as null for now.
 			var businessId = null;
-			this.props.addAnswerAction(conn.answer, conn.fromId, businessId, conn.id);
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId, price, description);
 		})
 		.catch(e => {
 			if(e) throw e;
@@ -77,12 +85,10 @@ const SingleForm = React.createClass({
 			return node;
 		})
 		.then(node => {
-			console.log(node);
 			axios.put(`/api/connections/${currentConn.id}`, {
 				toId: node.id
 			})
 			.then(conn => {
-				console.log(conn);
 			})
 		})
 
@@ -103,7 +109,12 @@ const SingleForm = React.createClass({
 	render: function(){
 		// console.log(this.props.connection)
 		// console.log(this.props.i);
-		console.log(this.props.connection);
+		var fromAnswer;
+		for(var key in this.props.connection){
+			if(this.props.connection[key].toId === this.props.id){
+				fromAnswer = this.props.connection[key];
+			}
+		}
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -134,7 +145,13 @@ const SingleForm = React.createClass({
 
 	    return (
 	    	<div className="nodeBox">
-	    	<button onClick={this.removeNode}>x</button>
+	    		<div>
+	  	  	{fromAnswer.answer}
+
+		    	</div>
+
+
+		    	<button onClick={this.removeNode}>x</button>
 
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
@@ -154,6 +171,8 @@ const SingleForm = React.createClass({
 	    			<label htmlFor="answer">Answer: </label>
 	    			<form onSubmit={this.addNewAnswer}>
 		    			<input ref="answer" name="answer"></input>
+		    			<input ref="price" name="price"></input>
+		    			<input ref="description" name="description"></input>
 		    			<input type="submit" hidden />
 		    			<button onClick={this.addNewAnswer}>add answer</button>
 	    			</form>
