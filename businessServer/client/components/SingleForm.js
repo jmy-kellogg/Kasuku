@@ -7,7 +7,26 @@ import axios from 'axios';
 const SingleForm = React.createClass({
 	removeNode: function(e){
 		console.log(this.props.data);
-		console.log(this.props);
+		console.log(this.props.node);
+		// id of this node is this.props.id
+		// get all connections that are associated with this node
+		// get all nodes that are connected to those connections
+		// repeat
+		var nodesForRemoval = [];
+		var connsForRemoval = [];
+		// var queue = [];
+
+		var getAllForRemoval = function(nodeId){
+
+
+			nodesForRemoval.push(id);
+			this.props.connection.forEach(conn => {
+				if(conn.fromId === id){
+					connsForRemoval.push(conn.id);
+					nodesForRemoval.push(conn.toId);
+				}
+			})
+		}
 		// recursively delete down tree
 		// axios.delete('/api/nodes/')
 	},

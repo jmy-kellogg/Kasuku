@@ -5,9 +5,7 @@ import ProductLayer from './productLayer';
 
 const Layers = React.createClass({
 
-  // iterate over array of arrays
   render: function(){
-    // console.log(this.props.layers);
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <span>

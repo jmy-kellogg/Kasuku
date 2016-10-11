@@ -4,14 +4,11 @@ import SingleForm from './SingleForm';
 const Layer = React.createClass({
   handleSelected: function(node, e){
 
-    // var thisLayer = this.props.layer;
     this.props.changeSelected(node.id, node.layer);
     // top layer has to be 2.
   },
 
   render: function(){
-    console.log(this.props);
-    // console.log(this.props.data);
     // this.props.data is the array of all the node ids that should populate this layer
 
     // parentId must be the node selected from the row above.

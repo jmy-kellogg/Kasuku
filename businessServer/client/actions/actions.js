@@ -118,7 +118,6 @@ export function changeSelected(thisId, layer){
 
 export function saveNode(question, thisNodeId){
 
-    // console.log(updatedNode);
     return {
         type: 'SAVE_NODE',
         question,
