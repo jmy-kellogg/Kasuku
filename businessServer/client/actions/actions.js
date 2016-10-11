@@ -2,6 +2,13 @@ import store from '../store';
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
+export function setHeadNode(nodeId){
+    return {
+        type: 'SET_HEADNODE',
+        nodeId
+    }
+}
+
 export function setSelectedProduct(product){
     return {
         type: 'SET_SELECTED',
@@ -130,10 +137,13 @@ export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) 
     }
 }
 
-export function addProductAction(id) {
+export function addProductAction(id, name, fromId, businessId=null) {
     return {
         type: 'ADD_PRODUCT',
-        id
+        id,
+        name,
+        fromId,
+        businessId
     }
 }
 
