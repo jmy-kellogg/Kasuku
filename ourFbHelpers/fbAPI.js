@@ -18,9 +18,9 @@ function receivedMessage(event, pageToken) {
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
-    console.log("Received message for user %d and page %d at %d with message:",
+    // console.log("Received message for user %d and page %d at %d with message:",
         senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(message));
+    // console.log(JSON.stringify(message));
 
     var messageId = message.mid;
 
@@ -61,7 +61,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         .then(chatter => {
             chatterId = chatter[0].id
-            console.log("CHATTERID 1", chatterId);
+            // console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
                 where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
@@ -72,7 +72,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
                     .then(business => {
-                        console.log("CHATTERID 2", chatterId);
+                        // console.log("CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
                     .then(__convo => {
@@ -96,7 +96,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                   _connections[i].answer === yesNoAnswer || 
                   _connections[i].answer === eitherOrAnswer || 
                   _connections[i].answer === quantity) {
-                  console.log(_connections[i].answer, 'got it.')
+                  // console.log(_connections[i].answer, 'got it.')
                   
                   History.create({
                     businessId: BUSINESSID,
@@ -132,7 +132,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                                 include: [{model: Connection}]
               })
                 .then(function(histories) {
-                  histories.forEach(h=>console.log(h.connection.answer))
+                  histories.forEach(h=>console.log("CONNECTIONS: ", h.connection.answer))
                 })
                 Business.findById(BUSINESSID)
                 .then(_business => {
@@ -165,8 +165,8 @@ function callSendAPI(messageData, pageToken) {
             var recipientId = body.recipient_id;
             var messageId = body.message_id;
 
-            console.log("Successfully sent generic message with id %s to recipient %s",
-                messageId, recipientId);
+            // console.log("Successfully sent generic message with id %s to recipient %s",
+                // messageId, recipientId);
         } else {
             console.error("Unable to send message.");
             console.error(response);
@@ -231,8 +231,8 @@ function receivedPostback(event, pageToken) {
     // button for Structured Messages. 
     var payload = event.postback.payload;
 
-    console.log("Received postback for user %d and page %d with payload '%s' " +
-        "at %d", senderID, recipientID, payload, timeOfPostback);
+    // console.log("Received postback for user %d and page %d with payload '%s' " +
+    //     "at %d", senderID, recipientID, payload, timeOfPostback);
 
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
