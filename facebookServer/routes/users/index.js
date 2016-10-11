@@ -17,13 +17,13 @@ var BUSINESSID = 1;
 // Use puts the business on the req object as fbRequester;
 
 router.use('/:name', function(req, res, next) {
-  console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
+  // console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
   var requester = { userName: req.params.name};
   
   Business.findOne({where: {businessName: req.params.name}})
   .then(function(business) {
     if (!business) { 
-      console.log("user not found in database");
+      // console.log("user not found in database");
       return res.send(403)
     }
 
@@ -74,7 +74,7 @@ router.post('/:name/fbwebhook', function(req, res, next) {
         } else if (messagingEvent.postback) {
           fbAPI.receivedPostback(messagingEvent, pageToken);
         } else {
-          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+          // console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
       });
     });
