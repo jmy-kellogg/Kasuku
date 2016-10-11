@@ -139,7 +139,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                   }, 0)
                   console.log("PRICE".repeat(500), price)
                   histories.forEach(h=>{
-                    price2 += connection.price;
+                    price2 += h.connection.price;
                     console.log("CONNECTIONS: ".repeat(23), h.connection.answer, connection.price, price2)
                 })
                 })
