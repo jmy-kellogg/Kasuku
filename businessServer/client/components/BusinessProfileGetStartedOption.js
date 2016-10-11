@@ -2,9 +2,18 @@ import React from 'react';
 import TooltipGlyph from './TooltipGlyph';
 
 const BusinessProfileGetStartedOption = React.createClass({
-  handleSubmit(e) {
+  getInitialState() {
+    return {
+      isOn: true
+    }
+  },
+
+  getStartedOn(e) {
     e.preventDefault();
-    console.log("calling handleSubmit on greeting text")
+    this.props.isOn = true;
+  },
+  getStartedOff(e) {
+    this.props.isOn = false;
   },
 
   render (){
@@ -14,11 +23,11 @@ const BusinessProfileGetStartedOption = React.createClass({
         <h1>Get Started Option</h1><TooltipGlyph tip={GETSTARTEDTOOLTIP}/>
         <form>
          <div className="btn-group" data-toggle="buttons">
-            <label className="btn btn-primary">
-              <input type="radio" name="enable-get-started" id="enable-get-started" autoComplete="off" defaultChecked /> Enable Get Started Button
+            <label className={ this.isOn ? 'btn btn-primary active' : 'btn btn-primary'}>
+              <input onClick={this.getStartedOn} type="radio" name="enable-get-started" id="enable-get-started" autoComplete="off" defaultChecked /> Enable Get Started Button
             </label>
-            <label className="btn btn-primary">
-              <input type="radio" name="disable-get-started" id="disable-get-started" autoComplete="off" /> Disable Get Started Button
+            <label className={ !this.isOn ? 'btn btn-primary active' : 'btn btn-primary'}>
+              <input onClick={this.getStartedOff} type="radio" name="disable-get-started" id="disable-get-started" autoComplete="off" /> Disable Get Started Button
             </label>
           </div>
         </form>
