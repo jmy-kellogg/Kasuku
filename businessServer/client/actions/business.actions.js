@@ -41,11 +41,29 @@ export function saveGreeting(id, greeting) {
           dispatch(errorUpdatingBusiness());
         } else {
           dispatch(successfullyUpdatedBusiness());
-          return business.greeting
+          return {greeting: business.greeting, pageToken: business.pageToken }
         }
+      })
+      .then(function(infoForFB) {
+        console.log(infoForFB)
+        return fetch('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + infoForFB.pageToken, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            setting_type: "greeting",
+            greeting: {
+              text: infoForFB.greeting
+            }
+          })
+        })
+
       })
       .then(function (greeting) {
         console.log("THIS IS THE GREETING", greeting)
+
       })
       .catch(function(err) {
         dispatch(errorUpdatingBusiness);

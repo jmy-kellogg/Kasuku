@@ -10,6 +10,7 @@ const BusinessProfileGreeting = React.createClass({
     }
   },
   componentDidMount () {
+    console.log(this.props["data-id"], "THIS> PROPS NLSDJ")
     this.businessRequest = axios.get('/api/business/' + this.props["data-id"])
     .then( (res) => res.data )
     .then( (_business) => {
@@ -33,7 +34,6 @@ const BusinessProfileGreeting = React.createClass({
   render (){
     return (
       <div>
-      HIHI- {this.props["data-id"]}
         <h1>Initial Greeting</h1>
         <form>
          <div className="form-group" onSubmit={this.handleSubmit}>

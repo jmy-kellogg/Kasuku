@@ -5,6 +5,7 @@ var Chatter = require('./chatter');
 var Connection = require('./connection');
 var Business = require('./business');
 var Conversation = require('./conversation')
+var MenuSetting = require('./menuSetting')
 
 Connection.belongsTo(Node, { as: 'from' })
 Connection.belongsTo(Node, { as: 'to' })
@@ -18,6 +19,9 @@ Node.hasMany(Connection, {as: 'to', foreignKey: 'toId'});
 Chatter.hasMany(Conversation, {as: 'chatterId', foreignKey: 'chatterId'});
 Business.hasMany(Conversation, {as: 'businessId', foreignKey: 'businessId'});
 Conversation.belongsTo(Node)
+
+Business.hasMany(MenuSetting);
+MenuSetting.belongsTo(Business);
 
 Business.belongsTo(Node, { as: 'headNode', foreignKey: 'headNodeId' })
 Business.belongsTo(Node, { as: 'restartNode', foreignKey: 'restartNodeId' })

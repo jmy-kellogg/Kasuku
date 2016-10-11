@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 var db = require('./models/index');
 
 var Node = require('./models/node');
@@ -6,7 +6,7 @@ var Chatter = require('./models/chatter');
 var Connection = require('./models/connection');
 var Business = require('./models/business');
 var Conversation = require('./models/conversation');
-
+var MenuSetting = require('./models/menuSetting');
 
 let chatters = [
     { fbAccount: 11, firstName: 'Billy BuyStuff' },
@@ -98,6 +98,12 @@ let businesses = [{
     greeting: "Hi, there. Welcome to Chatty-A-1"
 }]
 
+let menuSettings = [
+  {type: "webUrl", menuText: "Rboox", webUrl: "https://www.recordboox.com", businessId: 1},
+  {type: "newOrder", menuText: "New Order", businessId: 1}, 
+  {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1}
+]
+
 
 db.sync({ force: true })
     .then(function() {
@@ -118,7 +124,11 @@ db.sync({ force: true })
     .then(function() {
         return Connection.bulkCreate(connections)
     })
+    .then(function() {
+      return MenuSetting.bulkCreate(menuSettings)
+    })
     .then(() => {
         console.log("finished")
         process.exit()
     })
+    
