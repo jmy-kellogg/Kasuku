@@ -134,6 +134,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 .then(function(histories) {
                   var price = histories.reduce(function(pre, val) {
                     if (val.price) return pre + val.price;
+                    return pre
                   }, 0)
                   console.log("PRICE".repeat(500), price)
                   // histories.forEach(h=>console.log("CONNECTIONS: ".repeat(23), h.connection.answer))
