@@ -20,11 +20,14 @@ var Business = db.define('business', {
     password: {
         type: Sequelize.STRING,
     },
-    // email: {
-    //     type: Sequelize.STRING,
-    //     allowNull: false,
-    //     unique: true
-    // },
+    greeting: {
+      type: Sequelize.STRING,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+    },
 });
 
 module.exports = Business;

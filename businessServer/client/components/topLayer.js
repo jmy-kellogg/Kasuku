@@ -27,13 +27,13 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-      <div id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+      <div className='box' id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} />
       </div>
     )
   })
   return (
-   <div>
+   <div className='layer'>
      {nodesDiv}
    </div>
 )

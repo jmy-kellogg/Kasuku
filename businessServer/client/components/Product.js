@@ -82,7 +82,7 @@ const Product = React.createClass({
   },
   render: function(){
 
-    const defaultGreeting = "Welcome. This is the default greeting";
+    const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
         <div className="product-box" key={i} onClick={this.onClick.bind(this, product)}>
@@ -91,12 +91,16 @@ const Product = React.createClass({
       )
     })
     return (
-      <div>
-        <div onClick={this.createHeadNode}>Get Started</div>
+      <div className="chatbotPage">
+        <button onClick={this.createHeadNode}>Click to get Started</button>
         {this.state.showGreetingNode ? <div>
-          <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+          <div>Write your first question below:</div>
+          <InlineEdit id="firstQuestion" defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
         </div> : null}
         <div>
+          <div>
+            <p>Add an answer to first Question to start tree or Click on answer</p>
+          </div>
           {productDiv}
         </div>
         <div>

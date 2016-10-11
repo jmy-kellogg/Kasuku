@@ -28,7 +28,7 @@ button, .button
     outline 0*/
 
 .form{
-  background-color: lightgreen;
+
   outline-style: solid;
   outline-width: 2px;
   outline-color: black;
@@ -39,11 +39,8 @@ button, .button
   clear: both;
 }
 
-.layerBox{
-  background-color: lightblue;
-  outline-style: solid;
-  outline-width: 2px;
-  outline-color: black;
+.layer{
+  width: 100vh;
   height:31vh;
 }
 
@@ -162,6 +159,29 @@ button, .button
   float: right;
 }
 
-  
-  
+/*chatbotPage*/
 
+.chatbotPage{
+  margin: 5%;
+} 
+
+#firstQuestion{
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: black;
+} 
+  
+.product-box:hover{
+  color: blue;
+  cursor:pointer
+}  
+
+.addNodeButton{
+  padding: 5px;
+}
+
+.box{
+  display: inline;
+  float: left;
+  width: 50vh;
+}

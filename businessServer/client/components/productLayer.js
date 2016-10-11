@@ -50,9 +50,11 @@ const ProductLayer = React.createClass({
      return (
        <div>
         <div>
-          The Chat Tree for {productName}
+          <h1>The Chat Tree for {productName}</h1>
         </div>
-        <button onClick={this.addTopLayerNode}>add</button>
+          <div className="addNodeButton">
+            <button onClick={this.addTopLayerNode}>add question</button>
+          </div>
        </div>
 
      )

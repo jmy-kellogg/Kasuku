@@ -19,7 +19,7 @@ const Layers = React.createClass({
     })
 
     return (
-      <div>
+      <div className="chatbotPage">
         <ProductLayer {...this.props} layer={1}/>
         <TopLayer {...this.props} layer={2}/>
         {layersDiv}

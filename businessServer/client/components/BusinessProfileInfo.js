@@ -7,60 +7,80 @@ const BusinessProfile = React.createClass({
   handleSubmit (e) {
     e.preventDefault();
     
-    const id = this.props.business[0].id;
-    const businessName = this.refs.businessName;
-    const email = this.refs.email;
-    const pageToken = this.refs.pageToken;
-    const password = this.refs.password;
-    const webhookToken = this.refs.webhookToken;
+    const id = this.state.id;
+    const businessName = this.state.businessName;
+    const email = this.state.email;
+    const pageToken = this.state.pageToken;
+    const password = this.refs.password.value;
+    const password_confirmation = this.refs.password_confirmation;
+    const webhookToken = this.state.webhookToken;
 
-    console.log("handle submit for business profile info")
+    this.props.dispatch(updateBusinessProfile(id, businessName, email, pageToken, password, webhookToken))
+    
   },
   getInitialState () {
     return { 
       businessName: '',
       email: '',
       pageToken: '',
-      webhookToken: ''
+      webhookToken: '',
+      password: '',
     }
   },
   componentDidMount () {
-    axios.get('/api/business/' + this.props["data-id"])
+    
+    this.businessRequest = axios.get('/api/business/' + this.props["data-id"])
     .then( (res) => res.data )
-    .then( function (business) {
-      console.log("I go the business", business);
-
-      return business;
+    .then( (_business) => {
+      this.setState({ ..._business })
+      // this.company = _business;
     })
   },
+  businessNameChange(e) {
+    this.setState({ businessName: e.target.value })
+  },
+  emailChange(e) {
+    this.setState({ email: e.target.value })
+  },
+  pageTokenChange (e) {
+    this.setState({ pageToken: e.target.value })
+  },
+  webhookTokenChange (e) {
+    this.setState({ webhookToken: e.target.value })
+  },
   render() {
-    const business = this.props.business[0] || {};
-    console.log("Business", business);
-    console.log("Params", this.props);
-    console.log("State", this.state);
+    
     return (
-      <div className='businessInfoPage'>
+
+      <div>
+      id: {this.state.id}<br/>
+      businessName: {this.state.businessName}<br/>
+      userName: {this.state.username}<br/>
+      businessEmail: {this.state.email}<br/>
+      pt: {this.state.pageToken}<br/>
+      wht: {this.state.webhookToken}<br/>
+
       <h1>Business Info</h1>
         <form>
          
          <div className="form-group" onSubmit={this.handleSubmit}>
            <label htmlFor="business-name">Business Name:</label>
-           <input type="text" className="form-control" id="business-name" ref="businessName" value={business.businessName} />
+           <input type="text" className="form-control" id="business-name" ref="businessName" value={this.state.businessName} onChange={this.businessNameChange} />
          </div>
 
          <div className="form-group">
            <label htmlFor="email">Email address:</label>
-           <input type="email" className="form-control" id="email" ref="email" value={business.email} />
+           <input type="email" className="form-control" id="email" ref="email" value={this.state.email} onChange={this.emailChange} />
          </div>
 
          <div className="form-group">
            <label htmlFor="page-token">Facebook Page Token:</label>
-           <input type="text" className="form-control" id="page-token" ref="pageToken" value={business.pageToken} />
+           <input type="text" className="form-control" id="page-token" ref="pageToken" value={this.state.pageToken} onChange={this.pageTokenChange}/>
          </div>
 
          <div className="form-group">
            <label htmlFor="webhook-token">Facebook Webhook Token:</label>
-           <input type="text" className="form-control" id="webhook-token" ref="webhookToken" value={business.webhookToken} />
+           <input type="text" className="form-control" id="webhook-token" ref="webhookToken" value={this.state.webhookToken} onChange={this.webhookTokenChange} />
          </div>
 
          <div className="form-group">
@@ -69,12 +89,12 @@ const BusinessProfile = React.createClass({
 
          <div className="form-group">
            <label htmlFor="pwd">Password:</label>
-           <input type="password" className="form-control" id="pwd" ref="password" value={business.password} />
+           <input type="password" className="form-control" id="pwd" ref="password" />
          </div>
 
          <div className="form-group">
            <label htmlFor="pwd">Password confirmation:</label>
-           <input type="password_confirmation" className="form-control" id="pwd_confirmation" ref="password_confirmation" value={business.password} />
+           <input type="password" className="form-control" id="pwd_confirmation" ref="password_confirmation"  />
          </div>
 
          <button type="submit" onClick={this.handleSubmit} className="btn btn-primary">Update</button>
