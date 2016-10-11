@@ -14,7 +14,7 @@ let chatters = [
     { fbAccount: '13', firstName: 'Adele Acquirer' }
 ]
 let nodes = [
-    { question: 'Welcome to coffee shop. What order can I get for you?' },
+    { question: 'Welcome to Nick\'s coffee shop. What order can I get for you?' },
     { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
     { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
     { question: 'Milk, cream, or powder?', productId: 1 },
@@ -87,10 +87,21 @@ let connections = [
     { answer: 'large', fromId: 18, businessId: 1 },
 
 ]
-let businesses = [
-    { businessName: 'chatty-A-1', fb_account_id: 123, headNodeId: 1, restartNodeId: 10,
-      pageToken: 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD',
-      webhookToken: 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken'}
+let businesses = [{
+    businessName: 'chatty-A-1',
+    fb_account_id: 123,
+    headNodeId: 1,
+    restartNodeId: 10,
+    pageToken: 'EAAX1CK1IcUsBABEh49qLEKbIrv3KPzHvaLuzpnZCjpPW8fTKNl2EDZBedBJQR1LDB19ZB3dZBE8Xd65YR6bGzFuUajiZAtdq75ab5fE6QoDZBtG3EEF9QFHFA2ZC2le2oQNqDVe5StdDuGBHGyFfrgdvLrztAkiSZBj788bZAPuidTgZDZD',
+    webhookToken: 'thisIsTheGenericVerifyTokenForFacebookUsingOurAppAndNotTheUserSpecificToken',
+    email: "chatty-A-1@stuff.com",
+    greeting: "Hi, there. Welcome to Chatty-A-1"
+}]
+
+let menuSettings = [
+  {type: "webUrl", menuText: "Rboox", webUrl: "https://www.recordboox.com", businessId: 1},
+  {type: "newOrder", menuText: "New Order", businessId: 1}, 
+  {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1}
 ]
 
 
