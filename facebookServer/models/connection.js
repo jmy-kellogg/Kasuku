@@ -9,9 +9,9 @@ var Connection = db.define('connection', {
     price: {
       type: Sequelize.INTEGER
     },
-    // description: {
-    //   type: Sequelize.STRING
-    // }
+    description: {
+      type: Sequelize.STRING
+    }
 });
 
 module.exports = Connection;
