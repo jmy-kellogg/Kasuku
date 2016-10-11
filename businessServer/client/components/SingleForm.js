@@ -53,14 +53,15 @@ const SingleForm = React.createClass({
 	},
 	addNewNode: function(e){
 		e.preventDefault();
-		var currentConn;
 		var connId = this.refs.answerSelect.value;
 
-		this.props.connection.forEach(conn => {
-			if(conn.id == connId){
-				currentConn = conn;
-			}
-		})
+		var currentConn = this.props.connection[connId];
+
+		// this.props.connection.forEach(conn => {
+		// 	if(conn.id == connId){
+		// 		currentConn = conn;
+		// 	}
+		// })
 
 		var layer = this.props.layer+1;
 
@@ -88,7 +89,7 @@ const SingleForm = React.createClass({
 	},
 	handleChange: function(nodeId, e){
     var val = e.target.value;
-    console.log(nodeId);
+    // console.log(nodeId);
     axios.put(`/api/nodes/${nodeId}`, {
         question: val
     })
@@ -102,7 +103,7 @@ const SingleForm = React.createClass({
 	render: function(){
 		// console.log(this.props.connection)
 		// console.log(this.props.i);
-		console.log(this.props);
+		console.log(this.props.connection);
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -111,9 +112,16 @@ const SingleForm = React.createClass({
 				)
 		});
 
-		const answers = this.props.connection.filter(conn => {
-			return conn.fromId === this.props.id;
-		})
+		// const answers = this.props.connection.filter(conn => {
+		// 	return conn.fromId === this.props.id;
+		// })
+
+		const answers = [];
+		for(var key in this.props.connection){
+			if(this.props.connection[key].fromId === this.props.id){
+				answers.push(this.props.connection[key]);
+			}
+		}
 		const answersDiv = answers.map((ans, i) => {
 			return (
 				<option key={i} value={ans.id}>

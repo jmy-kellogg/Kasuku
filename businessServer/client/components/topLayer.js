@@ -14,11 +14,17 @@ const TopLayer = React.createClass({
   },
 render: function(){
 
+  var nodesArr = [];
+  for(var key in this.props.node){
+    if(this.props.node[key].topLevel && +this.props.node[key].productId === this.props.prodSelected){
+      nodesArr.push(this.props.node[key]);
+    }
+  }
 
-  const nodesArr = this.props.node.filter(node => {
+  // const nodesArr = this.props.node.filter(node => {
 
-     return node.topLevel && +node.productId === this.props.prodSelected;
-  })
+  //    return node.topLevel && +node.productId === this.props.prodSelected;
+  // })
 
    const nodesDiv = nodesArr.map((node, i) => {
       var q;

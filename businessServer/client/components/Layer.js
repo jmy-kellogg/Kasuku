@@ -23,15 +23,29 @@ const Layer = React.createClass({
       parentId = null;
     }
 
-    const connectionsArr = this.props.connection.filter(conn => {
-      return conn.fromId === parentId;
-    }).map(conn => {
-      return conn.toId
-    })
+    // const connectionsArr = this.props.connection.filter(conn => {
+    //   return conn.fromId === parentId;
+    // }).map(conn => {
+    //   return conn.toId
+    // })
 
-    const nodesArr = this.props.node.filter(node => {
-      return connectionsArr.includes(node.id) && +node.productId === this.props.prodSelected;
-    })
+    var connectionsArr = [];
+    for(var key in this.props.connection){
+      if(this.props.connection[key].fromId === parentId){
+        connectionsArr.push(this.props.connection[key].toId);
+      }
+    }
+
+    var nodesArr = [];
+    for(var key in this.props.node){
+      if(connectionsArr.includes(this.props.node[key].id) && +this.props.node[key].productId === this.props.prodSelected){
+        nodesArr.push(this.props.node[key]);
+      }
+    }
+
+    // const nodesArr = this.props.node.filter(node => {
+    //   return connectionsArr.includes(node.id) && +node.productId === this.props.prodSelected;
+    // })
 
     var nodesDiv = nodesArr.map((node, i) => {
       var q;
@@ -47,9 +61,9 @@ const Layer = React.createClass({
         </div>
       )
     })
-    var allConnId = this.props.connection.map(conn => {
-      return conn.id;
-    })
+    // var allConnId = this.props.connection.map(conn => {
+    //   return conn.id;
+    // })
 
     return (
       <div>

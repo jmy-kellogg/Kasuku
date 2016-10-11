@@ -40,12 +40,12 @@ const ProductLayer = React.createClass({
 
   render: function(){
 
-    var productName
-    this.props.connection.forEach(conn => {
-       if(conn.id == this.props.prodSelected){
-        productName = conn.answer;
-       }
-    })
+    var productName = this.props.connection[this.props.prodSelected].answer;
+    // this.props.connection.forEach(conn => {
+    //    if(conn.id == this.props.prodSelected){
+    //     productName = conn.answer;
+    //    }
+    // })
 
      return (
        <div className="productLayer">
