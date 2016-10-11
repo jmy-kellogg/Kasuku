@@ -28,20 +28,18 @@ button, .button
     outline 0*/
 
 .form{
-
-  outline-style: solid;
-  outline-width: 2px;
-  outline-color: black;
-  width: 50vh;
-  vertical-align: center;
-  padding: 5%;
-  float: left;
-  clear: both;
+  background-color: lightgreen;
+  width: 80%;
+  height: 60vh;
+  display: block;
+  padding: 10%;
+  margin: 0 10% 0 10%;
 }
 
 .layer{
-  width: 100vh;
-  height:31vh;
+  width: 100%;
+  height:60vh;
+  margin: 10% 0 10% 0;
 }
 
 /*home*/
@@ -161,7 +159,7 @@ button, .button
 
 /*chatbotPage*/
 
-.chatbotPage{
+.Product{
   margin: 5%;
 } 
 

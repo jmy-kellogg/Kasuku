@@ -108,6 +108,7 @@ const SingleForm = React.createClass({
 
 	    return (
 	    	<div className="form">
+	
 	    	<button onClick={this.removeNode}>x</button>
 
 	    		<div>

@@ -91,7 +91,7 @@ const Product = React.createClass({
       )
     })
     return (
-      <div className="chatbotPage">
+      <div className="Product">
         <button onClick={this.createHeadNode}>Click to get Started</button>
         {this.state.showGreetingNode ? <div>
           <div>Write your first question below:</div>

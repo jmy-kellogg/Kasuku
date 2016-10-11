@@ -1,6 +1,7 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from './InlineEdit';
+import { Carousel } from 'react-bootstrap';
 
 const TopLayer = React.createClass({
 
@@ -27,14 +28,19 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-      <div className='box' id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+        <Carousel.Item>
+      <div id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} />
-      </div>
+      </div>    
+       </Carousel.Item>
+
     )
   })
   return (
-   <div className='layer'>
-     {nodesDiv}
+   <div>
+     <Carousel className="layer" interval={false}>
+      {nodesDiv}
+      </Carousel>
    </div>
 )
    }
