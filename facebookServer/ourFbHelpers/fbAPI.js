@@ -132,8 +132,9 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                                 include: [{model: Connection}]
               })
                 .then(function(histories) {
-                  histories.forEach(h=>console.log("CONNECTIONS: ", h.connection.answer))
+                  histories.forEach(h=>console.log("CONNECTIONS: ".repeat(23), h.connection.answer))
                 })
+                .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
                 Business.findById(BUSINESSID)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
