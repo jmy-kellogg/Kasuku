@@ -8,6 +8,7 @@ var Node = db.model('node');
 var Connection = db.model('connection');
 var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
+var History = db.model('history');
 
 var BUSINESSID = 1;
 
@@ -96,6 +97,13 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                   _connections[i].answer === eitherOrAnswer || 
                   _connections[i].answer === quantity) {
                   console.log(_connections[i].answer, 'got it.')
+                  
+                  History.create({
+                    businessId: BUSINESSID,
+                    chatterFbId: recipientId,
+                    connectionId: _connections[i].id
+                  })
+
                   return currentConvo.update({ nodeId: _connections[i].toId })
               }
           }
@@ -225,7 +233,6 @@ function receivedPostback(event, pageToken) {
 
 module.exports = {
     receivedMessage,
-    sendImageMessage,
     sendTextMessage,
     callSendAPI,
     sendGenericMessage,
