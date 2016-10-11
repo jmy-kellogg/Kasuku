@@ -125,6 +125,15 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
+                History.findAll({where: {
+                                  businessId: BUSINESSID,
+                                  chatterFbId: recipientId
+                                },
+                                include: [{model: Connection}]
+              })
+                .then(function(histories) {
+                  histories.forEach(h=>console.log(h.connection.answer))
+                })
                 Business.findById(BUSINESSID)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
