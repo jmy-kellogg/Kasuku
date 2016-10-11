@@ -24,10 +24,11 @@ const defaultState = {
   selected: [],
   nodeIds: [],
   connIds: [],
-  prodSelected: "default"
+  prodSelected: "undefined",
+  headNode: 0
 
 };
-  
+
   // old configuration
  // const store = createStore(rootReducer, defaultState, middleware,
  //    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

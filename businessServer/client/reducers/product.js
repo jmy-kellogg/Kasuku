@@ -4,7 +4,8 @@ function product(state=[], action){
       return [
           ...state,
           {
-            id: action.id
+            id: action.id,
+            name: action.name
           }
         ]
       break;

@@ -10,8 +10,6 @@ const SingleForm = React.createClass({
 		console.log(this.props);
 		// recursively delete down tree
 		// axios.delete('/api/nodes/')
-
-
 	},
 	addNewAnswer: function(e){
 

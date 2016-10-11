@@ -1,5 +1,17 @@
 function connection(state=[], action){
   switch(action.type){
+    case 'ADD_PRODUCT':
+      return [
+        ...state,
+        {
+          answer: action.name,
+          id: action.id,
+          fromId: action.fromId,
+          businessId: action.businessId
+        }
+      ]
+      break;
+
     case 'ADD_ANSWER':
       return [
         ...state,

@@ -2,18 +2,74 @@ import React from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 import Layers from './Layers';
+import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
+
   getInitialState: function(){
-    return {showLayers: false}
+    return {
+      showLayers: false,
+      headNode: "undefined",
+      showGreetingNode: false,
+    }
   },
-  onClick: function(product){
+  onClick: function(product, e){
     this.setState({showLayers: true})
     this.props.setSelectedProduct(product.id);
   },
+  handleChange: function(e){
+    var greeting = e.target.value;
+    console.log(this.state.headNode);
+    axios.put(`/api/nodes/${this.state.headNode}`, {
+      question: greeting,
+      productId: "head",
+      topLevel: false,
+      layer: 0
+    })
+    .then(node => node.data)
+    .then(node => {
+      this.props.saveNode(greeting, node.id);
+    })
+  },
+  createHeadNode: function(e){
+
+    axios.post('/api/nodes/', {
+      question: "undefined",
+      productId: "head",
+      topLevel: false,
+      layer: 0
+    })
+    .then(node => node.data)
+    .then(node => {
+      console.log(node);
+      this.setState({
+        showGreetingNode: true,
+        headNode: node.id
+      });
+      // this.props.setHeadNode(node.id);
+    })
+    .catch(err => {
+      if(err) throw err;
+    })
+  },
+
 
   addProduct: function(e){
     var name = this.refs.productname.value;
+    var businessId = null;
+    axios.post('/api/connections/', {
+      answer: name,
+      fromId: this.state.headNode,
+      productId: name,
+      businessId: businessId
+    })
+    .then(conn => conn.data)
+    .then(conn => {
+      this.props.addProductAction(conn.id, name, this.state.headNode, businessId);
+
+    })
+
+    e.preventDefault();
 
     // var productId = 1;
     // this.props.product.forEach(prod => {
@@ -22,19 +78,24 @@ const Product = React.createClass({
     //   }
     // })
 
-    this.props.addProductAction(name);
 
   },
   render: function(){
+
+    const defaultGreeting = "Welcome. This is the default greeting";
     const productDiv = this.props.product.map((product, i) => {
       return (
         <div className="product-box" key={i} onClick={this.onClick.bind(this, product)}>
-          {product.id}
+          {product.name}
         </div>
       )
     })
     return (
       <div>
+        <div onClick={this.createHeadNode}>Get Started</div>
+        {this.state.showGreetingNode ? <div>
+          <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+        </div> : null}
         <div>
           {productDiv}
         </div>
@@ -43,7 +104,9 @@ const Product = React.createClass({
           <button onClick={this.addProduct}>add</button>
 
         </div>
+        <div>
         {this.state.showLayers ? <Layers {...this.props}/> : null }
+        </div>
 
       </div>
     )

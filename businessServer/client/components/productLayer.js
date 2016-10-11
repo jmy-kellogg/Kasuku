@@ -5,7 +5,9 @@ import axios from 'axios';
 
 
 const ProductLayer = React.createClass({
-  addTopLayerNode: function(productId, e){
+  addTopLayerNode: function(e){
+    var currentConn;
+    console.log(this.props);
 
     e.preventDefault();
     axios.post('/api/nodes', {
@@ -17,6 +19,12 @@ const ProductLayer = React.createClass({
     .then(node => node.data)
     .then(node => {
       this.props.addTopLayerNodeAction(node.id, node.productId, 2, true);
+      return node;
+    })
+    .then(node => {
+      axios.put(`/api/connections/${this.props.prodSelected}`,{
+        toId: node.id
+      })
     })
     .catch(e => {
       if(e) throw e;
@@ -31,14 +39,20 @@ const ProductLayer = React.createClass({
   },
 
   render: function(){
-    var productId = this.props.prodSelected;
+
+    var productName
+    this.props.connection.forEach(conn => {
+       if(conn.id == this.props.prodSelected){
+        productName = conn.answer;
+       }
+    })
 
      return (
        <div>
         <div>
-          The Chat Tree for {productId}
+          The Chat Tree for {productName}
         </div>
-        <button onClick={this.addTopLayerNode.bind(this, productId)}>add</button>
+        <button onClick={this.addTopLayerNode}>add</button>
        </div>
 
      )
