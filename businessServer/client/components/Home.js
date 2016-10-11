@@ -13,7 +13,7 @@ const Home = React.createClass({
         				<img src='https://pressdispensary.co.uk/q991744/images/aco_bot.jpg'/>
         			</div>
         			<div className='textCol'> 
-        				<div id="quote">
+        				<div className="quote">
         				  <p>We are here for you to make your very own chatbot</p>
   						<div className="pointerLeft"></div>
         			</div>

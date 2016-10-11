@@ -39,7 +39,7 @@ const BusinessProfile = React.createClass({
     console.log("Params", this.props);
     console.log("State", this.state);
     return (
-      <div>
+      <div className='businessInfoPage'>
       <h1>Business Info</h1>
         <form>
          

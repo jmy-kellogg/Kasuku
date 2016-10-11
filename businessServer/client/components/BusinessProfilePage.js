@@ -14,7 +14,7 @@ const BusinessProfilePage = React.createClass({
   render () {
     const businessId = this.props.params.businessId
     return (
-      <div>
+      <div className='businessPage'>
         <Tabs onSelect={this.handleSelect}>
           <TabList>
             <Tab>Business Profile</Tab>

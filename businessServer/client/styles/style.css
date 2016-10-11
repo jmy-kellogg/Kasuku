@@ -6,7 +6,7 @@ body{
   Buttons  
 */
 
-.control-buttons
+/*.control-buttons
   display flex
   justify-content space-between
     
@@ -25,7 +25,7 @@ button, .button
   box-sizing padding-box
   &:hover, &:focus
     border-color blue
-    outline 0
+    outline 0*/
 
 .form{
   background-color: lightgreen;
@@ -67,7 +67,7 @@ button, .button
   margin: 5%;
 }
 
-#quote {
+.quote {
   color: #fff;
   font-size: 24px;
   font-family: 'open sans', sans serif;
@@ -81,7 +81,7 @@ button, .button
   -webkit-border-radius: 30px;
   border-radius: 30px;
 }
-#quote .pointerRight {
+.quote .pointerRight {
   z-index: -1;
   position: absolute;
   height: 0;
@@ -94,7 +94,7 @@ button, .button
   -webkit-border-bottom-right-radius: 100% 60%;
   border-bottom-right-radius: 100% 60%;
 }
-#quote .pointerRight:before {
+.quote .pointerRight:before {
   content: '';
   background: #fff;
   position: absolute;
@@ -110,36 +110,8 @@ button, .button
   -webkit-border-bottom-right-radius: 100% 60%;
   border-bottom-right-radius: 100% 60%;
 }
-#quote .pointerRight {
-  z-index: -1;
-  position: absolute;
-  height: 0;
-  padding-bottom: 8.4%;
-  width: 15.6%;
-  bottom: 25%;
-  left: 100%;
-  background: inherit;
-  -moz-border-radius-bottomright: 100% 60%;
-  -webkit-border-bottom-right-radius: 100% 60%;
-  border-bottom-right-radius: 100% 60%;
-}
-#quote .pointerRight:before {
-  content: '';
-  background: #fff;
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  left: -17%;
-  bottom: 50%;
-  -moz-transform: rotate(25deg);
-  -ms-transform: rotate(25deg);
-  -webkit-transform: rotate(25deg);
-  transform: rotate(25deg);
-  -moz-border-radius-bottomright: 100% 60%;
-  -webkit-border-bottom-right-radius: 100% 60%;
-  border-bottom-right-radius: 100% 60%;
-}
-#quote .pointerLeft {
+
+.quote .pointerLeft {
   z-index: -1;
   position: absolute;
   height: 0;
@@ -152,7 +124,7 @@ button, .button
   -webkit-border-bottom-left-radius: 100% 60%;
   border-bottom-left-radius: 100% 60%;
 }
-#quote .pointerLeft:before {
+.quote .pointerLeft:before {
   content: '';
   background: #fff;
   position: absolute;
@@ -167,6 +139,27 @@ button, .button
   -moz-border-radius-bottomleft: 100% 60%;
   -webkit-border-bottom-left-radius: 100% 60%;
   border-bottom-left-radius: 100% 60%;
+}
+
+/*business*/
+.businessPage{
+
+}
+
+.businessInfoPage{
+  margin: 5%;
+}
+.businessInfoForm{
+  display: inline-block;
+  float: left;
+  clear: both;
+
+  width: 40%;
+
+}
+
+.businessName{
+  float: right;
 }
 
   
