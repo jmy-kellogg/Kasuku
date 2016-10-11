@@ -33,7 +33,7 @@ const Layer = React.createClass({
     })
 
     const nodesArr = this.props.node.filter(node => {
-      return connectionsArr.includes(node.id);
+      return connectionsArr.includes(node.id) && +node.productId === this.props.prodSelected;
     })
 
     var nodesDiv = nodesArr.map((node, i) => {

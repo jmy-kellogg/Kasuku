@@ -14,8 +14,10 @@ const TopLayer = React.createClass({
   },
 render: function(){
 
+
   const nodesArr = this.props.node.filter(node => {
-     return node.topLevel;
+
+     return node.topLevel && +node.productId === this.props.prodSelected;
   })
 
    const nodesDiv = nodesArr.map((node, i) => {

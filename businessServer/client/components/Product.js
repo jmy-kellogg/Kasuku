@@ -14,7 +14,7 @@ const Product = React.createClass({
       showGreetingNode: false
     }
   },
-  onClick: function(product, e){
+  selectProduct: function(product, e){
     this.setState({showLayers: true})
     this.props.setSelectedProduct(product.id);
   },
@@ -47,7 +47,6 @@ const Product = React.createClass({
         showGreetingNode: true,
         headNode: node.id
       });
-      // this.props.setHeadNode(node.id);
     })
     .catch(err => {
       if(err) throw err;
@@ -77,7 +76,7 @@ const Product = React.createClass({
     const defaultGreeting = "Welcome. This is the default greeting";
     const productDiv = this.props.product.map((product, i) => {
       return (
-        <div className="product-box" key={i} onClick={this.onClick.bind(this, product)}>
+        <div className="product-box" key={i} onClick={this.selectProduct.bind(this, product)}>
           {product.name}
         </div>
       )
