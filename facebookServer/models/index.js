@@ -28,4 +28,5 @@ History.belongsTo(Connection);
 Business.belongsTo(Node, { as: 'headNode', foreignKey: 'headNodeId' });
 Business.belongsTo(Node, { as: 'restartNode', foreignKey: 'restartNodeId' });
 
+
 module.exports = db;

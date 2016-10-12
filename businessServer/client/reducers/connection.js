@@ -1,5 +1,11 @@
 function connection(state=[], action){
   switch(action.type){
+    case 'LOAD_CONNECTIONS':
+      var newState = {};
+      action.connections.forEach(conn => {
+        newState[conn.id] = conn;
+      })
+      return newState;
 
     case 'REMOVE_CONNECTIONS':
       var newState = {...state}
@@ -18,7 +24,8 @@ function connection(state=[], action){
         fromId: action.fromId,
         businessId: action.businessId,
         price: action.price,
-        description: action.description
+        description: action.description,
+        product: true
       }
 
       return newState;

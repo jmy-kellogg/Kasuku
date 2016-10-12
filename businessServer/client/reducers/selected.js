@@ -1,14 +1,17 @@
 function selected(state=[], action){
   switch(action.type){
+    case 'LOAD_NODES':
+      var newState = [];
+      return newState;
     case 'CHANGE_SELECTED':
       var newState = [...state];
       var layer = action.layer - 2;
-      newState[action.layer-2] = [];
-      if(newState[action.layer-2]){
-        newState[action.layer-2] = action.thisId;
+      newState[layer] = [];
+      if(newState[layer]){
+        newState[layer] = action.thisId;
       }
       else{
-        newState[action.layer-2] = null;
+        newState[layer] = null;
       }
 
       for(var x = layer+1; x < newState.length; x++){

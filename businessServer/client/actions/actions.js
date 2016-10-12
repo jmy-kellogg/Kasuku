@@ -16,85 +16,21 @@ export function setSelectedProduct(product){
     }
 }
 
-export function getNodesData(){
-    store.dispatch(dispatch => {
-        dispatch(gettingNodes())
-        return fetch('/api/nodes', {
-            method: 'GET'
-        })
-    })
-    .then(res => res.json())
-    .then(nodes => {
-        console.log(nodes);
-        if(!nodes){
-            dispatch(errorGetNodes())
-        }
-        else{
-            dispatch(successGetNodes(nodes))
-        }
-    })
+export function loadConnections(connections){
+    return {
+        type: 'LOAD_CONNECTIONS',
+        connections
+    }
 }
 
-export function gettingNodes(){
+export function loadNodes(nodes){
     return {
-        type: 'GETTING_NODES',
-        loading: true
-    }
-}
-export function errorGetNodes(){
-    return {
-        type: 'GETTING_NODES_ERROR',
-        loading: false,
-        nodes: null
-    }
-}
-export function successGetNodes(nodes){
-    return {
-        type: 'GETTING_NODES_SUCCESS',
-        loading: true,
+        type: 'LOAD_NODES',
         nodes
     }
 }
 
-export function getConnectionsData(){
-    store.dispatch(dispatch => {
-        dispatch(gettingConnections())
-        return fetch('/api/connections/', {
-            method: 'GET'
-        })
-    })
-    .then(res => res.json())
-    .then(connections => {
-        console.log(connections);
-        if(!connections){
-            dispatch(errorGetConnections())
-        }
-        else{
-            dispatch(successGetConnections(connections))
-        }
-    })
-}
 
-export function gettingConnections(){
-    return {
-        type: 'GETTING_CONNECTIONS',
-        loading: true
-    }
-}
-export function errorGetConnections(){
-    return {
-        type: 'GETTING_CONNECTIONS_ERROR',
-        loading: false,
-        connections: null
-    }
-}
-export function successGetConnections(connections){
-    return {
-        type: 'GETTING_CONNECTIONS_SUCCESS',
-        loading: true,
-        connections
-    }
-}
 
 export function addTopLayerNodeAction(newNodeId, productId, layer){
   return {
@@ -132,6 +68,13 @@ export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) 
         layer,
         topLevel,
         productId
+    }
+}
+
+export function loadProducts(products){
+    return {
+        type: 'LOAD_PRODUCTS',
+        products
     }
 }
 

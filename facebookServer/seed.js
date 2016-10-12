@@ -98,7 +98,7 @@ let businesses = [{
 
 let menuSettings = [
   {type: "webUrl", menuText: "Rboox", webUrl: "https://www.recordboox.com", businessId: 1},
-  {type: "newOrder", menuText: "New Order", businessId: 1}, 
+  {type: "newOrder", menuText: "New Order", businessId: 1},
   {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1}
 ]
 
