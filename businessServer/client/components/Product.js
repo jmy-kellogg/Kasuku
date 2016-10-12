@@ -38,6 +38,7 @@ const Product = React.createClass({
             _nodesIdArr.forEach(nodeId => {
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
+            this.props.setHeadNode(headNodeId);
             this.props.loadNodes(_nodesArr);
           })
 
