@@ -6,7 +6,8 @@ var Chatter = require('./models/chatter');
 var Connection = require('./models/connection');
 var Business = require('./models/business');
 var Conversation = require('./models/conversation');
-
+var MenuSetting = require('./models/menuSetting');
+var History = require('./models/history');
 
 let chatters = [
     { fbAccount: '1035384179912235', firstName: 'Billy BuyStuff' },
@@ -114,6 +115,9 @@ db.sync({ force: true })
     })
     .then(function() {
         return Connection.bulkCreate(connections)
+    })
+     .then(function() {
+      return MenuSetting.bulkCreate(menuSettings)
     })
     .then(() => {
         console.log("finished")

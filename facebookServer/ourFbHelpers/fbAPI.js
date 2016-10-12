@@ -256,7 +256,22 @@ function receivedPostback(event, pageToken) {
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
     // sendTextMessage(senderID, "Postback called", pageToken);
-    // callSendAPI("HELLO", pageToken)
+
+    switch (payload) {
+      case: 'START_AT_HEAD_NODE': {
+        console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        break;
+      }
+      case: 'CHECKOUT_ORDER': {
+        console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
+        break;
+      }
+      default: {
+        console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
+      }
+    }
+
+
 }
 
 
