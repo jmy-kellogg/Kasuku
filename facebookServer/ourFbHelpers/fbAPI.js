@@ -258,15 +258,15 @@ function receivedPostback(event, pageToken) {
     // sendTextMessage(senderID, "Postback called", pageToken);
 
     switch (payload) {
-      case: 'START_AT_HEAD_NODE': {
+      case 'START_AT_HEAD_NODE': {
         console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
         break;
       }
-      case: 'CHECKOUT_ORDER': {
+      case 'CHECKOUT_ORDER': {
         console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
         break;
       }
-      default: {
+      default {
         console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
       }
     }
