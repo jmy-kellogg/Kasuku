@@ -155,37 +155,35 @@ const SingleForm = React.createClass({
 	    return (
 
 	    	<div className="nodeBox">
-	    		<div>
-	  	  	{fromAnswer.answer}
-
+	    		<div id="answerOfNode">
+			  	  	<h3>Answer to the question above: {fromAnswer.answer}</h3> 
 		    	</div>
-
-
-		    	<button onClick={this.removeNode}>x</button>
-
-
+					<button className="btn-remove" onClick={this.removeNode}>x</button>
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
 	    			<select name="type">
 	    				{repeatOption}
 	    			</select>
 	    		</div>
-	    		<div>
-	    			<p>Question: </p>
-          	<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
+	    		<div className="formQuest">
+	    			<h4>Question: </h4>
+          			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div>
 	    			<select ref="answerSelect">
 	    				{answersDiv}
 	    			</select>
-	    			<button onClick={this.addNewNode}>add node</button>
+	    			<button className="btn-form" onClick={this.addNewNode}>add node</button>
 	    			<label htmlFor="answer">Answer: </label>
-	    			<form onSubmit={this.addNewAnswer}>
+	    			<form className="form" onSubmit={this.addNewAnswer}>
+	    				<label htmlFor="answer">Answer: </label>
 		    			<input ref="answer" name="answer"></input>
+		    			<label htmlFor="price">Added price: </label>
 		    			<input ref="price" name="price"></input>
+		    			<label htmlFor="description">Log: </label>
 		    			<input ref="description" name="description"></input>
 		    			<input type="submit" hidden />
-		    			<button onClick={this.addNewAnswer}>add answer</button>
+		    			<button className="btn-form" onClick={this.addNewAnswer}>add answer</button>
 	    			</form>
 	    		</div>
 

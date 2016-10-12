@@ -33,7 +33,17 @@ body{
 /*  outline-offset: 20px;*/
   text-shadow: 1px 1px 2px #FFFFFF; 
 }
+.btnAdd {
+    background: transparent;
+    border: 1px solid white;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
 
+.btnAdd:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
 
 /*NavBar*/
 
@@ -94,27 +104,50 @@ body{
   margin: auto;
 }
 .nodeBox{
-  background-color: #F8F5EC;
+  background-color: #c1d72e;
+  color: white;
   outline-style: solid;
   outline-width: 1px;
   outline-color: #F5F5F5;
-  width: 80%;
+  width: 100%;
   height: 60vh;
   display: block;
-  padding: 5%;
-  margin: 0 10% 0 10%;
+  padding: 8% 5% 5% 20%;
+
 }
-/*.nodeBox{
-  background-color: #F8F5EC;
-  outline-style: solid;
-  outline-width: 1px;
-  outline-color: #F5F5F5;
-  width: 50vh;
-  vertical-align: center;
-  padding: 5%;
-  float: left;
-  clear: both;
-}*/
+.btn-form{
+  background: transparent;
+  margin: 5px;
+  border: 1px solid white; 
+}
+
+.form input{
+  color: black;
+} 
+
+.formQuest textarea{
+  width: 80%;
+}
+#answerOfNode{
+  display: inline-block;
+  margin: auto;
+  width: 50%; 
+}
+
+.btn-remove{
+  float: right;
+  margin-right: 20%;
+  background: transparent;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
+}
+
+.slide{
+  background-color: #c1d72e; 
+}
+
 
 .layer{
   width: 100%;
@@ -203,7 +236,7 @@ body{
 
 /*business*/
 .businessPage{
-
+  margin: 5%;
 }
 
 .businessInfoPage{
@@ -360,12 +393,20 @@ a.boxclose {
 
 
 .addProduct{
+  background-color: #9daf25;
+  color: white;
   display: block;
-  width: 53%;
+  width: 57%;
   padding: 10px;
-  margin: 5% 20% 5% 20%;
+  margin: 5% 20% 5% 25%;
   > button{
-    margin-left: 3px;
+    margin-left: 5px;
+  }
+  > label{
+    margin: 5px
+  }
+  > input{
+    color: black;
   }
 }
 

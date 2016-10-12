@@ -155,17 +155,11 @@ const Product = React.createClass({
     const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
-        <div id="ProductList">
-          <div className="bookmark-box">
-            <a className="boxclose" id="boxclose"></a>
-            <div className="bookmark-title">
-            <h3>Product List:</h3>
-          </div>
+   
           <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
           <h4 className="product-box">{product.name}</h4>
         </div>
-        </div>
-        </div>
+
 
       )
     })
@@ -190,7 +184,15 @@ const Product = React.createClass({
         
 
         <div>
+         <div id="ProductList">
+          <div className="bookmark-box">
+            <a className="boxclose" id="boxclose"></a>
+            <div className="bookmark-title">
+            <h3>Product List:</h3>
+          </div>
           {productDiv}
+                  </div>
+        </div>
         </div>
         {this.state.showGreetingNode ? <div>
           <form className="addProduct" onSubmit={this.addProduct}>
@@ -201,7 +203,7 @@ const Product = React.createClass({
             <label htmlFor="description">Log:</label>
             <input ref="description" name="description"></input>
             <input type="submit" hidden />
-            <button className="btn-effect"onClick={this.addProduct}>add</button>
+            <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
         </div> : null}
         <div>
