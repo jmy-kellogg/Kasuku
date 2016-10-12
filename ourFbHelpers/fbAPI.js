@@ -170,6 +170,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
 }
 
 function callSendAPI(messageData, pageToken) {
+  console.log("callSendAPI".repeat(100))
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
@@ -242,7 +243,7 @@ function receivedPostback(event, pageToken) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
-
+    console.log("Postback--".repeat(100));
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
