@@ -11,9 +11,10 @@ import selected from './selected';
 import nodeIds from './nodeIds';
 import connIds from './connIds';
 import prodSelected from './prodSelected';
+import headNode from './headNode';
 
 
-const rootReducer = combineReducers({connection, prodSelected, nodeIds, connIds, selected, layers, node, product, business, signup, routing: routerReducer });
+const rootReducer = combineReducers({connection, headNode, prodSelected, nodeIds, connIds, selected, layers, node, product, business, signup, routing: routerReducer });
 
 
 export default rootReducer;

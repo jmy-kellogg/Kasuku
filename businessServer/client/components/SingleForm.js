@@ -12,9 +12,9 @@ const SingleForm = React.createClass({
 		// id of this node is this.props.id
 		// get all connections that are associated with this node
 		// get all nodes that are connected to those connections
-
 		var nodesForRemoval = [];
 		var connsForRemoval = [];
+
 
 		var getAllForRemoval = function(nodeId){
 			nodes[nodeId].conns.forEach(connId => {
@@ -28,6 +28,7 @@ const SingleForm = React.createClass({
 		getAllForRemoval(this.props.id);
 		console.log(nodesForRemoval);
 		console.log(connsForRemoval);
+
 
 		//delete all nodes and associated connections branching from this node
 		axios.delete(`/api/nodes/${this.props.id}`)
@@ -116,8 +117,9 @@ const SingleForm = React.createClass({
   },
 
 	render: function(){
-		console.log(this.props.node);
-		console.log(this.props.connection);
+
+		// console.log(this.props.node);
+		// console.log(this.props.connection);
 
 		var fromAnswer;
 		for(var key in this.props.connection){

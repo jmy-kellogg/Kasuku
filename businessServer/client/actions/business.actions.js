@@ -7,7 +7,6 @@ function getData (res) { return res.data; };
 export function updateBusinessProfile(id, businessName, email, pageToken, password, webhookToken) {
     return function (dispatch) {
       dispatch(updatingBusiness())
-      console.log("Hi there")
       axios.put('/api/business/' + id, {
         businessName,
         email,
@@ -17,17 +16,64 @@ export function updateBusinessProfile(id, businessName, email, pageToken, passwo
       })
       .then(getData)
       .then(function(business) {
-        console.log("business", business);
         if (!business) {
           dispatch(errorUpdatingBusiness());
         } else {
           dispatch(successfullyUpdatedBusiness());
+          browserHistory.push('/businesses/' + id)
         }
       })
       .catch(function(err) {
         dispatch(errorUpdatingBusiness);
       })
     }
+}
+
+export function saveGreeting(id, greeting) {
+  return function (dispatch) {
+    dispatch(updatingBusiness());
+    axios.put('/api/business/' + id, {
+      greeting
+    })
+    .then(getData)
+    .then(function (business) {
+      if (!business) {
+          dispatch(errorUpdatingBusiness());
+        } else {
+          dispatch(successfullyUpdatedBusiness());
+          return {greeting: business.greeting, pageToken: business.pageToken }
+        }
+      })
+      .then(function(infoForFB) {
+        console.log(infoForFB)
+        return fetch('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + infoForFB.pageToken, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            setting_type: "greeting",
+            greeting: {
+              text: infoForFB.greeting
+            }
+          })
+        })
+
+      })
+      .then(function (greeting) {
+        console.log("THIS IS THE GREETING", greeting)
+
+      })
+      .catch(function(err) {
+        dispatch(errorUpdatingBusiness);
+      })
+  }
+}
+
+export function deleteGreeting(id) {
+
+
 }
 
 function updatingBusiness() {
@@ -50,4 +96,5 @@ function errorUpdatingBusiness() {
     posting: false
   }
 }
+
 

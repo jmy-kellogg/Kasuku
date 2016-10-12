@@ -1,14 +1,14 @@
 body
   background offwhite
 
-/*  
-  Buttons  
+/*
+  Buttons
 */
 
 .control-buttons
   display flex
   justify-content space-between
-    
+
 button, .button
   border 2px solid lighten(grey, 90%)
   background none
@@ -26,11 +26,11 @@ button, .button
     border-color blue
     outline 0
 
-.form{
-  background-color: lightgreen;
+.nodeBox{
+  background-color: #F8F5EC;
   outline-style: solid;
-  outline-width: 2px;
-  outline-color: black;
+  outline-width: 1px;
+  outline-color: #F5F5F5;
   width: 50vh;
   vertical-align: center;
   padding: 5%;
@@ -46,8 +46,16 @@ button, .button
   height:31vh;
 }
 
+.productLayer{
+  background-color:#F8F5EC;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: black;
+}
 
 
-  
-  
+
+
+
+
 

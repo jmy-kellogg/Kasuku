@@ -1,5 +1,6 @@
 function connection(state=[], action){
   switch(action.type){
+
     case 'REMOVE_CONNECTIONS':
       var newState = {...state}
       action.connections.forEach(connId => {

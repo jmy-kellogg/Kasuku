@@ -16,18 +16,19 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // create an object for the default data
 const defaultState = {
 
-  node: [],
-  connection: [],
+  node: {},
+  connection: {},
   product: [],
   business: [],
   layers: [],
   selected: [],
   nodeIds: [],
   connIds: [],
-  prodSelected: "default"
+  prodSelected: "undefined",
+  headNode: 0
 
 };
-  
+
   // old configuration
  // const store = createStore(rootReducer, defaultState, middleware,
  //    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

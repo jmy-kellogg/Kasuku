@@ -1,5 +1,6 @@
 function node(state=[], action){
   switch(action.type){
+
     case 'REMOVE_NODES':
       var newState = {...state};
       action.nodes.forEach(nodeId => {
@@ -7,6 +8,7 @@ function node(state=[], action){
       })
       return newState;
       break;
+
 
     case 'ADD_ANSWER':
       var newState = {...state};
@@ -32,9 +34,11 @@ function node(state=[], action){
       break;
 
     case 'SAVE_NODE':
+
       var newState = {...state};
       console.log(newState);
       newState[action.thisNodeId].question = action.question;
+
       return newState;
       break;
 
@@ -48,6 +52,7 @@ function node(state=[], action){
           conns: []
       }
       return newState;
+      break;
 
     default:
       return state;
