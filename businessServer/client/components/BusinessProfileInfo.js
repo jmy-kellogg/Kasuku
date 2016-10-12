@@ -51,6 +51,7 @@ const BusinessProfile = React.createClass({
   render() {
     
     return (
+
       <div>
       id: {this.state.id}<br/>
       businessName: {this.state.businessName}<br/>

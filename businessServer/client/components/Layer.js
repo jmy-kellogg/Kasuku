@@ -1,5 +1,6 @@
 import React from 'react';
 import SingleForm from './SingleForm';
+import { Carousel } from 'react-bootstrap';
 
 const Layer = React.createClass({
   handleSelected: function(node, e){
@@ -55,9 +56,11 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
+        <Carousel.Item>
         <div key={i} ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
+        </Carousel.Item>
       )
     })
     // var allConnId = this.props.connection.map(conn => {
@@ -65,9 +68,9 @@ const Layer = React.createClass({
     // })
 
     return (
-      <div>
+    <Carousel interval={false}>
         {nodesDiv}
-      </div>
+      </Carousel>
     )
   }
 });

@@ -32,7 +32,7 @@ const router = (
 			<Route path='/layers/:productId' component={Layers} />
 	      	<Route path='/login' component={Login} />
 	      	<Route path='/signup' component={Signup} />
-	      	<Route path='/business/:businessId' component={Product} />
+	      	<Route path='/chatbot/:businessId' component={Product} />
 	      	<Route path='/tree/:businessId' component={Tree} />
           <Route path='/businesses/:businessId' component={businessProfilePage} />
 		  </Route>

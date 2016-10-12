@@ -152,30 +152,58 @@ const Product = React.createClass({
   render: function(){
     console.log(this.props);
 
-    const defaultGreeting = "Welcome. This is the default greeting";
+    const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
-        <div className="product-box" key={i} onClick={this.selectProduct.bind(this, product)}>
-          {product.name}
+   
+          <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
+          <h4 className="product-box">{product.name}</h4>
         </div>
+
+
       )
     })
     return (
-      <div>
-        {!this.state.showGreetingNode ? <div onClick={this.createHeadNode}>Get Started</div> : null}
-        {this.state.showGreetingNode ? <div>
-          <InlineEdit question={this.props.node[this.state.headNode] ? this.props.node[this.state.headNode].question : "nope"}defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
-        </div> : null}
+
+      <div className="ProductPage">
+        {!this.state.showGreetingNode ? <button className="btn-effect btn-lg" id="start" onClick={this.createHeadNode}> Let's make a ChatBot! Click to get Started</button> : null}
+
+        {this.state.showGreetingNode ? 
+      <div id="firstQuestion">
+        <div className="bookmark-box">
+          <a className="boxclose" id="boxclose"></a>
+          <div className="bookmark-title">
+            <h3>Write your first question below:</h3>
+          </div>
+          <div>
+            <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+          </div>
+        </div>
+            {/*<div class="gotolink"><h4><a href="#">Go to link >></a></h4></div>*/}   
+      </div>: null}
+        
+
         <div>
+         <div id="ProductList">
+          <div className="bookmark-box">
+            <a className="boxclose" id="boxclose"></a>
+            <div className="bookmark-title">
+            <h3>Product List:</h3>
+          </div>
           {productDiv}
+                  </div>
+        </div>
         </div>
         {this.state.showGreetingNode ? <div>
-          <form onSubmit={this.addProduct}>
+          <form className="addProduct" onSubmit={this.addProduct}>
+            <label htmlFor="productname">Product Name:</label>
             <input ref="productname" name="productname"/>
+            <label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
+            <label htmlFor="description">Log:</label>
             <input ref="description" name="description"></input>
             <input type="submit" hidden />
-            <button onClick={this.addProduct}>add</button>
+            <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
         </div> : null}
         <div>

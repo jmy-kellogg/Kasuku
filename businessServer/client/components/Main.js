@@ -11,9 +11,6 @@ const Main = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>
-          <Link to="/">Coffee</Link>
-        </h1>
         <NavBar/>
         {React.cloneElement(this.props.children, this.props)}
       </div>
