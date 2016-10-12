@@ -241,14 +241,13 @@ function sendGenericMessage(recipientId, pageToken) {
 
 function receivedPostback(event, pageToken) {
     var senderID = event.sender.id;
-    // var recipientID = event.recipient.id;
+    var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
 
-    // ERROR RECIPIENT ID IS NOT DEFINED
-    console.log("Postback--".repeat(100), senderID, timeOfPostback, payload);
+    console.log("Postback--".repeat(100), senderID, recipientID, timeOfPostback, payload);
     console.log("event".repeat(100), event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
