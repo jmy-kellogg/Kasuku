@@ -41,7 +41,7 @@ let connections = [
     { answer: 'coffee', fromId: 1, toId: 2, businessId: 1},
     { answer: 'caf', fromId: 2, toId: 3, businessId: 1 },
     { answer: 'decaf', fromId: 2, toId: 3, businessId: 1 },
-    { answer: 'yes', fromId: 3, toId: 4, businessId: 1, price: 50 },
+    { answer: 'yes', fromId: 3, toId: 4, businessId: 1, price: 50, description: "Milk" },
     { answer: 'no', fromId: 3, toId: 6, businessId: 1 },
     { answer: 'milk', fromId: 4, toId: 5, businessId: 1 },
     { answer: 'cream', fromId: 4, toId: 5, businessId: 1 },
@@ -53,13 +53,13 @@ let connections = [
     { answer: 'no', fromId: 6, toId: 9, businessId: 1 },
     { answer: 'splenda', fromId: 7, toId: 8, businessId: 1 },
     { answer: 'cane', fromId: 7, toId: 8, businessId: 1 },
-    { answer: 'agave', fromId: 7, toId: 8, businessId: 1, price: 10 },
+    { answer: 'agave', fromId: 7, toId: 8, businessId: 1, price: 10, description: "agave" },
     { answer: '1', fromId: 8, toId: 9, businessId: 1 },
     { answer: '2', fromId: 8, toId: 9, businessId: 1 },
     { answer: '3', fromId: 8, toId: 9, businessId: 1 },
-    { answer: 'small', fromId: 9, businessId: 1 ,  price: 500 },
-    { answer: 'medium', fromId: 9, businessId: 1, price: 600},
-    { answer: 'large', fromId: 9, businessId: 1, price: 750},
+    { answer: 'small', fromId: 9, businessId: 1 ,  price: 500, description: "small Coffee" },
+    { answer: 'medium', fromId: 9, businessId: 1, price: 600, description: "medium coffee"},
+    { answer: 'large', fromId: 9, businessId: 1, price: 750, description: "large coffee"},
     { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
     { answer: 'green', fromId: 11, toId: 12, businessId: 1 },
     { answer: 'black', fromId: 11, toId: 12, businessId: 1 },
@@ -83,8 +83,8 @@ let connections = [
     { answer: 'small', fromId: 18, businessId: 1 },
     { answer: 'medium', fromId: 18, businessId: 1 },
     { answer: 'large', fromId: 18, businessId: 1 },
-
 ]
+
 let businesses = [{
     businessName: 'chatty-A-1',
     fb_account_id: 123,
