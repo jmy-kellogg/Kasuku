@@ -13,7 +13,7 @@
 4 verbose stack     at ReadFileContext.callback (/usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16)
 4 verbose stack     at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:359:13)
 5 verbose cwd /home/rheewalt/Documents/Projects/ChatterBot
-6 error Linux 4.4.0-38-generic
+6 error Linux 4.4.0-42-generic
 7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
 8 error node v6.2.2
 9 error npm  v3.9.5

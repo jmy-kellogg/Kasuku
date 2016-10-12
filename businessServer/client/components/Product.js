@@ -35,6 +35,10 @@ const Product = React.createClass({
       .then(data => {
         console.log(_nodesIdArr.sort(sortNumbers));
         var headNodeId = Math.min(..._nodesIdArr);
+        this.setState({
+          headNode: headNodeId
+        })
+        // LEFT OFF HERE SETTING
         allConnections.forEach(conn => {
           if(conn.fromId === headNodeId){
             _products.push(conn);
@@ -51,7 +55,7 @@ const Product = React.createClass({
             })
 
 
-            this.props.setHeadNode(headNodeId);
+            // this.props.setHeadNode(headNodeId);
 
             this.props.loadNodes(_nodesArr);
           })
@@ -146,6 +150,7 @@ const Product = React.createClass({
 
   },
   render: function(){
+    console.log(this.props);
 
     const defaultGreeting = "Welcome. This is the default greeting";
     const productDiv = this.props.product.map((product, i) => {
@@ -159,7 +164,7 @@ const Product = React.createClass({
       <div>
         {!this.state.showGreetingNode ? <div onClick={this.createHeadNode}>Get Started</div> : null}
         {this.state.showGreetingNode ? <div>
-          <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+          <InlineEdit question={this.props.node[this.state.headNode] ? this.props.node[this.state.headNode].question : "nope"}defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
         </div> : null}
         <div>
           {productDiv}
