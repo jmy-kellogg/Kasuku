@@ -170,6 +170,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
 }
 
 function callSendAPI(messageData, pageToken) {
+  console.log("callSendAPI".repeat(100))
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
@@ -242,18 +243,37 @@ function receivedPostback(event, pageToken) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
-
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
+
+    console.log("Postback--".repeat(100), senderID, recipientID, timeOfPostback, payload);
+    console.log("event".repeat(100), event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
     //     "at %d", senderID, recipientID, payload, timeOfPostback);
 
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
-    sendTextMessage(senderID, "Postback called", pageToken);
+    // sendTextMessage(senderID, "Postback called", pageToken);
+
+    switch (payload) {
+      case 'START_AT_HEAD_NODE': {
+        console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        break;
+      }
+      case 'CHECKOUT_ORDER': {
+        console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
+        break;
+      }
+      default: {
+        console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
+      }
+    }
+
+
 }
+
 
 
 module.exports = {

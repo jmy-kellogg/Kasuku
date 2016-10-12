@@ -6,7 +6,8 @@ var Chatter = require('./models/chatter');
 var Connection = require('./models/connection');
 var Business = require('./models/business');
 var Conversation = require('./models/conversation');
-
+var MenuSetting = require('./models/menuSetting');
+var History = require('./models/history');
 
 let chatters = [
     { fbAccount: '1035384179912235', firstName: 'Billy BuyStuff' },
@@ -98,8 +99,9 @@ let businesses = [{
 
 let menuSettings = [
   {type: "webUrl", menuText: "Rboox", webUrl: "https://www.recordboox.com", businessId: 1},
-  {type: "newOrder", menuText: "New Order", businessId: 1},
-  {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1}
+  {type: "newOrder", menuText: "New Order", businessId: 1}, 
+  {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1},
+  {type: "checkout", menuText: 'Checkout', businessId: 1}
 ]
 
 
@@ -114,6 +116,9 @@ db.sync({ force: true })
     })
     .then(function() {
         return Connection.bulkCreate(connections)
+    })
+     .then(function() {
+      return MenuSetting.bulkCreate(menuSettings)
     })
     .then(() => {
         console.log("finished")

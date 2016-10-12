@@ -54,13 +54,22 @@ function createFBPersistenMenuOptions(settingsArray) {
 
   let readyToSendArray = settingsArray.map( (val, index) => {
     let itemObj = {};
-
-    itemObj.type = val.type === 'webUrl' ? "web_url" : "postback";
-    itemObj.title = val.menuText;
-    if (itemObj.type === 'postback') { 
-      itemObj.payload = "START_AT_HEAD_NODE" 
-    } else if (itemObj.type === 'web_url') {
-      itemObj.url = val.webUrl
+    itemObj.title = val.menuText
+    // console.log(val);
+    switch (val.type) {
+      case 'webUrl': {
+        itemObj.type = 'web_url';
+        itemObj.webUrl = val.webUrl;
+        break;
+      }
+      case 'newOrder': {
+        itemObj.type = "postback";
+        itemObj.payload = "START_AT_HEAD_NODE"
+      }
+      case 'checkout': {
+        itemObj.type = "postback"
+        itemObj.payload = "CHECKOUT_ORDER"
+      }
     }
     return itemObj
   })
