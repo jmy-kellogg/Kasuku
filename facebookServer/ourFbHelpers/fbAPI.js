@@ -243,7 +243,7 @@ function receivedPostback(event, pageToken) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
-    console.log("Postback--".repeat(100));
+    console.log("Postback--".repeat(100), senderID, recipientId, timeOfPostback);
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
@@ -253,8 +253,10 @@ function receivedPostback(event, pageToken) {
 
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
-    sendTextMessage(senderID, "Postback called", pageToken);
+    // sendTextMessage(senderID, "Postback called", pageToken);
+    // callSendAPI("HELLO", pageToken)
 }
+
 
 
 module.exports = {
