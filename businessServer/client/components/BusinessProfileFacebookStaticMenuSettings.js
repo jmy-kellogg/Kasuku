@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import axios from 'axios';
 import TooltipGlyph from './TooltipGlyph';
-// import MenuSetting from './MenuSetting';
 
 const BusinessProfileFacebookStaticMenuSettings = React.createClass({
   getInitialState() {
@@ -39,6 +38,13 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
     let newMenuSettingsArray = [...this.state.menuSettingsArray];
     newMenuSettingsArray[index].webUrl = e.target.value;
     this.setState( { menuSettingsArray: newMenuSettingsArray });
+  },
+  addItem () {
+    if (this.state.menuSettingsArray.length < 5) {
+      let newMenuSettingsArray = this.state.menuSettingsArray;
+      newMenuSettingsArray.push({type: 'webUrl', menuText: '', webUrl: ''})
+      this.setState( { menuSettingsArray: newMenuSettingsArray });
+    }
   },
   renderSettings(settings, index) {
     return (
@@ -82,7 +88,8 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
       <div>
         <h1>Persistent Menu for Facebook</h1>
         {this.state.menuSettingsArray.map(this.renderSettings)}
-        <button className="btn btn-success" onClick={this.onSubmitSettings}>Save Menu Settings</button>
+        <button className="btn btn-success" onClick={this.addItem}>Add Menu Item</button>
+        <button className="btn btn-primary" onClick={this.onSubmitSettings}>Save Menu Settings</button>
       </div>
     )
   }
