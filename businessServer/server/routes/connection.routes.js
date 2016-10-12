@@ -32,10 +32,23 @@ router.use('/', function(req,res,next) {
 // })
 
 router.get('/', function(req, res, next) {
-  Connection.findAll()
+  if(req.query.businessId){
+    Connection.findAll({
+      where: {
+        businessId: req.query.businessId
+      }
+    })
+    .then(conn => {
+      res.send(conn);
+    })
+  }
+  else{
+    Connection.findAll()
     .then(function(connections) {
       res.json(connections);
     });
+  }
+
 });
 
 router.get('/:id', function(req, res, next) {

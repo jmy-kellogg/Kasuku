@@ -14,24 +14,112 @@ let chatters = [
     { fbAccount: 13, firstName: 'Adele Acquirer' }
 ]
 let nodes = [
-    { question: 'Welcome to coffee shop. What order can I get for you?' },
-    { question: 'Does caf or decaf sound better?', productId: 1, topLevel: true },
-    { question: 'Would you like any cream with that?', productId: 1, topLevel: true },
-    { question: 'Milk, cream, or powder?', productId: 1 },
-    { question: '1, 2, or 3?', productId: 1 },
-    { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
-    { question: 'Splenda, cane, or agave? ', productId: 1 },
-    { question: '1, 2, or 3 scoops?', productId: 1 },
-    { question: 'What size works best? Small, medium, or large?', productId: 1, topLevel: true },
-    { question: 'Perfect! Your order has been placed.', productId: 1},
-    { question: 'Would you like green or black?', productId: 2, topLevel: true },
-    { question: 'Would any milk added?', productId: 2, topLevel: true },
-    { question: 'whole, skim, or 2%?', productId: 2 },
-    { question: 'What about sugar. Should I throw some of that goodness in there?', productId: 1, topLevel: true },
-    { question: 'splenda, cane, or agave? ', productId: 2 },
-    { question: '1, 2, or 3 scoops?', productId: 2 },
-    { question: 'Would you like a slice of Lemon?', productId: 2},
-    { question: 'Great, size works best? small, medium, or large?', productId: 2, topLevel: true },
+    {
+        question: 'Welcome to coffee shop. What order can I get for you?',
+        layer: 0
+    },
+    {
+        question: 'Does caf or decaf sound better?',
+        productId: 1,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Would you like any cream with that?',
+        productId: 1,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Milk, cream, or powder?',
+        productId: 1,
+        topLevel: false,
+        layer: 3
+    },
+    {
+        question: '1, 2, or 3?',
+        productId: 1,
+        topLevel: false,
+        layer: 4
+    },
+    {
+        question: 'What about sugar. Should I throw some of that goodness in there?',
+        productId: 1,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Splenda, cane, or agave? ',
+        productId: 1,
+        topLevel: false,
+        layer: 3
+    },
+    {
+        question: '1, 2, or 3 scoops?',
+        productId: 1,
+        topLevel: false,
+        layer: 4
+    },
+    {
+        question: 'What size works best? Small, medium, or large?',
+        productId: 1,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Perfect! Your order has been placed.',
+        productId: 1,
+        topLevel: false,
+        layer: 3
+    },
+    {
+        question: 'Would you like green or black?',
+        productId: 2,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Would any milk added?',
+        productId: 2,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'whole, skim, or 2%?',
+        productId: 2,
+        topLevel: false,
+        layer: 3
+    },
+    {
+        question: 'What about sugar. Should I throw some of that goodness in there?',
+        productId: 1,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'splenda, cane, or agave? ',
+        productId: 2,
+        topLevel: false,
+        layer: 3
+    },
+    {
+        question: '1, 2, or 3 scoops?',
+        productId: 2,
+        topLevel: false,
+        layer: 4
+    },
+    {
+        question: 'Would you like a slice of Lemon?',
+        productId: 2,
+        topLevel: true,
+        layer: 2
+    },
+    {
+        question: 'Great, size works best? small, medium, or large?',
+        productId: 2,
+        topLevel: true,
+        layer: 2
+    },
 
 
 
@@ -39,6 +127,7 @@ let nodes = [
 ]
 let connections = [
     { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },
+    { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
     { answer: 'caf', fromId: 2, toId: 3, businessId: 1 },
     { answer: 'decaf', fromId: 2, toId: 3, businessId: 1 },
     { answer: 'yes', fromId: 2, toId: 3, businessId: 1 },
@@ -62,7 +151,6 @@ let connections = [
     { answer: 'small', fromId: 9, businessId: 1 },
     { answer: 'medium', fromId: 9, businessId: 1 },
     { answer: 'large', fromId: 9, businessId: 1 },
-    { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
     { answer: 'green', fromId: 11, toId: 12, businessId: 1 },
     { answer: 'black', fromId: 11, toId: 12, businessId: 1 },
     { answer: 'green tea', fromId: 11, toId: 12, businessId: 1 },
@@ -100,7 +188,7 @@ let businesses = [{
 
 let menuSettings = [
   {type: "webUrl", menuText: "Rboox", webUrl: "https://www.recordboox.com", businessId: 1},
-  {type: "newOrder", menuText: "New Order", businessId: 1}, 
+  {type: "newOrder", menuText: "New Order", businessId: 1},
   {type: "webUrl", menuText: "T.O.S", webUrl: "https://www.recordboox.com/terms_of_service", businessId: 1}
 ]
 
@@ -131,4 +219,4 @@ db.sync({ force: true })
         console.log("finished")
         process.exit()
     })
-    
+

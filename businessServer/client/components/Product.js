@@ -6,10 +6,29 @@ import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
   componentWillMount: function(){
-    console.log(this.props.params.businessId);
+    var _nodesArr = [];
+    var sortNumbers = function(a,b){
+      return a-b;
+    }
+
     if(this.props.params.businessId){
-      axios.get(`/api/nodes/?businessId=${this.props.params.businessId}`)
-      .then(res => {console.log(res)})
+      axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
+      .then(res => res.data)
+      .then(connections => {
+        console.log(connections);
+        connections.forEach(conn => {
+          if(conn.fromId && !_nodesArr.includes(conn.fromId)){
+            _nodesArr.push(conn.fromId);
+          }
+          if(conn.toId && !_nodesArr.includes(conn.toId)){
+            _nodesArr.push(conn.toId);
+          }
+        })
+
+      })
+      .then(data => {
+        console.log(_nodesArr.sort(sortNumbers));
+      })
     }
 
   },
