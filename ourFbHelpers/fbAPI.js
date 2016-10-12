@@ -137,16 +137,10 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                     if (val.connection.price) return pre + val.connection.price;
                     return pre
                   }, 0)
-                  var table = {};
-                  histories.forEach( (history) => {
-                    if (history.connection.description) {
-                      table[history.connection.description] = history.connection.price
-                    }
-                  })
-                  console.log("PRICE".repeat(500), price, table)
+                  console.log("PRICE".repeat(500), price)
                   histories.forEach(h=>{
                     price2 += h.connection.price;
-                    console.log("CONNECTIONS: ".repeat(23), h.connection.description, connection.price, price2)
+                    console.log("CONNECTIONS: ".repeat(23), h.connection.answer, connection.price, price2)
                 })
                 })
                 .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
