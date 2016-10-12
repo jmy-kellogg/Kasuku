@@ -1,5 +1,12 @@
 function node(state=[], action){
   switch(action.type){
+    case 'LOAD_NODES':
+      var newState = {};
+      action.nodes.forEach(node => {
+        newState[node.id] = node;
+      })
+      return newState;
+
 
     case 'REMOVE_NODES':
       var newState = {...state};

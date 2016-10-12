@@ -16,7 +16,11 @@ router.use('/', function(req, res, next) {
 // create get route for specific product?
 
 router.get('/', function(req, res, next) {
-  Node.findAll()
+
+  Node.findAll({include: [
+               {model: Connection, as: 'to'},
+               {model: Connection, as: 'from'}
+               ]})
   .then(function(nodes) {
     res.json(nodes);
   })
@@ -103,11 +107,9 @@ router.delete('/:id', (req, res, next) => {
 
 
 router.get('/:id', function(req, res, next) {
+
   Node.findOne({
-    where: {id: req.params.id},
-    include: [
-      {model: Connection, as: 'from'}
-    ]
+    where: {id: req.params.id}
   })
   .then(function(node) {
     res.json(node);

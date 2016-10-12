@@ -5,6 +5,77 @@ import Layers from './Layers';
 import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
+  componentWillMount: function(){
+    var _nodesIdArr = [];
+    var _nodesArr = [];
+    var allConnections;
+    var _products = [];
+    var sortNumbers = function(a,b){
+      return a-b;
+    }
+
+    if(this.props.params.businessId){
+      axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
+      .then(res => res.data)
+      .then(connections => {
+        allConnections = connections;
+
+        this.props.loadConnections(connections);
+
+        connections.forEach(conn => {
+          if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
+            _nodesIdArr.push(conn.fromId);
+          }
+          if(conn.toId && !_nodesIdArr.includes(conn.toId)){
+            _nodesIdArr.push(conn.toId);
+          }
+        })
+
+      })
+      .then(data => {
+        console.log(_nodesIdArr.sort(sortNumbers));
+        var headNodeId = Math.min(..._nodesIdArr);
+        this.setState({
+          headNode: headNodeId
+        })
+
+        allConnections.forEach(conn => {
+          if(conn.fromId === headNodeId){
+            _products.push(conn);
+          }
+        })
+        this.props.loadProducts(_products);
+
+        axios.get(`/api/nodes/`)
+          .then(res => res.data)
+          .then(nodes => {
+            console.log(nodes);
+            _nodesIdArr.forEach(nodeId => {
+              _nodesArr.push(getNodeById(nodeId, nodes))
+            })
+
+
+            // this.props.setHeadNode(headNodeId);
+
+            this.props.loadNodes(_nodesArr);
+          })
+
+
+
+        var getNodeById = function(id, nodes){
+          var _node;
+          nodes.forEach(node => {
+            if(node.id == id){
+              _node = node;
+            }
+          })
+          return _node;
+        }
+
+      })
+    }
+
+  },
 
 
   getInitialState: function(){
@@ -79,6 +150,7 @@ const Product = React.createClass({
 
   },
   render: function(){
+    console.log(this.props);
 
     const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
@@ -116,6 +188,7 @@ const Product = React.createClass({
             {/*<div class="gotolink"><h4><a href="#">Go to link >></a></h4></div>*/}   
       </div>: null}
         
+
         <div>
           {productDiv}
         </div>
