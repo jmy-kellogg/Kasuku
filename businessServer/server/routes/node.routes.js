@@ -46,20 +46,39 @@ router.post('/toplevel', function(req, res, next) {
 });
 
 router.delete('/:id', (req, res, next) => {
-  Node.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
-  .then(destroyedNode => {
-    if(destroyedNode){
-      res.sendStatus(204);
-    }
-    else{
-      res.sendStatus(404);
-    }
-  })
-  .catch(next);
+
+  var removeAll = function(id){
+    return Node.findById(id, {
+      include: [
+      {model: Connection, as: 'from'}
+      ]
+    })
+    .then(node => {
+      Promise.all(
+      node.from.forEach(conn => {
+        if(conn.toId){
+          removeAll(conn.toId);
+        }
+        return Connection.destroy({
+          where: {
+            id: conn.id
+          }
+        })
+      }))
+      return node;
+    })
+    .then(node => {
+      console.log(node)
+      return Node.destroy({
+        where: {
+          id: node.id
+        }
+      })
+    })
+  }
+  removeAll(req.params.id);
+  res.send('done?');
+
 })
 
 // router.post('/all', (req, res, next) => {

@@ -18,7 +18,7 @@ const ProductLayer = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-      this.props.addTopLayerNodeAction(node.id, node.productId, 2, true);
+      this.props.addNewNode(node.productId, node.id, 2, true, node.productId);
       return node;
     })
     .then(node => {
@@ -40,15 +40,15 @@ const ProductLayer = React.createClass({
 
   render: function(){
 
-    var productName
-    this.props.connection.forEach(conn => {
-       if(conn.id == this.props.prodSelected){
-        productName = conn.answer;
-       }
-    })
+    var productName = this.props.connection[this.props.prodSelected].answer;
+    // this.props.connection.forEach(conn => {
+    //    if(conn.id == this.props.prodSelected){
+    //     productName = conn.answer;
+    //    }
+    // })
 
      return (
-       <div>
+       <div className="productLayer">
         <div>
           The Chat Tree for {productName}
         </div>
