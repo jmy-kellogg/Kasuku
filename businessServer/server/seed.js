@@ -130,8 +130,6 @@ let connections = [
     { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
     { answer: 'caf', fromId: 2, toId: 3, businessId: 1 },
     { answer: 'decaf', fromId: 2, toId: 3, businessId: 1 },
-    { answer: 'yes', fromId: 2, toId: 3, businessId: 1 },
-    { answer: 'no', fromId: 2, toId: 3, businessId: 1 },
     { answer: 'yes', fromId: 3, toId: 4, businessId: 1 },
     { answer: 'no', fromId: 3, toId: 6, businessId: 1 },
     { answer: 'milk', fromId: 4, toId: 5, businessId: 1 },

@@ -104,7 +104,7 @@ body{
   margin: auto;
 }
 .nodeBox{
-  background-color: #c1d72e;
+  background-color: #B0C4DE;
   color: white;
   outline-style: solid;
   outline-width: 1px;
@@ -114,6 +114,9 @@ body{
   display: block;
   padding: 8% 5% 5% 20%;
 
+}
+.nodeBox select{
+  color: black;
 }
 .btn-form{
   background: transparent;
@@ -145,7 +148,7 @@ body{
 }
 
 .slide{
-  background-color: #c1d72e; 
+  background-color: #B0C4DE; 
 }
 
 
@@ -282,13 +285,13 @@ textarea{
 
 }
 .bookmark-box {
-  background: #c1d72e;
+  background: #B0C4DE;
   width: 100%;
   height: auto;
   padding: 15px 15px 15px 25px;
   display: inline-table;
   margin: 25px 50px 0 0;
-  border-bottom: 3px solid #b1be59
+  border-bottom: 3px solid #191970
 }
 
 .bookmark-box p {
@@ -300,7 +303,7 @@ textarea{
 .bookmark-title {
   position: relative;
   width: 80%;
-  background: #9daf25;
+  background: #4682B4;
   padding: 5px 10px 5px 10px;
   margin: 0 0 20px -36px
 }
@@ -319,7 +322,7 @@ textarea{
   z-index: -1;
   left: 4px;
   top: 24px;
-  border-color: #6e7c26 transparent;
+  border-color: #191970 transparent;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -335,7 +338,7 @@ textarea{
 
 
 .gotolink {
-  background: #9daf25;
+  background: #4682B4;
   position: relative;
   padding: 5px 8px 5px 10px;
   width: 60%;
@@ -357,7 +360,7 @@ textarea{
 }
 
 .gotolink a:hover {
-  color: #6e7c26
+  color: #191970
 }
 
 .gotolink:before {
@@ -369,7 +372,7 @@ textarea{
   left: 110px;
   top: 20px;
   z-index: -1;
-  border-color: #6e7c26 transparent transparent;
+  border-color: #191970 transparent transparent;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
@@ -393,7 +396,7 @@ a.boxclose {
 
 
 .addProduct{
-  background-color: #9daf25;
+  background-color: #4682B4;
   color: white;
   display: block;
   width: 57%;
