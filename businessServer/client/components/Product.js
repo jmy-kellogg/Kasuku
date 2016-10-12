@@ -6,14 +6,15 @@ import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
 
+
   getInitialState: function(){
     return {
       showLayers: false,
       headNode: "undefined",
-      showGreetingNode: false,
+      showGreetingNode: false
     }
   },
-  onClick: function(product, e){
+  selectProduct: function(product, e){
     this.setState({showLayers: true})
     this.props.setSelectedProduct(product.id);
   },
@@ -28,6 +29,7 @@ const Product = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
+      console.log(node);
       this.props.saveNode(greeting, node.id);
     })
   },
@@ -41,43 +43,39 @@ const Product = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-      console.log(node);
+      this.props.addNewNode(null, node.id, 0, false, "head");
+      // console.log(node);
       this.setState({
         showGreetingNode: true,
         headNode: node.id
       });
-      // this.props.setHeadNode(node.id);
     })
     .catch(err => {
       if(err) throw err;
     })
   },
 
-
   addProduct: function(e){
     var name = this.refs.productname.value;
+    var price = +this.refs.price.value;
+    var description = this.refs.description.value;
+    this.refs.productname.value = "";
     var businessId = null;
     axios.post('/api/connections/', {
       answer: name,
       fromId: this.state.headNode,
       productId: name,
-      businessId: businessId
+      businessId,
+      price,
+      description
+
     })
     .then(conn => conn.data)
     .then(conn => {
-      this.props.addProductAction(conn.id, name, this.state.headNode, businessId);
-
+      this.props.addProductAction(conn.id, name, this.state.headNode, businessId, price, description);
     })
 
     e.preventDefault();
-
-    // var productId = 1;
-    // this.props.product.forEach(prod => {
-    //   if(prod.id > productId){
-    //     productId = prod.id + 1;
-    //   }
-    // })
-
 
   },
   render: function(){
@@ -85,29 +83,42 @@ const Product = React.createClass({
     const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
-        <div className="product-box" key={i} onClick={this.onClick.bind(this, product)}>
+        <div>
+        <div>
+          <p>Product List:</p>
+        </div>
+        <div className="product-box" key={i} onClick={this.selectProduct.bind(this, product)}>
           {product.name}
+        </div>
         </div>
       )
     })
     return (
-      <div className="Product">
-        <button onClick={this.createHeadNode}>Click to get Started</button>
-        {this.state.showGreetingNode ? <div>
-          <div>Write your first question below:</div>
-          <InlineEdit id="firstQuestion" defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+
+      <div className="ProductPage">
+        {!this.state.showGreetingNode ? <button className="btn-effect btn-lg" id="start" onClick={this.createHeadNode}> Let's make a ChatBot! Click to get Started</button> : null}
+
+        {this.state.showGreetingNode ? <div id="firstQuestion">
+          <div>
+          <p>Write your first question below:</p>
+          </div>
+          <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
         </div> : null}
         <div>
-          <div>
-            <p>Add an answer to first Question to start tree or Click on answer</p>
-          </div>
           {productDiv}
         </div>
-        <div>
-          <input ref="productname" name="productname"/>
-          <button onClick={this.addProduct}>add</button>
-
-        </div>
+        {this.state.showGreetingNode ? <div>
+          <form onSubmit={this.addProduct}>
+            <label htmlFor="productname">Product Name:</label>
+            <input ref="productname" name="productname"/>
+            <label htmlFor="price">Price:</label>
+            <input ref="price" name="price"></input>
+            <label htmlFor="description">Log:</label>
+            <input ref="description" name="description"></input>
+            <input type="submit" hidden />
+            <button onClick={this.addProduct}>add</button>
+          </form>
+        </div> : null}
         <div>
         {this.state.showLayers ? <Layers {...this.props}/> : null }
         </div>
@@ -118,5 +129,3 @@ const Product = React.createClass({
 });
 
 export default Product
-
-// <Link to={`/layers/${product.id}`}>
