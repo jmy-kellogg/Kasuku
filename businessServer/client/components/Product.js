@@ -6,6 +6,7 @@ import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
   componentWillMount: function(){
+    var _nodesIdArr = [];
     var _nodesArr = [];
     var sortNumbers = function(a,b){
       return a-b;
@@ -15,19 +16,43 @@ const Product = React.createClass({
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
       .then(res => res.data)
       .then(connections => {
-        console.log(connections);
+
+        // this.props.loadConnections(connections);
+
         connections.forEach(conn => {
-          if(conn.fromId && !_nodesArr.includes(conn.fromId)){
-            _nodesArr.push(conn.fromId);
+          if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
+            _nodesIdArr.push(conn.fromId);
           }
-          if(conn.toId && !_nodesArr.includes(conn.toId)){
-            _nodesArr.push(conn.toId);
+          if(conn.toId && !_nodesIdArr.includes(conn.toId)){
+            _nodesIdArr.push(conn.toId);
           }
         })
 
       })
       .then(data => {
-        console.log(_nodesArr.sort(sortNumbers));
+        console.log(_nodesIdArr.sort(sortNumbers));
+        var headNodeId = Math.min(..._nodesIdArr);
+        axios.get(`/api/nodes/`)
+          .then(res => res.data)
+          .then(nodes => {
+            _nodesIdArr.forEach(nodeId => {
+              _nodesArr.push(getNodeById(nodeId, nodes))
+            })
+            // this.props.loadNodes(_nodesArr);
+          })
+
+
+
+        var getNodeById = function(id, nodes){
+          var _node;
+          nodes.forEach(node => {
+            if(node.id == id){
+              _node = node;
+            }
+          })
+          return _node;
+        }
+
       })
     }
 
