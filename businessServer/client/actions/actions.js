@@ -72,6 +72,13 @@ export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) 
     }
 }
 
+export function loadProducts(products){
+    return {
+        type: 'LOAD_PRODUCTS',
+        products
+    }
+}
+
 export function addProductAction(id, name, fromId, businessId=null, price=null, description=null) {
     return {
         type: 'ADD_PRODUCT',

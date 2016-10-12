@@ -1,8 +1,10 @@
 function layers(state=[], action){
   switch(action.type){
+
+
     case 'ADD_NODE':
       var newState = [...state];
-      console.log(action.layer, typeof action.layer)
+
       if(!newState[action.layer-3]){
         newState[action.layer-3] = [action.newNodeId];
       }

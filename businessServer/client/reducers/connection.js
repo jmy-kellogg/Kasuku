@@ -24,7 +24,8 @@ function connection(state=[], action){
         fromId: action.fromId,
         businessId: action.businessId,
         price: action.price,
-        description: action.description
+        description: action.description,
+        product: true
       }
 
       return newState;

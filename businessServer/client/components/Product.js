@@ -8,6 +8,8 @@ const Product = React.createClass({
   componentWillMount: function(){
     var _nodesIdArr = [];
     var _nodesArr = [];
+    var allConnections;
+    var _products = [];
     var sortNumbers = function(a,b){
       return a-b;
     }
@@ -16,6 +18,7 @@ const Product = React.createClass({
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
       .then(res => res.data)
       .then(connections => {
+        allConnections = connections;
 
         this.props.loadConnections(connections);
 
@@ -32,13 +35,24 @@ const Product = React.createClass({
       .then(data => {
         console.log(_nodesIdArr.sort(sortNumbers));
         var headNodeId = Math.min(..._nodesIdArr);
+        allConnections.forEach(conn => {
+          if(conn.fromId === headNodeId){
+            _products.push(conn);
+          }
+        })
+        this.props.loadProducts(_products);
+
         axios.get(`/api/nodes/`)
           .then(res => res.data)
           .then(nodes => {
+            console.log(nodes);
             _nodesIdArr.forEach(nodeId => {
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
+
+
             this.props.setHeadNode(headNodeId);
+
             this.props.loadNodes(_nodesArr);
           })
 
