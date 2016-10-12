@@ -266,7 +266,7 @@ function receivedPostback(event, pageToken) {
         console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
         break;
       }
-      default {
+      default: {
         console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
       }
     }
