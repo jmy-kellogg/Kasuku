@@ -16,6 +16,20 @@ export function setSelectedProduct(product){
     }
 }
 
+export function loadConnections(connections){
+    return {
+        type: 'LOAD_CONNECTIONS',
+        connections
+    }
+
+}
+export function loadNodes(nodes){
+    return {
+        type: 'LOAD_NODES',
+        nodes
+    }
+
+}
 
 
 

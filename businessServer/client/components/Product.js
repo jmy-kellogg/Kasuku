@@ -17,7 +17,7 @@ const Product = React.createClass({
       .then(res => res.data)
       .then(connections => {
 
-        // this.props.loadConnections(connections);
+        this.props.loadConnections(connections);
 
         connections.forEach(conn => {
           if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
@@ -38,7 +38,7 @@ const Product = React.createClass({
             _nodesIdArr.forEach(nodeId => {
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
-            // this.props.loadNodes(_nodesArr);
+            this.props.loadNodes(_nodesArr);
           })
 
 
