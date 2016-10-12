@@ -38,7 +38,7 @@ const Product = React.createClass({
         this.setState({
           headNode: headNodeId
         })
-        // LEFT OFF HERE SETTING
+
         allConnections.forEach(conn => {
           if(conn.fromId === headNodeId){
             _products.push(conn);
