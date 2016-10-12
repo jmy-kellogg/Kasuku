@@ -5,6 +5,14 @@ import Layers from './Layers';
 import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
+  componentWillMount: function(){
+    console.log(this.props.params.businessId);
+    if(this.props.params.businessId){
+      axios.get(`/api/nodes/?businessId=${this.props.params.businessId}`)
+      .then(res => {console.log(res)})
+    }
+
+  },
 
 
   getInitialState: function(){

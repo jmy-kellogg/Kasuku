@@ -16,10 +16,25 @@ router.use('/', function(req, res, next) {
 // create get route for specific product?
 
 router.get('/', function(req, res, next) {
-  Node.findAll()
-  .then(function(nodes) {
-    res.json(nodes);
-  })
+  console.log(req.query);
+  if(req.query.businessId){
+    Connection.findAll({
+      where: {
+        businessId: req.query.businessId
+      }
+    })
+    .then(conn => {
+      res.send(conn);
+    })
+  }
+  else{
+    res.sendStatus(404);
+  }
+  // res.send('hello');
+  // Node.findAll()
+  // .then(function(nodes) {
+  //   res.json(nodes);
+  // })
 })
 
 router.post('/', function(req, res, next) {
