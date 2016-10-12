@@ -83,14 +83,18 @@ const Product = React.createClass({
     const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
-        <div>
-        <div>
-          <p>Product List:</p>
+        <div id="ProductList">
+          <div className="bookmark-box">
+            <a className="boxclose" id="boxclose"></a>
+            <div className="bookmark-title">
+            <h3>Product List:</h3>
+          </div>
+          <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
+          <h4 className="product-box">{product.name}</h4>
         </div>
-        <div className="product-box" key={i} onClick={this.selectProduct.bind(this, product)}>
-          {product.name}
         </div>
         </div>
+
       )
     })
     return (
@@ -98,17 +102,25 @@ const Product = React.createClass({
       <div className="ProductPage">
         {!this.state.showGreetingNode ? <button className="btn-effect btn-lg" id="start" onClick={this.createHeadNode}> Let's make a ChatBot! Click to get Started</button> : null}
 
-        {this.state.showGreetingNode ? <div id="firstQuestion">
-          <div>
-          <p>Write your first question below:</p>
+        {this.state.showGreetingNode ? 
+      <div id="firstQuestion">
+        <div className="bookmark-box">
+          <a className="boxclose" id="boxclose"></a>
+          <div className="bookmark-title">
+            <h3>Write your first question below:</h3>
           </div>
-          <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
-        </div> : null}
+          <div>
+            <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
+          </div>
+        </div>
+            {/*<div class="gotolink"><h4><a href="#">Go to link >></a></h4></div>*/}   
+      </div>: null}
+        
         <div>
           {productDiv}
         </div>
         {this.state.showGreetingNode ? <div>
-          <form onSubmit={this.addProduct}>
+          <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname">Product Name:</label>
             <input ref="productname" name="productname"/>
             <label htmlFor="price">Price:</label>
@@ -116,7 +128,7 @@ const Product = React.createClass({
             <label htmlFor="description">Log:</label>
             <input ref="description" name="description"></input>
             <input type="submit" hidden />
-            <button onClick={this.addProduct}>add</button>
+            <button className="btn-effect"onClick={this.addProduct}>add</button>
           </form>
         </div> : null}
         <div>
