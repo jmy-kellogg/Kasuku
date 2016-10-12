@@ -104,7 +104,7 @@ body{
   margin: auto;
 }
 .nodeBox{
-  background-color: #c1d72e;
+  background-color:   #B0C4DE;
   color: white;
   outline-style: solid;
   outline-width: 1px;
@@ -145,7 +145,7 @@ body{
 }
 
 .slide{
-  background-color: #c1d72e; 
+  background-color:   #B0C4DE; 
 }
 
 
@@ -282,7 +282,7 @@ textarea{
 
 }
 .bookmark-box {
-  background: #c1d72e;
+  background:   #B0C4DE;
   width: 100%;
   height: auto;
   padding: 15px 15px 15px 25px;

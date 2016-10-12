@@ -53,13 +53,7 @@ const BusinessProfile = React.createClass({
     return (
 
       <div>
-      id: {this.state.id}<br/>
-      businessName: {this.state.businessName}<br/>
-      userName: {this.state.username}<br/>
-      businessEmail: {this.state.email}<br/>
-      pt: {this.state.pageToken}<br/>
-      wht: {this.state.webhookToken}<br/>
-
+      
       <h1>Business Info</h1>
         <form>
          
