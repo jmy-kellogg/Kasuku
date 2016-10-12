@@ -6,16 +6,15 @@ import axios from 'axios';
 
 const SingleForm = React.createClass({
 	removeNode: function(e){
-		// console.log(this.props.data);
+
 		var nodes = this.props.node;
 		var connections = this.props.connection;
 		// id of this node is this.props.id
 		// get all connections that are associated with this node
 		// get all nodes that are connected to those connections
-		// repeat
 		var nodesForRemoval = [];
 		var connsForRemoval = [];
-		// var queue = [];
+
 
 		var getAllForRemoval = function(nodeId){
 			nodes[nodeId].conns.forEach(connId => {
@@ -29,9 +28,25 @@ const SingleForm = React.createClass({
 		getAllForRemoval(this.props.id);
 		console.log(nodesForRemoval);
 		console.log(connsForRemoval);
-		// axios.delete('/api/nodes/all')
-		// recursively delete down tree
-		// axios.delete('/api/nodes/')
+
+
+		//delete all nodes and associated connections branching from this node
+		axios.delete(`/api/nodes/${this.props.id}`)
+			.then(item => item.data)
+			.then(item => {
+				console.log(item);
+			})
+			.catch(err => {
+				if(err) throw err;
+			})
+
+		// remove those nodes from state
+		this.props.removeNodesAction(nodesForRemoval);
+
+		// remove those connections from state
+		this.props.removeConnectionsAction(connsForRemoval);
+
+
 	},
 	addNewAnswer: function(e){
 
@@ -65,11 +80,6 @@ const SingleForm = React.createClass({
 
 		var currentConn = this.props.connection[connId];
 
-		// this.props.connection.forEach(conn => {
-		// 	if(conn.id == connId){
-		// 		currentConn = conn;
-		// 	}
-		// })
 
 		var layer = this.props.layer+1;
 
@@ -95,7 +105,7 @@ const SingleForm = React.createClass({
 	},
 	handleChange: function(nodeId, e){
     var val = e.target.value;
-    // console.log(nodeId);
+
     axios.put(`/api/nodes/${nodeId}`, {
         question: val
     })
@@ -107,8 +117,10 @@ const SingleForm = React.createClass({
   },
 
 	render: function(){
-		// console.log(this.props.connection)
-		// console.log(this.props.i);
+
+		// console.log(this.props.node);
+		// console.log(this.props.connection);
+
 		var fromAnswer;
 		for(var key in this.props.connection){
 			if(this.props.connection[key].toId === this.props.id){
@@ -123,9 +135,6 @@ const SingleForm = React.createClass({
 				)
 		});
 
-		// const answers = this.props.connection.filter(conn => {
-		// 	return conn.fromId === this.props.id;
-		// })
 
 		const answers = [];
 		for(var key in this.props.connection){
