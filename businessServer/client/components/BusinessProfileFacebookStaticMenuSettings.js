@@ -55,6 +55,7 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
             <select className="form-control" id="sel1" ref="first-menu-type" defaultValue={settings.type} onChange={this.typeOnChange.bind(this, index)}>
               <option value="webUrl">Web Link</option>
               <option value="newOrder">New Order</option>
+              <option value="checkout">Checkout</option>
             </select>
           </div>
 
