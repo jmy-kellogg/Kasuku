@@ -8,6 +8,7 @@ var Node = db.model('node');
 var Connection = db.model('connection');
 var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
+var History = db.model('history');
 
 var BUSINESSID = 1;
 
@@ -17,9 +18,9 @@ function receivedMessage(event, pageToken) {
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
-    console.log("Received message for user %d and page %d at %d with message:",
-        senderID, recipientID, timeOfMessage);
-    console.log(JSON.stringify(message));
+    // console.log("Received message for user %d and page %d at %d with message:",
+        // senderID, recipientID, timeOfMessage);
+    // console.log(JSON.stringify(message));
 
     var messageId = message.mid;
 
@@ -60,7 +61,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         .then(chatter => {
             chatterId = chatter[0].id
-            console.log("CHATTERID 1", chatterId);
+            // console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
                 where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
@@ -71,7 +72,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             if (!_convo || _convo.done === true) {
                 return Business.findById(BUSINESSID)
                     .then(business => {
-                        console.log("CHATTERID 2", chatterId);
+                        // console.log("CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
                     .then(__convo => {
@@ -95,7 +96,14 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                   _connections[i].answer === yesNoAnswer || 
                   _connections[i].answer === eitherOrAnswer || 
                   _connections[i].answer === quantity) {
-                  console.log(_connections[i].answer, 'got it.')
+                  // console.log(_connections[i].answer, 'got it.')
+                  
+                  History.create({
+                    businessId: BUSINESSID,
+                    chatterFbId: recipientId,
+                    connectionId: _connections[i].id
+                  })
+
                   return currentConvo.update({ nodeId: _connections[i].toId })
               }
           }
@@ -117,6 +125,25 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                 };
                 callSendAPI(messageData, pageToken);
             } else {
+                History.findAll({where: {
+                                  businessId: BUSINESSID,
+                                  chatterFbId: recipientId
+                                },
+                                include: [{model: Connection}]
+              })
+                .then(function(histories) {
+                  var price2 = 0;
+                  var price = histories.reduce(function(pre, val) {
+                    if (val.connection.price) return pre + val.connection.price;
+                    return pre
+                  }, 0)
+                  console.log("PRICE".repeat(500), price)
+                  histories.forEach(h=>{
+                    price2 += h.connection.price;
+                    console.log("CONNECTIONS: ".repeat(23), h.connection.answer, connection.price, price2)
+                })
+                })
+                .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
                 Business.findById(BUSINESSID)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
@@ -148,12 +175,12 @@ function callSendAPI(messageData, pageToken) {
             var recipientId = body.recipient_id;
             var messageId = body.message_id;
 
-            console.log("Successfully sent generic message with id %s to recipient %s",
-                messageId, recipientId);
+            // console.log("Successfully sent generic message with id %s to recipient %s",
+                // messageId, recipientId);
         } else {
             console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
+            // console.error(response);
+            // console.error(error);
         }
     });
 }
@@ -214,8 +241,8 @@ function receivedPostback(event, pageToken) {
     // button for Structured Messages. 
     var payload = event.postback.payload;
 
-    console.log("Received postback for user %d and page %d with payload '%s' " +
-        "at %d", senderID, recipientID, payload, timeOfPostback);
+    // console.log("Received postback for user %d and page %d with payload '%s' " +
+    //     "at %d", senderID, recipientID, payload, timeOfPostback);
 
     // When a postback is called, we'll send a message back to the sender to 
     // let them know it was successful
@@ -225,7 +252,6 @@ function receivedPostback(event, pageToken) {
 
 module.exports = {
     receivedMessage,
-    sendImageMessage,
     sendTextMessage,
     callSendAPI,
     sendGenericMessage,
