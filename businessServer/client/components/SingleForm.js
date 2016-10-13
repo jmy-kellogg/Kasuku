@@ -4,7 +4,7 @@ import polyfill from 'es6-promise';
 import InlineEdit from './InlineEdit';
 import axios from 'axios';
 // added this ------------------//
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 const SingleForm = React.createClass({
 	getInitialState: function() {
@@ -15,7 +15,7 @@ const SingleForm = React.createClass({
   },
 	selectAnswer: function(answerId, e){
 		e.preventDefault();
-		console.log(answerId)
+		// console.log(answerId)
 		this.state.currentAnswer= answerId;
 	},
 	removeNode: function(e){
@@ -86,11 +86,13 @@ const SingleForm = React.createClass({
 			if(e) throw e;
 		})
 	},
-	addNewNode: function(e){
+	addNewNode: function(answerId, e){
 		e.preventDefault();
-		var connId = this.refs.answerSelect.value;
-
+		// var connId = this.refs.answerSelect.value;
+    this.selectAnswer(answerId, e)
+    var connId = this.state.currentAnswer;
 		var currentConn = this.props.connection[connId];
+    console.log("THIS IS SOME STUFF", currentConn, connId);
 
 
 		var layer = this.props.layer+1;
@@ -159,6 +161,7 @@ const SingleForm = React.createClass({
 			return (
 				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
 					{ans.answer}
+          <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
 				</div>
 			)
 		})
@@ -181,8 +184,10 @@ const SingleForm = React.createClass({
 	    				{answersDiv}
 	    			</div>
 	    			<button className="btn-form" onClick={this.addNewNode}>add node</button>
-	    			<label htmlFor="answer">Answer: </label>
-	    			<form className="form" onSubmit={this.addNewAnswer}>
+	    			
+
+            <label htmlFor="answer">Answer: </label>
+            <form className="form" onSubmit={this.addNewAnswer}>
 	    				<label htmlFor="answer">Answer: </label>
 		    			<input ref="answer" name="answer"></input>
 		    			<label htmlFor="price">Added price: </label>
