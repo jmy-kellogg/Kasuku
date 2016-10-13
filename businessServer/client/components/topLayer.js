@@ -17,7 +17,6 @@ render: function(){
   for(var key in this.props.node){
 
     if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
-      console.log(this.props.node[key]);
       nodesArr.push(this.props.node[key]);
     }
   }
@@ -38,7 +37,7 @@ render: function(){
     )
   })
   return (
-   <div>
+   <div className='toplayer-container'>
       {nodesDiv}
    </div>
 )

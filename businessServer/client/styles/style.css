@@ -3,6 +3,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  height: 100vh;
 
 }
 
@@ -106,8 +107,16 @@ body{
 /*product*/
 .ProductPage{
   width: 25%;
-  height: 800px;
+  float: left;
+  height: 90vh;
   background-color: blue
+}
+.layerCol{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
@@ -327,6 +336,14 @@ body{
     color: black;
     width: 20%
   }
+}
+.toplayer-container{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
 textarea{

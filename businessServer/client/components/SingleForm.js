@@ -5,6 +5,18 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 
 const SingleForm = React.createClass({
+	componentDidMount(){
+		console.log(this.refs.hello);
+		this.refs.hello.value = this.props.question;
+		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+	},
+	componentDidUpdate(){
+		console.log(this.refs.hello);
+		this.refs.hello.value = this.props.question;
+		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+	},
 	removeNode: function(e){
 
 		var nodes = this.props.node;
@@ -161,7 +173,8 @@ const SingleForm = React.createClass({
 	    		</div>
 	    		<div className="formQuest">
 	    			<h4>Question: </h4>
-          			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
+	    			<textarea ref='hello' />
+
 	    		</div>
 	    		<div>
 	    			<select ref="answerSelect">
@@ -188,3 +201,4 @@ const SingleForm = React.createClass({
 });
 
 export default SingleForm
+         		// <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
