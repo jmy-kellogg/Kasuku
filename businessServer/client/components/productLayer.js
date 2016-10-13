@@ -7,7 +7,6 @@ import axios from 'axios';
 const ProductLayer = React.createClass({
   addTopLayerNode: function(e){
     var currentConn;
-    console.log(this.props);
 
     e.preventDefault();
     axios.post('/api/nodes', {
@@ -18,6 +17,7 @@ const ProductLayer = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
+    console.log(this.props);
       this.props.addNewNode(node.productId, node.id, 2, true, node.productId);
       return node;
     })
@@ -56,7 +56,7 @@ const ProductLayer = React.createClass({
           </div>
         </div>
           <div class="gotolink"><h4><a onClick={this.addTopLayerNode}>Add Question >></a></h4></div>
-          {/*<div className="addNodeButton">  
+          {/*<div className="addNodeButton">
             <button onClick={this.addTopLayerNode}>add question</button>
           </div>*/}
        </div>

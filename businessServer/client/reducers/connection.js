@@ -19,7 +19,7 @@ function connection(state=[], action){
 
       var newState = {...state};
       newState[action.id] = {
-        answer: action.name,
+        answer: action.answer,
         id: action.id,
         fromId: action.fromId,
         businessId: action.businessId,

@@ -26,8 +26,7 @@ const SingleForm = React.createClass({
 			nodesForRemoval.push(nodeId);
 		}
 		getAllForRemoval(this.props.id);
-		console.log(nodesForRemoval);
-		console.log(connsForRemoval);
+
 
 
 		//delete all nodes and associated connections branching from this node
@@ -121,12 +120,7 @@ const SingleForm = React.createClass({
 		// console.log(this.props.node);
 		// console.log(this.props.connection);
 
-		var fromAnswer;
-		for(var key in this.props.connection){
-			if(this.props.connection[key].toId === this.props.id){
-				fromAnswer = this.props.connection[key];
-			}
-		}
+
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -142,6 +136,7 @@ const SingleForm = React.createClass({
 				answers.push(this.props.connection[key]);
 			}
 		}
+
 		const answersDiv = answers.map((ans, i) => {
 			return (
 				<option key={i} value={ans.id}>
@@ -150,14 +145,13 @@ const SingleForm = React.createClass({
 			)
 		})
 
+
 		var _thisId = this.props.id;
 
 	    return (
 
 	    	<div className="nodeBox">
-	    		<div id="answerOfNode">
-			  	  	<h3>Answer to the question above: {fromAnswer.answer}</h3> 
-		    	</div>
+
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 	    		<div>
 	    			<label htmlFor="type">Type: </label>
