@@ -73,7 +73,7 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
     )
   },
   onSubmitSettings() {
-    console.log("SUBMITTING");
+    // console.log("SUBMITTING");
     axios.post('/api/menuSettings/' + this.props["data-id"], { menuSettingsArray: this.state.menuSettingsArray })
     .then((newMenuSettingsArray) => {
       this.setState( { menuSettingsArray: newMenuSettingsArray.data });

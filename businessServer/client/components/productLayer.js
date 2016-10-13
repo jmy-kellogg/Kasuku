@@ -17,7 +17,7 @@ const ProductLayer = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-    console.log(this.props);
+    // console.log(this.props);
       this.props.addNewNode(node.productId, node.id, 2, true, node.productId);
       return node;
     })

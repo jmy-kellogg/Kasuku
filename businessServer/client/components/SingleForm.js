@@ -3,8 +3,21 @@ import fetch from 'isomorphic-fetch';
 import polyfill from 'es6-promise';
 import InlineEdit from './InlineEdit';
 import axios from 'axios';
+// added this ------------------//
+import classNames from 'classnames';
 
 const SingleForm = React.createClass({
+	getInitialState: function() {
+    return {
+    		...this.state,
+    		currentAnswer: null
+    	};
+  },
+	selectAnswer: function(answerId, e){
+		e.preventDefault();
+		// console.log(answerId)
+		this.state.currentAnswer= answerId;
+	},
 	removeNode: function(e){
 
 		var nodes = this.props.node;
@@ -33,7 +46,7 @@ const SingleForm = React.createClass({
 		axios.delete(`/api/nodes/${this.props.id}`)
 			.then(item => item.data)
 			.then(item => {
-				console.log(item);
+				// console.log(item);
 			})
 			.catch(err => {
 				if(err) throw err;
@@ -51,8 +64,8 @@ const SingleForm = React.createClass({
 
 		e.preventDefault();
 		var answer = this.refs.answer.value;
-		var price = +this.refs.price.value;
-		var description = this.refs.description.value;
+		// var price = +this.refs.price.value;
+		// var description = this.refs.description.value;
 
 		this.refs.answer.value = "";
 		var fromId = this.props.id;
@@ -60,24 +73,26 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-			price,
-			description
+			// price,
+			// description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
 			// set business ID once business ids are set up.  but keep as null for now.
 			var businessId = null;
-			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId, price, description);
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId);
 		})
 		.catch(e => {
 			if(e) throw e;
 		})
 	},
-	addNewNode: function(e){
+	addNewNode: function(answerId, e){
 		e.preventDefault();
-		var connId = this.refs.answerSelect.value;
-
+		// var connId = this.refs.answerSelect.value;
+    this.selectAnswer(answerId, e)
+    var connId = this.state.currentAnswer;
 		var currentConn = this.props.connection[connId];
+    console.log("THIS IS SOME STUFF", currentConn, connId);
 
 
 		var layer = this.props.layer+1;
@@ -138,10 +153,21 @@ const SingleForm = React.createClass({
 		}
 
 		const answersDiv = answers.map((ans, i) => {
+      // added this //
+      let divClassName = classNames({
+        answer: true,
+        "input-group": true,
+        active: this.state.currentAnswer === ans.id
+      });
 			return (
-				<option key={i} value={ans.id}>
-					{ans.answer}
-				</option>
+        <div class="form-group">
+  				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
+  					<label><h4>{ans.answer}</h4></label>
+            <span className="input-group-btn">
+              <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
+            </span>
+  				</div>
+        </div>
 			)
 		})
 
@@ -150,35 +176,37 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="nodeBox">
+	    	<div className="panel panel-primary nodeBox">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
-	    		<div>
-	    			<label htmlFor="type">Type: </label>
-	    			<select name="type">
-	    				{repeatOption}
-	    			</select>
+
+	    		<div className="panel-heading formQuest">
+	    			<h4><b>Question: </b></h4>
+          			<InlineEdit className="" defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
-	    		<div className="formQuest">
-	    			<h4>Question: </h4>
-          			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-	    		</div>
-	    		<div>
-	    			<select ref="answerSelect">
+	    		<div className="panel-body">
+	    			<div ref="answerSelect">
+              <h4><b>Answers:</b></h4>
 	    				{answersDiv}
-	    			</select>
-	    			<button className="btn-form" onClick={this.addNewNode}>add node</button>
-	    			<label htmlFor="answer">Answer: </label>
-	    			<form className="form" onSubmit={this.addNewAnswer}>
-	    				<label htmlFor="answer">Answer: </label>
-		    			<input ref="answer" name="answer"></input>
-		    			<label htmlFor="price">Added price: </label>
-		    			<input ref="price" name="price"></input>
-		    			<label htmlFor="description">Log: </label>
-		    			<input ref="description" name="description"></input>
-		    			<input type="submit" hidden />
-		    			<button className="btn-form" onClick={this.addNewAnswer}>add answer</button>
-	    			</form>
+	    			</div>
+            <div class="add-answer"> 
+              <form className="form" onSubmit={this.addNewAnswer}>
+                <div className="form-group">
+                  <div className="input-group">
+                    <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
+                    <span className="input-group-btn">
+                      <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
+                    </span>
+                  </div>
+                </div>
+                
+                {/*<label htmlFor="price">Added price: </label>
+                <input ref="price" name="price"></input>
+                <label htmlFor="description">Log: </label>
+                <input ref="description" name="description"></input>*/}
+                <input type="submit" hidden />
+              </form>
+            </div>
 	    		</div>
 
 

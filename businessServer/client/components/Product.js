@@ -33,7 +33,7 @@ const Product = React.createClass({
 
       })
       .then(data => {
-        console.log(_nodesIdArr.sort(sortNumbers));
+        // console.log(_nodesIdArr.sort(sortNumbers));
         var headNodeId = Math.min(..._nodesIdArr);
         this.setState({
           headNode: headNodeId
@@ -91,7 +91,7 @@ const Product = React.createClass({
   },
   handleChange: function(e){
     var greeting = e.target.value;
-    console.log(this.state.headNode);
+    // console.log(this.state.headNode);
     axios.put(`/api/nodes/${this.state.headNode}`, {
       question: greeting,
       productId: "head",
@@ -100,7 +100,7 @@ const Product = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-      console.log(node);
+      // console.log(node);
       this.props.saveNode(greeting, node.id);
     })
   },
