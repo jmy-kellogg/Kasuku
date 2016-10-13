@@ -182,7 +182,7 @@ const Product = React.createClass({
             {/*<div class="gotolink"><h4><a href="#">Go to link >></a></h4></div>*/}   
       </div>: null}
         
-
+{this.state.showGreetingNode ?
         <div>
          <div id="ProductList">
           <div className="bookmark-box">
@@ -193,7 +193,7 @@ const Product = React.createClass({
           {productDiv}
                   </div>
         </div>
-        </div>
+        </div>:null}
         {this.state.showGreetingNode ? <div>
           <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname">Product Name:</label>

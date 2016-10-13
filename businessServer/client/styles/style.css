@@ -105,7 +105,7 @@ body{
 }
 .nodeBox{
   background-color: #B0C4DE;
-  color: white;
+  color: black;
   outline-style: solid;
   outline-width: 1px;
   outline-color: #F5F5F5;
@@ -170,6 +170,9 @@ body{
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
   border-radius: 30px;
+}
+.carousel{
+  margin: 10% 0 10% 0;
 }
 .quote .pointerRight {
   z-index: -1;
@@ -274,7 +277,7 @@ body{
   display: block;
   margin: auto;
 /*  padding: 5px 140px;*/
-  width: 40%;
+  width: 60%;
 }
 
 textarea{
@@ -291,7 +294,7 @@ textarea{
   padding: 15px 15px 15px 25px;
   display: inline-table;
   margin: 25px 50px 0 0;
-  border-bottom: 3px solid #191970
+
 }
 
 .bookmark-box p {
@@ -399,9 +402,9 @@ a.boxclose {
   background-color: #4682B4;
   color: white;
   display: block;
-  width: 57%;
+  width: 60%;
   padding: 10px;
-  margin: 5% 20% 5% 25%;
+  margin: auto
   > button{
     margin-left: 5px;
   }
@@ -410,6 +413,7 @@ a.boxclose {
   }
   > input{
     color: black;
+    width: 20%;
   }
 }
 
