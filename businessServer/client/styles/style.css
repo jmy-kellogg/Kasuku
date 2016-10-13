@@ -19,6 +19,7 @@ body{
 .btn-effect {
   background: transparent; 
   border: 0 solid;
+  padding: 5px;
   box-shadow: inset 0 0 20px    rgb(70,130,180, 0);
 /*  outline: 1px solid;*/
 /*  outline-color:    rgb(70,130,180, .5);*/
