@@ -5,6 +5,17 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 
 const SingleForm = React.createClass({
+	getInitialState: function() {
+    return {
+    		...this.state,
+    		currentAnswer: null
+    	};
+  },
+	selectAnswer: function(answerId, e){
+		e.preventDefault();
+		console.log(answerId)
+		this.state.currentAnswer= answerId;
+	},
 	removeNode: function(e){
 
 		var nodes = this.props.node;
@@ -139,9 +150,9 @@ const SingleForm = React.createClass({
 
 		const answersDiv = answers.map((ans, i) => {
 			return (
-				<option key={i} value={ans.id}>
+				<div className="answer" key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
 					{ans.answer}
-				</option>
+				</div>
 			)
 		})
 
@@ -153,20 +164,15 @@ const SingleForm = React.createClass({
 	    	<div className="nodeBox">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
-	    		<div>
-	    			<label htmlFor="type">Type: </label>
-	    			<select name="type">
-	    				{repeatOption}
-	    			</select>
-	    		</div>
+
 	    		<div className="formQuest">
 	    			<h4>Question: </h4>
           			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div>
-	    			<select ref="answerSelect">
+	    			<div ref="answerSelect">
 	    				{answersDiv}
-	    			</select>
+	    			</div>
 	    			<button className="btn-form" onClick={this.addNewNode}>add node</button>
 	    			<label htmlFor="answer">Answer: </label>
 	    			<form className="form" onSubmit={this.addNewAnswer}>
