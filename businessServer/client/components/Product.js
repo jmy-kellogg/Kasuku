@@ -174,7 +174,6 @@ const Product = React.createClass({
     return (
 
       <div className="ProductPage">
-
         <div>
          <div>
           <div>

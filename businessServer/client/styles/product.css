@@ -182,3 +182,121 @@ a.boxclose {
   display: block;
   text-align: center
 }
+
+/*
+.Product{
+  margin: 5%;
+}
+
+#firstQuestion{
+  display: block;
+  margin: 0 5%;
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.productinput{
+  bottom: 0;
+
+
+}
+
+.layerCol{
+  width: 25%;
+  display: inline;
+}
+
+#ProductList{
+  display: block;
+  margin: 5%;
+
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
+}
+.addProduct{
+  background-color: #4682B4;
+  color: white;
+  display: block;
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
+  padding: 10px;
+  margin: 0 10%;
+  > button{
+    margin-left: 5px;
+  }
+  > label{
+    margin: 5px;
+  }
+  > input{
+    color: black;
+    width: 20%
+  }
+}
+.toplayer-container{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+}
+
+textarea{
+  display: block;
+  margin: auto;
+  font-size: 1.5em;
+  background-color: white;
+
+}
+.bookmark-box {
+
+  background: #B0C4DE;
+  width: 100%;
+  height: auto;
+  padding: 15px 15px 15px 25px;
+  display: inline-table;
+  margin: 25px 50px 0 0;
+}
+
+.bookmark-box p {
+  color: #f8f8f8;
+  font-size: 78%;
+  font-weight: 200;
+  opacity: .6;
+}
+
+.bookmark-title {
+  position: relative;
+  width: 80%;
+  background: #4682B4;
+  padding: 5px 10px 5px 10px;
+  margin: 0 0 20px -36px
+}
+
+.bookmark-title h3 {
+  color: #f8f8f8;
+  font-family: 'Oswald', sans-serif
+}
+
+.bookmark-title:before {
+  content: ' ';
+  position: absolute;
+  height: 0;
+  width: 0;
+  border: 10px solid;
+  z-index: -1;
+  left: 4px;
+  top: 24px;
+  border-color: #191970 transparent;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg)
+}
+
+.product-box:hover{
+  color: blue;
+  cursor:pointer
+}
+*/

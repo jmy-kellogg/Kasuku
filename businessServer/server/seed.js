@@ -19,106 +19,106 @@ let nodes = [
         layer: 0
     },
     {
-        question: 'Does caf or decaf sound better?',
+        question: 'Does coffee caf or decaf sound better?',
         productId: 1,
         topLevel: true,
+        layer: 1
+    },
+    {
+        question: 'Would you like any coffee cream with that?',
+        productId: 1,
+        topLevel: true,
+        layer: 1
+    },
+    {
+        question: 'coffee Milk, cream, or powder?',
+        productId: 1,
+        topLevel: false,
         layer: 2
     },
     {
-        question: 'Would you like any cream with that?',
-        productId: 1,
-        topLevel: true,
-        layer: 2
-    },
-    {
-        question: 'Milk, cream, or powder?',
+        question: 'coffee 1, 2, or 3?',
         productId: 1,
         topLevel: false,
         layer: 3
     },
     {
-        question: '1, 2, or 3?',
-        productId: 1,
-        topLevel: false,
-        layer: 4
-    },
-    {
-        question: 'What about sugar. Should I throw some of that goodness in there?',
+        question: 'What about coffee sugar. Should I throw some of that goodness in there?',
         productId: 1,
         topLevel: true,
+        layer: 1
+    },
+    {
+        question: 'Splenda, cane, or coffee agave? ',
+        productId: 1,
+        topLevel: false,
         layer: 2
     },
     {
-        question: 'Splenda, cane, or agave? ',
+        question: '1, 2, or 3 coffee scoops?',
         productId: 1,
         topLevel: false,
-        layer: 3
-    },
-    {
-        question: '1, 2, or 3 scoops?',
-        productId: 1,
-        topLevel: false,
-        layer: 4
-    },
-    {
-        question: 'What size works best? Small, medium, or large?',
-        productId: 1,
-        topLevel: true,
         layer: 2
     },
     {
-        question: 'Perfect! Your order has been placed.',
+        question: 'What size coffee works best? Small, medium, or large?',
+        productId: 1,
+        topLevel: true,
+        layer: 1
+    },
+    {
+        question: 'Perfect! Your coffee order has been placed.',
         productId: 1,
         topLevel: false,
-        layer: 3
+        layer: 2
     },
     {
         question: 'Would you like green or black?',
         productId: 2,
         topLevel: true,
-        layer: 2
+        layer: 1
     },
     {
         question: 'Would any milk added?',
         productId: 2,
         topLevel: true,
-        layer: 2
+        layer: 1
     },
     {
         question: 'whole, skim, or 2%?',
         productId: 2,
         topLevel: false,
-        layer: 3
+        layer: 2
     },
     {
         question: 'What about sugar. Should I throw some of that goodness in there?',
         productId: 2,
         topLevel: true,
-        layer: 2
+        layer: 1
     },
     {
         question: 'splenda, cane, or agave? ',
         productId: 2,
         topLevel: false,
-        layer: 3
+        layer: 2
     },
     {
         question: '1, 2, or 3 scoops?',
         productId: 2,
         topLevel: false,
-        layer: 4
+        layer: 3
     },
     {
         question: 'Would you like a slice of Lemon?',
         productId: 2,
         topLevel: true,
-        layer: 2
+        layer: 1
     },
     {
         question: 'Great, size works best? small, medium, or large?',
         productId: 2,
         topLevel: true,
-        layer: 2
+        layer: 1
     },
 
 
@@ -126,51 +126,51 @@ let nodes = [
 
 ]
 let connections = [
-    { answer: 'coffee', fromId: 1, toId: 2, businessId: 1 },
-    { answer: 'tea', fromId: 1, toId: 11, businessId: 1 },
-    { answer: 'caf', fromId: 2, toId: 3, businessId: 1 },
-    { answer: 'decaf', fromId: 2, toId: 3, businessId: 1 },
-    { answer: 'yes', fromId: 3, toId: 4, businessId: 1 },
-    { answer: 'no', fromId: 3, toId: 6, businessId: 1 },
-    { answer: 'milk', fromId: 4, toId: 5, businessId: 1 },
-    { answer: 'cream', fromId: 4, toId: 5, businessId: 1 },
-    { answer: 'powder', fromId: 4, toId: 5, businessId: 1 },
-    { answer: '1', fromId: 5, toId: 6, businessId: 1 },
-    { answer: '2', fromId: 5, toId: 6, businessId: 1 },
-    { answer: '3', fromId: 5, toId: 6, businessId: 1 },
-    { answer: 'yes', fromId: 6, toId: 7, businessId: 1 },
-    { answer: 'no', fromId: 6, toId: 9, businessId: 1 },
-    { answer: 'splenda', fromId: 7, toId: 8, businessId: 1 },
-    { answer: 'cane', fromId: 7, toId: 8, businessId: 1 },
-    { answer: 'agave', fromId: 7, toId: 8, businessId: 1 },
-    { answer: '1', fromId: 8, toId: 9, businessId: 1 },
-    { answer: '2', fromId: 8, toId: 9, businessId: 1 },
-    { answer: '3', fromId: 8, toId: 9, businessId: 1 },
-    { answer: 'small', fromId: 9, businessId: 1 },
-    { answer: 'medium', fromId: 9, businessId: 1 },
-    { answer: 'large', fromId: 9, businessId: 1 },
-    { answer: 'green', fromId: 11, toId: 12, businessId: 1 },
-    { answer: 'black', fromId: 11, toId: 12, businessId: 1 },
-    { answer: 'green tea', fromId: 11, toId: 12, businessId: 1 },
-    { answer: 'black tea', fromId: 11, toId: 12, businessId: 1 },
-    { answer: 'yes', fromId: 12, toId: 13, businessId: 1 },
-    { answer: 'whole', fromId: 13, toId: 14, businessId: 1 },
-    { answer: 'skim', fromId: 13, toId: 14, businessId: 1 },
-    { answer: '2%', fromId: 13, toId: 14, businessId: 1 },
-    { answer: 'no', fromId: 12, toId: 14, businessId: 1 },
-    { answer: 'yes', fromId: 14, toId: 15, businessId: 1 },
-    { answer: 'splenda', fromId: 15, toId: 16, businessId: 1 },
-    { answer: 'cane', fromId: 15, toId: 16, businessId: 1 },
-    { answer: 'agave', fromId: 15, toId: 16, businessId: 1 },
-    { answer: '1', fromId: 16, toId: 18, businessId: 1 },
-    { answer: '2', fromId: 16, toId: 18, businessId: 1 },
-    { answer: '3', fromId: 16, toId: 18, businessId: 1 },
-    { answer: 'no', fromId: 14, toId: 17, businessId: 1 },
-    { answer: 'yes', fromId: 17, toId: 18, businessId: 1 },
-    { answer: 'no', fromId: 17, toId: 18, businessId: 1 },
-    { answer: 'small', fromId: 18, businessId: 1 },
-    { answer: 'medium', fromId: 18, businessId: 1 },
-    { answer: 'large', fromId: 18, businessId: 1 },
+    { answer: 'coffee', fromId: 1, toId: 2, businessId: 1, productId: 1 },
+    { answer: 'tea', fromId: 1, toId: 11, businessId: 1, productId: 2 },
+    { answer: 'caf', fromId: 2, toId: 3, businessId: 1, productId: 1 },
+    { answer: 'decaf', fromId: 2, toId: 3, businessId: 1, productId: 1 },
+    { answer: 'yes', fromId: 3, toId: 4, businessId: 1, productId: 1 },
+    { answer: 'no', fromId: 3, toId: 6, businessId: 1, productId: 1 },
+    { answer: 'milk', fromId: 4, toId: 5, businessId: 1, productId: 1 },
+    { answer: 'cream', fromId: 4, toId: 5, businessId: 1, productId: 1 },
+    { answer: 'powder', fromId: 4, toId: 5, businessId: 1, productId: 1 },
+    { answer: '1', fromId: 5, toId: 6, businessId: 1, productId: 1 },
+    { answer: '2', fromId: 5, toId: 6, businessId: 1, productId: 1 },
+    { answer: '3', fromId: 5, toId: 6, businessId: 1, productId: 1 },
+    { answer: 'yes', fromId: 6, toId: 7, businessId: 1, productId: 1 },
+    { answer: 'no', fromId: 6, toId: 9, businessId: 1, productId: 1 },
+    { answer: 'splenda', fromId: 7, toId: 8, businessId: 1, productId: 1 },
+    { answer: 'cane', fromId: 7, toId: 8, businessId: 1, productId: 1 },
+    { answer: 'agave', fromId: 7, toId: 8, businessId: 1, productId: 1 },
+    { answer: '1', fromId: 8, toId: 9, businessId: 1, productId: 1 },
+    { answer: '2', fromId: 8, toId: 9, businessId: 1, productId: 1 },
+    { answer: '3', fromId: 8, toId: 9, businessId: 1, productId: 1 },
+    { answer: 'small', fromId: 9, businessId: 1, productId: 1 },
+    { answer: 'medium', fromId: 9, businessId: 1, productId: 1 },
+    { answer: 'large', fromId: 9, businessId: 1, productId: 1 },
+    { answer: 'green', fromId: 11, toId: 12, businessId: 1, productId: 2 },
+    { answer: 'black', fromId: 11, toId: 12, businessId: 1, productId: 2 },
+    { answer: 'green tea', fromId: 11, toId: 12, businessId: 1, productId: 2 },
+    { answer: 'black tea', fromId: 11, toId: 12, businessId: 1, productId: 2 },
+    { answer: 'yes', fromId: 12, toId: 13, businessId: 1, productId: 2 },
+    { answer: 'whole', fromId: 13, toId: 14, businessId: 1, productId: 2 },
+    { answer: 'skim', fromId: 13, toId: 14, businessId: 1, productId: 2 },
+    { answer: '2%', fromId: 13, toId: 14, businessId: 1, productId: 2 },
+    { answer: 'no', fromId: 12, toId: 14, businessId: 1, productId: 2 },
+    { answer: 'yes', fromId: 14, toId: 15, businessId: 1, productId: 2 },
+    { answer: 'splenda', fromId: 15, toId: 16, businessId: 1, productId: 2 },
+    { answer: 'cane', fromId: 15, toId: 16, businessId: 1, productId: 2 },
+    { answer: 'agave', fromId: 15, toId: 16, businessId: 1, productId: 2 },
+    { answer: '1', fromId: 16, toId: 18, businessId: 1, productId: 2 },
+    { answer: '2', fromId: 16, toId: 18, businessId: 1, productId: 2 },
+    { answer: '3', fromId: 16, toId: 18, businessId: 1, productId: 2 },
+    { answer: 'no', fromId: 14, toId: 17, businessId: 1, productId: 2 },
+    { answer: 'yes', fromId: 17, toId: 18, businessId: 1, productId: 2 },
+    { answer: 'no', fromId: 17, toId: 18, businessId: 1, productId: 2 },
+    { answer: 'small', fromId: 18, businessId: 1, productId: 2 },
+    { answer: 'medium', fromId: 18, businessId: 1, productId: 2 },
+    { answer: 'large', fromId: 18, businessId: 1, productId: 2 },
 
 ]
 let businesses = [{

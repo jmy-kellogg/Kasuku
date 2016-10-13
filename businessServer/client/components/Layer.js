@@ -21,7 +21,9 @@ const Layer = React.createClass({
       parentId = null;
     }
 
-
+    console.log(parentId);
+    // console.log(this.props.layer);
+    console.log(this.props);
     var connectionsArr = [];
     for(var key in this.props.connection){
       if(this.props.connection[key].fromId === parentId){
@@ -52,7 +54,9 @@ const Layer = React.createClass({
     })
 
     return (
-        {nodesDiv}
+        <div>
+          {nodesDiv}
+        </div>
     )
   }
 });

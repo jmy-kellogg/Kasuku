@@ -3,6 +3,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  height: 100vh;
 
 }
 
@@ -102,6 +103,17 @@ body{
   display: inline-block;
   margin: 5%;
 }
+
+
+
+.layerCol{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 
 
 
@@ -260,6 +272,7 @@ body{
 .businessName{
   float: right;
 }
+
 
 
 /************************************/
