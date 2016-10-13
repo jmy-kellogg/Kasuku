@@ -21,7 +21,7 @@ const NavBar = React.createClass({
     </div>
     <div className="collapse navbar-collapse" id="navbar-primary-collapse">
       <ul className="nav navbar-nav">
-        <li className="active"><a  href="/chatbot/1">Make Bot</a></li>
+        <li className="active"><a href="/chatbot/1">Make Bot</a></li>
         <li><a href="/businesses/1">Business</a></li>
         <li><a href="/" id="NavBarLogo">ChatterBot</a></li>
         <li><a href="/Signup">Sign Up</a></li>

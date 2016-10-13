@@ -1,5 +1,8 @@
 body{
-  background: white;
+  background-image: url("https://www.protolabs.com/resourceimages/united-states/cool-idea-follow-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /*
@@ -99,13 +102,18 @@ body{
 }
 
 .productLayer{
-  width: 75%;
+  width: 60%;
   display: block;
   margin: auto;
 }
+.product-title{
+    box-shadow: 10px 10px 5px #888888;
+}
+
 .nodeBox{
-  background-color:   #B0C4DE;
-  color: white;
+
+  background-color: #B0C4DE;
+  color: black;
   outline-style: solid;
   outline-width: 1px;
   outline-color: #F5F5F5;
@@ -114,6 +122,19 @@ body{
   display: block;
   padding: 8% 5% 5% 20%;
 
+}
+.nodeBox select{
+  color: black;
+}
+.slide{
+  background-color: #B0C4DE; 
+}
+
+.layer{
+  display: block;
+  width: 100%;
+  height:60vh;
+  margin: 10% 0 10% 0;
 }
 .btn-form{
   background: transparent;
@@ -144,16 +165,7 @@ body{
   border: none;
 }
 
-.slide{
-  background-color:   #B0C4DE; 
-}
 
-
-.layer{
-  width: 100%;
-  height:60vh;
-  margin: 10% 0 10% 0;
-}
 .quote {
   color: #fff;
   font-size: 24px;
@@ -263,15 +275,36 @@ body{
 
 #firstQuestion{
   display: block;
-  margin: auto;
+  margin: 0 5%;
 /*  padding: 5px 140px;*/
-  width: 40%;
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
 } 
 #ProductList{
   display: block;
-  margin: auto;
+  margin: 0 10%;
 /*  padding: 5px 140px;*/
-  width: 40%;
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
+}
+.addProduct{
+  background-color: #4682B4;
+  color: white;
+  display: block;
+  width: 60%;
+  box-shadow: 10px 10px 5px #888888;
+  padding: 10px;
+  margin: 0 10%;
+  > button{
+    margin-left: 5px;
+  }
+  > label{
+    margin: 5px;
+  }
+  > input{
+    color: black;
+    width: 20%
+  }
 }
 
 textarea{
@@ -282,25 +315,27 @@ textarea{
 
 }
 .bookmark-box {
-  background:   #B0C4DE;
+
+  background: #B0C4DE;
   width: 100%;
   height: auto;
   padding: 15px 15px 15px 25px;
   display: inline-table;
   margin: 25px 50px 0 0;
-  border-bottom: 3px solid #b1be59
+/*  border-bottom: 3px solid #191970*/
 }
 
 .bookmark-box p {
   color: #f8f8f8;
   font-size: 78%;
-  font-weight: 200
+  font-weight: 200;
+  opacity: .6;
 }
 
 .bookmark-title {
   position: relative;
   width: 80%;
-  background: #9daf25;
+  background: #4682B4;
   padding: 5px 10px 5px 10px;
   margin: 0 0 20px -36px
 }
@@ -319,7 +354,7 @@ textarea{
   z-index: -1;
   left: 4px;
   top: 24px;
-  border-color: #6e7c26 transparent;
+  border-color: #191970 transparent;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -335,11 +370,12 @@ textarea{
 
 
 .gotolink {
-  background: #9daf25;
+  background: #4682B4;
   position: relative;
   padding: 5px 8px 5px 10px;
-  width: 60%;
-  margin: 20px 0 0 75px
+  width: 40%;
+  margin: -3% 0 0 60%;
+  box-shadow: 10px 10px 5px #888888;
 }
 
 .gotolink h4 {
@@ -357,7 +393,7 @@ textarea{
 }
 
 .gotolink a:hover {
-  color: #6e7c26
+  color: #191970
 }
 
 .gotolink:before {
@@ -369,7 +405,7 @@ textarea{
   left: 110px;
   top: 20px;
   z-index: -1;
-  border-color: #6e7c26 transparent transparent;
+  border-color: #191970 transparent transparent;
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
@@ -392,23 +428,6 @@ a.boxclose {
 
 
 
-.addProduct{
-  background-color: #9daf25;
-  color: white;
-  display: block;
-  width: 57%;
-  padding: 10px;
-  margin: 5% 20% 5% 25%;
-  > button{
-    margin-left: 5px;
-  }
-  > label{
-    margin: 5px
-  }
-  > input{
-    color: black;
-  }
-}
 
 .bodyText{
   display: block;

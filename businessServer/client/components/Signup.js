@@ -13,15 +13,14 @@ const Signup = React.createClass({
     const password = this.refs.password.value;
     const password_confirmation = this.refs.password_confirmation.value;
 
-// <<<<<<< HEAD
     
-    this.props.dispatch(signup(username, email, password, password_confirmation)); 
-// =======
+ //   this.props.dispatch(signup(username, email, password, password_confirmation)); 
+
 //     // console.log(username, email, password, password_confirmation);
 
 //     store.dispatch(signup(username, email, password, password_confirmation));
 
-// >>>>>>> master
+
   },
   render () {
     return (
