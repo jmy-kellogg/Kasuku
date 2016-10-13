@@ -52,6 +52,8 @@
 .answer:hover{
   background-color: yellow; 
 }
-.answer:active{
+
+
+.answer.active{
   background-color: green; 
 }

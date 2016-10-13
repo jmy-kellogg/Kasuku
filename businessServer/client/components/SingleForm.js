@@ -3,6 +3,8 @@ import fetch from 'isomorphic-fetch';
 import polyfill from 'es6-promise';
 import InlineEdit from './InlineEdit';
 import axios from 'axios';
+// added this ------------------//
+import classNames from 'classNames';
 
 const SingleForm = React.createClass({
 	getInitialState: function() {
@@ -149,8 +151,13 @@ const SingleForm = React.createClass({
 		}
 
 		const answersDiv = answers.map((ans, i) => {
+      // added this //
+      let divClassName = classNames({
+        answer: true,
+        active: this.state.currentAnswer === ans.id
+      });
 			return (
-				<div className="answer" key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
+				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
 					{ans.answer}
 				</div>
 			)
