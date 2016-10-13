@@ -130,8 +130,9 @@ const Product = React.createClass({
     var answer = this.refs.productname.value;
     var price = +this.refs.price.value;
     var description = this.refs.description.value;
+
     this.refs.productname.value = "";
-    var businessId = null;
+    var businessId = 1;
     axios.post('/api/connections/', {
       answer: name,
       fromId: null,
@@ -143,11 +144,13 @@ const Product = React.createClass({
     })
     .then(conn => conn.data)
     .then(conn => {
+      console.log(conn);
       axios.put(`/api/connections/${conn.id}`, {
         productId: conn.id
       })
         .then(res => res.data)
         .then(updatedConn => {
+          // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
           this.props.addProductAction(conn.id, answer, null, businessId, price, description, productId);
         })
     })
@@ -156,9 +159,8 @@ const Product = React.createClass({
 
   },
   render: function(){
-    console.log(this.props);
 
-    const defaultGreeting = "Welcome. What can I get for You?";
+
     const productDiv = this.props.product.map((product, i) => {
       return (
 

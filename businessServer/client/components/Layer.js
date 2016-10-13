@@ -5,7 +5,6 @@ import SingleForm from './SingleForm';
 const Layer = React.createClass({
   handleSelected: function(node, e){
     this.props.changeSelected(node.id, node.layer);
-    // top layer has to be 2.
   },
 
   render: function(){
@@ -16,8 +15,7 @@ const Layer = React.createClass({
     // layer 0 : layers[0] : selected[0] : all layers
     var parentId;
     if(this.props.selected){
-      console.log(this.props.data);
-      parentId = this.props.selected[this.props.layer];
+      parentId = this.props.selected[this.props.layer-2];
     }
     else{
       parentId = null;

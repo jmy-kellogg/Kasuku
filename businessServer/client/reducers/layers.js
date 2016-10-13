@@ -3,12 +3,12 @@ function layers(state=[], action){
     case 'LOAD_NODES':
       var newState = [];
       action.nodes.forEach(node => {
-        if(node.layer >= 3){
-          if(!newState[node.layer-3]){
-            newState[node.layer-3] = [node];
+        if(node.layer >= 2){
+          if(!newState[node.layer-2]){
+            newState[node.layer-2] = [node];
           }
           else{
-            newState[node.layer-3].push(node);
+            newState[node.layer-2].push(node);
           }
         }
       })
@@ -18,11 +18,11 @@ function layers(state=[], action){
     case 'ADD_NODE':
       var newState = [...state];
 
-      if(!newState[action.layer-3]){
-        newState[action.layer-3] = [action.newNodeId];
+      if(!newState[action.layer-2]){
+        newState[action.layer-2] = [action.newNodeId];
       }
       else{
-        newState[action.layer-3].push(action.newNodeId);
+        newState[action.layer-2].push(action.newNodeId);
       }
       return newState;
 

@@ -92,7 +92,7 @@ let nodes = [
     },
     {
         question: 'What about sugar. Should I throw some of that goodness in there?',
-        productId: 1,
+        productId: 2,
         topLevel: true,
         layer: 2
     },

@@ -16,7 +16,6 @@ function connection(state=[], action){
       break;
 
     case 'ADD_PRODUCT':
-
       var newState = {...state};
       newState[action.id] = {
         answer: action.answer,
@@ -25,7 +24,7 @@ function connection(state=[], action){
         businessId: action.businessId,
         price: action.price,
         description: action.description,
-        product: true
+        productId: action.productId
       }
 
       return newState;

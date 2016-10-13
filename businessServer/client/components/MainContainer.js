@@ -2,6 +2,7 @@ import React from 'react';
 import Product from './Product';
 // import Layers from './Layers';
 import Layer from './Layer';
+import TopLayer from './topLayer';
 
 
 const MainContainer = React.createClass({
@@ -19,7 +20,7 @@ const MainContainer = React.createClass({
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
-        {layersDiv}
+
       </div>
 
     )
