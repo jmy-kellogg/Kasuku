@@ -78,11 +78,11 @@ export function loadProducts(products){
     }
 }
 
-export function addProductAction(id, name, fromId, businessId=null, price=null, description=null) {
+export function addProductAction(id, answer, fromId, businessId=null, price=null, description=null) {
     return {
         type: 'ADD_PRODUCT',
         id,
-        name,
+        answer,
         fromId,
         businessId,
         price,
