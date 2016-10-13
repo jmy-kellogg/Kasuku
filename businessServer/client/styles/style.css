@@ -3,11 +3,20 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+
 }
+
 
 /*
   Buttons
 */
+#root{
+  height: 100%;
+}
+.chatbotPage{
+  height: 100%;
+}
+
 
 #start{
     display: block;
@@ -94,12 +103,14 @@ body{
   margin: 5%;
 }
 
-
-
 /*product*/
 .ProductPage{
   width: 25%;
+  height: 800px;
+  background-color: blue
 }
+
+
 
 .productLayer{
   width: 60%;
@@ -282,8 +293,13 @@ body{
 
 .productinput{
   bottom: 0;
-  position: absolute;
 
+
+}
+
+.layerCol{
+  width: 25%;
+  display: inline;
 }
 
 #ProductList{

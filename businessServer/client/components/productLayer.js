@@ -65,7 +65,7 @@ const ProductLayer = React.createClass({
      )
    }
  });
-          {/*<div className="addNodeButton">  
+          {/*<div className="addNodeButton">
             <button onClick={this.addTopLayerNode}>add question</button>
           </div>*/}
 

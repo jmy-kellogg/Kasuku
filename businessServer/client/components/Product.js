@@ -89,62 +89,67 @@ const Product = React.createClass({
     this.setState({showLayers: true})
     this.props.setSelectedProduct(product.id);
   },
-  handleChange: function(e){
-    var greeting = e.target.value;
-    console.log(this.state.headNode);
-    axios.put(`/api/nodes/${this.state.headNode}`, {
-      question: greeting,
-      productId: "head",
-      topLevel: false,
-      layer: 0
-    })
-    .then(node => node.data)
-    .then(node => {
-      console.log(node);
-      this.props.saveNode(greeting, node.id);
-    })
-  },
-  createHeadNode: function(e){
+  // handleChange: function(e){
+  //   var greeting = e.target.value;
+  //   axios.put(`/api/nodes/${this.state.headNode}`, {
+  //     question: greeting,
+  //     productId: "head",
+  //     topLevel: false,
+  //     layer: 0
+  //   })
+  //   .then(node => node.data)
+  //   .then(node => {
+  //     console.log(node);
+  //     this.props.saveNode(greeting, node.id);
+  //   })
+  // },
+  // createHeadNode: function(e){
 
-    axios.post('/api/nodes/', {
-      question: "undefined",
-      productId: "head",
-      topLevel: false,
-      layer: 0
-    })
-    .then(node => node.data)
-    .then(node => {
-      this.props.addNewNode(null, node.id, 0, false, "head");
-      // console.log(node);
-      this.setState({
-        showGreetingNode: true,
-        headNode: node.id
-      });
-    })
-    .catch(err => {
-      if(err) throw err;
-    })
-  },
+  //   axios.post('/api/nodes/', {
+  //     question: "undefined",
+  //     productId: "head",
+  //     topLevel: false,
+  //     layer: 0
+  //   })
+  //   .then(node => node.data)
+  //   .then(node => {
+  //     this.props.addNewNode(null, node.id, 0, false, "head");
+  //     // console.log(node);
+  //     this.setState({
+  //       showGreetingNode: true,
+  //       headNode: node.id
+  //     });
+  //   })
+  //   .catch(err => {
+  //     if(err) throw err;
+  //   })
+  // },
 
 
   addProduct: function(e){
-    var name = this.refs.productname.value;
+    var answer = this.refs.productname.value;
     var price = +this.refs.price.value;
     var description = this.refs.description.value;
     this.refs.productname.value = "";
     var businessId = null;
     axios.post('/api/connections/', {
       answer: name,
-      fromId: this.state.headNode,
-      productId: name,
+      fromId: null,
+      // if fromId is null, must be product
+      productId: null,
       businessId,
       price,
       description
-
     })
     .then(conn => conn.data)
     .then(conn => {
-      this.props.addProductAction(conn.id, name, this.state.headNode, businessId, price, description);
+      axios.put(`/api/connections/${conn.id}`, {
+        productId: conn.id
+      })
+        .then(res => res.data)
+        .then(updatedConn => {
+          this.props.addProductAction(conn.id, answer, null, businessId, price, description, productId);
+        })
     })
 
     e.preventDefault();
@@ -169,15 +174,14 @@ const Product = React.createClass({
       <div className="ProductPage">
 
         <div>
-         <div id="ProductList">
-          <div className="bookmark-box">
-            <a className="boxclose" id="boxclose"></a>
-            <div className="bookmark-title">
-            <h3>Product List:</h3>
+         <div>
+          <div>
+            <div>
+              <h3>Product List:</h3>
+            </div>
+              {productDiv}
+            </div>
           </div>
-          {productDiv}
-          </div>
-        </div>
         </div>
 
          <div className="productinput">
@@ -191,9 +195,6 @@ const Product = React.createClass({
             <input type="submit" hidden />
             <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
-        </div>
-        <div>
-        {this.state.showLayers ? <Layers {...this.props}/> : null }
         </div>
 
       </div>

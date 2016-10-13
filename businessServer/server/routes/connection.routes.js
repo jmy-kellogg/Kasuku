@@ -70,7 +70,9 @@ router.post('/', function(req, res, next) {
       answer: req.body.answer,
       fromId: req.body.fromId,
       productId: req.body.productId,
-      businessId: req.body.businessId
+      businessId: req.body.businessId,
+      price: req.body.price,
+      description: req.body.description
     }
   )
   .then(function(_connection) {
@@ -81,6 +83,18 @@ router.post('/', function(req, res, next) {
 router.put('/:connectionId', function(req, res, next){
   // update toId on connection
   Connection.findById(req.params.connectionId)
-  .then(connection => connection.update({toId: req.body.toId}))
-  .then(connection => res.json(connection))
+  .then(connection => {
+    if(connection){
+      connection.update(req.body)
+        .then(updatedConnection => {
+          res.json(updatedConnection);
+        })
+    }
+    else{
+      res.sendStatus(404);
+    }
+  })
+  .catch(next);
+
+
 })

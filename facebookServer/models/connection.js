@@ -11,6 +11,9 @@ var Connection = db.define('connection', {
     },
     description: {
       type: Sequelize.STRING
+    },
+    productId: {
+        type: Sequelize.INTEGER
     }
 });
 

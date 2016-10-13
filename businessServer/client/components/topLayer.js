@@ -36,19 +36,15 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-        <Carousel.Item>
       <div id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} />
-      </div>    
-       </Carousel.Item>
+      </div>
 
     )
   })
   return (
    <div>
-     <Carousel className="layer" interval={false}>
       {nodesDiv}
-      </Carousel>
    </div>
 )
    }
