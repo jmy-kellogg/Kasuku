@@ -162,7 +162,7 @@ const SingleForm = React.createClass({
 			return (
         <div class="form-group">
   				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
-  					<label>{ans.answer}</label>
+  					<label><h4>{ans.answer}</h4></label>
             <span className="input-group-btn">
               <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
             </span>
@@ -186,26 +186,27 @@ const SingleForm = React.createClass({
 	    		</div>
 	    		<div className="panel-body">
 	    			<div ref="answerSelect">
+              <h4>Answers</h4>
 	    				{answersDiv}
 	    			</div>
-
-            <form className="form" onSubmit={this.addNewAnswer}>
-              <div className="form-group">
-                <label htmlFor="answer">Answer: </label>
-                <div className="input-group">
-                  <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
-                  <span className="input-group-btn">
-                    <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
-                  </span>
+            <div class="add-answer"> 
+              <form className="form" onSubmit={this.addNewAnswer}>
+                <div className="form-group">
+                  <div className="input-group">
+                    <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
+                    <span className="input-group-btn">
+                      <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
+                    </span>
+                  </div>
                 </div>
-              </div>
-              
-              {/*<label htmlFor="price">Added price: </label>
-              <input ref="price" name="price"></input>
-              <label htmlFor="description">Log: </label>
-              <input ref="description" name="description"></input>*/}
-              <input type="submit" hidden />
-            </form>
+                
+                {/*<label htmlFor="price">Added price: </label>
+                <input ref="price" name="price"></input>
+                <label htmlFor="description">Log: </label>
+                <input ref="description" name="description"></input>*/}
+                <input type="submit" hidden />
+              </form>
+            </div>
 	    		</div>
 
 
