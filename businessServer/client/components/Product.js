@@ -156,8 +156,8 @@ const Product = React.createClass({
     const productDiv = this.props.product.map((product, i) => {
       return (
    
-          <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
-          <h4 className="product-box">{product.name}</h4>
+        <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
+            <h4 className="product-box">{product.name}</h4>
         </div>
 
 
@@ -166,9 +166,8 @@ const Product = React.createClass({
     return (
 
       <div className="ProductPage">
-        {!this.state.showGreetingNode ? <button className="btn-effect btn-lg" id="start" onClick={this.createHeadNode}> Let's make a ChatBot! Click to get Started</button> : null}
 
-        {this.state.showGreetingNode ? 
+
       <div id="firstQuestion">
         <div className="bookmark-box">
           <a className="boxclose" id="boxclose"></a>
@@ -179,10 +178,10 @@ const Product = React.createClass({
             <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
           </div>
         </div>
-            {/*<div class="gotolink"><h4><a href="#">Go to link >></a></h4></div>*/}   
-      </div>: null}
+      </div>
         
-{this.state.showGreetingNode ?
+
+]
         <div>
          <div id="ProductList">
           <div className="bookmark-box">
@@ -191,10 +190,11 @@ const Product = React.createClass({
             <h3>Product List:</h3>
           </div>
           {productDiv}
-                  </div>
+          </div>
         </div>
-        </div>:null}
-        {this.state.showGreetingNode ? <div>
+        </div>
+
+         <div>
           <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname">Product Name:</label>
             <input ref="productname" name="productname"/>
@@ -205,7 +205,7 @@ const Product = React.createClass({
             <input type="submit" hidden />
             <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
-        </div> : null}
+        </div>
         <div>
         {this.state.showLayers ? <Layers {...this.props}/> : null }
         </div>

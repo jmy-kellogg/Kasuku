@@ -49,21 +49,24 @@ const ProductLayer = React.createClass({
 
      return (
        <div className="productLayer">
-        <div className="bookmark-box">
+        <div className="bookmark-box product-title">
           <a className="boxclose" id="boxclose"></a>
           <div className="bookmark-title">
             <h3>The Chat Tree for {productName}</h3>
           </div>
         </div>
-          <div class="gotolink"><h4><a onClick={this.addTopLayerNode}>Add Question >></a></h4></div>
+
+          <div className="gotolink"><h4><a onClick={this.addTopLayerNode}>Add Question >></a></h4></div>
           {/*<div className="addNodeButton">
             <button onClick={this.addTopLayerNode}>add question</button>
           </div>*/}
+
        </div>
-
-
      )
    }
  });
+          {/*<div className="addNodeButton">  
+            <button onClick={this.addTopLayerNode}>add question</button>
+          </div>*/}
 
  export default ProductLayer
