@@ -46,7 +46,7 @@ const SingleForm = React.createClass({
 		axios.delete(`/api/nodes/${this.props.id}`)
 			.then(item => item.data)
 			.then(item => {
-				console.log(item);
+				// console.log(item);
 			})
 			.catch(err => {
 				if(err) throw err;
@@ -64,8 +64,8 @@ const SingleForm = React.createClass({
 
 		e.preventDefault();
 		var answer = this.refs.answer.value;
-		var price = +this.refs.price.value;
-		var description = this.refs.description.value;
+		// var price = +this.refs.price.value;
+		// var description = this.refs.description.value;
 
 		this.refs.answer.value = "";
 		var fromId = this.props.id;
@@ -73,14 +73,14 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-			price,
-			description
+			// price,
+			// description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
 			// set business ID once business ids are set up.  but keep as null for now.
 			var businessId = null;
-			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId, price, description);
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId);
 		})
 		.catch(e => {
 			if(e) throw e;
@@ -177,21 +177,20 @@ const SingleForm = React.createClass({
           			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div>
-	    			<div ref="answerSelect">
-	    				{answersDiv}
-	    			</div>
 	    			<button className="btn-form" onClick={this.addNewNode}>add node</button>
-	    			<label htmlFor="answer">Answer: </label>
 	    			<form className="form" onSubmit={this.addNewAnswer}>
 	    				<label htmlFor="answer">Answer: </label>
 		    			<input ref="answer" name="answer"></input>
-		    			<label htmlFor="price">Added price: </label>
+		    			{/*<label htmlFor="price">Added price: </label>
 		    			<input ref="price" name="price"></input>
 		    			<label htmlFor="description">Log: </label>
-		    			<input ref="description" name="description"></input>
+		    			<input ref="description" name="description"></input>*/}
 		    			<input type="submit" hidden />
 		    			<button className="btn-form" onClick={this.addNewAnswer}>add answer</button>
 	    			</form>
+	    			<div ref="answerSelect">
+	    				{answersDiv}
+	    			</div>
 	    		</div>
 
 

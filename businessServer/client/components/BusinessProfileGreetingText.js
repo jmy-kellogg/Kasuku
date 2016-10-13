@@ -10,11 +10,11 @@ const BusinessProfileGreeting = React.createClass({
     }
   },
   componentDidMount () {
-    console.log(this.props["data-id"], "THIS> PROPS NLSDJ")
+    // console.log(this.props["data-id"], "THIS> PROPS NLSDJ")
     this.businessRequest = axios.get('/api/business/' + this.props["data-id"])
     .then( (res) => res.data )
     .then( (_business) => {
-      console.log(_business)
+      // console.log(_business)
       this.setState({ greeting: _business.greeting })
     })
   },
