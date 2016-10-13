@@ -147,6 +147,7 @@ body{
 } 
 
 .formQuest textarea{
+  background-color: white; 
   width: 80%;
 }
 #answerOfNode{
@@ -180,6 +181,9 @@ body{
   -webkit-border-radius: 30px;
   border-radius: 30px;
 }
+.carousel{
+  margin: 10% 0 10% 0;
+}
 .quote .pointerRight {
   z-index: -1;
   position: absolute;
@@ -209,11 +213,6 @@ body{
   -webkit-border-bottom-right-radius: 100% 60%;
   border-bottom-right-radius: 100% 60%;
 }
-
-
-
-
-
 
 .quote .pointerLeft {
   z-index: -1;
@@ -322,7 +321,6 @@ textarea{
   padding: 15px 15px 15px 25px;
   display: inline-table;
   margin: 25px 50px 0 0;
-/*  border-bottom: 3px solid #191970*/
 }
 
 .bookmark-box p {
@@ -426,11 +424,8 @@ a.boxclose {
   -o-transition: color .25s ease-in-out
 }
 
-
-
-
 .bodyText{
   display: block;
   text-align: center 
 }
-
+/************************************/
