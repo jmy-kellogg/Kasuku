@@ -181,7 +181,7 @@ const Product = React.createClass({
             <div>
               <h3>Product List:</h3>
             </div>
-              {productDiv}
+              <p>{productDiv}</p>
             </div>
           </div>
         </div>
