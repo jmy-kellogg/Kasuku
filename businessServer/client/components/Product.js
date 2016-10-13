@@ -126,6 +126,7 @@ const Product = React.createClass({
     })
   },
 
+
   addProduct: function(e){
     var name = this.refs.productname.value;
     var price = +this.refs.price.value;
@@ -155,7 +156,7 @@ const Product = React.createClass({
     const defaultGreeting = "Welcome. What can I get for You?";
     const productDiv = this.props.product.map((product, i) => {
       return (
-   
+
         <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
             <h4 className="product-box">{product.name}</h4>
         </div>
@@ -167,21 +168,6 @@ const Product = React.createClass({
 
       <div className="ProductPage">
 
-
-      <div id="firstQuestion">
-        <div className="bookmark-box">
-          <a className="boxclose" id="boxclose"></a>
-          <div className="bookmark-title">
-            <h3>Write your first question below:</h3>
-          </div>
-          <div>
-            <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
-          </div>
-        </div>
-      </div>
-        
-
-]
         <div>
          <div id="ProductList">
           <div className="bookmark-box">
@@ -194,7 +180,7 @@ const Product = React.createClass({
         </div>
         </div>
 
-         <div>
+         <div className="productinput">
           <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname">Product Name:</label>
             <input ref="productname" name="productname"/>
