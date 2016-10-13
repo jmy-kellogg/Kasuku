@@ -48,6 +48,7 @@
 
 .answer{
   background-color: transparent;
+  position: relative;
 }
 .answer:hover{
   background-color: yellow; 
@@ -56,4 +57,10 @@
 
 .answer.active{
   background-color: green; 
+}
+
+.far-right-button {
+  position: absolute;
+  right: -10px;
+
 }

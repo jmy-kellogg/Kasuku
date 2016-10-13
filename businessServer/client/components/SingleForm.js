@@ -156,13 +156,18 @@ const SingleForm = React.createClass({
       // added this //
       let divClassName = classNames({
         answer: true,
+        "input-group": true,
         active: this.state.currentAnswer === ans.id
       });
 			return (
-				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
-					{ans.answer}
-          <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
-				</div>
+        <div class="form-group">
+  				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
+  					<label>{ans.answer}</label>
+            <span className="input-group-btn">
+              <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
+            </span>
+  				</div>
+        </div>
 			)
 		})
 
@@ -171,30 +176,36 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="nodeBox">
+	    	<div className="panel panel-primary nodeBox">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
-	    		<div className="formQuest">
+	    		<div className="panel-heading formQuest">
 	    			<h4>Question: </h4>
           			<InlineEdit defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
-	    		<div>
-
-	    			<form className="form" onSubmit={this.addNewAnswer}>
-
-	    				<label htmlFor="answer">Answer: </label>
-		    			<input ref="answer" name="answer"></input>
-		    			{/*<label htmlFor="price">Added price: </label>
-		    			<input ref="price" name="price"></input>
-		    			<label htmlFor="description">Log: </label>
-		    			<input ref="description" name="description"></input>*/}
-		    			<input type="submit" hidden />
-		    			<button className="btn-form" onClick={this.addNewAnswer}>add answer</button>
-	    			</form>
+	    		<div className="panel-body">
 	    			<div ref="answerSelect">
 	    				{answersDiv}
 	    			</div>
+
+            <form className="form" onSubmit={this.addNewAnswer}>
+              <div className="form-group">
+                <label htmlFor="answer">Answer: </label>
+                <div className="input-group">
+                  <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
+                  <span className="input-group-btn">
+                    <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
+                  </span>
+                </div>
+              </div>
+              
+              {/*<label htmlFor="price">Added price: </label>
+              <input ref="price" name="price"></input>
+              <label htmlFor="description">Log: </label>
+              <input ref="description" name="description"></input>*/}
+              <input type="submit" hidden />
+            </form>
 	    		</div>
 
 
