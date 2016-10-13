@@ -52,6 +52,9 @@ router.get('/:name/fbwebhook', function(req, res, next) {
 
 router.post('/:name/fbwebhook', function(req, res, next) {
   console.log("Got to post on /users/:name/fbwebhook"); 
+
+  
+  
   var data = req.body;
   var pageToken = req.fbRequester.pageToken;
   //Make sure this is a page subscription 

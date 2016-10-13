@@ -121,7 +121,8 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                     },
                     message: {
                         text: node.question
-                    }
+                    },
+                    sender_action: 'typing_on'
                 };
                 callSendAPI(messageData, pageToken);
             } else {
@@ -171,6 +172,14 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
 
 function callSendAPI(messageData, pageToken) {
   console.log("callSendAPI".repeat(100))
+
+    // request( {
+    //   uri: 'https://graph.facebook.com/v2.6/me/messages',
+    //   qs: { access_token: pageToken },
+    //   method: 'POST',
+    //   json: { sender_action: typing_on }
+    // })
+
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
