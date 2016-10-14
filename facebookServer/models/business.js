@@ -28,6 +28,13 @@ var Business = db.define('business', {
         allowNull: false,
         unique: true
     },
+},
+{
+  getterMethods: {
+    webhookUrl: function() {
+      return 'https://sheltered-retreat-12501.herokuapp.com/users/' + this.username + '/fbwebhook'
+    }
+  }
 });
 
 module.exports = Business;

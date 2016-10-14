@@ -1,0 +1,22 @@
+/*business*/
+
+
+.businessInfoPage{
+  margin: 5%;
+}
+.businessInfoForm{
+  display: inline-block;
+  float: left;
+  clear: both;
+
+  width: 40%;
+
+}
+
+.businessName{
+  float: right;
+}
+
+.business-greeting {
+  
+}

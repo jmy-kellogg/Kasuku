@@ -175,6 +175,7 @@ let connections = [
 ]
 let businesses = [{
     businessName: 'chatty-A-1',
+    username: 'chatty-A-1',
     fb_account_id: 123,
     headNodeId: 1,
     restartNodeId: 10,
