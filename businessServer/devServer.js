@@ -23,14 +23,16 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.set('port', (process.env.PORT || 1337));
+
 db.sync()
   .then(function() {
-    app.listen(80, function(err) {
+    app.listen(app.get('port'), function(err) {
         if (err) {
             console.log(err);
             return;
         }
-        console.log('Listening on port 80');
+        console.log("We are listening on port ", app.get('port'));
     })
   })
   .catch(function(err) {
