@@ -33,16 +33,18 @@ const BusinessProfileGreeting = React.createClass({
   },
   render (){
     return (
-      <div>
-        <h1>Initial Greeting</h1>
+      <div className="business-greeting"> 
         <form>
-         <div className="form-group" onSubmit={this.handleSubmit}>
-           <label htmlFor="greeting-text">Greeting Text</label>
-           <input type="text" className="form-control" id="greeting-text" value={this.state.greeting} onChange={this.greetingChange} />
-         </div>
-
-         <button type="button" onClick={this.handleSave} className="btn btn-primary">Save</button>
-         <button type="button" onClick={this.handleDelete} className="btn btn-danger">Delete Greeting</button>
+          <h1>Initial Greeting</h1>
+          <div className="form-group" onSubmit={this.handleSubmit}>
+            <div className="input-group">
+              <input type="text" className="form-control" id="greeting-text" value={this.state.greeting} onChange={this.greetingChange} />
+              <span className="input-group-btn">
+                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
+              </span>
+            </div>
+          </div>
+         {/*<button type="button" onClick={this.handleDelete} className="btn btn-danger">Delete Greeting</button>*/}
         </form>
       </div>
     )

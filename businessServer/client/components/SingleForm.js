@@ -245,12 +245,12 @@ const SingleForm = React.createClass({
                 <input type="submit" hidden />
               </form>
             </div>
-          </div>
 
+	    		</div>
+	    	</div>
+	    )
+	}
 
-        </div>
-      )
-  }
 });
 
 export default SingleForm

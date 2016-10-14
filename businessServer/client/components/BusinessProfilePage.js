@@ -14,24 +14,28 @@ const BusinessProfilePage = React.createClass({
   render () {
     const businessId = this.props.params.businessId
     return (
-      <div className='businessPage'>
-        <Tabs onSelect={this.handleSelect}>
-          <TabList>
-            <Tab>Business Profile</Tab>
-            <Tab>Business Greeting</Tab>
-            <Tab>Persistent Menu Settings</Tab>
-          </TabList>
-          <TabPanel>
-            <BusinessProfileInfo data-id={businessId} />
-          </TabPanel>
-          <TabPanel>
-            <BusinessProfileGreetingText data-id={businessId} />
-            <BusinessProfileGetStartedOption data-id={businessId} />
-          </TabPanel>
-          <TabPanel>
-            <BusinessProfileFacebookStaticMenuSettings data-id={businessId} />
-          </TabPanel>
-        </Tabs>
+      <div className='container'>
+        <div className="row">
+          <div className="col-sm-8 col-sm-offset-2">
+            <Tabs onSelect={this.handleSelect}>
+              <TabList>
+                <Tab>General Settings</Tab>
+                <Tab>Business Greeting</Tab>
+                <Tab>Persistent Menu Settings</Tab>
+              </TabList>
+              <TabPanel>
+                <BusinessProfileInfo data-id={businessId} />
+              </TabPanel>
+              <TabPanel>
+                <BusinessProfileGreetingText data-id={businessId} />
+                <BusinessProfileGetStartedOption data-id={businessId} />
+              </TabPanel>
+              <TabPanel>
+                <BusinessProfileFacebookStaticMenuSettings data-id={businessId} />
+              </TabPanel>
+            </Tabs>
+          </div>
+        </div>
       </div>
     )
   }
