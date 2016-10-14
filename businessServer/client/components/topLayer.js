@@ -20,15 +20,14 @@ const TopLayer = React.createClass({
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId);
       return node;
     })
-    // .then(node => {
-    //   axios.put(`/api/connections/${this.props.prodSelected}`,{
-    //     toId: node.id
-    //   })
-    // })
+    .then(node => {
+      // axios.put(`/api/connections/${this.props.prodSelected}`,{
+      //   toId: node.id
+      // })
+    })
     .catch(e => {
       if(e) throw e;
     })
-
   },
 
   handleSelected: function(node, e){
@@ -62,7 +61,7 @@ render: function(){
   })
   return (
    <div className='toplayer-container'>
-   <div className='addtoplayernode' onClick={this.addTopLayerNode}></div>
+    <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div>
       {nodesDiv}
    </div>
 )

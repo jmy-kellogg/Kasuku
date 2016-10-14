@@ -5,13 +5,15 @@ import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
 
+
   getInitialState: function(){
     return {
-      showLayers: false
+      showLayers: false,
+      showGreetingNode: false
     }
   },
   selectProduct: function(product, e){
-    this.setState({showLayers: true})
+    this.setState({showLayers: true});
     this.props.setSelectedProduct(product.id);
   },
 
@@ -54,8 +56,8 @@ const Product = React.createClass({
     const productDiv = this.props.product.map((product, i) => {
       return (
 
-        <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
-            <h4 className="product-box">{product.name}</h4>
+        <div key={i} onClick={this.selectProduct.bind(this, product)}>
+           {product.name}
         </div>
 
 
@@ -63,8 +65,7 @@ const Product = React.createClass({
     })
     return (
 
-      <div className="ProductPage">
-
+      <div className="ProductPage metal">
         <div>
          <div>
           <div>
@@ -77,15 +78,17 @@ const Product = React.createClass({
         </div>
 
          <div className="productinput">
-          <form className="addProduct" onSubmit={this.addProduct}>
-            <label htmlFor="productname">Product Name:</label>
+          <form className="addProduct metal" onSubmit={this.addProduct}>
+            <label htmlFor="productname"></label>
+            <div className="productName">
             <input ref="productname" name="productname"/>
+            <input type="submit" hidden />
+            <button className="btnAdd"onClick={this.addProduct}>Add Product</button>
+            </div>
             <label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
             <label htmlFor="description">Log:</label>
             <input ref="description" name="description"></input>
-            <input type="submit" hidden />
-            <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
         </div>
 

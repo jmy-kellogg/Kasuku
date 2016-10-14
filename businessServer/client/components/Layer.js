@@ -87,8 +87,7 @@ const Layer = React.createClass({
       }
       return (
         <div className="mooo" key={i} ref={`nodeContainer${i}`} >
-        hkasjdflkjasdlkfjaksdl
-        <div className='addtoplayernode' onClick={this.addNodeSameLayer}></div>
+          <div className='metal addtoplayernode' onClick={this.addNodeSameLayer}></div>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
       )
