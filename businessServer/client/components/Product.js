@@ -21,8 +21,8 @@ const Product = React.createClass({
 
   addProduct: function(e){
     var answer = this.refs.productname.value;
-    var price = +this.refs.price.value;
-    var description = this.refs.description.value;
+    // var price = +this.refs.price.value;
+    // var description = this.refs.description.value;
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
@@ -32,8 +32,8 @@ const Product = React.createClass({
       // if fromId is null, must be product
       productId: null,
       businessId,
-      price,
-      description
+      // price,
+      // description
     })
     .then(conn => conn.data)
     .then(conn => {
@@ -44,7 +44,7 @@ const Product = React.createClass({
         .then(res => res.data)
         .then(updatedConn => {
           // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
-          this.props.addProductAction(conn.id, answer, null, businessId, price, description, conn.id);
+          this.props.addProductAction(conn.id, answer, null, businessId, null, null, conn.id);
         })
     })
 
@@ -86,10 +86,10 @@ const Product = React.createClass({
             <input type="submit" hidden />
             <button className="btnAdd"onClick={this.addProduct}>Add Product</button>
             </div>
-            <label htmlFor="price">Price:</label>
+            {/*<label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
             <label htmlFor="description">Log:</label>
-            <input ref="description" name="description"></input>
+            <input ref="description" name="description"></input>*/}
           </form>
         </div>
 

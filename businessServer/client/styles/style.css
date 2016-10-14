@@ -4,7 +4,7 @@ body{
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
-
+  width: 100%;
 }
 
 /* make keyframes that tell the start state and the end state of our object */
@@ -29,10 +29,6 @@ body{
 }
 
 
-.addtoplayernode{
-  height: 30px;
-  width: 100%;
-}
 
 /*
   Buttons
@@ -42,6 +38,8 @@ body{
 }
 .chatbotPage{
   height: 100%;
+  width: 5000px;
+  overflow-x: scroll;
 }
 
 #start{
@@ -80,6 +78,7 @@ body{
 //  background: #ededed;
   width: 100%;
   text-align: center;
+/*  position: fixed;*/
   > li {
     display: inline-block;
     float: none;
@@ -123,11 +122,10 @@ body{
 
 
 .layerCol{
-  width: 25%;
+  width: 500px;
   float: left;
   height: 90vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: scroll;
 }
 
 
