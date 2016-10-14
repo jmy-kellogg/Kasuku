@@ -5,51 +5,19 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 // added this ------------------//
 import classNames from 'classnames';
+import ContentEditable from 'react-contenteditable'
 
 const SingleForm = React.createClass({
 
-//<<<<<<< HEAD
-//=======
-	// componentDidMount(){
-	// 	console.log(this.refs.hello);
-	// 	this.refs.hello.value = this.props.question;
-	// 	// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
-	// },
-
-	// componentDidUpdate(){
-	// 	console.log(this.refs.hello);
-	// 	this.refs[`question${this.props.id}`].value = this.props.question;
-	// 	// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
- //   },
-
-//>>>>>>> master
 	getInitialState: function() {
     return {
     		...this.state,
     		currentAnswer: null,
         questionValue: this.props.question,
-        connectionToUpdate: null
+        connectionToUpdate: null,
+        questionId: null
     	};
   },
-// <<<<<<< HEAD
-// 	selectAnswer: function(answerId, e){
-// 		e.preventDefault();
-// 		// console.log(answerId)
-// 		this.state.currentAnswer= answerId;
-// 	},
-// 	componentDidMount(){
-// 		console.log(this.refs.hello);
-// 		this.refs.hello.value = this.props.question;
-// 		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
-
-// 	},
-// 	componentDidUpdate(){
-// 		console.log(this.refs.hello);
-// 		this.refs.hello.value = this.props.question;
-// 		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
-
-
-// =======
   onTextChange: function(e){
     this.setState({questionValue: e.target.value})
 
@@ -71,20 +39,6 @@ const SingleForm = React.createClass({
 		var nodesForRemoval = [];
 		var connsForRemoval = [];
 
-    // connections.forEach(connection => {
-    //   if(connection.fromId === nodeId){
-    //     connsForRemoval.push(connection.id);
-    //     if(connections[connection.id].toId){
-    //       getAllForRemoval(connections[connection.id].toId);
-    //     }
-    //   }
-    // })
-    // var queue = [].concat(nodes[this.props.id].conns);
-    // while(queue.length > 0){
-    //   queue.forEach(conn => {
-
-    //   })
-    // }
     var visited =[];
 
 		var getAllForRemoval = function(nodeId){
@@ -199,18 +153,27 @@ const SingleForm = React.createClass({
     e.preventDefault();
     this.props.connection[answer.id].answer = e.target.value;
     this.setState({connectionToUpdate: answer});
-    console.log(this.state.connectionToUpdate);
-    console.log("ANSWER", answer);
-    console.log(this.state);
-    console.log(this.props.connection[answer.id]);
   },
 
   updateConnection (answer, e) {
-    console.log(this.state.connectionToUpdate);
-    console.log(answer);
     axios.put(`/api/connections/${answer.id}`, answer)
     .then( (val) => { console.log(val) })
   },
+
+  changeQuestion (e) {
+    this.setState({questionValue: e.target.value});
+  }, 
+
+  updateQuestion (e) {
+    axios.put(`/api/nodes/${this.props.id}`, { question: this.state.questionValue})
+    .then( (res) => { 
+      console.log(res.data); 
+      this.setState({currentQuestion: res.data.question})
+      console.log(this.forceUpdate);
+      this.forceUpdate();
+    } 
+    )
+  }, 
 
 	render: function(){
 
@@ -222,7 +185,6 @@ const SingleForm = React.createClass({
 				<option key={i}>{item.name}</option>
 				)
 		});
-
 
 		const answers = [];
 		for(var key in this.props.connection){
@@ -262,7 +224,13 @@ const SingleForm = React.createClass({
 
 	    		<div className="formQuest">
 	    			<h4><b>Question: </b></h4>
-            {this.props.question}
+            <ContentEditable 
+              html={this.props.question} // innerHTML of the editable div
+              disabled={false}       // use true to disable edition
+              onChange={this.changeQuestion}
+              onBlur={this.updateQuestion}
+            />
+            {/*<p contentEditable={true}>{this.props.question}</p>*/}
 
           </div>
           <div className="panel-body">
