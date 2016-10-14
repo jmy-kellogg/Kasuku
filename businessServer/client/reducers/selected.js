@@ -5,18 +5,16 @@ function selected(state=[], action){
       return newState;
     case 'CHANGE_SELECTED':
       var newState = [...state];
+      console.log(action.layer);
       var layer = action.layer - 1;
-      newState[layer] = [];
-      if(newState[layer]){
-        newState[layer] = action.thisId;
-      }
-      else{
-        newState[layer] = null;
-      }
+
+      newState[layer] = action.connection;
+
 
       for(var x = layer+1; x < newState.length; x++){
         newState[x] = null;
       }
+      console.log(newState);
       return newState;
       break;
     default:

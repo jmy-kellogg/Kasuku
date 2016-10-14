@@ -2,12 +2,22 @@ import store from '../store';
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
-export function setHeadNode(nodeId){
+export function setSelected(connection, layer){
     return {
-        type: 'SET_HEADNODE',
-        nodeId
+        type: 'CHANGE_SELECTED',
+        connection,
+        layer
     }
 }
+
+// export function changeSelected(thisId, layer){
+//     return {
+//         type: 'CHANGE_SELECTED',
+//         thisId,
+//         layer
+//     }
+
+// }
 
 export function setSelectedProduct(product){
     return {
@@ -42,14 +52,6 @@ export function addTopLayerNodeAction(newNodeId, productId, layer){
   }
 }
 
-export function changeSelected(thisId, layer){
-    console.log(thisId, layer);
-    return {
-        type: 'CHANGE_SELECTED',
-        thisId,
-        layer
-    }
-}
 
 export function saveNode(question, thisNodeId){
 

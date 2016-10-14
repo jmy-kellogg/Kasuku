@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
-import Layers from './Layers';
 import InlineEdit from './InlineEdit'
 
 const Product = React.createClass({
@@ -15,41 +14,6 @@ const Product = React.createClass({
     this.setState({showLayers: true})
     this.props.setSelectedProduct(product.id);
   },
-  // handleChange: function(e){
-  //   var greeting = e.target.value;
-  //   axios.put(`/api/nodes/${this.state.headNode}`, {
-  //     question: greeting,
-  //     productId: "head",
-  //     topLevel: false,
-  //     layer: 0
-  //   })
-  //   .then(node => node.data)
-  //   .then(node => {
-  //     console.log(node);
-  //     this.props.saveNode(greeting, node.id);
-  //   })
-  // },
-  // createHeadNode: function(e){
-
-  //   axios.post('/api/nodes/', {
-  //     question: "undefined",
-  //     productId: "head",
-  //     topLevel: false,
-  //     layer: 0
-  //   })
-  //   .then(node => node.data)
-  //   .then(node => {
-  //     this.props.addNewNode(null, node.id, 0, false, "head");
-  //     // console.log(node);
-  //     this.setState({
-  //       showGreetingNode: true,
-  //       headNode: node.id
-  //     });
-  //   })
-  //   .catch(err => {
-  //     if(err) throw err;
-  //   })
-  // },
 
 
   addProduct: function(e){

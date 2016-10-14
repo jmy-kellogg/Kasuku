@@ -35,18 +35,13 @@ const MainContainer = React.createClass({
 
       })
       .then(data => {
-        // console.log(_nodesIdArr.sort(sortNumbers));
-        // var headNodeId = Math.min(..._nodesIdArr);
-        // this.setState({
-        //   headNode: headNodeId
-        // })
+
 
         allConnections.forEach(conn => {
           if(conn.id === conn.productId){
             _products.push(conn);
           }
         })
-        console.log(_products);
         this.props.loadProducts(_products);
 
         axios.get(`/api/nodes/`)
@@ -78,6 +73,7 @@ const MainContainer = React.createClass({
   },
 
   render: function(){
+
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <div className="layerCol" key={i}>
@@ -86,11 +82,17 @@ const MainContainer = React.createClass({
         </div>
       )
     })
+
+// product    : layer 0  : undefined : undefined
+// top layer  : layer 1  : undefined  : selected[0]
+// all layers : layer 2+ : layer[0] : selected[1]
+
     return (
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
         {layersDiv}
+
       </div>
 
     )
