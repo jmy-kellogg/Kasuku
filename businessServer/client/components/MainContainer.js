@@ -10,7 +10,7 @@ const MainContainer = React.createClass({
   componentWillMount: function(){
     var _nodesIdArr = [];
     var _nodesArr = [];
-    var allConnections;
+    var _allConnections;
     var _products = [];
     var sortNumbers = function(a,b){
       return a-b;
@@ -20,7 +20,7 @@ const MainContainer = React.createClass({
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
       .then(res => res.data)
       .then(connections => {
-        allConnections = connections;
+        _allConnections = connections;
 
         this.props.loadConnections(connections);
 
@@ -35,19 +35,15 @@ const MainContainer = React.createClass({
 
       })
       .then(data => {
-        // console.log(_nodesIdArr.sort(sortNumbers));
-        // var headNodeId = Math.min(..._nodesIdArr);
-        // this.setState({
-        //   headNode: headNodeId
-        // })
 
-        allConnections.forEach(conn => {
+
+        _allConnections.forEach(conn => {
           if(conn.id === conn.productId){
             _products.push(conn);
           }
         })
-        console.log(_products);
         this.props.loadProducts(_products);
+
 
         axios.get(`/api/nodes/`)
           .then(res => res.data)
@@ -58,9 +54,8 @@ const MainContainer = React.createClass({
             // this.props.setHeadNode(headNodeId);
 
             this.props.loadNodes(_nodesArr);
+            this.props.loadNodeConnections(_nodesArr, _allConnections);
           })
-
-
 
         var getNodeById = function(id, nodes){
           var _node;
@@ -71,13 +66,14 @@ const MainContainer = React.createClass({
           })
           return _node;
         }
-
       })
     }
-
   },
 
   render: function(){
+    console.log(this.props.layers);
+    var layersHTML = [];
+
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <div className="layerCol" key={i}>
@@ -86,11 +82,17 @@ const MainContainer = React.createClass({
         </div>
       )
     })
+
+// product    : layer 0  : undefined : undefined
+// top layer  : layer 1  : undefined  : selected[0]
+// all layers : layer 2+ : layer[0] : selected[1]
+
     return (
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
         {layersDiv}
+
       </div>
 
     )

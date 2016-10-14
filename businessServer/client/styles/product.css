@@ -17,6 +17,9 @@
   width: 25%;
   height: 87vh;
 /*  margin-top: -20px;*/
+  float: left;
+/*  display: block;
+  clear: both;*/
   position: fixed;
   >h3{
   	padding: 5px;
@@ -203,4 +206,30 @@ a.boxclose {
 .bodyText{
   display: block;
   text-align: center
+}
+
+.btn-remove{
+  float: right;
+  margin-right: 20%;
+  background: transparent;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
+}
+
+
+.quote {
+  color: #fff;
+  font-size: 24px;
+  font-family: 'open sans', sans serif;
+  margin-left: 10%;
+  padding: 20px 30px;
+  width: 400px;
+  height: 200px;
+  background: skyblue;
+  position: relative;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
 }

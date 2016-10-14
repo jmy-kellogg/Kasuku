@@ -7,6 +7,32 @@ body{
 
 }
 
+/* make keyframes that tell the start state and the end state of our object */
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+
+.addtoplayernode{
+  height: 30px;
+  width: 100%;
+}
 
 /*
   Buttons
@@ -17,7 +43,6 @@ body{
 .chatbotPage{
   height: 100%;
 }
-
 
 #start{
     display: block;
@@ -106,9 +131,6 @@ body{
 }
 
 
-
-
-
 .slide{
   background-color: #B0C4DE;
 }
@@ -121,25 +143,20 @@ body{
 }
 
 
-
-
-.quote {
-  color: #fff;
-  font-size: 24px;
-  font-family: 'open sans', sans serif;
-  margin-left: 10%;
-  padding: 20px 30px;
-  width: 400px;
-  height: 200px;
-  background: skyblue;
-  position: relative;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
+.form input{
+  color: black;
 }
-.carousel{
-  margin: 10% 0 10% 0;
+
+.formQuest textarea{
+  background-color: black;
+  width: 80%;
 }
+#answerOfNode{
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+}
+
 .quote .pointerRight {
   z-index: -1;
   position: absolute;
@@ -222,7 +239,7 @@ body{
   float: right;
 }
 
-@import ('./singleForm.css');
 @import ('./metal.css');
 @import ('./product.css');
-
+@import ('./singleForm.css');
+@import ('./toplayer.css');
