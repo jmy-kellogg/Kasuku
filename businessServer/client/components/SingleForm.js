@@ -135,8 +135,6 @@ const SingleForm = React.createClass({
 		// console.log(this.props.node);
 		// console.log(this.props.connection);
 
-
-
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
 			return (
@@ -208,8 +206,6 @@ const SingleForm = React.createClass({
               </form>
             </div>
 	    		</div>
-
-
 	    	</div>
 	    )
 	}

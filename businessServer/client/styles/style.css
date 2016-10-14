@@ -201,26 +201,7 @@ body{
 }
 
 
-/*business*/
-.businessPage{
-  margin: 5%;
-}
 
-.businessInfoPage{
-  margin: 5%;
-}
-.businessInfoForm{
-  display: inline-block;
-  float: left;
-  clear: both;
-
-  width: 40%;
-
-}
-
-.businessName{
-  float: right;
-}
 
 /*ProductPage*/
 
@@ -387,3 +368,4 @@ a.boxclose {
 /************************************/
 
 @import ('./singleForm.css');
+@import ('./business.profile.css');
