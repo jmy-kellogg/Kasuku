@@ -24,7 +24,8 @@ const SingleForm = React.createClass({
     return {
     		...this.state,
     		currentAnswer: null,
-        questionValue: this.props.question
+        questionValue: this.props.question,
+        connectionToUpdate: null
     	};
   },
   onTextChange: function(e){
@@ -36,6 +37,7 @@ const SingleForm = React.createClass({
 		console.log(answer);
 		this.state.currentAnswer= answer.id;
     this.props.setSelected(answer, this.props.layer);
+    this.setState({connectionToUpdate: null})
 	},
 	removeNode: function(e){
 
@@ -171,6 +173,23 @@ const SingleForm = React.createClass({
 
   },
 
+  changeOptionValue (answer, e) {
+    e.preventDefault();
+    this.props.connection[answer.id].answer = e.target.value;
+    this.setState({connectionToUpdate: answer});
+    console.log(this.state.connectionToUpdate);
+    console.log("ANSWER", answer);
+    console.log(this.state);
+    console.log(this.props.connection[answer.id]);
+  },
+
+  updateConnection (answer, e) {
+    console.log(this.state.connectionToUpdate);
+    console.log(answer);
+    axios.put(`/api/connections/${answer.id}`, answer)
+    .then( (val) => { console.log(val) })
+  },
+
 	render: function(){
 
 		// console.log(this.props.connection);
@@ -198,10 +217,12 @@ const SingleForm = React.createClass({
         active: this.state.currentAnswer === ans.id
       });
       // TODO: GIVE ANSWER DIV A HEIGHT AND SET SCROLL / OVERFLOW
+
 			return (
         <div key={i} className="form-group">
   				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans)}>
-  					<label><h4>{ans.answer}</h4></label>
+  					{/*<label><h4>{ans.answer}</h4></label>*/}
+            <input className="form-control" value={ans.answer} onChange={this.changeOptionValue.bind(this, ans)} onBlur={this.updateConnection.bind(this, ans)} />
             <span className="input-group-btn">
               <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
             </span>
