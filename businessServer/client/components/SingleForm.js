@@ -8,6 +8,8 @@ import classNames from 'classnames';
 
 const SingleForm = React.createClass({
 
+//<<<<<<< HEAD
+//=======
 	// componentDidMount(){
 	// 	console.log(this.refs.hello);
 	// 	this.refs.hello.value = this.props.question;
@@ -20,6 +22,7 @@ const SingleForm = React.createClass({
 	// 	// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
  //   },
 
+//>>>>>>> master
 	getInitialState: function() {
     return {
     		...this.state,
@@ -28,6 +31,25 @@ const SingleForm = React.createClass({
         connectionToUpdate: null
     	};
   },
+// <<<<<<< HEAD
+// 	selectAnswer: function(answerId, e){
+// 		e.preventDefault();
+// 		// console.log(answerId)
+// 		this.state.currentAnswer= answerId;
+// 	},
+// 	componentDidMount(){
+// 		console.log(this.refs.hello);
+// 		this.refs.hello.value = this.props.question;
+// 		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+// 	},
+// 	componentDidUpdate(){
+// 		console.log(this.refs.hello);
+// 		this.refs.hello.value = this.props.question;
+// 		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+
+// =======
   onTextChange: function(e){
     this.setState({questionValue: e.target.value})
 
@@ -234,11 +256,11 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="panel panel-primary nodeBox fade-in">
+	    	<div className="panel panel-primary metal nodeBox fade-in">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
-	    		<div className="panel-heading formQuest">
+	    		<div className="formQuest">
 	    			<h4><b>Question: </b></h4>
             {this.props.question}
 
@@ -271,7 +293,6 @@ const SingleForm = React.createClass({
 	    	</div>
 	    )
 	}
-
 });
 
 export default SingleForm

@@ -62,7 +62,7 @@ render: function(){
   })
   return (
    <div className='toplayer-container'>
-   <div className='addtoplayernode' onClick={this.addTopLayerNode}></div>
+    <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div>
       {nodesDiv}
    </div>
 )
