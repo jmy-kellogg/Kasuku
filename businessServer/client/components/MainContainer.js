@@ -55,11 +55,7 @@ const MainContainer = React.createClass({
 
             this.props.loadNodes(_nodesArr);
             this.props.loadNodeConnections(_nodesArr, _allConnections);
-
-
           })
-
-
 
         var getNodeById = function(id, nodes){
           var _node;
@@ -70,15 +66,13 @@ const MainContainer = React.createClass({
           })
           return _node;
         }
-
       })
-
-
     }
-
   },
 
   render: function(){
+    console.log(this.props.layers);
+    var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
       return (

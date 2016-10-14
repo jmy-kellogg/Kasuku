@@ -61,7 +61,6 @@ export function addTopLayerNodeAction(newNodeId, productId, layer){
   }
 }
 
-
 export function saveNode(question, thisNodeId){
 
     return {

@@ -10,7 +10,6 @@ function selected(state=[], action){
 
       newState[layer] = action.connection;
 
-
       for(var x = layer+1; x < newState.length; x++){
         newState[x] = null;
       }

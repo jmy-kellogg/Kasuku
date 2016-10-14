@@ -1,11 +1,48 @@
 import React from 'react';
 import SingleForm from './SingleForm';
+import axios from 'axios';
 
 const Layer = React.createClass({
   handleSelected: function(node, e){
-    console.log(node.layer);
-    console.log('kjhkjhkjhjk');
+
     this.props.changeSelected(node.id, node.layer);
+  },
+  addNodeSameLayer: function(e){
+    var currentConnection = this.props.selected[this.props.layer-2];
+    // console.log(this.props.selected);
+    // console.log(currentConnection);
+
+    e.preventDefault();
+    axios.post('/api/nodes', {
+      question: "default question",
+      productId: this.props.prodSelected,
+      topLevel: false,
+      layer: this.props.layer
+    })
+    .then(node => node.data)
+    .then(node => {
+      console.log(this.props.layer);
+
+      this.props.addNewNode(currentConnection.id, node.id, this.props.layer, false, node.productId);
+      return node;
+    })
+    .then(node => {
+      axios.post(`/api/connections`, {
+        answer: currentConnection.answer,
+        fromId: currentConnection.fromId,
+        businessId: this.props.params.businessId,
+        price: null,
+        description: null,
+        toId: node.id
+      })
+      // axios.put(`/api/connections/${currentConnection.id}`,{
+      //   toId: node.id
+      // })
+    })
+    .catch(e => {
+      if(e) throw e;
+    })
+
   },
 
   render: function(){
@@ -51,7 +88,7 @@ const Layer = React.createClass({
       return (
         <div className="mooo" key={i} ref={`nodeContainer${i}`} >
         hkasjdflkjasdlkfjaksdl
-        <div className='addtoplayernode' onClick=''></div>
+        <div className='addtoplayernode' onClick={this.addNodeSameLayer}></div>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
       )

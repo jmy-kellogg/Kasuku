@@ -55,26 +55,26 @@ const SingleForm = React.createClass({
     //     }
     //   }
     // })
+    // var queue = [].concat(nodes[this.props.id].conns);
+    // while(queue.length > 0){
+    //   queue.forEach(conn => {
+
+    //   })
+    // }
+    var visited =[];
 
 		var getAllForRemoval = function(nodeId){
-      // for(var key in connections){
-      //   if(connections[key].fromId === nodeId){
-      //     connsForRemoval.push(connections[key].id);
-      //     if(connections[key].toId){
-      //       getAllForRemoval(connections[key].toId);
-      //     }
-      //   }
-      // }
-      // console.log(nodes[nodeId].conns);
+
       if(nodes[nodeId].conns){
   			nodes[nodeId].conns.forEach(connId => {
   				connsForRemoval.push(connId);
-  				if(connections[connId].toId){
-  					getAllForRemoval(connections[connId].toId);
-  				}
-  			})
+          if(connections[connId].toId && !visited.includes(connections[connId].toId)){
+            visited.push(connections[connId].toId)
+            getAllForRemoval(connections[connId].toId);
+          }
+        })
+    			    nodesForRemoval.push(nodeId);
       }
-  			nodesForRemoval.push(nodeId);
 		}
 		getAllForRemoval(this.props.id);
     console.log(connsForRemoval);
@@ -130,12 +130,10 @@ const SingleForm = React.createClass({
     this.selectAnswer(answerId, e)
     var connId = this.state.currentAnswer;
 		var currentConn = this.props.connection[connId];
-    console.log("THIS IS SOME STUFF", currentConn, connId);
 
 
 		var layer = this.props.layer+1;
     // add new node to the next level
-    console.log(answerId);
     if(!this.props.connection[answerId].toId){
   		axios.post('/api/nodes/', {
   			question: "default question",
@@ -145,7 +143,6 @@ const SingleForm = React.createClass({
   		})
   		.then(node => node.data)
   		.then(node => {
-        console.log(node);
   			this.props.addNewNode(answerId, node.id, node.layer, false, node.productId);
   			return node;
   		})
@@ -176,7 +173,6 @@ const SingleForm = React.createClass({
 
 	render: function(){
 
-		console.log(this.props.node);
 		// console.log(this.props.connection);
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];

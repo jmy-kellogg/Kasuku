@@ -10,11 +10,9 @@ function node(state=[], action){
     case 'LOAD_NODE_CONNECTIONS':
       var newState = {...state};
       action.nodes.forEach(node => {
+        newState[node.id].conns = [];
         action.connections.forEach(connection => {
           if(connection.fromId === node.id){
-            if(!newState[node.id].conns){
-              newState[node.id].conns = [];
-            }
             newState[node.id].conns.push(connection.id);
           }
         })
