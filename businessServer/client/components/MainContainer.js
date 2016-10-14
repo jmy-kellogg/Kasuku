@@ -12,6 +12,7 @@ const MainContainer = React.createClass({
     var _nodesArr = [];
     var _allConnections;
     var _products = [];
+    var _productIds = [];
     var sortNumbers = function(a,b){
       return a-b;
     }
@@ -24,36 +25,48 @@ const MainContainer = React.createClass({
 
         this.props.loadConnections(connections);
 
-        connections.forEach(conn => {
-          if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
-            _nodesIdArr.push(conn.fromId);
-          }
-          if(conn.toId && !_nodesIdArr.includes(conn.toId)){
-            _nodesIdArr.push(conn.toId);
+        _allConnections.forEach(conn => {
+          if(conn.id === conn.productId){
+            _products.push(conn);
+            _productIds.push(conn.id);
           }
         })
+        this.props.loadProducts(_products);
+        // console.log(_products);
+        // console.log(_allConnections);
+
+        // connections.forEach(conn => {
+        //   if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
+        //     _nodesIdArr.push(conn.fromId);
+        //   }
+        //   if(conn.toId && !_nodesIdArr.includes(conn.toId)){
+        //     _nodesIdArr.push(conn.toId);
+        //   }
+        // })
 
       })
       .then(data => {
 
-
-        _allConnections.forEach(conn => {
-          if(conn.id === conn.productId){
-            _products.push(conn);
-          }
-        })
-        this.props.loadProducts(_products);
-
-
         axios.get(`/api/nodes/`)
           .then(res => res.data)
           .then(nodes => {
+            console.log(nodes);
+            console.log(_productIds)
+            nodes.forEach(node => {
+
+              if(_productIds.includes(+node.productId)){
+                _nodesIdArr.push(node.id);
+              }
+            })
+
             _nodesIdArr.forEach(nodeId => {
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
             // this.props.setHeadNode(headNodeId);
+            console.log(_nodesIdArr);
 
             this.props.loadNodes(_nodesArr);
+            // console.log(_nodesArr);
             this.props.loadNodeConnections(_nodesArr, _allConnections);
           })
 
@@ -71,7 +84,7 @@ const MainContainer = React.createClass({
   },
 
   render: function(){
-    console.log(this.props.layers);
+    console.log(this.props.prodSelected);
     var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
