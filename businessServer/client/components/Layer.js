@@ -1,34 +1,29 @@
 import React from 'react';
 import SingleForm from './SingleForm';
-import { Carousel } from 'react-bootstrap';
+
 
 const Layer = React.createClass({
   handleSelected: function(node, e){
     this.props.changeSelected(node.id, node.layer);
-    // top layer has to be 2.
   },
 
   render: function(){
     // this.props.data is the array of all the node ids that should populate this layer
 
     // parentId must be the node selected from the row above.
-    // row 1  : undefined : undefined : product layer
-    // row 2  : undefined : selected[0] : top layer
-    // row 3+ : layers[0] : selected[1] : all other layers
+    // header  : undefined : undefined : product layer
+    // layer 0 : layers[0] : selected[0] : all layers
     var parentId;
     if(this.props.selected){
-      parentId = this.props.selected[this.props.layer-3];
+      parentId = this.props.selected[this.props.layer-2];
     }
     else{
       parentId = null;
     }
 
-    // const connectionsArr = this.props.connection.filter(conn => {
-    //   return conn.fromId === parentId;
-    // }).map(conn => {
-    //   return conn.toId
-    // })
-
+    console.log(parentId);
+    // console.log(this.props.layer);
+    console.log(this.props);
     var connectionsArr = [];
     for(var key in this.props.connection){
       if(this.props.connection[key].fromId === parentId){
@@ -43,10 +38,6 @@ const Layer = React.createClass({
       }
     }
 
-    // const nodesArr = this.props.node.filter(node => {
-    //   return connectionsArr.includes(node.id) && +node.productId === this.props.prodSelected;
-    // })
-
     var nodesDiv = nodesArr.map((node, i) => {
       var q;
       if(node.question){
@@ -56,21 +47,16 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
-        <Carousel.Item>
         <div key={i} ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
-        </Carousel.Item>
       )
     })
-    // var allConnId = this.props.connection.map(conn => {
-    //   return conn.id;
-    // })
 
     return (
-    <Carousel interval={false}>
-        {nodesDiv}
-      </Carousel>
+        <div>
+          {nodesDiv}
+        </div>
     )
   }
 });

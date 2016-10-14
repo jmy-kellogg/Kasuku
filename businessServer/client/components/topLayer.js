@@ -9,25 +9,19 @@ const TopLayer = React.createClass({
 
     // console.log(node);
     this.props.changeSelected(node.id, node.layer);
-    var thisLayer = 2;
-    // top layer has to be 2.
-    // all other layers start at 3
+    // top layer has to be 1.
+    // all other layers start at 2
   },
 render: function(){
-
   var nodesArr = [];
   for(var key in this.props.node){
-    if(this.props.node[key].topLevel && +this.props.node[key].productId === this.props.prodSelected){
+
+    if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
       nodesArr.push(this.props.node[key]);
     }
   }
 
-  // const nodesArr = this.props.node.filter(node => {
-
-  //    return node.topLevel && +node.productId === this.props.prodSelected;
-  // })
-
-   const nodesDiv = nodesArr.map((node, i) => {
+  const nodesDiv = nodesArr.map((node, i) => {
       var q;
       if(node.question){
         q = node.question;
@@ -36,19 +30,15 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-        <Carousel.Item>
       <div id={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} />
-      </div>    
-       </Carousel.Item>
+      </div>
 
     )
   })
   return (
-   <div>
-     <Carousel className="layer" interval={false}>
+   <div className='toplayer-container'>
       {nodesDiv}
-      </Carousel>
    </div>
 )
    }

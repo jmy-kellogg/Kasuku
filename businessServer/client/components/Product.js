@@ -33,7 +33,7 @@ const Product = React.createClass({
 
       })
       .then(data => {
-        // console.log(_nodesIdArr.sort(sortNumbers));
+        console.log(_nodesIdArr.sort(sortNumbers));
         var headNodeId = Math.min(..._nodesIdArr);
         this.setState({
           headNode: headNodeId
@@ -86,78 +86,86 @@ const Product = React.createClass({
     }
   },
   selectProduct: function(product, e){
-    this.setState({showLayers: true})
+    this.setState({showLayers: true});
     this.props.setSelectedProduct(product.id);
   },
-  handleChange: function(e){
-    var greeting = e.target.value;
-    // console.log(this.state.headNode);
-    axios.put(`/api/nodes/${this.state.headNode}`, {
-      question: greeting,
-      productId: "head",
-      topLevel: false,
-      layer: 0
-    })
-    .then(node => node.data)
-    .then(node => {
-      // console.log(node);
-      this.props.saveNode(greeting, node.id);
-    })
-  },
-  createHeadNode: function(e){
+  // handleChange: function(e){
+  //   var greeting = e.target.value;
+  //   axios.put(`/api/nodes/${this.state.headNode}`, {
+  //     question: greeting,
+  //     productId: "head",
+  //     topLevel: false,
+  //     layer: 0
+  //   })
+  //   .then(node => node.data)
+  //   .then(node => {
+  //     console.log(node);
+  //     this.props.saveNode(greeting, node.id);
+  //   })
+  // },
+  // createHeadNode: function(e){
 
-    axios.post('/api/nodes/', {
-      question: "undefined",
-      productId: "head",
-      topLevel: false,
-      layer: 0
-    })
-    .then(node => node.data)
-    .then(node => {
-      this.props.addNewNode(null, node.id, 0, false, "head");
-      // console.log(node);
-      this.setState({
-        showGreetingNode: true,
-        headNode: node.id
-      });
-    })
-    .catch(err => {
-      if(err) throw err;
-    })
-  },
+  //   axios.post('/api/nodes/', {
+  //     question: "undefined",
+  //     productId: "head",
+  //     topLevel: false,
+  //     layer: 0
+  //   })
+  //   .then(node => node.data)
+  //   .then(node => {
+  //     this.props.addNewNode(null, node.id, 0, false, "head");
+  //     // console.log(node);
+  //     this.setState({
+  //       showGreetingNode: true,
+  //       headNode: node.id
+  //     });
+  //   })
+  //   .catch(err => {
+  //     if(err) throw err;
+  //   })
+  // },
+
 
   addProduct: function(e){
-    var name = this.refs.productname.value;
+    var answer = this.refs.productname.value;
     var price = +this.refs.price.value;
     var description = this.refs.description.value;
+
     this.refs.productname.value = "";
-    var businessId = null;
+    var businessId = 1;
     axios.post('/api/connections/', {
       answer: name,
-      fromId: this.state.headNode,
-      productId: name,
+      fromId: null,
+      // if fromId is null, must be product
+      productId: null,
       businessId,
       price,
       description
-
     })
     .then(conn => conn.data)
     .then(conn => {
-      this.props.addProductAction(conn.id, name, this.state.headNode, businessId, price, description);
+      console.log(conn);
+      axios.put(`/api/connections/${conn.id}`, {
+        productId: conn.id
+      })
+        .then(res => res.data)
+        .then(updatedConn => {
+          // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
+          this.props.addProductAction(conn.id, answer, null, businessId, price, description, productId);
+        })
     })
 
     e.preventDefault();
 
   },
   render: function(){
-    console.log(this.props);
 
-    const defaultGreeting = "Welcome. What can I get for You?";
+
     const productDiv = this.props.product.map((product, i) => {
       return (
-   
-        <div className="bodyText" key={i} onClick={this.selectProduct.bind(this, product)}>
-            <h4 className="product-box">{product.name}</h4>
+
+        <div key={i} onClick={this.selectProduct.bind(this, product)}>
+           {product.name}
         </div>
 
 
@@ -165,49 +173,31 @@ const Product = React.createClass({
     })
     return (
 
-      <div className="ProductPage">
-
-
-      <div id="firstQuestion">
-        <div className="bookmark-box">
-          <a className="boxclose" id="boxclose"></a>
-          <div className="bookmark-title">
-            <h3>Write your first question below:</h3>
-          </div>
-          <div>
-            <InlineEdit defaultValue={defaultGreeting} ref={"headNode"} onBlur={this.handleChange} />
-          </div>
-        </div>
-      </div>
-        
-
-]
+      <div className="ProductPage metal">
         <div>
-         <div id="ProductList">
-          <div className="bookmark-box">
-            <a className="boxclose" id="boxclose"></a>
-            <div className="bookmark-title">
-            <h3>Product List:</h3>
+         <div>
+          <div>
+            <div>
+              <h3>Product List:</h3>
+            </div>
+              {productDiv}
+            </div>
           </div>
-          {productDiv}
-          </div>
-        </div>
         </div>
 
-         <div>
-          <form className="addProduct" onSubmit={this.addProduct}>
-            <label htmlFor="productname">Product Name:</label>
+         <div className="productinput">
+          <form className="addProduct metal" onSubmit={this.addProduct}>
+            <label htmlFor="productname"></label>
+            <div className="productName">
             <input ref="productname" name="productname"/>
+            <input type="submit" hidden />
+            <button className="btnAdd"onClick={this.addProduct}>Add Product</button>
+            </div>
             <label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
             <label htmlFor="description">Log:</label>
             <input ref="description" name="description"></input>
-            <input type="submit" hidden />
-            <button className="btnAdd"onClick={this.addProduct}>add</button>
           </form>
-        </div>
-        <div>
-        {this.state.showLayers ? <Layers {...this.props}/> : null }
         </div>
 
       </div>

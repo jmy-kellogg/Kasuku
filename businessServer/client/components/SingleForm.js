@@ -7,6 +7,7 @@ import axios from 'axios';
 import classNames from 'classnames';
 
 const SingleForm = React.createClass({
+
 	getInitialState: function() {
     return {
     		...this.state,
@@ -17,6 +18,19 @@ const SingleForm = React.createClass({
 		e.preventDefault();
 		// console.log(answerId)
 		this.state.currentAnswer= answerId;
+	},
+	componentDidMount(){
+		console.log(this.refs.hello);
+		this.refs.hello.value = this.props.question;
+		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+	},
+	componentDidUpdate(){
+		console.log(this.refs.hello);
+		this.refs.hello.value = this.props.question;
+		// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+
+
 	},
 	removeNode: function(e){
 
@@ -175,44 +189,40 @@ const SingleForm = React.createClass({
 		var _thisId = this.props.id;
 
 	    return (
-
-	    	<div className="panel panel-primary nodeBox">
-
-					<button className="btn-remove" onClick={this.removeNode}>x</button>
-
-	    		<div className="panel-heading formQuest">
-	    			<h4><b>Question: </b></h4>
+	    	<div className="panel panel-primary nodeBox metal">
+			  <button className="btn-remove" onClick={this.removeNode}>x</button>
+	    	    <div className="formQuest">
+	    		  <h4><b>Question: </b></h4>
           			<InlineEdit className="" defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div className="panel-body">
-	    			<div ref="answerSelect">
-              <h4><b>Answers:</b></h4>
-	    				{answersDiv}
-	    			</div>
-            <div class="add-answer"> 
-              <form className="form" onSubmit={this.addNewAnswer}>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
-                    <span className="input-group-btn">
-                      <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
-                    </span>
-                  </div>
-                </div>
+	    		  <div ref="answerSelect">
+                    <h4><b>Answers:</b></h4>
+	    			  {answersDiv}
+	    		  </div>
+		            <div class="add-answer"> 
+		              <form className="form" onSubmit={this.addNewAnswer}>
+		                <div className="form-group">
+		                  <div className="input-group">
+		                    <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
+		                    <span className="input-group-btn">
+		                      <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
+		                    </span>
+		                  </div>
+		                </div>
                 
-                {/*<label htmlFor="price">Added price: </label>
-                <input ref="price" name="price"></input>
-                <label htmlFor="description">Log: </label>
-                <input ref="description" name="description"></input>*/}
-                <input type="submit" hidden />
-              </form>
-            </div>
+			                {/*<label htmlFor="price">Added price: </label>
+			                <input ref="price" name="price"></input>
+			                <label htmlFor="description">Log: </label>
+			                <input ref="description" name="description"></input>*/}
+                          <input type="submit" hidden />
+                      </form>
+                    </div>
 	    		</div>
-
-
 	    	</div>
 	    )
 	}
 });
 
 export default SingleForm
+         		// <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>

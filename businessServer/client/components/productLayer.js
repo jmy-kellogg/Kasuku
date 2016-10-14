@@ -57,16 +57,12 @@ const ProductLayer = React.createClass({
         </div>
 
           <div className="gotolink"><h4><a onClick={this.addTopLayerNode}>Add Question >></a></h4></div>
-          {/*<div className="addNodeButton">
-            <button onClick={this.addTopLayerNode}>add question</button>
-          </div>*/}
+
 
        </div>
      )
    }
  });
-          {/*<div className="addNodeButton">  
-            <button onClick={this.addTopLayerNode}>add question</button>
-          </div>*/}
+
 
  export default ProductLayer

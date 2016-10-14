@@ -13,6 +13,7 @@ import SingleForm from './components/SingleForm';
 import Home from './components/Home';
 import Tree from './components/Tree';
 import Product from './components/Product';
+import MainContainer from './components/MainContainer';
 import Layers from './components/Layers';
 import businessProfilePage from './components/BusinessProfilePage';
 
@@ -23,7 +24,6 @@ import store, { history } from './store';
 
 
 const router = (
-
 	<Provider store={store}>
 	  <Router history={ history}>
 	    <Route path='/' component={App}>
@@ -32,7 +32,7 @@ const router = (
 			<Route path='/layers/:productId' component={Layers} />
 	      	<Route path='/login' component={Login} />
 	      	<Route path='/signup' component={Signup} />
-	      	<Route path='/chatbot/:businessId' component={Product} />
+	      	<Route path='/chatbot/:businessId' component={MainContainer} />
 	      	<Route path='/tree/:businessId' component={Tree} />
           <Route path='/businesses/:businessId' component={businessProfilePage} />
 		  </Route>

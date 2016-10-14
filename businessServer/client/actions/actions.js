@@ -78,7 +78,7 @@ export function loadProducts(products){
     }
 }
 
-export function addProductAction(id, answer, fromId, businessId=null, price=null, description=null) {
+export function addProductAction(id, answer, fromId, businessId=null, price=null, description=null, productId) {
     return {
         type: 'ADD_PRODUCT',
         id,
@@ -86,7 +86,8 @@ export function addProductAction(id, answer, fromId, businessId=null, price=null
         fromId,
         businessId,
         price,
-        description
+        description,
+        productId
     }
 }
 
