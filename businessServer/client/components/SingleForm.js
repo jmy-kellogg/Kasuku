@@ -193,7 +193,7 @@ const SingleForm = React.createClass({
 			  <button className="btn-remove" onClick={this.removeNode}>x</button>
 	    	    <div className="formQuest">
 	    		  <h4><b>Question: </b></h4>
-          			<InlineEdit className="" defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
+          			<InlineEdit style={{backgroundColor: 'white'}} defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
 	    		</div>
 	    		<div className="panel-body">
 	    		  <div ref="answerSelect">
