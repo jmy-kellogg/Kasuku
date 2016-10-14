@@ -213,7 +213,7 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="panel panel-primary nodeBox">
+	    	<div className="panel panel-primary nodeBox fade-in">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
