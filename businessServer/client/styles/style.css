@@ -46,17 +46,7 @@ body{
 /*  outline-offset: 20px;*/
   text-shadow: 1px 1px 2px #FFFFFF;
 }
-.btnAdd {
-    background: transparent;
-    border: 1px solid white;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
 
-.btnAdd:hover {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
 
 /*NavBar*/
 
@@ -277,4 +267,5 @@ body{
 
 /************************************/
 
-@import ('./product.css')
+@import ('./metal.css');
+@import ('./product.css');
