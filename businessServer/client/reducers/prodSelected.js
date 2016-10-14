@@ -4,7 +4,7 @@ function prodSelected(state=[], action){
       return action.connections[0];
       break;
     case 'SET_SELECTED':
-        return action.product;
+        return action.productId;
         break;
     default:
       return state;

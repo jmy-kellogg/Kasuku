@@ -9,7 +9,6 @@ const Product = React.createClass({
   getInitialState: function(){
     return {
       showLayers: false,
-      headNode: "undefined",
       showGreetingNode: false
     }
   },

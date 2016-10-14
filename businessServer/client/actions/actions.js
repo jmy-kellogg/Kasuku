@@ -28,10 +28,10 @@ export function loadNodeConnections(nodes, connections){
 
 // }
 
-export function setSelectedProduct(product){
+export function setSelectedProduct(productId){
     return {
         type: 'SET_SELECTED',
-        product
+        productId
     }
 }
 
