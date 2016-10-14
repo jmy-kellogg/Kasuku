@@ -20,15 +20,14 @@ const TopLayer = React.createClass({
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId);
       return node;
     })
-    // .then(node => {
-    //   axios.put(`/api/connections/${this.props.prodSelected}`,{
-    //     toId: node.id
-    //   })
-    // })
+    .then(node => {
+      // axios.put(`/api/connections/${this.props.prodSelected}`,{
+      //   toId: node.id
+      // })
+    })
     .catch(e => {
       if(e) throw e;
     })
-
   },
 
   handleSelected: function(node, e){
