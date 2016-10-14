@@ -10,7 +10,7 @@ const MainContainer = React.createClass({
   componentWillMount: function(){
     var _nodesIdArr = [];
     var _nodesArr = [];
-    var allConnections;
+    var _allConnections;
     var _products = [];
     var sortNumbers = function(a,b){
       return a-b;
@@ -20,7 +20,7 @@ const MainContainer = React.createClass({
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
       .then(res => res.data)
       .then(connections => {
-        allConnections = connections;
+        _allConnections = connections;
 
         this.props.loadConnections(connections);
 
@@ -37,12 +37,13 @@ const MainContainer = React.createClass({
       .then(data => {
 
 
-        allConnections.forEach(conn => {
+        _allConnections.forEach(conn => {
           if(conn.id === conn.productId){
             _products.push(conn);
           }
         })
         this.props.loadProducts(_products);
+
 
         axios.get(`/api/nodes/`)
           .then(res => res.data)
@@ -53,6 +54,9 @@ const MainContainer = React.createClass({
             // this.props.setHeadNode(headNodeId);
 
             this.props.loadNodes(_nodesArr);
+            this.props.loadNodeConnections(_nodesArr, _allConnections);
+
+
           })
 
 
@@ -68,6 +72,8 @@ const MainContainer = React.createClass({
         }
 
       })
+
+
     }
 
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from './InlineEdit';
-import { Carousel } from 'react-bootstrap';
+import axios from 'axios';
 
 const TopLayer = React.createClass({
     addTopLayerNode: function(e){
@@ -20,11 +20,11 @@ const TopLayer = React.createClass({
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId);
       return node;
     })
-    .then(node => {
-      axios.put(`/api/connections/${this.props.prodSelected}`,{
-        toId: node.id
-      })
-    })
+    // .then(node => {
+    //   axios.put(`/api/connections/${this.props.prodSelected}`,{
+    //     toId: node.id
+    //   })
+    // })
     .catch(e => {
       if(e) throw e;
     })
@@ -62,7 +62,7 @@ render: function(){
   })
   return (
    <div className='toplayer-container'>
-   <div className='addtoplayernode' onClick=''></div>
+   <div className='addtoplayernode' onClick={this.addTopLayerNode}></div>
       {nodesDiv}
    </div>
 )

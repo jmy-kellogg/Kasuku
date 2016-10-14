@@ -47,16 +47,38 @@ const SingleForm = React.createClass({
 		var nodesForRemoval = [];
 		var connsForRemoval = [];
 
+    // connections.forEach(connection => {
+    //   if(connection.fromId === nodeId){
+    //     connsForRemoval.push(connection.id);
+    //     if(connections[connection.id].toId){
+    //       getAllForRemoval(connections[connection.id].toId);
+    //     }
+    //   }
+    // })
+
 		var getAllForRemoval = function(nodeId){
-			nodes[nodeId].conns.forEach(connId => {
-				connsForRemoval.push(connId);
-				if(connections[connId].toId){
-					getAllForRemoval(connections[connId].toId);
-				}
-			})
-			nodesForRemoval.push(nodeId);
+      // for(var key in connections){
+      //   if(connections[key].fromId === nodeId){
+      //     connsForRemoval.push(connections[key].id);
+      //     if(connections[key].toId){
+      //       getAllForRemoval(connections[key].toId);
+      //     }
+      //   }
+      // }
+      // console.log(nodes[nodeId].conns);
+      if(nodes[nodeId].conns){
+  			nodes[nodeId].conns.forEach(connId => {
+  				connsForRemoval.push(connId);
+  				if(connections[connId].toId){
+  					getAllForRemoval(connections[connId].toId);
+  				}
+  			})
+      }
+  			nodesForRemoval.push(nodeId);
 		}
 		getAllForRemoval(this.props.id);
+    console.log(connsForRemoval);
+    console.log(nodesForRemoval);
 
 		//delete all nodes and associated connections branching from this node
 		axios.delete(`/api/nodes/${this.props.id}`)
@@ -154,7 +176,7 @@ const SingleForm = React.createClass({
 
 	render: function(){
 
-		// console.log(this.props.node);
+		console.log(this.props.node);
 		// console.log(this.props.connection);
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];

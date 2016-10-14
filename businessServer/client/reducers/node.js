@@ -6,6 +6,22 @@ function node(state=[], action){
         newState[node.id] = node;
       })
       return newState;
+      break;
+    case 'LOAD_NODE_CONNECTIONS':
+      var newState = {...state};
+      action.nodes.forEach(node => {
+        action.connections.forEach(connection => {
+          if(connection.fromId === node.id){
+            if(!newState[node.id].conns){
+              newState[node.id].conns = [];
+            }
+            newState[node.id].conns.push(connection.id);
+          }
+        })
+      })
+      console.log(newState);
+      return newState;
+      break;
 
 
     case 'REMOVE_NODES':

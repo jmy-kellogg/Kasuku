@@ -10,6 +10,15 @@ export function setSelected(connection, layer){
     }
 }
 
+export function loadNodeConnections(nodes, connections){
+    return {
+        type: 'LOAD_NODE_CONNECTIONS',
+        nodes,
+        connections
+    }
+
+}
+
 // export function changeSelected(thisId, layer){
 //     return {
 //         type: 'CHANGE_SELECTED',
