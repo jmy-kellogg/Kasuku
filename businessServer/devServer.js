@@ -25,12 +25,12 @@ app.get('*', function(req, res) {
 
 db.sync()
   .then(function() {
-    app.listen(1337, 'localhost', function(err) {
+    app.listen(80, function(err) {
         if (err) {
             console.log(err);
             return;
         }
-        console.log('Listening at http://localhost:1337');
+        console.log('Listening on port 80');
     })
   })
   .catch(function(err) {
