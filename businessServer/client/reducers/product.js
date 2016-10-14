@@ -8,7 +8,7 @@ function product(state=[], action){
           name: product.answer
         })
       })
-      console.log(action.products);
+      console.log(newState);
       return newState;
       break;
     case 'ADD_PRODUCT':

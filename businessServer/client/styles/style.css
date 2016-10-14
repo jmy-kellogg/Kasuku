@@ -3,11 +3,53 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  height: 100vh;
+
 }
+
+/* make keyframes that tell the start state and the end state of our object */
+
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+
+
+
+
+
+.addtoplayernode{
+  height: 30px;
+  width: 100%;
+  background-color: red;
+}
+
 
 /*
   Buttons
 */
+#root{
+  height: 100%;
+}
+.chatbotPage{
+  height: 100%;
+}
+
 
 #start{
     display: block;
@@ -17,7 +59,7 @@ body{
 }
 
 .btn-effect {
-  background: transparent; 
+  background: transparent;
   border: 0 solid;
   padding: 5px;
   box-shadow: inset 0 0 20px    rgb(70,130,180, 0);
@@ -26,7 +68,7 @@ body{
 /*  outline-offset: 0px;*/
   text-shadow: none;
   transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
-} 
+}
 
 .btn-effect:hover {
 /*  background: transparent; */
@@ -35,7 +77,7 @@ body{
   box-shadow: inset 0 0 20px  rgb(70,130,180, .5), 0 0 20px  rgb(70,130,180, .2);
   outline-color:    rgb(25,25,112, 0);
 /*  outline-offset: 20px;*/
-  text-shadow: 1px 1px 2px #FFFFFF; 
+  text-shadow: 1px 1px 2px #FFFFFF;
 }
 .btnAdd {
     background: transparent;
@@ -51,7 +93,7 @@ body{
 
 /*NavBar*/
 
-#navbar-primary .navbar-nav { 
+#navbar-primary .navbar-nav {
 //  background: #ededed;
   width: 100%;
   text-align: center;
@@ -95,12 +137,22 @@ body{
   margin: 5%;
 }
 
-
-
 /*product*/
 .ProductPage{
-  margin: 5%;
+  width: 25%;
+  float: left;
+  height: 90vh;
+  background-color: blue
 }
+.layerCol{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
 
 .productLayer{
   width: 60%;
@@ -113,7 +165,7 @@ body{
 
 
 .slide{
-  background-color: #B0C4DE; 
+  background-color: #B0C4DE;
 }
 
 .layer{
@@ -121,6 +173,36 @@ body{
   width: 100%;
   height:60vh;
   margin: 10% 0 10% 0;
+}
+
+.btn-form{
+  background: transparent;
+  margin: 5px;
+  border: 1px solid white;
+}
+
+.form input{
+  color: black;
+}
+
+.formQuest textarea{
+  background-color: black;
+  width: 80%;
+}
+#answerOfNode{
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+}
+
+.btn-remove{
+  float: right;
+  margin-right: 20%;
+  background: transparent;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
 }
 
 
@@ -227,7 +309,7 @@ body{
 
 .Product{
   margin: 5%;
-} 
+}
 
 #firstQuestion{
   display: block;
@@ -235,10 +317,22 @@ body{
 /*  padding: 5px 140px;*/
   width: 60%;
   box-shadow: 10px 10px 5px #888888;
-} 
+}
+
+.productinput{
+  bottom: 0;
+
+
+}
+
+.layerCol{
+  width: 25%;
+  display: inline;
+}
+
 #ProductList{
   display: block;
-  margin: 0 10%;
+  margin: 5%;
 /*  padding: 5px 140px;*/
   width: 60%;
   box-shadow: 10px 10px 5px #888888;
@@ -261,6 +355,14 @@ body{
     color: black;
     width: 20%
   }
+}
+.toplayer-container{
+  width: 25%;
+  float: left;
+  height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
 textarea{
@@ -316,11 +418,11 @@ textarea{
   -o-transform: rotate(45deg);
   transform: rotate(45deg)
 }
- 
+
 .product-box:hover{
   color: blue;
   cursor:pointer
-}  
+}
 
 
 
@@ -383,7 +485,7 @@ a.boxclose {
 
 .bodyText{
   display: block;
-  text-align: center 
+  text-align: center
 }
 /************************************/
 

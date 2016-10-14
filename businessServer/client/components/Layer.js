@@ -1,51 +1,81 @@
 import React from 'react';
 import SingleForm from './SingleForm';
-import { Carousel } from 'react-bootstrap';
+import axios from 'axios';
 
 const Layer = React.createClass({
   handleSelected: function(node, e){
+
     this.props.changeSelected(node.id, node.layer);
-    // top layer has to be 2.
+  },
+  addNodeSameLayer: function(e){
+    var currentConnection = this.props.selected[this.props.layer-2];
+    // console.log(this.props.selected);
+    // console.log(currentConnection);
+
+    e.preventDefault();
+    axios.post('/api/nodes', {
+      question: "default question",
+      productId: this.props.prodSelected,
+      topLevel: false,
+      layer: this.props.layer
+    })
+    .then(node => node.data)
+    .then(node => {
+      console.log(this.props.layer);
+
+      this.props.addNewNode(currentConnection.id, node.id, this.props.layer, false, node.productId);
+      return node;
+    })
+    .then(node => {
+      axios.post(`/api/connections`, {
+        answer: currentConnection.answer,
+        fromId: currentConnection.fromId,
+        businessId: this.props.params.businessId,
+        price: null,
+        description: null,
+        toId: node.id
+      })
+      // axios.put(`/api/connections/${currentConnection.id}`,{
+      //   toId: node.id
+      // })
+    })
+    .catch(e => {
+      if(e) throw e;
+    })
+
   },
 
   render: function(){
     // this.props.data is the array of all the node ids that should populate this layer
-
     // parentId must be the node selected from the row above.
-    // row 1  : undefined : undefined : product layer
-    // row 2  : undefined : selected[0] : top layer
-    // row 3+ : layers[0] : selected[1] : all other layers
-    var parentId;
-    if(this.props.selected){
-      parentId = this.props.selected[this.props.layer-3];
-    }
-    else{
-      parentId = null;
-    }
+    // var parentId;
+    // if(this.props.selected){
+    //   parentId = this.props.selected[this.props.layer-2];
+    // }
+    // else{
+    //   parentId = null;
+    // }
 
-    // const connectionsArr = this.props.connection.filter(conn => {
-    //   return conn.fromId === parentId;
-    // }).map(conn => {
-    //   return conn.toId
-    // })
-
-    var connectionsArr = [];
-    for(var key in this.props.connection){
-      if(this.props.connection[key].fromId === parentId){
-        connectionsArr.push(this.props.connection[key].toId);
-      }
-    }
-
+    // console.log(this.props.layer);
+    // console.log(this.props.selected);
+    // var connectionsArr = [];
+    // for(var key in this.props.connection){
+    //   if(this.props.connection[key].fromId === 1){
+    //     connectionsArr.push(this.props.connection[key].toId);
+    //   }
+    // }
+    console.log(this.props.layer);
+    console.log(this.props.selected[this.props.layer-2]);
     var nodesArr = [];
     for(var key in this.props.node){
-      if(connectionsArr.includes(this.props.node[key].id) && +this.props.node[key].productId === this.props.prodSelected){
-        nodesArr.push(this.props.node[key]);
+      // if(connectionsArr.includes(this.props.node[key].id) && +this.props.node[key].productId === this.props.prodSelected){
+      if(this.props.selected[this.props.layer-2]){
+        if(this.props.node[key].id === this.props.selected[this.props.layer-2].toId){
+          nodesArr.push(this.props.node[key]);
+        }
       }
     }
-
-    // const nodesArr = this.props.node.filter(node => {
-    //   return connectionsArr.includes(node.id) && +node.productId === this.props.prodSelected;
-    // })
+    console.log(nodesArr);
 
     var nodesDiv = nodesArr.map((node, i) => {
       var q;
@@ -56,21 +86,18 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
-        <Carousel.Item>
-        <div key={i} ref={`nodeContainer${i}`} onClick={this.handleSelected.bind(this, node)}>
+        <div className="mooo" key={i} ref={`nodeContainer${i}`} >
+        hkasjdflkjasdlkfjaksdl
+        <div className='addtoplayernode' onClick={this.addNodeSameLayer}></div>
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
         </div>
-        </Carousel.Item>
       )
     })
-    // var allConnId = this.props.connection.map(conn => {
-    //   return conn.id;
-    // })
 
     return (
-    <Carousel interval={false}>
-        {nodesDiv}
-      </Carousel>
+        <div>
+          {nodesDiv}
+        </div>
     )
   }
 });

@@ -7,16 +7,35 @@ import axios from 'axios';
 import classNames from 'classnames';
 
 const SingleForm = React.createClass({
+
+	// componentDidMount(){
+	// 	console.log(this.refs.hello);
+	// 	this.refs.hello.value = this.props.question;
+	// 	// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+	// },
+
+	// componentDidUpdate(){
+	// 	console.log(this.refs.hello);
+	// 	this.refs[`question${this.props.id}`].value = this.props.question;
+	// 	// this.refs[`question${this.props.id}`].defaultValue = this.props.question;
+ //   },
+
 	getInitialState: function() {
     return {
     		...this.state,
-    		currentAnswer: null
+    		currentAnswer: null,
+        questionValue: this.props.question
     	};
   },
-	selectAnswer: function(answerId, e){
+  onTextChange: function(e){
+    this.setState({questionValue: e.target.value})
+
+  },
+	selectAnswer: function(answer, e){
 		e.preventDefault();
-		// console.log(answerId)
-		this.state.currentAnswer= answerId;
+		console.log(answer);
+		this.state.currentAnswer= answer.id;
+    this.props.setSelected(answer, this.props.layer);
 	},
 	removeNode: function(e){
 
@@ -28,19 +47,38 @@ const SingleForm = React.createClass({
 		var nodesForRemoval = [];
 		var connsForRemoval = [];
 
+    // connections.forEach(connection => {
+    //   if(connection.fromId === nodeId){
+    //     connsForRemoval.push(connection.id);
+    //     if(connections[connection.id].toId){
+    //       getAllForRemoval(connections[connection.id].toId);
+    //     }
+    //   }
+    // })
+    // var queue = [].concat(nodes[this.props.id].conns);
+    // while(queue.length > 0){
+    //   queue.forEach(conn => {
+
+    //   })
+    // }
+    var visited =[];
 
 		var getAllForRemoval = function(nodeId){
-			nodes[nodeId].conns.forEach(connId => {
-				connsForRemoval.push(connId);
-				if(connections[connId].toId){
-					getAllForRemoval(connections[connId].toId);
-				}
-			})
-			nodesForRemoval.push(nodeId);
+
+      if(nodes[nodeId].conns){
+  			nodes[nodeId].conns.forEach(connId => {
+  				connsForRemoval.push(connId);
+          if(connections[connId].toId && !visited.includes(connections[connId].toId)){
+            visited.push(connections[connId].toId)
+            getAllForRemoval(connections[connId].toId);
+          }
+        })
+    			    nodesForRemoval.push(nodeId);
+      }
 		}
 		getAllForRemoval(this.props.id);
-
-
+    console.log(connsForRemoval);
+    console.log(nodesForRemoval);
 
 		//delete all nodes and associated connections branching from this node
 		axios.delete(`/api/nodes/${this.props.id}`)
@@ -92,29 +130,32 @@ const SingleForm = React.createClass({
     this.selectAnswer(answerId, e)
     var connId = this.state.currentAnswer;
 		var currentConn = this.props.connection[connId];
-    console.log("THIS IS SOME STUFF", currentConn, connId);
 
 
 		var layer = this.props.layer+1;
+    // add new node to the next level
+    if(!this.props.connection[answerId].toId){
+  		axios.post('/api/nodes/', {
+  			question: "default question",
+  			productId: this.props.prodSelected,
+  			topLevel: false,
+  			layer: layer
+  		})
+  		.then(node => node.data)
+  		.then(node => {
+  			this.props.addNewNode(answerId, node.id, node.layer, false, node.productId);
+  			return node;
+  		})
+  		.then(node => {
+  			axios.put(`/api/connections/${currentConn.id}`, {
+  				toId: node.id
+  			})
+  		})
+      .catch(err => {
+        if(err) throw err;
+      })
+    }
 
-		axios.post('/api/nodes/', {
-			question: "default question",
-			productId: this.props.prodSelected,
-			topLevel: false,
-			layer: layer
-		})
-		.then(node => node.data)
-		.then(node => {
-			this.props.addNewNode(currentConn.id, node.id, node.layer, false, node.productId);
-			return node;
-		})
-		.then(node => {
-			axios.put(`/api/connections/${currentConn.id}`, {
-				toId: node.id
-			})
-			.then(conn => {
-			})
-		})
 
 	},
 	handleChange: function(nodeId, e){
@@ -132,10 +173,7 @@ const SingleForm = React.createClass({
 
 	render: function(){
 
-		// console.log(this.props.node);
 		// console.log(this.props.connection);
-
-
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -159,9 +197,10 @@ const SingleForm = React.createClass({
         "input-group": true,
         active: this.state.currentAnswer === ans.id
       });
+      // TODO: GIVE ANSWER DIV A HEIGHT AND SET SCROLL / OVERFLOW
 			return (
-        <div class="form-group">
-  				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans.id)}>
+        <div key={i} className="form-group">
+  				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans)}>
   					<label><h4>{ans.answer}</h4></label>
             <span className="input-group-btn">
               <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
@@ -172,34 +211,33 @@ const SingleForm = React.createClass({
 		})
 
 
-		var _thisId = this.props.id;
-
 	    return (
 
-	    	<div className="panel panel-primary nodeBox">
+	    	<div className="panel panel-primary nodeBox fade-in">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
 	    		<div className="panel-heading formQuest">
 	    			<h4><b>Question: </b></h4>
-          			<InlineEdit className="" defaultValue={this.props.question} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-	    		</div>
-	    		<div className="panel-body">
-	    			<div ref="answerSelect">
+            {this.props.question}
+
+          </div>
+          <div className="panel-body">
+            <div ref="answerSelect">
               <h4><b>Answers:</b></h4>
-	    				{answersDiv}
-	    			</div>
-            <div class="add-answer"> 
+              {answersDiv}
+            </div>
+            <div className="add-answer">
               <form className="form" onSubmit={this.addNewAnswer}>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" className="form-control" ref="answer" name="answer" placeHolder="add an answer to your question"></input>
+                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>
                     <span className="input-group-btn">
                       <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
                     </span>
                   </div>
                 </div>
-                
+
                 {/*<label htmlFor="price">Added price: </label>
                 <input ref="price" name="price"></input>
                 <label htmlFor="description">Log: </label>
@@ -207,12 +245,14 @@ const SingleForm = React.createClass({
                 <input type="submit" hidden />
               </form>
             </div>
-	    		</div>
+          </div>
 
 
-	    	</div>
-	    )
-	}
+        </div>
+      )
+  }
 });
 
 export default SingleForm
+            // <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
+          			// <textArea className="" onChange={this.onTextChange} value={this.state.questionValue} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
