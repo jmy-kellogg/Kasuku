@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateBusinessProfile } from '../actions/business.actions.js'
 import axios from 'axios';
 import PwordField from './PwordField';
+import TooltipGlyph from './TooltipGlyph';
 
 const BusinessProfile = React.createClass({
   handleSubmit (e) {
@@ -74,6 +75,11 @@ const BusinessProfile = React.createClass({
   },
   render() {
     console.log(this.state);
+    const BUSINESS_NAME = 'This is your business name as it appears on our page';
+    const EMAIL_ADDRESS = 'This is the primary email address used for this accoutn';
+    const PAGE_TOKEN = 'This is the Facebook issued page token for your business page';
+    const WEBHOOK_TOKEN = 'This is the token you create on Facebook to validate the webhook url';
+    const WEBHOOK_URL = 'Use this webhook url to connect your chatbot to facebook';
     return (
 
       <div>
@@ -81,17 +87,17 @@ const BusinessProfile = React.createClass({
         <form>
          
           <div className="form-group" onSubmit={this.handleSubmit}>
-            <label htmlFor="business-name">Business Name:</label>
+            <label htmlFor="business-name">Business Name:</label><TooltipGlyph tip={BUSINESS_NAME}/>
             <input type="text" className="form-control" id="business-name" ref="businessName" value={this.state.businessName} onChange={this.businessNameChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email address:</label>
+            <label htmlFor="email">Email address:</label><TooltipGlyph tip={EMAIL_ADDRESS}/>
             <input type="email" className="form-control" id="email" ref="email" value={this.state.email} onChange={this.emailChange} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="page-token">Facebook Page Token:</label>
+            <label htmlFor="page-token">Facebook Page Token:</label><TooltipGlyph tip={PAGE_TOKEN}/>
             <div className="input-group">
               <input type={this.state.pTokenType} className="form-control" id="page-token" ref="pageToken" value={this.state.pageToken} onChange={this.pageTokenChange}/>
               <span className="input-group-btn">
@@ -101,7 +107,7 @@ const BusinessProfile = React.createClass({
           </div>
 
           <div className="form-group">
-            <label htmlFor="webhook-token">Facebook Webhook Token:</label>
+            <label htmlFor="webhook-token">Facebook Webhook Token:</label><TooltipGlyph tip={WEBHOOK_TOKEN}/>
             <div className="input-group">
               <input type={this.state.wTokenType} className="form-control" id="webhook-token" ref="webhookToken" value={this.state.webhookToken} onChange={this.webhookTokenChange} /> 
               <span className="input-group-btn">
@@ -111,7 +117,7 @@ const BusinessProfile = React.createClass({
           </div>
 
           <div className="form-group">
-            <label htmlFor="webhook-url">Facebook Webhook Url:</label><br/>
+            <label htmlFor="webhook-url">Facebook Webhook Url:</label><TooltipGlyph tip={WEBHOOK_URL}/>
             <input className="form-control" type="text" readOnly value={this.state.webhookUrl} />
           </div>
 
