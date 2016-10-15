@@ -24,14 +24,17 @@ const BusinessProfilePage = React.createClass({
                 <Tab>Persistent Menu Settings</Tab>
               </TabList>
               <TabPanel>
+                <br/>
                 <BusinessProfileInfo data-id={businessId} />
               </TabPanel>
               <TabPanel>
+                <br/>
                 <BusinessProfileHeadNodeText data-id={businessId} />
                 <BusinessProfileGreetingText data-id={businessId} />
                 <BusinessProfileGetStartedOption data-id={businessId} />
               </TabPanel>
               <TabPanel>
+                <br/>
                 <BusinessProfileFacebookStaticMenuSettings data-id={businessId} />
               </TabPanel>
             </Tabs>
