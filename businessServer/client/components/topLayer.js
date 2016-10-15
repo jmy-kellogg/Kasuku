@@ -33,7 +33,7 @@ const TopLayer = React.createClass({
         var place = "#nodeContainer" + i
         console.log("scrooled", place)
         $('html,body').animate({
-        scrollTop: $(place).offset().top-90},
+        scrollTop: $(place).offset().top-74},
         'slow');
   },
   handleSelected: function(node, e){
