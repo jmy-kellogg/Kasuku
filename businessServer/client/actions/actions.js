@@ -2,11 +2,12 @@ import store from '../store';
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
-export function setSelected(connection, layer){
+export function setSelected(connection, layer, nodes){
     return {
         type: 'CHANGE_SELECTED',
         connection,
-        layer
+        layer,
+        nodes
     }
 }
 

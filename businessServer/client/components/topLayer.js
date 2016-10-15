@@ -31,37 +31,34 @@ const TopLayer = React.createClass({
   },
 
   handleSelected: function(node, e){
-
     this.props.changeSelected(node.id, node.layer);
-
   },
 render: function(){
+
   var nodesArr = [];
   for(var key in this.props.node){
-
     if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
       nodesArr.push(this.props.node[key]);
     }
   }
-
   const nodesDiv = nodesArr.map((node, i) => {
-      var q;
-      if(node.question){
-        q = node.question;
-      }
-      else{
-        q = "I'm a question? Fill me out.";
-      }
-     return (
+    var q;
+    if(node.question){
+      q = node.question;
+    }
+    else{
+      q = "I'm a question? Fill me out.";
+    }
+   return (
       <div key={i} id={`nodeContainer${i}`} >
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
-
     )
   })
+  console.log(nodesDiv);
   return (
    <div className='toplayer-container'>
-    <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div>
+    {nodesDiv.length > 0 ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div> : null}
       {nodesDiv}
    </div>
 )

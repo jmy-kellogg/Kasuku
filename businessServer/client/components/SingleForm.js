@@ -26,7 +26,7 @@ const SingleForm = React.createClass({
 		e.preventDefault();
 		console.log(answer);
 		this.state.currentAnswer= answer.id;
-    this.props.setSelected(answer, this.props.layer);
+    this.props.setSelected(answer, this.props.layer, this.props.node);
     this.setState({connectionToUpdate: null})
 	},
 	removeNode: function(e){
@@ -162,18 +162,18 @@ const SingleForm = React.createClass({
 
   changeQuestion (e) {
     this.setState({questionValue: e.target.value});
-  }, 
+  },
 
   updateQuestion (e) {
     axios.put(`/api/nodes/${this.props.id}`, { question: this.state.questionValue})
-    .then( (res) => { 
-      console.log(res.data); 
+    .then( (res) => {
+      console.log(res.data);
       this.setState({currentQuestion: res.data.question})
       console.log(this.forceUpdate);
       this.forceUpdate();
-    } 
+    }
     )
-  }, 
+  },
 
 	render: function(){
 
@@ -224,7 +224,7 @@ const SingleForm = React.createClass({
 
 	    		<div className="formQuest">
 	    			<h4><b>Question: </b></h4>
-            <ContentEditable 
+            <ContentEditable
               html={this.props.question} // innerHTML of the editable div
               disabled={false}       // use true to disable edition
               onChange={this.changeQuestion}

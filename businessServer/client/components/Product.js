@@ -20,11 +20,14 @@ const Product = React.createClass({
 
   addProduct: function(e){
     var answer = this.refs.productname.value;
-    var price = +this.refs.price.value;
-    var description = this.refs.description.value;
+    // var price = +this.refs.price.value;
+    // var description = this.refs.description.value;
+    var price = null;
+    var description = null;
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
+    console.log(businessId);
     axios.post('/api/connections/', {
       answer: answer,
       fromId: null,
@@ -45,6 +48,9 @@ const Product = React.createClass({
           // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
           this.props.addProductAction(conn.id, answer, null, businessId, price, description, conn.id);
         })
+    })
+    .catch(err => {
+      if(err) throw err;
     })
 
     e.preventDefault();
