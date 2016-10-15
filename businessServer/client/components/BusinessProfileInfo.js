@@ -78,7 +78,6 @@ const BusinessProfile = React.createClass({
 
       <div>
       
-      <h1>Business Info</h1>
         <form>
          
           <div className="form-group" onSubmit={this.handleSubmit}>

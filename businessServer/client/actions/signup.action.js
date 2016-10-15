@@ -1,5 +1,4 @@
 // import store from '../store'
-import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 import { browserHistory } from 'react-router'
 
