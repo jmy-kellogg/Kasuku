@@ -88,10 +88,10 @@ const SingleForm = React.createClass({
     // // this.props.topLevelNodes[this.props.prodSelected];
     // // the index of the array
     // // this.props.data.topLevelNodeIndex
-    console.log(this.props.prodSelected);
-    console.log(this.props.topLevelNodes);
-    console.log(this.props.data.topLevelNodeIndex)
-    console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
+    // console.log(this.props.prodSelected);
+    // console.log(this.props.topLevelNodes);
+    // console.log(this.props.data.topLevelNodeIndex)
+    // console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
     var nextTreePointer;
     // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
     //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
@@ -99,11 +99,13 @@ const SingleForm = React.createClass({
     // else{
     //   nextTreePointer = null;
     // }
-    if(this.props.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
+    console.log(this.props.data.topLevelNodeIndex);
+    console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+    if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
       nextTreePointer = null;
     }
     else{
-      nextTreePointer = nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
+      nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
     }
     console.log(nextTreePointer);
 
@@ -113,7 +115,7 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-      toId: nextTreePointer.id,
+      toId: nextTreePointer,
       businessId: this.props.params.businessId
 			// price,
 			// description
