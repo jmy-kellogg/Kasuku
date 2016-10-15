@@ -46,7 +46,6 @@ const BusinessProfileGreeting = React.createClass({
               </span>
             </div>
           </div>
-         {/*<button type="button" onClick={this.handleDelete} className="btn btn-danger">Delete Greeting</button>*/}
         </form>
       </div>
     )
