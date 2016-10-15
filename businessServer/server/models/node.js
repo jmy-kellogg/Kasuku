@@ -7,13 +7,19 @@ var Node = db.define('node', {
         allowNull: false
     },
     productId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     topLevel: {
         type: Sequelize.BOOLEAN,
     },
     layer: {
         type: Sequelize.INTEGER
+    },
+    topLevelNodeIndex: {
+        type: Sequelize.INTEGER
+    },
+    leafNode: {
+        type: Sequelize.BOOLEAN
     }
 });
 

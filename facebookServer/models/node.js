@@ -14,6 +14,12 @@ var Node = db.define('node', {
     },
     layer: {
         type: Sequelize.INTEGER
+    },
+    topLevelNodeIndex: {
+        type: Sequelize.INTEGER
+    },
+    leafNode: {
+        type: Sequelize.BOOLEAN
     }
 });
 
