@@ -9,7 +9,7 @@ function prodSelected(state=[], action){
         return state;
       }
       break;
-    case 'SET_SELECTED':
+    case 'SET_SELECTED_PRODUCT':
         return action.productId;
         break;
     default:

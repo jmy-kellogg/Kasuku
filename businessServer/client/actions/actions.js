@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
 export function setSelected(connection, layer, nodes){
+    console.log(nodes);
     return {
         type: 'CHANGE_SELECTED',
         connection,
@@ -31,7 +32,7 @@ export function loadNodeConnections(nodes, connections){
 
 export function setSelectedProduct(productId){
     return {
-        type: 'SET_SELECTED',
+        type: 'SET_SELECTED_PRODUCT',
         productId
     }
 }
