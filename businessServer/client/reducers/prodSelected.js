@@ -1,9 +1,15 @@
 function prodSelected(state=[], action){
   switch(action.type){
     case 'LOAD_CONNECTIONS':
-      return action.connections[0];
+      if(action.connections.length > 0)
+      {
+        return action.connections[0];
+      }
+      else{
+        return state;
+      }
       break;
-    case 'SET_SELECTED':
+    case 'SET_SELECTED_PRODUCT':
         return action.productId;
         break;
     default:

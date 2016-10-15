@@ -22,103 +22,120 @@ let nodes = [
         question: 'Does coffee caf or decaf sound better?',
         productId: 1,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 0
     },
     {
         question: 'Would you like any coffee cream with that?',
         productId: 1,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 0
     },
     {
         question: 'coffee Milk, cream, or powder?',
         productId: 1,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 0
     },
     {
         question: 'coffee 1, 2, or 3?',
         productId: 1,
         topLevel: false,
-        layer: 3
+        layer: 3,
+        topLevelNodeIndex: 0
     },
     {
         question: 'What about coffee sugar. Should I throw some of that goodness in there?',
         productId: 1,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 1
     },
     {
         question: 'Splenda, cane, or coffee agave? ',
         productId: 1,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 1
     },
     {
         question: '1, 2, or 3 coffee scoops?',
         productId: 1,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 1
     },
     {
         question: 'What size coffee works best? Small, medium, or large?',
         productId: 1,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 2
     },
     {
         question: 'Perfect! Your coffee order has been placed.',
         productId: 1,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 2
     },
     {
         question: 'Would you like green or black?',
         productId: 2,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 0
     },
     {
         question: 'Would any milk added?',
         productId: 2,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 1
     },
     {
         question: 'whole, skim, or 2%?',
         productId: 2,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 1
     },
     {
         question: 'What about sugar. Should I throw some of that goodness in there?',
         productId: 2,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 2
     },
     {
         question: 'splenda, cane, or agave? ',
         productId: 2,
         topLevel: false,
-        layer: 2
+        layer: 2,
+        topLevelNodeIndex: 2
     },
     {
         question: '1, 2, or 3 scoops?',
         productId: 2,
         topLevel: false,
-        layer: 3
+        layer: 3,
+        topLevelNodeIndex: 2
     },
     {
         question: 'Would you like a slice of Lemon?',
         productId: 2,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 3
     },
     {
         question: 'Great, size works best? small, medium, or large?',
         productId: 2,
         topLevel: true,
-        layer: 1
+        layer: 1,
+        topLevelNodeIndex: 3
     },
 
 

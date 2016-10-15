@@ -25,7 +25,8 @@ const defaultState = {
   nodeIds: [],
   connIds: [],
   prodSelected: "undefined",
-  headNode: 0
+  headNode: 0,
+  topLevelNodes: {}
 
 };
 
