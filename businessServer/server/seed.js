@@ -49,7 +49,7 @@ let nodes = [
         topLevel: false,
         layer: 3,
         topLevelNodeIndex: 0,
-        leafNode: false
+        leafNode: true
     },
     {
         question: 'What about coffee sugar. Should I throw some of that goodness in there?',
@@ -73,7 +73,7 @@ let nodes = [
         topLevel: false,
         layer: 2,
         topLevelNodeIndex: 1,
-        leafNode: false
+        leafNode: true
     },
     {
         question: 'What size coffee works best? Small, medium, or large?',
@@ -89,7 +89,7 @@ let nodes = [
         topLevel: false,
         layer: 2,
         topLevelNodeIndex: 2,
-        leafNode: false
+        leafNode: true
     },
     {
         question: 'Would you like green or black?',
@@ -113,7 +113,7 @@ let nodes = [
         topLevel: false,
         layer: 2,
         topLevelNodeIndex: 1,
-        leafNode: false
+        leafNode: true
     },
     {
         question: 'What about sugar. Should I throw some of that goodness in there?',
@@ -137,7 +137,7 @@ let nodes = [
         topLevel: false,
         layer: 3,
         topLevelNodeIndex: 2,
-        leafNode: false
+        leafNode: true
     },
     {
         question: 'Would you like a slice of Lemon?',
@@ -153,11 +153,8 @@ let nodes = [
         topLevel: true,
         layer: 1,
         topLevelNodeIndex: 3,
-        leafNode: false
-    },
-
-
-
+        leafNode: true
+    }
 
 ]
 let connections = [
