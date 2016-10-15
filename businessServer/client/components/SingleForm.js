@@ -89,8 +89,6 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-			// price,
-			// description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
@@ -167,10 +165,8 @@ const SingleForm = React.createClass({
   updateQuestion (e) {
     axios.put(`/api/nodes/${this.props.id}`, { question: this.state.questionValue})
     .then( (res) => { 
-      console.log(res.data); 
       this.setState({currentQuestion: res.data.question})
-      console.log(this.forceUpdate);
-      this.forceUpdate();
+      this.updateQuestion(res.data.question, this.props.id);
     } 
     )
   }, 
@@ -264,5 +260,3 @@ const SingleForm = React.createClass({
 });
 
 export default SingleForm
-            // <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-          			// <textArea className="" onChange={this.onTextChange} value={this.state.questionValue} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
