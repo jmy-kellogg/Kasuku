@@ -4,6 +4,9 @@ function topLevelNodes(state=[], action){
     case 'ADD_NODE':
       var newState = {...state};
       if(action.topLevel){
+        if(!newState[action.productId]){
+          newState[action.productId] = [];
+        }
         newState[action.productId].push(action.newNodeId);
       }
       return newState;
