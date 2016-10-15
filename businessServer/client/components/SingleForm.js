@@ -138,7 +138,8 @@ const SingleForm = React.createClass({
 
 		var layer = this.props.layer+1;
     // add new node to the next level
-    // if(!this.props.connection[answerId].toId){
+    // commented out if statement is to prevent adding a new node if the connection already points to a node.  prevent duplicates.  but the new design has new nodes pointing to the next top level node by default.
+    var createNewNode = function(){
   		axios.post('/api/nodes/', {
   			question: "default question",
   			productId: this.props.prodSelected,
@@ -161,8 +162,16 @@ const SingleForm = React.createClass({
       .catch(err => {
         if(err) throw err;
       })
-    // }
 
+    }
+    if(!this.props.connection[answerId].toId){
+      createNewNode.call(this);
+    }
+    else{
+      if(this.props.node[this.props.connection[answerId].toId].topLevel){
+        createNewNode.call(this);
+      }
+    }
 
 	},
 	handleChange: function(nodeId, e){

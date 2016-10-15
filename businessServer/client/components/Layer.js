@@ -67,7 +67,7 @@ const Layer = React.createClass({
     for(var key in this.props.node){
       // if(connectionsArr.includes(this.props.node[key].id) && +this.props.node[key].productId === this.props.prodSelected){
       if(this.props.selected[this.props.layer-2]){
-        if(this.props.node[key].id === this.props.selected[this.props.layer-2].toId){
+        if(this.props.node[key].id === this.props.selected[this.props.layer-2].toId && !this.props.node[key].topLevel){
           nodesArr.push(this.props.node[key]);
         }
       }
