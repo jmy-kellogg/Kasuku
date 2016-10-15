@@ -6,7 +6,6 @@ import axios from 'axios';
 const TopLayer = React.createClass({
     addTopLayerNode: function(e){
     var currentConn;
-
     e.preventDefault();
     axios.post('/api/nodes', {
       question: "default question",
@@ -29,20 +28,27 @@ const TopLayer = React.createClass({
       if(e) throw e;
     })
   },
-
+  scrollTo: function(i, e){
+        e.preventDefault();
+        var place = "#nodeContainer" + i
+        console.log("scrooled", place)
+        $('html,body').animate({
+        scrollTop: $(place).offset().top-90},
+        'slow');
+  },
   handleSelected: function(node, e){
 
     this.props.changeSelected(node.id, node.layer);
 
   },
-render: function(){
-  var nodesArr = [];
-  for(var key in this.props.node){
+  render: function(){
+    var nodesArr = [];
+    for(var key in this.props.node){
 
-    if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
-      nodesArr.push(this.props.node[key]);
+      if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
+        nodesArr.push(this.props.node[key]);
+      }
     }
-  }
 
   const nodesDiv = nodesArr.map((node, i) => {
       var q;
@@ -53,7 +59,7 @@ render: function(){
         q = "I'm a question? Fill me out.";
       }
      return (
-      <div key={i} id={`nodeContainer${i}`} >
+      <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
 
@@ -61,8 +67,9 @@ render: function(){
   })
   return (
    <div className='toplayer-container'>
-    <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div>
-      {nodesDiv}
+    {nodesDiv}
+    <div className='addtoplayernode' onClick={this.addTopLayerNode}><span className="glyphicon glyphicon-plus"></span></div>
+
    </div>
 )
    }

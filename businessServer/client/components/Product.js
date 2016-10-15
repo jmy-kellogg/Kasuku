@@ -1,20 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
-import InlineEdit from './InlineEdit'
+import InlineEdit from './InlineEdit';
+import classNames from 'classnames';
 
 const Product = React.createClass({
 
 
   getInitialState: function(){
     return {
+      ...this.state,
       showLayers: false,
-      showGreetingNode: false
+      showGreetingNode: false,
+      currentProduct: null
     }
   },
   selectProduct: function(product, e){
-    this.setState({showLayers: true});
+    this.state.currentProduct = product.id
     this.props.setSelectedProduct(product.id);
+    this.setState({showLayers: true});
+    e.preventDefault();
   },
 
 
@@ -54,23 +59,26 @@ const Product = React.createClass({
 
 
     const productDiv = this.props.product.map((product, i) => {
+      console.log(product.id)
+      let divClassName = classNames({
+        "product-box": true,
+        "hightlight": this.state.currentProduct === product.id
+      });
       return (
-
-        <div key={i} onClick={this.selectProduct.bind(this, product)}>
-           {product.name}
+        <div className={divClassName} key={i} onClick={this.selectProduct.bind(this, product)}>
+           <h3>{product.name}</h3>
         </div>
 
 
       )
     })
     return (
-
-      <div className="ProductPage metal">
+      <div className="ProductPage">
         <div>
          <div>
           <div>
             <div>
-              <h3>Product List:</h3>
+              <h2>Product List</h2>
             </div>
               {productDiv}
             </div>
@@ -78,12 +86,12 @@ const Product = React.createClass({
         </div>
 
          <div className="productinput">
-          <form className="addProduct metal" onSubmit={this.addProduct}>
+          <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname"></label>
             <div className="productName">
-            <input ref="productname" name="productname"/>
             <input type="submit" hidden />
-            <button className="btnAdd"onClick={this.addProduct}>Add Product</button>
+            <button className="btnAdd"onClick={this.addProduct}>Add</button>
+            <input ref="productname" name="productname"/>
             </div>
             {/*<label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>

@@ -24,7 +24,7 @@ const SingleForm = React.createClass({
   },
 	selectAnswer: function(answer, e){
 		e.preventDefault();
-		console.log(answer);
+		// console.log(answer);
 		this.state.currentAnswer= answer.id;
     this.props.setSelected(answer, this.props.layer);
     this.setState({connectionToUpdate: null})
@@ -218,7 +218,7 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="panel-primary metal nodeBox fade-in">
+	    	<div className="fade-in nodeBox">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
@@ -233,7 +233,7 @@ const SingleForm = React.createClass({
             {/*<p contentEditable={true}>{this.props.question}</p>*/}
 
           </div>
-          <div className="panel-body">
+          <div className="formAns">
             <div ref="answerSelect">
               <h4><b>Answers:</b></h4>
               {answersDiv}

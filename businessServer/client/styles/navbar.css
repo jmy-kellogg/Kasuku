@@ -1,0 +1,31 @@
+#navbar-primary .navbar-nav {
+//  background: #ededed;
+  background-color: rgb(241,243,232);
+  display: box;
+  width: 100%;
+  padding-left: 25%;
+  margin-left: -15px;
+  text-align: center;
+  position: fixed;
+  z-index: 1;
+  float: left;
+  clear: both;
+  > li {
+    display: inline-block;
+    float: none;
+    > a {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}
+
+#NavBarLogo{
+  //  background: #ededed;
+  font-size: 3em;
+  font-family: Helvetica;
+  font-weight: bold;
+  height: 70px;
+  padding-top: 20px;
+  padding-bottom: 0; 
+}

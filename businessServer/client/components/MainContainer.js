@@ -84,6 +84,7 @@ const MainContainer = React.createClass({
   },
 
   render: function(){
+
     console.log(this.props.prodSelected);
     var layersHTML = [];
 
@@ -104,8 +105,9 @@ const MainContainer = React.createClass({
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
-        {layersDiv}
-
+        <div className="extendConvo">
+          {layersDiv}
+        </div>
       </div>
 
     )
