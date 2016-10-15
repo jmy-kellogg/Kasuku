@@ -145,3 +145,12 @@ export function removeConnectionsAction(connsForRemoval){
         connections: connsForRemoval
     }
 }
+
+export function updateQuestion(question, id) {
+  console.log('question, id', question, id)
+  return {
+    type: 'UPDATE_QUESTION',
+    question,
+    id
+  }
+} 

@@ -63,7 +63,7 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
             <input type="text" className="form-control" id="first-menu-text" ref="first-menu-text" value={settings.menuText} onChange={this.menuTextOnChange.bind(this, index)} />
           </div>
 
-          <div className="form-group">
+          <div className="form-group hidden">
             <label htmlFor="first-weburl">Web Link</label><TooltipGlyph tip="SOME STUFF" />
             <input type="text" className="form-control" id="first-weburl" ref="first-weburl" value={settings.webUrl} onChange={this.webUrlOnChange.bind(this, index)} />
           </div>

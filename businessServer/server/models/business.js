@@ -28,6 +28,10 @@ var Business = db.define('business', {
         allowNull: false,
         unique: true
     },
+    getStartedButton: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    }
 },
 {
   getterMethods: {
