@@ -32,7 +32,7 @@ let nodes = [
         productId: 1,
         topLevel: true,
         layer: 1,
-        topLevelNodeIndex: 0,
+        topLevelNodeIndex: 1,
         leafNode: false
     },
     {
@@ -40,7 +40,7 @@ let nodes = [
         productId: 1,
         topLevel: false,
         layer: 2,
-        topLevelNodeIndex: 0,
+        topLevelNodeIndex: 1,
         leafNode: false
     },
     {
@@ -48,7 +48,7 @@ let nodes = [
         productId: 1,
         topLevel: false,
         layer: 3,
-        topLevelNodeIndex: 0,
+        topLevelNodeIndex: 1,
         leafNode: true
     },
     {
@@ -56,7 +56,7 @@ let nodes = [
         productId: 1,
         topLevel: true,
         layer: 1,
-        topLevelNodeIndex: 1,
+        topLevelNodeIndex: 2,
         leafNode: false
     },
     {
@@ -64,7 +64,7 @@ let nodes = [
         productId: 1,
         topLevel: false,
         layer: 2,
-        topLevelNodeIndex: 1,
+        topLevelNodeIndex: 2,
         leafNode: false
     },
     {
@@ -72,7 +72,7 @@ let nodes = [
         productId: 1,
         topLevel: false,
         layer: 2,
-        topLevelNodeIndex: 1,
+        topLevelNodeIndex: 2,
         leafNode: true
     },
     {
@@ -80,7 +80,7 @@ let nodes = [
         productId: 1,
         topLevel: true,
         layer: 1,
-        topLevelNodeIndex: 2,
+        topLevelNodeIndex: 3,
         leafNode: false
     },
     {
@@ -88,7 +88,7 @@ let nodes = [
         productId: 1,
         topLevel: false,
         layer: 2,
-        topLevelNodeIndex: 2,
+        topLevelNodeIndex: 3,
         leafNode: true
     },
     {

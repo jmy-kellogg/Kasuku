@@ -4,20 +4,32 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 
 const TopLayer = React.createClass({
-    addTopLayerNode: function(e){
+  addTopLayerNode: function(e){
+      // console.log(this.props.topLevelNodes[this.props.prodSelected])
+      // this.props.topLevelNodes[this.props.prodSelected] this is an array of the top level nodes for the selected product
     var currentConn;
+    console.log(this.props.prodSelected);
+    console.log(this.props.topLevelNodes);
+    var newTopLevelIndex = 0;
+    if(this.props.topLevelNodes[this.props.prodSelected]){
+      newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
+    }
+    // var newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
 
     e.preventDefault();
     axios.post('/api/nodes', {
       question: "default question",
       productId: this.props.prodSelected,
       topLevel: true,
-      layer: 1
+      layer: 1,
+      topLevelNodeIndex: newTopLevelIndex,
+      leafNode: true
     })
     .then(node => node.data)
     .then(node => {
-    // console.log(this.props);
-      this.props.addNewNode(node.productId, node.id, 1, true, node.productId);
+      console.log(newTopLevelIndex)
+
+      this.props.addNewNode(node.productId, node.id, 1, true, node.productId, newTopLevelIndex, true);
       return node;
     })
     .then(node => {
@@ -58,7 +70,7 @@ render: function(){
   console.log(nodesDiv);
   return (
    <div className='toplayer-container'>
-    {nodesDiv.length > 0 ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div> : null}
+    {this.props.prodSelected !== undefined ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div> : null}
       {nodesDiv}
    </div>
 )

@@ -69,6 +69,7 @@ router.post('/', function(req, res, next) {
   Connection.create({
       answer: req.body.answer,
       fromId: req.body.fromId,
+      toId: req.body.toId,
       productId: req.body.productId,
       businessId: req.body.businessId,
       price: req.body.price,

@@ -27,7 +27,9 @@ body{
   -moz-animation-duration:0.3s;
   animation-duration:0.3s;
 }
-
+.product-div{
+  cursor: pointer;
+}
 
 .addtoplayernode{
   height: 30px;
