@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { saveGreeting, deleteGreeting } from '../actions/business.actions.js';
 import TooltipGlyph from './TooltipGlyph';
+import Spinner from './Spinner';
 
 const BusinessProfileGreeting = React.createClass({
   getInitialState () {
     return { 
-      greeting: ''
+      greeting: '',
+      saveButtonText: 'Save',
+      isSaving: false
     }
   },
   componentDidMount () {
@@ -27,8 +30,11 @@ const BusinessProfileGreeting = React.createClass({
     e.stopPropagation();
     const id = this.props["data-id"];
     const greeting = this.state.greeting;
-
+    this.setState({saveButtonText: 'Saving...', isSaving: true})
     this.props.dispatch(saveGreeting(id, greeting));
+    setTimeout(()=> {
+      this.setState({saveButtonText: 'Save', isSaving: false })
+    }, 500)
   },
   handleDelete() {
     const id = this.props["data-id"];
@@ -44,7 +50,7 @@ const BusinessProfileGreeting = React.createClass({
             <div className="input-group">
               <input type="text" className="form-control" id="greeting-text" value={this.state.greeting} onChange={this.greetingChange} />
               <span className="input-group-btn">
-                <button onClick={this.handleSave} className="btn btn-submit">Save</button>
+                <button onClick={this.handleSave} className="btn btn-submit"><span hidden={!this.state.isSaving}><Spinner size="16px" /></span> {this.state.saveButtonText}</button>
               </span>
             </div>
           </div>
