@@ -21,7 +21,6 @@ router.post('/:businessId', function(req, res, next) {
   })
   .then( (business) => {
     let call_to_actions = createFBPersistenMenuOptions(menuSettingsArray)
-    console.log(call_to_actions);
     return fetch('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + business.pageToken, {
       'method': 'POST',
       'headers': {
@@ -35,7 +34,7 @@ router.post('/:businessId', function(req, res, next) {
       })
     })
     .then(function(fbResp) {
-      console.log("FB".repeat(40), fbResp.body)
+      // add code to check fbResponse here and handle errors
     })
   })
   .then(function() {
@@ -53,26 +52,39 @@ router.get('/:businessId', function (req, res, next) {
 
 function createFBPersistenMenuOptions(settingsArray) {
 
+  // let readyToSendArray = settingsArray.map( (val, index) => {
+  //   let itemObj = {};
+  //   itemObj.title = val.menuText
+  //   // console.log(val);
+  //   switch (val.type) {
+  //     case 'webUrl': {
+  //       itemObj.type = 'web_url';
+  //       itemObj.webUrl = val.webUrl;
+  //       break;
+  //     }
+  //     case 'newOrder': {
+  //       itemObj.type = "postback";
+  //       itemObj.payload = "START_AT_HEAD_NODE"
+  //     }
+  //     case 'checkout': {
+  //       itemObj.type = "postback"
+  //       itemObj.payload = "CHECKOUT_ORDER"
+  //     }
+  //   }
+  //   return itemObj
+  // })
+
+  // return readyToSendArray;
+
   let readyToSendArray = settingsArray.map( (val, index) => {
     let itemObj = {};
-    itemObj.title = val.menuText
-    // console.log(val);
-    switch (val.type) {
-      case 'webUrl': {
-        itemObj.type = 'web_url';
-        itemObj.webUrl = val.webUrl;
-        break;
-      }
-      case 'newOrder': {
-        itemObj.type = "postback";
-        itemObj.payload = "START_AT_HEAD_NODE"
-        break;
-      }
-      case 'checkout': {
-        itemObj.type = "postback"
-        itemObj.payload = "CHECKOUT_ORDER"
-        break;
-      }
+
+    itemObj.type = val.type === 'webUrl' ? "web_url" : "postback";
+    itemObj.title = val.menuText;
+    if (itemObj.type === 'postback') { 
+      itemObj.payload = "START_AT_HEAD_NODE" 
+    } else if (itemObj.type === 'web_url') {
+      itemObj.url = val.webUrl
     }
     return itemObj
   })
