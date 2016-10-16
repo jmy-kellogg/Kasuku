@@ -79,29 +79,18 @@ const SingleForm = React.createClass({
 	addNewAnswer: function(e){
 
 		e.preventDefault();
-		var answer = "";
-		// var price = +this.refs.price.value;
-		// var description = this.refs.description.value;
+		var answer = this.refs.answer.value;
+		var price = null;
+		var description = null;
 
-// <<<<<<< HEAD
-		//this.refs.answer.value = "";
-// =======
-    // find the
+
     // // the array of top level nodes
     // // this.props.topLevelNodes[this.props.prodSelected];
     // // the index of the array
     // // this.props.data.topLevelNodeIndex
-    // console.log(this.props.prodSelected);
-    // console.log(this.props.topLevelNodes);
-    // console.log(this.props.data.topLevelNodeIndex)
-    // console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
+
     var nextTreePointer;
-    // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
-    //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
-    // }
-    // else{
-    //   nextTreePointer = null;
-    // }
+
     console.log(this.props.data.topLevelNodeIndex);
     console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
     if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
@@ -113,16 +102,16 @@ const SingleForm = React.createClass({
     console.log(nextTreePointer);
 
 		this.refs.answer.value = "";
-// >>>>>>> master
+
 		var fromId = this.props.id;
 		axios.post('/api/connections', {
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
       toId: nextTreePointer,
-      businessId: this.props.params.businessId
-			// price,
-			// description
+      businessId: this.props.params.businessId,
+			price,
+			description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
