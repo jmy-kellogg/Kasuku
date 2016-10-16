@@ -21,6 +21,7 @@ router.post('/:businessId', function(req, res, next) {
   })
   .then( (business) => {
     let call_to_actions = createFBPersistenMenuOptions(menuSettingsArray)
+    console.log(call_to_actions);
     return fetch('https://graph.facebook.com/v2.6/me/thread_settings?access_token=' + business.pageToken, {
       'method': 'POST',
       'headers': {
@@ -34,7 +35,7 @@ router.post('/:businessId', function(req, res, next) {
       })
     })
     .then(function(fbResp) {
-      // add code to check fbResponse here and handle errors
+      console.log("FB".repeat(40), fbResp.body)
     })
   })
   .then(function() {
@@ -65,10 +66,12 @@ function createFBPersistenMenuOptions(settingsArray) {
       case 'newOrder': {
         itemObj.type = "postback";
         itemObj.payload = "START_AT_HEAD_NODE"
+        break;
       }
       case 'checkout': {
         itemObj.type = "postback"
         itemObj.payload = "CHECKOUT_ORDER"
+        break;
       }
     }
     return itemObj
