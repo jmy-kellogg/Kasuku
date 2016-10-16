@@ -2,10 +2,15 @@ import React from 'react';
 import SingleForm from './SingleForm';
 import { connect } from 'react-redux'
 import { signup } from '../actions/signup.action.js';
+import axios from 'axios';
+
 
 // console.log(signup);
 
 const Signup = React.createClass({
+  contextTypes: {
+        router: React.PropTypes.object
+  },
   handleSubmit (e) {
     e.preventDefault();
     const username = this.refs.username.value;
@@ -14,11 +19,15 @@ const Signup = React.createClass({
     const password_confirmation = this.refs.password_confirmation.value;
 
     
- //   this.props.dispatch(signup(username, email, password, password_confirmation)); 
-
-//     // console.log(username, email, password, password_confirmation);
-
-//     store.dispatch(signup(username, email, password, password_confirmation));
+  axios.post('/api/business', { username, email, password })
+  .then( (res) => {
+    console.log("In here", res.data);
+    console.log("router", this.props.history, this.props)
+    this.props.history.push(`/businesses/${res.data.id}`);
+  })
+  .catch ( (err) => {
+    console.log(err)
+  })
 
 
   },

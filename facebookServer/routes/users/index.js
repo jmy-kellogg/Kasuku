@@ -21,7 +21,7 @@ router.use('/:name', function(req, res, next) {
   // console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
   var requester = { userName: req.params.name};
   
-  Business.findOne({where: {businessName: req.params.name}})
+  Business.findOne({where: {username: req.params.name}})
   .then(function(business) {
     if (!business) { 
       // console.log("user not found in database");
