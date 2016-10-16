@@ -11,17 +11,13 @@ const Product = React.createClass({
 
   getInitialState: function(){
     return {
-      ...this.state,
       showLayers: false,
-      showGreetingNode: false,
-      currentProduct: null
+      showGreetingNode: false
     }
   },
   selectProduct: function(product, e){
-    this.state.currentProduct = product.id
-    this.props.setSelectedProduct(product.id);
     this.setState({showLayers: true});
-    e.preventDefault();
+    this.props.setSelectedProduct(product.id);
   },
 
 
@@ -29,11 +25,8 @@ const Product = React.createClass({
     var answer = this.refs.productname.value;
     // var price = +this.refs.price.value;
     // var description = this.refs.description.value;
-
-//     var price = null;
-//     var description = null;
-
-
+    var price = null;
+    var description = null;
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
@@ -43,8 +36,8 @@ const Product = React.createClass({
       // if fromId is null, must be product
       productId: null,
       businessId,
-      // price,
-      // description
+      price,
+      description
     })
     .then(conn => conn.data)
     .then(conn => {
@@ -54,7 +47,7 @@ const Product = React.createClass({
         .then(res => res.data)
         .then(updatedConn => {
           // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
-          this.props.addProductAction(conn.id, answer, null, businessId, null, null, conn.id);
+          this.props.addProductAction(conn.id, answer, null, businessId, price, description, conn.id);
         })
     })
     .catch(err => {
@@ -65,8 +58,6 @@ const Product = React.createClass({
 
   },
   render: function(){
-
-
     const productDiv = this.props.product.map((product, i) => {
       let divClassName = classNames({
         "product-box": true,
@@ -82,12 +73,13 @@ const Product = React.createClass({
       )
     })
     return (
+
       <div className="ProductPage">
         <div>
          <div>
           <div>
             <div>
-              <h2>Product List</h2>
+              <h2>Product List:</h2>
             </div>
               {productDiv}
             </div>
@@ -98,9 +90,9 @@ const Product = React.createClass({
           <form className="addProduct" onSubmit={this.addProduct}>
             <label htmlFor="productname"></label>
             <div className="productName">
-            <input type="submit" hidden />
-            <button className="btnAdd"onClick={this.addProduct}>Add</button>
             <input ref="productname" name="productname"/>
+            <input type="submit" hidden />
+            <button className="btnAdd"onClick={this.addProduct}><span className="glyphicon glyphicon-plus"></span></button>
             </div>
             {/*<label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
