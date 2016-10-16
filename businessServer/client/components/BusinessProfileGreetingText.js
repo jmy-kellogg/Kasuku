@@ -22,7 +22,9 @@ const BusinessProfileGreeting = React.createClass({
   greetingChange(e) {
     this.setState({ greeting: e.target.value })
   },
-  handleSave() {
+  handleSave(e) {
+    e.preventDefault();
+    e.stopPropagation();
     const id = this.props["data-id"];
     const greeting = this.state.greeting;
 
