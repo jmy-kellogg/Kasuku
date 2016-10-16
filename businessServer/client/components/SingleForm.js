@@ -55,8 +55,8 @@ const SingleForm = React.createClass({
       }
 		}
 		getAllForRemoval(this.props.id);
-    console.log(connsForRemoval);
-    console.log(nodesForRemoval);
+    //console.log(connsForRemoval);
+    //console.log(nodesForRemoval);
 
 		//delete all nodes and associated connections branching from this node
 		axios.delete(`/api/nodes/${this.props.id}`)
@@ -77,9 +77,11 @@ const SingleForm = React.createClass({
 
 	},
 	addNewAnswer: function(e){
-//Not sure how to resolve conflicts in this function
+
 		e.preventDefault();
+
 		//var answer = "";
+    var answer = this.refs.answer.value;
 		// var price = +this.refs.price.value;
 		// var description = this.refs.description.value;
 
@@ -110,10 +112,9 @@ const SingleForm = React.createClass({
     else{
       nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
     }
-    console.log(nextTreePointer);
+    //console.log(nextTreePointer);
 
 		this.refs.answer.value = "";
-// >>>>>>> master
 		var fromId = this.props.id;
 		axios.post('/api/connections', {
 			answer,
@@ -281,7 +282,7 @@ const SingleForm = React.createClass({
               <form className="form" onSubmit={this.addNewAnswer}>
                 <div className="form-group">
                   <div className="input-group">
-                    {/*<input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>*/}
+                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>
                     <span className="input-group-btn">
                       <button className="btn btn-success btnAdd" onClick={this.addNewAnswer}>add answer</button>
                     </span>
