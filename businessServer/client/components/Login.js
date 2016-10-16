@@ -6,15 +6,18 @@ const Login = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="LoginPage">
         <form>
           <div>
             <label for="username">User Name</label>
-            <input name="username" type="text"/>
+            <input className="form-control" name="username" type="text"/>
           </div>
           <div>
             <label for="password">Password</label>
-            <input name="password" type="password"/>
+            <input className="form-control" name="password" type="password"/>
+          </div>
+          <div>
+            <button className="btn btn-submit" type="submit">Login</button>
           </div>
         </form>
       </div>

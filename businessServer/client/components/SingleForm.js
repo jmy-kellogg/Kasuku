@@ -26,7 +26,7 @@ const SingleForm = React.createClass({
 		e.preventDefault();
 		// console.log(answer);
 		this.state.currentAnswer= answer.id;
-    this.props.setSelected(answer, this.props.layer);
+    this.props.setSelected(answer, this.props.layer, this.props.node);
     this.setState({connectionToUpdate: null})
 	},
 	removeNode: function(e){
@@ -89,8 +89,6 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-			// price,
-			// description
 		})
 		.then(conn => conn.data)
 		.then(conn => {
@@ -162,18 +160,15 @@ const SingleForm = React.createClass({
 
   changeQuestion (e) {
     this.setState({questionValue: e.target.value});
-  }, 
+  },
 
   updateQuestion (e) {
     axios.put(`/api/nodes/${this.props.id}`, { question: this.state.questionValue})
-    .then( (res) => { 
-      console.log(res.data); 
+    .then( (res) => {
       this.setState({currentQuestion: res.data.question})
-      console.log(this.forceUpdate);
       this.forceUpdate();
-    } 
-    )
-  }, 
+    })
+  },
 
 	render: function(){
 
@@ -224,7 +219,7 @@ const SingleForm = React.createClass({
 
 	    		<div className="formQuest">
 	    			<h4><b>Question: </b></h4>
-            <ContentEditable 
+            <ContentEditable
               html={this.props.question} // innerHTML of the editable div
               disabled={false}       // use true to disable edition
               onChange={this.changeQuestion}
@@ -264,5 +259,3 @@ const SingleForm = React.createClass({
 });
 
 export default SingleForm
-            // <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-          			// <textArea className="" onChange={this.onTextChange} value={this.state.questionValue} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>

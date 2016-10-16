@@ -7,6 +7,10 @@ body{
 /*  width: 1000px;*/
 }
 
+.hidden {
+  display: none;
+}
+
 /* make keyframes that tell the start state and the end state of our object */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -27,7 +31,23 @@ body{
   animation-duration:0.3s;
 }
 
-
+.SingleFormPage{
+  margin: 10% 30%;
+}
+.LoginPage{
+  margin: 10% 30%;
+}
+.LoginPage div{
+  margin: 5px;
+}
+.btn-submit{
+  background: rgb(134,211,191);
+  color: rgb(63,62,58);
+}
+.btn-submit:hover{
+  background: rgb(226,110,85);
+  color: white;
+}
 
 /*
   Buttons

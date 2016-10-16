@@ -37,39 +37,37 @@ const TopLayer = React.createClass({
         'slow');
   },
   handleSelected: function(node, e){
-
     this.props.changeSelected(node.id, node.layer);
-
   },
-  render: function(){
-    var nodesArr = [];
-    for(var key in this.props.node){
 
-      if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
-        nodesArr.push(this.props.node[key]);
-      }
+render: function(){
+
+  var nodesArr = [];
+  for(var key in this.props.node){
+    if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
+      nodesArr.push(this.props.node[key]);
     }
-
+  }
   const nodesDiv = nodesArr.map((node, i) => {
-      var q;
-      if(node.question){
-        q = node.question;
-      }
-      else{
-        q = "I'm a question? Fill me out.";
-      }
-     return (
+    var q;
+    if(node.question){
+      q = node.question;
+    }
+    else{
+      q = "I'm a question? Fill me out.";
+    }
+   return (
       <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)}>
+
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
-
     )
   })
+  console.log(nodesDiv);
   return (
    <div className='toplayer-container'>
-    {nodesDiv}
-    <div className='addtoplayernode' onClick={this.addTopLayerNode}><span className="glyphicon glyphicon-plus"></span></div>
-
+      {nodesDiv}
+      {nodesDiv.length > 0 ? <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
    </div>
 )
    }

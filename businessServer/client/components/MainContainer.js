@@ -13,6 +13,7 @@ const MainContainer = React.createClass({
     var _allConnections;
     var _products = [];
     var _productIds = [];
+    var _topLevelNodes = [];
     var sortNumbers = function(a,b){
       return a-b;
     }
@@ -53,7 +54,6 @@ const MainContainer = React.createClass({
             console.log(nodes);
             console.log(_productIds)
             nodes.forEach(node => {
-
               if(_productIds.includes(+node.productId)){
                 _nodesIdArr.push(node.id);
               }
@@ -63,11 +63,27 @@ const MainContainer = React.createClass({
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
             // this.props.setHeadNode(headNodeId);
-            console.log(_nodesIdArr);
+            // console.log(_nodesIdArr);
+
+            _nodesArr.forEach(node => {
+              if(node.topLevel){
+                if(!_topLevelNodes[node.productId]){
+                  _topLevelNodes[node.productId] = [];
+                }
+                  _topLevelNodes[node.productId].push(node);
+              }
+            })
+            console.log(_topLevelNodes);
+            // this.props.loadTopLevelNodes(_topLevelNodes);
 
             this.props.loadNodes(_nodesArr);
             // console.log(_nodesArr);
+
             this.props.loadNodeConnections(_nodesArr, _allConnections);
+            // TODO: INITIALIZE TOP LEVEL NODES
+            // object where product id is the key and the top layer nodes are in an array.
+
+
           })
 
         var getNodeById = function(id, nodes){
@@ -89,6 +105,7 @@ const MainContainer = React.createClass({
     var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
+      console.log(layer);
       return (
         <div className="layerCol" key={i}>
         {/*layer {i+3}*/}
