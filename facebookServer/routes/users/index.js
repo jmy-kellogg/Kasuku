@@ -18,21 +18,21 @@ var BUSINESSID = 1;
 // Use puts the business on the req object as fbRequester;
 
 router.use('/:name', function(req, res, next) {
-  // console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
+  console.log("********** USE ROUTE: /users/:name for name:", req.params.name);
   var requester = { userName: req.params.name};
   
   Business.findOne({where: {username: req.params.name}})
   .then(function(business) {
     if (!business) { 
-      // console.log("user not found in database");
+      console.log("user not found in database ***************************");
       return res.send(403)
     }
-
     requester.webhookToken = business.webhookToken;
     requester.pageToken = business.pageToken;
     requester.businessId = business.id;
     req.fbRequester = requester;
  
+    console.log("----------------------------------------------------user found", requester)
     next();
   })
 });
