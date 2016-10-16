@@ -1,16 +1,14 @@
 .toplayer-container{
-/*  width: 500px;*/
-/*\\  height: 90vh;*/
+  width: 300px;
+  height: 90vh;
   display: block;
   margin-left: 200px;
   float: left;
   clear: both;
  /* margin-top: 10px;*/
 /*  position: relative;*/
-   position: absolute;
-   height: 1000px;
-   width: 300px;
-/*  overflow: scroll;*/
+  position: absolute;
+  overflow: scroll;
 }
 .addtoplayernode{
   height: 200px;
@@ -25,4 +23,12 @@
     background-image: none;
     color: white;
     border-radius: 5px;
+}
+.question.active div.nodeBox {
+  background-color: rgba(226,110,85, 0.5);
+  border-color: rgb(63,62,58);
+  margin-bottom: 0px;
+}
+.question.active div.formQuest{
+  background-color: rgb(226,110,85);
 }

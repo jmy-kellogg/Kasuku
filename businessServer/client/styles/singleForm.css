@@ -33,7 +33,6 @@
 
 
 .formQuest{
-
   padding: 5px 5px 20px 5px;
   background-color: rgb(134,211,191); 
   color:  rgb(63,62,58);
@@ -41,6 +40,7 @@
 }
 .formQuest div{
   background-color: white; 
+  color: black;
 }
 
 .form input{
