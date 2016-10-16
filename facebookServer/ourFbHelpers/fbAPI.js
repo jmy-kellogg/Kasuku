@@ -12,7 +12,8 @@ var History = db.model('history');
 
 var BUSINESSID = 1;
 
-function receivedMessage(event, pageToken) {
+function receivedMessage(event, pageToken, businessId) {
+    console.log("recieved message businessId", businessId)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
@@ -32,18 +33,19 @@ function receivedMessage(event, pageToken) {
     if (messageText) {
         switch (messageText) {
                 case 'thanks':
-                  divertMessage(senderID, pageToken);
+                  divertMessage(senderID, pageToken, businessId);
                   break;
 
             default:
-                sendTextMessage(senderID, messageText, pageToken);
+                sendTextMessage(senderID, messageText, pageToken, businessId);
         }
     } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received", pageToken);
+        sendTextMessage(senderID, "Message with attachment received", pageToken, businessId);
     }
 }
 
-function divertMessage(recipientId, pageToken){
+function divertMessage(recipientId, pageToken, businessId){
+  console.log("divert message businessId", businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -52,10 +54,11 @@ function divertMessage(recipientId, pageToken){
             text: `You're very welcome!`
         }
     };
-    callSendAPI(messageData, pageToken);
+    callSendAPI(messageData, pageToken, businessId);
 }
 
-function sendTextMessage(recipientId, chatterMsg, pageToken) {
+function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
+    console.log("send text message businessId", businessId)
     let currentConvo, chatterId;
     recipientId = '' + recipientId;
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
@@ -123,7 +126,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                         text: node.question
                     }
                 };
-                callSendAPI(messageData, pageToken);
+                callSendAPI(messageData, pageToken, businessId);
             } else {
                 History.findAll({where: {
                                   businessId: BUSINESSID,
@@ -163,14 +166,14 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                             text: 'Perfect you order has been placed! Let me know if you need anything else'
                         }
                     };
-                    callSendAPI(messageData, pageToken);
+                    callSendAPI(messageData, pageToken, businessId);
                 })
             }
         })
 }
 
-function callSendAPI(messageData, pageToken) {
-  console.log("callSendAPI".repeat(100))
+function callSendAPI(messageData, pageToken, businessId) {
+  console.log("callSendAPI businessId", businessId)
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
@@ -192,7 +195,8 @@ function callSendAPI(messageData, pageToken) {
     });
 }
 
-function sendGenericMessage(recipientId, pageToken) {
+function sendGenericMessage(recipientId, pageToken, businessId) {
+    console.log("sendGenericMessage businessId", businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -236,10 +240,11 @@ function sendGenericMessage(recipientId, pageToken) {
         }
     };
 
-    callSendAPI(messageData, pageToken);
+    callSendAPI(messageData, pageToken, businessId);
 }
 
-function receivedPostback(event, pageToken) {
+function receivedPostback(event, pageToken, businessId) {
+    console.log("recieved message businessId, recipientId", businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;

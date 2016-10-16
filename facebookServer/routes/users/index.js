@@ -29,6 +29,7 @@ router.use('/:name', function(req, res, next) {
 
     requester.webhookToken = business.webhookToken;
     requester.pageToken = business.pageToken;
+    requester.businessId = business.id;
     req.fbRequester = requester;
  
     next();
@@ -51,9 +52,10 @@ router.get('/:name/fbwebhook', function(req, res, next) {
 
 
 router.post('/:name/fbwebhook', function(req, res, next) {
-  console.log("Got to post on /users/:name/fbwebhook"); 
+  console.log("Got to post on /users/:name/fbwebhook", req.requester); 
   var data = req.body;
   var pageToken = req.fbRequester.pageToken;
+  var businessId = req.fbRequester.businessId;
   //Make sure this is a page subscription 
   if (data.object === 'page') {
     // Iterate over each entry
@@ -68,11 +70,11 @@ router.post('/:name/fbwebhook', function(req, res, next) {
         if (messagingEvent.optin) {
           // receivedAuthentication(messagingEvent, pageToken);
         } else if (messagingEvent.message) {
-          fbAPI.receivedMessage(messagingEvent, pageToken);
+          fbAPI.receivedMessage(messagingEvent, pageToken, businessId);
         } else if (messagingEvent.delivery) {
           //receivedDeliveryConfirmation(messagingEvent);
         } else if (messagingEvent.postback) {
-          fbAPI.receivedPostback(messagingEvent, pageToken);
+          fbAPI.receivedPostback(messagingEvent, pageToken, businessId);
         } else {
           // console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
