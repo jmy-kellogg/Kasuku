@@ -74,14 +74,14 @@ const Product = React.createClass({
         "hightlight": this.state.currentProduct === product.id
       });
       return (
-<<<<<<< HEAD
-        <div className={divClassName} key={i} onClick={this.selectProduct.bind(this, product)}>
-           <h3>{product.name}</h3>
-=======
+//<<<<<<< HEAD
+        //<div className={divClassName} key={i} onClick={this.selectProduct.bind(this, product)}>
+          // <h3>{product.name}</h3>
+// {/*=======*/}
 
         <div className="product-div" key={i} onClick={this.selectProduct.bind(this, product)}>
            {product.name}
->>>>>>> master
+{/*>>>>>>> master*/}
         </div>
 
 

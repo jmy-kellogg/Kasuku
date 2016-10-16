@@ -56,7 +56,7 @@ const TopLayer = React.createClass({
   handleSelected: function(node, e){
     this.props.changeSelected(node.id, node.layer);
   },
-<<<<<<< HEAD
+// <<<<<<< HEAD
   render: function(){
     var nodesArr = [];
     for(var key in this.props.node){
@@ -76,7 +76,7 @@ const TopLayer = React.createClass({
       }
      return (
       <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)}>
-=======
+{/*=======
 render: function(){
 
   var nodesArr = [];
@@ -95,7 +95,7 @@ render: function(){
     }
    return (
       <div key={i} id={`nodeContainer${i}`} >
->>>>>>> master
+>>>>>>> master*/}
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
     )
@@ -103,14 +103,14 @@ render: function(){
   console.log(nodesDiv);
   return (
    <div className='toplayer-container'>
-<<<<<<< HEAD
+{/*<<<<<<< HEAD
     {nodesDiv}
     <div className='addtoplayernode' onClick={this.addTopLayerNode}><span className="glyphicon glyphicon-plus"></span></div>
 
-=======
+{/*=======*/}
     {this.props.prodSelected !== undefined ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div> : null}
       {nodesDiv}
->>>>>>> master
+{/*>>>>>>> master*/}
    </div>
 )
    }
