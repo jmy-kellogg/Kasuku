@@ -32,3 +32,24 @@
 .question.active div.formQuest{
   background-color: rgb(226,110,85);
 }
+.question.active div.answer.active{
+  background-color: rgb(63,62,58);
+  color: white;
+}
+.question.active  div.answer.active input{
+  background-color:rgba(241,243,232, 0.2);
+  width: 100%;
+  color: white;
+  border: 1px rgb(63,62,58);
+  border-radius: 0px;
+}
+.question div.answer.active{
+  background: transparent;
+  color: black;
+}
+.question .answer.active input{
+  background-color: white;  
+  color: black;
+  border: 1px rgb(63,62,58);
+  border-radius: 0px;
+}
