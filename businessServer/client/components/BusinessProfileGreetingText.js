@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { saveGreeting, deleteGreeting } from '../actions/business.actions.js';
+import TooltipGlyph from './TooltipGlyph';
 
 const BusinessProfileGreeting = React.createClass({
   getInitialState () {
@@ -32,11 +33,12 @@ const BusinessProfileGreeting = React.createClass({
     this.props.dispatch(deleteGreeting(id))
   },
   render (){
+    const INITIAL_GREETING_INFO = 'This will greet users the first time they engage with you on your page'
     return (
       <div className="business-greeting"> 
         <form>
-          <h1>Initial Greeting</h1>
           <div className="form-group" onSubmit={this.handleSubmit}>
+            <label htmlFor="first-question">Initial greeting to first time user:&nbsp;</label><TooltipGlyph tip={INITIAL_GREETING_INFO}/>
             <div className="input-group">
               <input type="text" className="form-control" id="greeting-text" value={this.state.greeting} onChange={this.greetingChange} />
               <span className="input-group-btn">
@@ -44,7 +46,6 @@ const BusinessProfileGreeting = React.createClass({
               </span>
             </div>
           </div>
-         {/*<button type="button" onClick={this.handleDelete} className="btn btn-danger">Delete Greeting</button>*/}
         </form>
       </div>
     )

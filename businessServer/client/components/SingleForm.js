@@ -26,7 +26,7 @@ const SingleForm = React.createClass({
 		e.preventDefault();
 		// console.log(answer);
 		this.state.currentAnswer= answer.id;
-    this.props.setSelected(answer, this.props.layer);
+    this.props.setSelected(answer, this.props.layer, this.props.node);
     this.setState({connectionToUpdate: null})
 	},
 	removeNode: function(e){
@@ -83,12 +83,44 @@ const SingleForm = React.createClass({
 		// var price = +this.refs.price.value;
 		// var description = this.refs.description.value;
 
+// <<<<<<< HEAD
 		//this.refs.answer.value = "";
+// =======
+    // find the
+    // // the array of top level nodes
+    // // this.props.topLevelNodes[this.props.prodSelected];
+    // // the index of the array
+    // // this.props.data.topLevelNodeIndex
+    // console.log(this.props.prodSelected);
+    // console.log(this.props.topLevelNodes);
+    // console.log(this.props.data.topLevelNodeIndex)
+    // console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
+    var nextTreePointer;
+    // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
+    //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
+    // }
+    // else{
+    //   nextTreePointer = null;
+    // }
+    console.log(this.props.data.topLevelNodeIndex);
+    console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+    if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
+      nextTreePointer = null;
+    }
+    else{
+      nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
+    }
+    console.log(nextTreePointer);
+
+		this.refs.answer.value = "";
+// >>>>>>> master
 		var fromId = this.props.id;
 		axios.post('/api/connections', {
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
+      toId: nextTreePointer,
+      businessId: this.props.params.businessId
 			// price,
 			// description
 		})
@@ -96,7 +128,7 @@ const SingleForm = React.createClass({
 		.then(conn => {
 			// set business ID once business ids are set up.  but keep as null for now.
 			var businessId = null;
-			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, businessId);
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, businessId);
 		})
 		.catch(e => {
 			if(e) throw e;
@@ -112,28 +144,40 @@ const SingleForm = React.createClass({
 
 		var layer = this.props.layer+1;
     // add new node to the next level
-    if(!this.props.connection[answerId].toId){
+    // commented out if statement is to prevent adding a new node if the connection already points to a node.  prevent duplicates.  but the new design has new nodes pointing to the next top level node by default.
+    var createNewNode = function(){
   		axios.post('/api/nodes/', {
   			question: "default question",
   			productId: this.props.prodSelected,
   			topLevel: false,
-  			layer: layer
+  			layer,
+        topLevelNodeIndex: this.props.data.topLevelNodeIndex,
+        leafNode: true
   		})
   		.then(node => node.data)
   		.then(node => {
-  			this.props.addNewNode(answerId, node.id, node.layer, false, node.productId);
+  			this.props.addNewNode(answerId, node.id, node.layer, false, node.productId, this.props.data.topLevelNodeIndex, true);
+        this.props.removeLeafNode(this.props.id);
   			return node;
   		})
   		.then(node => {
-  			axios.put(`/api/connections/${currentConn.id}`, {
+  			axios.put(`/api/connections/${answerId}`, {
   				toId: node.id
   			})
   		})
       .catch(err => {
         if(err) throw err;
       })
-    }
 
+    }
+    if(!this.props.connection[answerId].toId){
+      createNewNode.call(this);
+    }
+    else{
+      if(this.props.node[this.props.connection[answerId].toId].topLevel){
+        createNewNode.call(this);
+      }
+    }
 
 	},
 	handleChange: function(nodeId, e){
@@ -162,22 +206,17 @@ const SingleForm = React.createClass({
 
   changeQuestion (e) {
     this.setState({questionValue: e.target.value});
-  }, 
+  },
 
   updateQuestion (e) {
     axios.put(`/api/nodes/${this.props.id}`, { question: this.state.questionValue})
-    .then( (res) => { 
-      console.log(res.data); 
+    .then( (res) => {
       this.setState({currentQuestion: res.data.question})
-      console.log(this.forceUpdate);
       this.forceUpdate();
-    } 
-    )
-  }, 
+    })
+  },
 
 	render: function(){
-
-		// console.log(this.props.connection);
 
 		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
 		const repeatOption = options.map((item, i) => {
@@ -224,7 +263,7 @@ const SingleForm = React.createClass({
 
 	    		<div className="formQuest">
 	    			<h4><b>Question: </b></h4>
-            <ContentEditable 
+            <ContentEditable
               html={this.props.question} // innerHTML of the editable div
               disabled={false}       // use true to disable edition
               onChange={this.changeQuestion}
@@ -264,5 +303,3 @@ const SingleForm = React.createClass({
 });
 
 export default SingleForm
-            // <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-          			// <textArea className="" onChange={this.onTextChange} value={this.state.questionValue} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>

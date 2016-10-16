@@ -12,9 +12,10 @@ import nodeIds from './nodeIds';
 import connIds from './connIds';
 import prodSelected from './prodSelected';
 import headNode from './headNode';
+import updateQuestion from './updateQuestion';
+import topLevelNodes from './topLevelNodes';
 
-
-const rootReducer = combineReducers({connection, headNode, prodSelected, nodeIds, connIds, selected, layers, node, product, business, signup, routing: routerReducer });
+const rootReducer = combineReducers({connection, topLevelNodes, headNode, prodSelected, nodeIds, connIds, selected, layers, node, product, business, signup, updateQuestion, routing: routerReducer });
 
 
 export default rootReducer;

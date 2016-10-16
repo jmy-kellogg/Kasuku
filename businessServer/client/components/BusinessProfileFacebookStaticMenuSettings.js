@@ -7,13 +7,15 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
   getInitialState() {
     return {
       isOn: true,
-      menuSettingsArray: []
+      menuSettingsArray: [],
+      isWeblink: true
     }
   },
   componentDidMount() {
     axios.get('/api/menuSettings/' + this.props["data-id"])
     .then( (res) => res.data )
     .then( (_settings) => {
+      console.log("settings", _settings)
       this.setState({ menuSettingsArray: _settings })
     })
   },
@@ -47,28 +49,39 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
     }
   },
   renderSettings(settings, index) {
+    console.log("TYPE", this.state.menuSettingsArray[index])
+    
+    let weblinkClasses = this.state.menuSettingsArray[index].type === 'webUrl' ? "form-group" : "hidden";
+    const MENUTYPETIP = `You can choose to have the menu item link to a url (weblink) or for a customer to start a new order`;
+    const MENUTEXTTIP = `This is the text that will be displayed on the menu (30 character limit)`;
+    const WEBLINKTIP = `This is the link that you will send users to if they click on this menu item`;
+    
     return (
-      <div key={index}>
+      <div key={index} className="fb-menu-settings-options row">
         <div id="first-menu-item">
-          <div className="form-group">
-            <label htmlFor="sel1">Select list:</label>
+          <div className="form-group" className="col-sm-3">
+            <label htmlFor="sel1">Type:&nbsp;</label> <TooltipGlyph tip={MENUTYPETIP} />
             <select className="form-control" id="sel1" ref="first-menu-type" defaultValue={settings.type} onChange={this.typeOnChange.bind(this, index)}>
               <option value="webUrl">Web Link</option>
               <option value="newOrder">New Order</option>
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="first-menu-text">Menu Text</label><TooltipGlyph tip="CHANGE THIS" />
-            <input type="text" className="form-control" id="first-menu-text" ref="first-menu-text" value={settings.menuText} onChange={this.menuTextOnChange.bind(this, index)} />
-          </div>
+          <div className="col-sm-8">
+            <div className="form-group">
+              <label htmlFor="first-menu-text">Menu Text&nbsp;</label> <TooltipGlyph tip={MENUTEXTTIP} />
+              <input type="text" className="form-control" id="first-menu-text" ref="first-menu-text" value={settings.menuText} onChange={this.menuTextOnChange.bind(this, index)} />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="first-weburl">Web Link</label><TooltipGlyph tip="SOME STUFF" />
-            <input type="text" className="form-control" id="first-weburl" ref="first-weburl" value={settings.webUrl} onChange={this.webUrlOnChange.bind(this, index)} />
+            <div className={weblinkClasses}>
+              <label htmlFor="first-weburl">Web Link&nbsp;</label> <TooltipGlyph tip={WEBLINKTIP} />
+              <input type="text" className="form-control" id="first-weburl" ref="first-weburl" value={settings.webUrl} onChange={this.webUrlOnChange.bind(this, index)} />
+            </div>
+          </div>
+          <div className="col-sm-1">
+            <button className="btn btn-xs btn-danger" onClick={this.deleteMenuItem.bind(null, index)}>x</button>
           </div>
         </div>
-        <button className="btn btn-danger" onClick={this.deleteMenuItem.bind(null, index)}>x</button>
       </div>
     )
   },
@@ -81,15 +94,20 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
   },
   render () {
 
-    const MENUTYPETIP = `You can choose to have the menu item link to a url (weblink) or for a customer to start a new order`;
-    const MENUTEXTTIP = `This is the text that will be displayed on the menu (30 character limit)`;
-    const WEBLINKTIP = `This is the link that you will send users to if they click on this menu item`;
     return (
       <div>
-        <h1>Persistent Menu for Facebook</h1>
         {this.state.menuSettingsArray.map(this.renderSettings)}
-        <button className="btn btn-success" onClick={this.addItem}>Add Menu Item</button>
-        <button className="btn btn-primary" onClick={this.onSubmitSettings}>Save Menu Settings</button>
+        <div className="row">
+          <div className="col-sm-12">
+            <button className="btn btn-block btn-success" onClick={this.addItem}>Add Menu Item</button>
+          </div>
+        </div>
+        <br/>
+        <div className="row">
+          <div className="col-sm-12">
+            <button className="btn btn-primary pull-right" onClick={this.onSubmitSettings}>Save Menu Settings</button>
+          </div>
+        </div>
       </div>
     )
   }
