@@ -4,7 +4,7 @@ body{
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
-
+/*  width: 1000px;*/
 }
 
 .hidden {
@@ -12,14 +12,13 @@ body{
 }
 
 /* make keyframes that tell the start state and the end state of our object */
-
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fade-in {
   opacity:0;  /* make things invisible upon start */
-  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -webkit-animation:fadeIn ease-in 1;   call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time 
   -moz-animation:fadeIn ease-in 1;
   animation:fadeIn ease-in 1;
 
@@ -35,10 +34,6 @@ body{
   cursor: pointer;
 }
 
-.addtoplayernode{
-  height: 30px;
-  width: 100%;
-}
 
 /*
   Buttons
@@ -48,6 +43,10 @@ body{
 }
 .chatbotPage{
   height: 100%;
+  display: flex;
+/*  width: 5000px;*/
+  overflow-x: scroll;
+
 }
 
 #start{
@@ -80,154 +79,18 @@ body{
 }
 
 
-/*NavBar*/
-
-#navbar-primary .navbar-nav {
-//  background: #ededed;
-  width: 100%;
-  text-align: center;
-  > li {
-    display: inline-block;
-    float: none;
-    > a {
-      padding-left: 30px;
-      padding-right: 30px;
-    }
-  }
-}
-#navbar-primary.navbar{
-  margin: 0;
-  margin-bottom: 0;
-}
-#NavBarLogo{
-  //  background: #ededed;
-  font-size: 3em;
-  font-family: Helvetica;
-  font-weight: bold;
-  height: 90px;
-  padding: 30px;
-}
-
-/*Home*/
-.homePage{
-  margin-top: -20px;
-}
-
-.homeGif{
-  width: 100%;
-  height: 90vh;
-}
-.imgCol{
-  display: inline-block;
-}
-
-.textCol{
-  display: inline-block;
-  margin: 5%;
-}
-
-
-
-.layerCol{
-  width: 25%;
-  float: left;
-  height: 90vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-
-.slide{
-  background-color: #B0C4DE;
-}
-
-.layer{
-  display: block;
-  width: 100%;
-  height:60vh;
-  margin: 10% 0 10% 0;
-}
-
-
-.form input{
-  color: black;
-}
-
-.formQuest textarea{
-  background-color: black;
-  width: 80%;
-}
-#answerOfNode{
-  display: inline-block;
-  margin: auto;
-  width: 50%;
-}
-
-.quote .pointerRight {
-  z-index: -1;
-  position: absolute;
-  height: 0;
-  padding-bottom: 8.4%;
-  width: 15.6%;
-  bottom: 25%;
-  left: 100%;
-  background: inherit;
-  -moz-border-radius-bottomright: 100% 60%;
-  -webkit-border-bottom-right-radius: 100% 60%;
-  border-bottom-right-radius: 100% 60%;
-}
-.quote .pointerRight:before {
-  content: '';
-  background: #fff;
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  left: -17%;
-  bottom: 50%;
-  -moz-transform: rotate(25deg);
-  -ms-transform: rotate(25deg);
-  -webkit-transform: rotate(25deg);
-  transform: rotate(25deg);
-  -moz-border-radius-bottomright: 100% 60%;
-  -webkit-border-bottom-right-radius: 100% 60%;
-  border-bottom-right-radius: 100% 60%;
-}
-
-.quote .pointerLeft {
-  z-index: -1;
-  position: absolute;
-  height: 0;
-  padding-bottom: 8.4%;
-  width: 15.6%;
-  bottom: 25%;
-  right: 100%;
-  background: inherit;
-  -moz-border-radius-bottomleft: 100% 60%;
-  -webkit-border-bottom-left-radius: 100% 60%;
-  border-bottom-left-radius: 100% 60%;
-}
-.quote .pointerLeft:before {
-  content: '';
-  background: #fff;
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  right: -17%;
-  bottom: 50%;
-  -moz-transform: rotate(-25deg);
-  -ms-transform: rotate(-25deg);
-  -webkit-transform: rotate(-25deg);
-  transform: rotate(-25deg);
-  -moz-border-radius-bottomleft: 100% 60%;
-  -webkit-border-bottom-left-radius: 100% 60%;
-  border-bottom-left-radius: 100% 60%;
-}
 
 
 
 
-@import ('./metal.css');
+
+
+
+
+@import ('./navbar.css');
 @import ('./product.css');
 @import ('./singleForm.css');
 @import ('./toplayer.css');
 @import ('./business.profile.css');
+@import ('./home.css');
+@import ('./layer.css');

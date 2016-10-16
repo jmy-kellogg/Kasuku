@@ -8,6 +8,9 @@ const TopLayer = React.createClass({
       // console.log(this.props.topLevelNodes[this.props.prodSelected])
       // this.props.topLevelNodes[this.props.prodSelected] this is an array of the top level nodes for the selected product
     var currentConn;
+// <<<<<<< HEAD
+// =======
+    // I'M NOT SURE WHETHER TO TO DELETE OR UPDATE THIS BASED 
     console.log(this.props.prodSelected);
     console.log(this.props.topLevelNodes);
     var newTopLevelIndex = 0;
@@ -16,6 +19,7 @@ const TopLayer = React.createClass({
     }
     // var newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
 
+// >>>>>>> master
     e.preventDefault();
     axios.post('/api/nodes', {
       question: "default question",
@@ -41,10 +45,38 @@ const TopLayer = React.createClass({
       if(e) throw e;
     })
   },
-
+  scrollTo: function(i, e){
+        e.preventDefault();
+        var place = "#nodeContainer" + i
+        console.log("scrooled", place)
+        $('html,body').animate({
+        scrollTop: $(place).offset().top-74},
+        'slow');
+  },
   handleSelected: function(node, e){
     this.props.changeSelected(node.id, node.layer);
   },
+<<<<<<< HEAD
+  render: function(){
+    var nodesArr = [];
+    for(var key in this.props.node){
+
+      if(this.props.node[key].topLevel && this.props.node[key].productId == this.props.prodSelected){
+        nodesArr.push(this.props.node[key]);
+      }
+    }
+
+  const nodesDiv = nodesArr.map((node, i) => {
+      var q;
+      if(node.question){
+        q = node.question;
+      }
+      else{
+        q = "I'm a question? Fill me out.";
+      }
+     return (
+      <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)}>
+=======
 render: function(){
 
   var nodesArr = [];
@@ -63,6 +95,7 @@ render: function(){
     }
    return (
       <div key={i} id={`nodeContainer${i}`} >
+>>>>>>> master
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
     )
@@ -70,8 +103,14 @@ render: function(){
   console.log(nodesDiv);
   return (
    <div className='toplayer-container'>
+<<<<<<< HEAD
+    {nodesDiv}
+    <div className='addtoplayernode' onClick={this.addTopLayerNode}><span className="glyphicon glyphicon-plus"></span></div>
+
+=======
     {this.props.prodSelected !== undefined ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> Add New Question</div> : null}
       {nodesDiv}
+>>>>>>> master
    </div>
 )
    }

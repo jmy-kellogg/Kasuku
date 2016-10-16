@@ -1,11 +1,42 @@
 /*ProductPage*/
+.ProductPage{
+  width: 200px;
+  height: 89vh;
+  background-color:rgb(226,110,85); 
+  border: 5px solid rgb(63,62,58);
+  position: fixed;
+  float: left;
+  z-index : 1;
+  margin-top: 0px;
+}
+.ProductPage h2{
+    text-align: center;
+    margin: 10px;
+  }
+.product-box{
+  text-align: center;
+  padding: 0 -2px 2px -2px;
+  margin-bottom: -1px; 
+  border: 2px solid rgb(63,62,58);
+  width: 100%
+}
+.product-box:hover{
+  color: white;
+  cursor:pointer;
+}
+.hightlight{
+  color: white;
+  background-color: rgb(63,62,58);
+}
+/*buttons*/
 .btnAdd {
-    background:  transparent;
-    border: 1px solid black;
+    background:  rgba(192,192,192, 0.5);
+    color: black;
+    border: 2px solid black;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     border-radius: 5px;
-    margin: 5px;
+/*    margin: 5px;*/
 }
 
 .btnAdd:hover {
@@ -13,25 +44,25 @@
     color: white;
     border-radius: 5px;
 }
-.ProductPage{
-  width: 25%;
-  height: 87vh;
-/*  margin-top: -20px;*/
-  float: left;
-/*  display: block;
-  clear: both;*/
-  position: fixed;
-  >h3{
-  	padding: 5px;
-  }
+.btn-remove{
+  float: right;
+  margin-right: 20%;
+  background: transparent;
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: none;
 }
 .addProduct{
   color: black;
-  width:90%;
-  margin: 5%;
-  height: 100%;
+  width:100%;
+/*  margin: 5%;*/
+  height: 50%;
   display: block;
-  padding-bottom: 5%;
+/*  padding-bottom: 5%;*/
+}
+.addtoplayernode{
+  margin-bottom: 500px;
 }
 
 .productinput{
@@ -42,7 +73,8 @@
 }
 .productName input{
    border: 1px solid black;
-   color: black
+   color: black;
+   margin: 5px 
 }
 .productName input:focus { 
     outline: none;
@@ -50,16 +82,6 @@
     box-shadow: 0 0 10px  #708090;
 }
 
-
-.product-box:hover{
-  color: blue;
-  cursor:pointer
-}
-.product-box:active{
-  background-color: yellow;
-}
-
-/**********************************/
 .productLayer{
   width: 60%;
   display: block;
@@ -71,11 +93,14 @@
 #firstQuestion{
   display: block;
   margin: 0 5%;
-/*  padding: 5px 140px;*/
   width: 60%;
   box-shadow: 10px 10px 5px #888888;
 }
 
+.bodyText{
+  display: block;
+  text-align: center
+}
 .layerCol{
   width: 25%;
   display: inline;
@@ -96,7 +121,7 @@
   background-color: white;
 
 }
-.bookmark-box {
+/*.bookmark-box {
 
   background: #B0C4DE;
   width: 100%;
@@ -108,7 +133,6 @@
 
 .bookmark-box p {
   color: #f8f8f8;
-/*  font-size: 78%;*/
   font-weight: 200;
   opacity: .6;
 }
@@ -203,33 +227,5 @@ a.boxclose {
   -o-transition: color .25s ease-in-out
 }
 
-.bodyText{
-  display: block;
-  text-align: center
-}
 
-.btn-remove{
-  float: right;
-  margin-right: 20%;
-  background: transparent;
-  color: white;
-  font-size: 1.5em;
-  font-weight: bold;
-  border: none;
-}
-
-
-.quote {
-  color: #fff;
-  font-size: 24px;
-  font-family: 'open sans', sans serif;
-  margin-left: 10%;
-  padding: 20px 30px;
-  width: 400px;
-  height: 200px;
-  background: skyblue;
-  position: relative;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-}
+*/

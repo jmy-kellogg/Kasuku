@@ -82,9 +82,9 @@ const Layer = React.createClass({
         q = "I'm a question? Fill me out.";
       }
       return (
-        <div className="mooo" key={i} ref={`nodeContainer${i}`} >
-          <div className='metal addtoplayernode' onClick={this.addNodeSameLayer}></div>
+        <div key={i} ref={`nodeContainer${i}`} >
           <SingleForm {...this.props} id={node.id} question={q} layer={this.props.layer} data={node}/>
+          {/*<div className='addtoplayernode' onClick={this.addNodeSameLayer}>Add New Question</div>*/}
         </div>
       )
     })

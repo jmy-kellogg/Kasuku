@@ -1,6 +1,28 @@
 .toplayer-container{
-  width: 25%;
+/*  width: 500px;*/
+/*\\  height: 90vh;*/
   display: block;
-  margin-left: 25%;
+  margin-left: 200px;
   float: left;
+  clear: both;
+ /* margin-top: 10px;*/
+/*  position: relative;*/
+   position: absolute;
+   height: 1000px;
+   width: 300px;
+/*  overflow: scroll;*/
+}
+.addtoplayernode{
+  height: 200px;
+  width: 100%;
+  text-align: center;
+  font-size: 5em; 
+  padding: 20%;
+  background: rgba(63,62,58, 0.5)
+}
+.addtoplayernode:hover {
+    background-color: #808080; /* gray */
+    background-image: none;
+    color: white;
+    border-radius: 5px;
 }

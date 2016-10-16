@@ -24,7 +24,7 @@ const SingleForm = React.createClass({
   },
 	selectAnswer: function(answer, e){
 		e.preventDefault();
-		console.log(answer);
+		// console.log(answer);
 		this.state.currentAnswer= answer.id;
     this.props.setSelected(answer, this.props.layer, this.props.node);
     this.setState({connectionToUpdate: null})
@@ -79,10 +79,13 @@ const SingleForm = React.createClass({
 	addNewAnswer: function(e){
 
 		e.preventDefault();
-		var answer = this.refs.answer.value;
+		var answer = "";
 		// var price = +this.refs.price.value;
 		// var description = this.refs.description.value;
 
+// <<<<<<< HEAD
+		//this.refs.answer.value = "";
+// =======
     // find the
     // // the array of top level nodes
     // // this.props.topLevelNodes[this.props.prodSelected];
@@ -110,6 +113,7 @@ const SingleForm = React.createClass({
     console.log(nextTreePointer);
 
 		this.refs.answer.value = "";
+// >>>>>>> master
 		var fromId = this.props.id;
 		axios.post('/api/connections', {
 			answer,
@@ -243,7 +247,7 @@ const SingleForm = React.createClass({
   					{/*<label><h4>{ans.answer}</h4></label>*/}
             <input className="form-control" value={ans.answer} onChange={this.changeOptionValue.bind(this, ans)} onBlur={this.updateConnection.bind(this, ans)} />
             <span className="input-group-btn">
-              <button className="btn btn-primary" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
+              <button className="btn btn-primary btnAdd" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
             </span>
   				</div>
         </div>
@@ -253,7 +257,7 @@ const SingleForm = React.createClass({
 
 	    return (
 
-	    	<div className="panel panel-primary metal nodeBox fade-in">
+	    	<div className="fade-in nodeBox">
 
 					<button className="btn-remove" onClick={this.removeNode}>x</button>
 
@@ -268,7 +272,7 @@ const SingleForm = React.createClass({
             {/*<p contentEditable={true}>{this.props.question}</p>*/}
 
           </div>
-          <div className="panel-body">
+          <div className="formAns">
             <div ref="answerSelect">
               <h4><b>Answers:</b></h4>
               {answersDiv}
@@ -277,9 +281,9 @@ const SingleForm = React.createClass({
               <form className="form" onSubmit={this.addNewAnswer}>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>
+                    {/*<input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>*/}
                     <span className="input-group-btn">
-                      <button className="btn btn-success" onClick={this.addNewAnswer}>add answer</button>
+                      <button className="btn btn-success btnAdd" onClick={this.addNewAnswer}>add answer</button>
                     </span>
                   </div>
                 </div>
