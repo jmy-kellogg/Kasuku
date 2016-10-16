@@ -2,6 +2,13 @@ import store from '../store';
 import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 
+export function removeLeafNode(nodeId){
+    return {
+        type: 'REMOVE_LEAF_NODE',
+        nodeId
+    }
+}
+
 export function setSelected(connection, layer, nodes){
     console.log(nodes);
     return {
@@ -53,14 +60,20 @@ export function loadNodes(nodes){
 
 
 
-export function addTopLayerNodeAction(newNodeId, productId, layer){
-  return {
-    type: 'ADD_TOP_LAYER_NODE',
-    newNodeId,
-    layer,
-    productId,
-    topLevel: true
-  }
+// export function addTopLayerNodeAction(newNodeId, productId, layer){
+//   return {
+//     type: 'ADD_TOP_LAYER_NODE',
+//     newNodeId,
+//     layer,
+//     productId,
+//     topLevel: true
+//   }
+// }
+export function loadTopLevelNodes(topLevelNodes){
+    return {
+        type: 'LOAD_TOP_LEVEL_NODES',
+        topLevelNodes
+    }
 }
 
 export function saveNode(question, thisNodeId){
@@ -72,14 +85,17 @@ export function saveNode(question, thisNodeId){
     }
 }
 
-export function addNewNode(connId, newNodeId, layer, topLevel=false, productId) {
+export function addNewNode(connId, newNodeId, layer, topLevel=false, productId, topLevelNodeIndex, leafNode) {
+    console.log(topLevelNodeIndex);
     return {
         type: 'ADD_NODE',
         connId,
         newNodeId,
         layer,
         topLevel,
-        productId
+        productId,
+        topLevelNodeIndex,
+        leafNode
     }
 }
 
@@ -103,7 +119,7 @@ export function addProductAction(id, answer, fromId, businessId=null, price=null
     }
 }
 
-export function addAnswerAction(connId, answer, fromId, businessId = null, price=null, description=null) {
+export function addAnswerAction(connId, answer, fromId, toId, businessId = null, price=null, description=null) {
     console.log(fromId);
     return {
         type: 'ADD_ANSWER',
@@ -112,7 +128,8 @@ export function addAnswerAction(connId, answer, fromId, businessId = null, price
         fromId,
         businessId,
         price,
-        description
+        description,
+        toId
     }
 }
 

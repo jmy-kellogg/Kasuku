@@ -40,6 +40,7 @@ const TopLayer = React.createClass({
     this.props.changeSelected(node.id, node.layer);
   },
 
+
 render: function(){
 
   var nodesArr = [];
@@ -57,7 +58,7 @@ render: function(){
       q = "I'm a question? Fill me out.";
     }
    return (
-      <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)}>
+      <div key={i} id={`nodeContainer${i}`} onClick={this.scrollTo.bind(this, i)} >
 
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>

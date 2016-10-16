@@ -31,23 +31,25 @@ router.post('/', function(req, res, next) {
     question: req.body.question,
     productId: req.body.productId,
     topLevel: req.body.topLevel,
-    layer: req.body.layer
+    layer: req.body.layer,
+    topLevelNodeIndex: req.body.topLevelNodeIndex,
+    leafNode: req.body.leafNode
   })
   .then(function(node) {
     res.json(node);
   })
 });
 
-router.post('/toplevel', function(req, res, next) {
-  Node.create( {
-    question: req.body.question,
-    productId: req.body.productId,
-    topLevel: true
-  })
-  .then(function(node) {
-    res.json(node);
-  })
-});
+// router.post('/toplevel', function(req, res, next) {
+//   Node.create( {
+//     question: req.body.question,
+//     productId: req.body.productId,
+//     topLevel: true
+//   })
+//   .then(function(node) {
+//     res.json(node);
+//   })
+// });
 
 router.delete('/:id', (req, res, next) => {
 

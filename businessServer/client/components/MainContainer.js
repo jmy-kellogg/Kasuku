@@ -13,7 +13,7 @@ const MainContainer = React.createClass({
     var _allConnections;
     var _products = [];
     var _productIds = [];
-    var _topLevelNodes = [];
+    var _topLevelNodes = {};
     var sortNumbers = function(a,b){
       return a-b;
     }
@@ -74,7 +74,7 @@ const MainContainer = React.createClass({
               }
             })
             console.log(_topLevelNodes);
-            // this.props.loadTopLevelNodes(_topLevelNodes);
+            this.props.loadTopLevelNodes(_topLevelNodes);
 
             this.props.loadNodes(_nodesArr);
             // console.log(_nodesArr);
