@@ -44,7 +44,7 @@ const BusinessProfileHeadNodeText = React.createClass({
             <div className="input-group">
               <input type="text" className="form-control" id="greeting-text" value={this.state.question} onChange={this.questionChange} />
               <span className="input-group-btn">
-                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
+                <button onClick={this.handleSave} className="btn btn-submit">Save</button>
               </span>
             </div>
           </div>

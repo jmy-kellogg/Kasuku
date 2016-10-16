@@ -24,7 +24,7 @@ const Signup = React.createClass({
   },
   render () {
     return (
-      <div>
+      <div className="SingleFormPage">
         <form onSubmit={this.handleSubmit} noValidate>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -34,7 +34,7 @@ const Signup = React.createClass({
                     name="username"
                     ref="username"
                     value={this.props.username}
-                    placeholder="enter a username" />
+                    placeholder="enter username" />
           </div>
 
           <div className="form-group">
@@ -45,7 +45,7 @@ const Signup = React.createClass({
                     name="email"
                     ref="email"
                     value={this.props.email}
-                    placeholder="enter a email" />
+                    placeholder="enter email" />
           </div>
 
           <div className="form-group">
@@ -56,7 +56,7 @@ const Signup = React.createClass({
                     name="password"
                     ref="password"
                     value={this.props.password}
-                    placeholder="enter a password" />
+                    placeholder="enter password" />
           </div>
 
           <div className="form-group">
@@ -67,9 +67,9 @@ const Signup = React.createClass({
                     name="password_confirmation"
                     ref="password_confirmation"
                     value={this.props.password_confirmation}
-                    placeholder="confirm your password" />
+                    placeholder="confirm password" />
           </div>
-          <button className="btn btn-success" type="submit">Signup</button>
+          <button className="btn btn-submit" type="submit">Signup</button>
         </form>
       </div>
     )

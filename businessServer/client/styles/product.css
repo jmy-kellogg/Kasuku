@@ -1,7 +1,7 @@
 /*ProductPage*/
 .ProductPage{
   width: 200px;
-  height: 89vh;
+  height: 90vh;
   background-color:rgb(226,110,85); 
   border: 5px solid rgb(63,62,58);
   position: fixed;
@@ -20,6 +20,9 @@
   border: 2px solid rgb(63,62,58);
   width: 100%
 }
+.product-div{
+  cursor: pointer;
+}
 .product-box:hover{
   color: white;
   cursor:pointer;
@@ -29,21 +32,7 @@
   background-color: rgb(63,62,58);
 }
 /*buttons*/
-.btnAdd {
-    background:  rgba(192,192,192, 0.5);
-    color: black;
-    border: 2px solid black;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    border-radius: 5px;
-/*    margin: 5px;*/
-}
 
-.btnAdd:hover {
-    background-color: #808080; /* gray */
-    color: white;
-    border-radius: 5px;
-}
 .btn-remove{
   float: right;
   margin-right: 20%;
@@ -72,9 +61,10 @@
   width: 100%
 }
 .productName input{
-   border: 1px solid black;
+   border: 1px solid rgb(63,62,58);
    color: black;
-   margin: 5px 
+   margin: 5px;
+   width: 70%; 
 }
 .productName input:focus { 
     outline: none;

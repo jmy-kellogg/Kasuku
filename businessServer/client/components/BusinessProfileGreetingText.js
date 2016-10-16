@@ -22,7 +22,9 @@ const BusinessProfileGreeting = React.createClass({
   greetingChange(e) {
     this.setState({ greeting: e.target.value })
   },
-  handleSave() {
+  handleSave(e) {
+    e.preventDefault();
+    e.stopPropagation();
     const id = this.props["data-id"];
     const greeting = this.state.greeting;
 
@@ -42,7 +44,7 @@ const BusinessProfileGreeting = React.createClass({
             <div className="input-group">
               <input type="text" className="form-control" id="greeting-text" value={this.state.greeting} onChange={this.greetingChange} />
               <span className="input-group-btn">
-                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
+                <button onClick={this.handleSave} className="btn btn-submit">Save</button>
               </span>
             </div>
           </div>

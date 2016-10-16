@@ -83,12 +83,14 @@ const BusinessProfileGetStartedOption = React.createClass({
     return (
       <div>
         <form>
+          <div>
           <label htmlFor="get-started-button">Include a "Get Started Button":&nbsp;</label><TooltipGlyph tip={GETSTARTEDTOOLTIP}/>
+          </div>
           <div className="btn-group" data-toggle="buttons">
-            <label onClick={this.getStartedOn} className={ this.state.isOn ? 'btn btn-primary active' : 'btn btn-primary'}>
+            <label onClick={this.getStartedOn} className={ this.state.isOn ? 'btn btn-submit active' : 'btn btn-submit'}>
               <input type="radio" name="enable-get-started" id="enable-get-started" autoComplete="off" defaultChecked /> Enable Get Started Button
-            </label>
-            <label onClick={this.getStartedOff} className={ !this.state.isOn ? 'btn btn-primary active' : 'btn btn-primary'}>
+              </label>
+            <label onClick={this.getStartedOff} className={ !this.state.isOn ? 'btn btn-submit active' : 'btn btn-submit'}>
               <input  type="radio" name="disable-get-started" id="disable-get-started" autoComplete="off" /> Disable Get Started Button
             </label>
           </div>

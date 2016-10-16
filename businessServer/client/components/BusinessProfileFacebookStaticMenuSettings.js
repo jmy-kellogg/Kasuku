@@ -99,13 +99,13 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
         {this.state.menuSettingsArray.map(this.renderSettings)}
         <div className="row">
           <div className="col-sm-12">
-            <button className="btn btn-block btn-success" onClick={this.addItem}>Add Menu Item</button>
+            <button className="btn btn-block btn-submit" onClick={this.addItem}>Add Menu Item</button>
           </div>
         </div>
         <br/>
         <div className="row">
           <div className="col-sm-12">
-            <button className="btn btn-primary pull-right" onClick={this.onSubmitSettings}>Save Menu Settings</button>
+            <button className="btn btn-submit pull-right" onClick={this.onSubmitSettings}>Save Menu Settings</button>
           </div>
         </div>
       </div>
