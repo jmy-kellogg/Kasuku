@@ -2,6 +2,7 @@
 var request = require('request');
 var db = require('../models')
 var wParse = require('./ai.js');
+var chalk = require('chalk');
 
 var Business = db.model('business');
 var Node = db.model('node');
@@ -13,7 +14,7 @@ var History = db.model('history');
 var BUSINESSID = 1;
 
 function receivedMessage(event, pageToken, businessId) {
-    console.log("recieved message businessId", businessId)
+    console.log(chalk.red("recieved message businessId"), businessId)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
@@ -45,7 +46,7 @@ function receivedMessage(event, pageToken, businessId) {
 }
 
 function divertMessage(recipientId, pageToken, businessId){
-  console.log("divert message businessId", businessId)
+  console.log(chalk.red("divert message businessId"), businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -58,7 +59,7 @@ function divertMessage(recipientId, pageToken, businessId){
 }
 
 function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
-    console.log("send text message businessId", businessId)
+    console.log(chalk.red("send text message businessId"), businessId)
     let currentConvo, chatterId;
     recipientId = '' + recipientId;
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
@@ -146,13 +147,13 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                       table[history.connection.description] = history.connection.price
                     }
                   })
-                  console.log("PRICE".repeat(500), price, table)
+                  console.log("PRICE", price, table)
                   histories.forEach(h=>{
                     price2 += h.connection.price;
-                    console.log("CONNECTIONS: ".repeat(23), h.connection.description, connection.price, price2)
+                    console.log("CONNECTIONS: ", h.connection.description, connection.price, price2)
                 })
                 })
-                .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
+                .catch(err => console.log("THIS IS AN ERROR", err))
                 Business.findById(BUSINESSID)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
@@ -173,7 +174,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
 }
 
 function callSendAPI(messageData, pageToken, businessId) {
-  console.log("callSendAPI businessId", businessId)
+  console.log(chalk.red("callSendAPI businessId"), businessId)
 
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -197,7 +198,7 @@ function callSendAPI(messageData, pageToken, businessId) {
 }
 
 function sendGenericMessage(recipientId, pageToken, businessId) {
-    console.log("sendGenericMessage businessId", businessId)
+    console.log(chalk.red("sendGenericMessage businessId"), businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -245,7 +246,7 @@ function sendGenericMessage(recipientId, pageToken, businessId) {
 }
 
 function receivedPostback(event, pageToken, businessId) {
-    console.log("recieved message businessId, recipientId", businessId, recipientID)
+    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
@@ -253,8 +254,8 @@ function receivedPostback(event, pageToken, businessId) {
     // button for Structured Messages. 
     var payload = event.postback.payload;
 
-    console.log("Postback--".repeat(100), senderID, recipientID, timeOfPostback, payload);
-    console.log("event".repeat(100), event);    
+    console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
+    console.log("event", event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
     //     "at %d", senderID, recipientID, payload, timeOfPostback);
