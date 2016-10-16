@@ -11,4 +11,5 @@ router.use('/connections', require('./routes/connection.routes'));
 router.use('/business', require('./routes/business.routes'));
 router.use('/product', require('./routes/tree.routes'));
 router.use('/menuSettings', require('./routes/menuSetting.routes'))
+router.use('/convoTest', require('./routes/convoTest.routes'))
 module.exports = router;
