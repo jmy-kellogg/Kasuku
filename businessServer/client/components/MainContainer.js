@@ -34,17 +34,6 @@ const MainContainer = React.createClass({
           }
         })
         this.props.loadProducts(_products);
-        // console.log(_products);
-        // console.log(_allConnections);
-
-        // connections.forEach(conn => {
-        //   if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
-        //     _nodesIdArr.push(conn.fromId);
-        //   }
-        //   if(conn.toId && !_nodesIdArr.includes(conn.toId)){
-        //     _nodesIdArr.push(conn.toId);
-        //   }
-        // })
 
       })
       .then(data => {

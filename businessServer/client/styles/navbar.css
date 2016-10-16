@@ -1,6 +1,6 @@
 #navbar-primary .navbar-nav {
 //  background: #ededed;
-  background-color: rgb(241,243,232);
+  background-color: rgba(241,243,232, 0.7);
   display: box;
   width: 100%;
   padding-left: 25%;

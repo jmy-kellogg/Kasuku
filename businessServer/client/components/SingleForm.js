@@ -83,6 +83,9 @@ const SingleForm = React.createClass({
 		var price = null;
 		var description = null;
 
+		// var price = +this.refs.price.value;
+		// var description = this.refs.description.value;
+
 
     // // the array of top level nodes
     // // this.props.topLevelNodes[this.props.prodSelected];
@@ -91,8 +94,18 @@ const SingleForm = React.createClass({
 
     var nextTreePointer;
 
-    console.log(this.props.data.topLevelNodeIndex);
-    console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+    // console.log(this.props.data.topLevelNodeIndex);
+    // console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+
+    // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
+    //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
+    // }
+    // else{
+    //   nextTreePointer = null;
+    // }
+    //console.log(this.props.data.topLevelNodeIndex);
+    //console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+
     if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
       nextTreePointer = null;
     }
@@ -270,7 +283,7 @@ const SingleForm = React.createClass({
               <form className="form" onSubmit={this.addNewAnswer}>
                 <div className="form-group">
                   <div className="input-group">
-                    {/*<input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>*/}
+                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>
                     <span className="input-group-btn">
                       <button className="btn btn-success btnAdd" onClick={this.addNewAnswer}>add answer</button>
                     </span>

@@ -1,6 +1,5 @@
 body{
-  background-image: url("https://www.protolabs.com/resourceimages/united-states/cool-idea-follow-background.jpg");
-  background-repeat: no-repeat;
+
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
@@ -30,9 +29,42 @@ body{
   -moz-animation-duration:0.3s;
   animation-duration:0.3s;
 }
-.product-div{
-  cursor: pointer;
+
+.btnAdd {
+    background:  rgba(192,192,192, 0.5);
+    color: rgb(63,62,58);
+    border: 2px solid rgb(63,62,58);
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 5px;
+/*    margin: 5px;*/
 }
+
+.btnAdd:hover {
+    background-color: #808080; /* gray */
+    color: white;
+    border-radius: 5px;
+}
+.SingleFormPage{
+  margin: 10% 30%;
+}
+.LoginPage{
+  margin: 10% 30%;
+}
+.LoginPage div{
+  margin: 5px;
+}
+.btn-submit{
+  background: rgb(134,211,191);
+  color: rgb(63,62,58);
+}
+.btn-submit:hover{
+  background: rgb(226,110,85);
+  color: white;
+}
+
+
+
 
 
 /*
@@ -78,7 +110,9 @@ body{
   text-shadow: 1px 1px 2px #FFFFFF;
 }
 
-
+.pull-inline {
+  display: inline-block;
+}
 
 
 

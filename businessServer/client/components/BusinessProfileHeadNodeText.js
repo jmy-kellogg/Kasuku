@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import TooltipGlyph from './TooltipGlyph';
+import Spinner from './Spinner';
 
 const BusinessProfileHeadNodeText = React.createClass({
   getInitialState () {
     return {
       question: '',
-      headNodeId: null
+      headNodeId: null,
+      saveButtonText: 'Save',
+      isSaving: false
     }
   },
   componentDidMount () {
@@ -27,11 +30,14 @@ const BusinessProfileHeadNodeText = React.createClass({
   handleSave (e) {
     e.preventDefault();
     e.stopPropagation();
+    this.setState({isSaving: true, saveButtonText: "Saving..."})
     axios.put(`/api/nodes/${this.state.headNodeId}`, {
         question: this.state.question
     })
     .then( (node) => {
-      this.setState({question: node.data.question})
+      setTimeout(() => {
+        this.setState({question: node.data.question, isSaving: false, saveButtonText: "Save"})
+      }, 500)
     })
   },
   render() {
@@ -44,7 +50,7 @@ const BusinessProfileHeadNodeText = React.createClass({
             <div className="input-group">
               <input type="text" className="form-control" id="greeting-text" value={this.state.question} onChange={this.questionChange} />
               <span className="input-group-btn">
-                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
+                <button onClick={this.handleSave} className="btn btn-submit"><span hidden={!this.state.isSaving}><Spinner size="15px"/></span>{this.state.saveButtonText}</button>
               </span>
             </div>
           </div>

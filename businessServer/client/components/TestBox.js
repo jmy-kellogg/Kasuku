@@ -17,10 +17,6 @@ const TestBox = React.createClass({
     this.setState({
       messages: this.state.messages.concat([{message: message, fromUser: true}])
     })
-    // this.state.messages.push({
-    //   message: message,
-    //   fromUser: true
-    // })
     axios.post('/api/convoTest', {
       input: message
     })
@@ -29,15 +25,13 @@ const TestBox = React.createClass({
       this.setState({
         messages: this.state.messages.concat([{message: response.message, fromUser: false}])
       })
-      console.log(this.state.messages);
     })
-    // console.log(message);
   },
 
   render: function(){
     const messagesDiv = this.state.messages.map(message => {
       return (
-        <li className="ChatLog__entry ChatLog__entry_mine">
+        <li className={message.fromUser ? "ChatLog__entry ChatLog__entry_mine" : "ChatLog__entry"}  >
           <p className="ChatLog__message">
             {message.message}
           </p>
@@ -45,7 +39,7 @@ const TestBox = React.createClass({
       )
     })
     return (
-      <div className="test-box">
+      <div className="test-box" id="messenger-test-container">
 
         <div>
           <ul className="ChatLog">
@@ -62,7 +56,5 @@ const TestBox = React.createClass({
 
   }
 })
-
-
 
 export default TestBox

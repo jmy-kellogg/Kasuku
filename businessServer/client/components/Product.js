@@ -28,11 +28,11 @@ const Product = React.createClass({
     var answer = this.refs.productname.value;
     // var price = +this.refs.price.value;
     // var description = this.refs.description.value;
-// <<<<<<< HEAD
-// =======
-    var price = null;
-    var description = null;
-// >>>>>>> master
+
+//     var price = null;
+//     var description = null;
+
+
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
@@ -75,14 +75,9 @@ const Product = React.createClass({
         "hightlight": this.state.currentProduct === product.id
       });
       return (
-//<<<<<<< HEAD
-        //<div className={divClassName} key={i} onClick={this.selectProduct.bind(this, product)}>
-          // <h3>{product.name}</h3>
-// {/*=======*/}
 
-        <div className="product-div" key={i} onClick={this.selectProduct.bind(this, product)}>
-           {product.name}
-{/*>>>>>>> master*/}
+        <div className={divClassName} key={i} onClick={this.selectProduct.bind(this, product)}>
+           <h4>{product.name}</h4>
         </div>
 
 
