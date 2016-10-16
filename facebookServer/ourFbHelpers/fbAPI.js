@@ -11,7 +11,7 @@ var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
 var History = db.model('history');
 
-var BUSINESSID = 1;
+
 
 function receivedMessage(event, pageToken, businessId) {
     console.log(chalk.red("recieved message businessId"), businessId)
@@ -68,13 +68,13 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
             // console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
-                where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
+                where: { done: false, chatterId: chatterId, businessId: businessId }
             })
         })
         .then(_convo => {
             console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
             if (!_convo || _convo.done === true) {
-                return Business.findById(BUSINESSID)
+                return Business.findById(businessId)
                     .then(business => {
                         // console.log("CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
@@ -103,7 +103,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                   // console.log(_connections[i].answer, 'got it.')
                   
                   History.create({
-                    businessId: BUSINESSID,
+                    businessId: businessId,
                     chatterFbId: recipientId,
                     connectionId: _connections[i].id
                   })
@@ -130,7 +130,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                 callSendAPI(messageData, pageToken, businessId);
             } else {
                 History.findAll({where: {
-                                  businessId: BUSINESSID,
+                                  businessId: businessId,
                                   chatterFbId: recipientId
                                 },
                                 include: [{model: Connection}]
@@ -154,7 +154,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                 })
                 })
                 .catch(err => console.log("THIS IS AN ERROR", err))
-                Business.findById(BUSINESSID)
+                Business.findById(businessId)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
                 })
