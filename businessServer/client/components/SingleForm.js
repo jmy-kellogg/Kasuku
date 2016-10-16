@@ -209,8 +209,7 @@ const SingleForm = React.createClass({
     .then( (res) => {
       this.setState({currentQuestion: res.data.question})
       this.forceUpdate();
-    }
-    )
+    })
   },
 
 	render: function(){
@@ -300,5 +299,3 @@ const SingleForm = React.createClass({
 });
 
 export default SingleForm
-            // <InlineEdit data={this.props.question} defaultValue={this.props.question} i={this.props.id} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>
-          			// <textArea className="" onChange={this.onTextChange} value={this.state.questionValue} id={`question${_thisId}`} ref={`question${_thisId}`} onBlur={this.handleChange.bind(this, _thisId)}/>

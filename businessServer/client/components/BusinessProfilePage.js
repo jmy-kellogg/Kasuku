@@ -5,7 +5,7 @@ import BusinessProfileInfo from './BusinessProfileInfo';
 import BusinessProfileGreetingText from './BusinessProfileGreetingText';
 import BusinessProfileGetStartedOption from './BusinessProfileGetStartedOption';
 import BusinessProfileFacebookStaticMenuSettings from './BusinessProfileFacebookStaticMenuSettings';
-
+import BusinessProfileHeadNodeText from './BusinessProfileHeadNodeText';
 
 const BusinessProfilePage = React.createClass({
   handleSelect(index, last) {
@@ -20,17 +20,21 @@ const BusinessProfilePage = React.createClass({
             <Tabs onSelect={this.handleSelect}>
               <TabList>
                 <Tab>General Settings</Tab>
-                <Tab>Business Greeting</Tab>
+                <Tab>Starting Settings</Tab>
                 <Tab>Persistent Menu Settings</Tab>
               </TabList>
               <TabPanel>
+                <br/>
                 <BusinessProfileInfo data-id={businessId} />
               </TabPanel>
               <TabPanel>
+                <br/>
+                <BusinessProfileHeadNodeText data-id={businessId} />
                 <BusinessProfileGreetingText data-id={businessId} />
                 <BusinessProfileGetStartedOption data-id={businessId} />
               </TabPanel>
               <TabPanel>
+                <br/>
                 <BusinessProfileFacebookStaticMenuSettings data-id={businessId} />
               </TabPanel>
             </Tabs>
