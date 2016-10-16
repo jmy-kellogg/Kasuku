@@ -2,13 +2,16 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import axios from 'axios';
 import TooltipGlyph from './TooltipGlyph';
+import Spinner from './Spinner';
 
 const BusinessProfileFacebookStaticMenuSettings = React.createClass({
   getInitialState() {
     return {
       isOn: true,
       menuSettingsArray: [],
-      isWeblink: true
+      isWeblink: true,
+      saveButtonText: 'Save Menu Settings',
+      isSaving: false
     }
   },
   componentDidMount() {
@@ -87,9 +90,10 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
   },
   onSubmitSettings() {
     // console.log("SUBMITTING");
+    this.setState({saveButtonText: 'Saving Settings...', isSaving: true})
     axios.post('/api/menuSettings/' + this.props["data-id"], { menuSettingsArray: this.state.menuSettingsArray })
     .then((newMenuSettingsArray) => {
-      this.setState( { menuSettingsArray: newMenuSettingsArray.data });
+      this.setState( { menuSettingsArray: newMenuSettingsArray.data, saveButtonText: 'Saving Menu Settings', isSaving: false });
     })
   },
   render () {
@@ -105,7 +109,7 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
         <br/>
         <div className="row">
           <div className="col-sm-12">
-            <button className="btn btn-submit pull-right" onClick={this.onSubmitSettings}>Save Menu Settings</button>
+            <button className="btn btn-submit pull-right" onClick={this.onSubmitSettings}><span hidden={!this.state.isSaving}><Spinner size="10px" /></span>{this.state.saveButtonText}</button>
           </div>
         </div>
       </div>

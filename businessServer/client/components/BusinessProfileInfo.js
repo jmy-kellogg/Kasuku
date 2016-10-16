@@ -27,8 +27,8 @@ const BusinessProfile = React.createClass({
       setTimeout(()=> {
         console.log("3:", this.state);
         this.setState({hasUpdated: false})
-      }, 1000)
-    }, 1000)
+      }, 500)
+    }, 500)
   },
   getInitialState () {
     return { 

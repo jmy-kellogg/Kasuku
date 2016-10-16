@@ -268,7 +268,7 @@ const SingleForm = React.createClass({
             {/*<p contentEditable={true}>{this.props.question}</p>*/}
 
           </div>
-          <div className="panel-body">
+          <div>
             <div ref="answerSelect">
               <h4><b>Answers:</b></h4>
               {answersDiv}
@@ -277,7 +277,7 @@ const SingleForm = React.createClass({
               <form className="form" onSubmit={this.addNewAnswer}>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add an answer to your question"></input>
+                    <input type="text" className="form-control" ref="answer" name="answer" placeholder="add answer to question"></input>
                     <span className="input-group-btn">
                       <button className="btn btn-success btnAdd" onClick={this.addNewAnswer}>add answer</button>
                     </span>
