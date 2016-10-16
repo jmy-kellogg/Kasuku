@@ -40,6 +40,10 @@
   color:  rgb(63,62,58);
   width: 100%;
 }
+.formQuest div{
+  background-color: white; 
+}
+
 .form input{
   color: black;
 }

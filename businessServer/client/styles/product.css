@@ -9,19 +9,23 @@
   z-index : 1;
   margin-top: 0px;
 }
-.ProductPage h2{
+.productHeader{
     text-align: center;
-    margin: 10px;
-  }
+    font-weight: bold;
+    background: rgba(241,243,232, 0.1);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 2px solid rgb(63,62,58);
+}
+.product-div{
+  cursor: pointer;
+}
 .product-box{
   text-align: center;
   padding: 0 -2px 2px -2px;
   margin-bottom: -1px; 
   border: 2px solid rgb(63,62,58);
   width: 100%
-}
-.product-div{
-  cursor: pointer;
 }
 .product-box:hover{
   color: white;
@@ -61,7 +65,8 @@
   width: 100%
 }
 .productName input{
-   border: 1px solid rgb(63,62,58);
+   border: 1px solid rgb(63,62,58, 0.7);
+   background: rgb(241,243,232);
    color: black;
    margin: 5px;
    width: 70%; 
