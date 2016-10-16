@@ -4,14 +4,14 @@ import InlineEdit from './InlineEdit';
 import axios from 'axios';
 
 const TopLayer = React.createClass({
-  // scrollTo: function(i, e){
-  //       e.preventDefault();
-  //       var place = "#nodeContainer" + i
-  //       console.log("scrooled", place)
-  //       $('html,body').animate({
-  //       scrollTop: $(place).offset().top-74},
-  //       'slow');
-  // },
+  scrollTo: function(i, e){
+        e.preventDefault();
+        var place = "#nodeContainer" + i
+        console.log("scrooled", place)
+        $('html,body').animate({
+        scrollTop: $(place).offset().top-74},
+        'slow');
+  },
   addTopLayerNode: function(e){
       // console.log(this.props.topLevelNodes[this.props.prodSelected])
       // this.props.topLevelNodes[this.props.prodSelected] this is an array of the top level nodes for the selected product
@@ -70,7 +70,7 @@ render: function(){
       q = "I'm a question? Fill me out.";
     }
    return (
-      <div key={i} id={`nodeContainer${i}`}>
+      <div key={i} id={`nodeContainer${i}`}  onClick={this.scrollTo.bind(this, i)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
     )
