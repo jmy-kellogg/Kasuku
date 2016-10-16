@@ -77,14 +77,14 @@ const SingleForm = React.createClass({
 
 	},
 	addNewAnswer: function(e){
-
+//Not sure how to resolve conflicts in this function
 		e.preventDefault();
 		//var answer = "";
 		// var price = +this.refs.price.value;
 		// var description = this.refs.description.value;
 
 
-		//this.refs.answer.value = "";
+		this.refs.answer.value = "";
 
     // find the
     // // the array of top level nodes
@@ -102,7 +102,7 @@ const SingleForm = React.createClass({
     else{
       nextTreePointer = null;
     }
-    //console.log(this.props.data.topLevelNodeIndex);
+    console.log(this.props.data.topLevelNodeIndex);
     //console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
     if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
       nextTreePointer = null;
