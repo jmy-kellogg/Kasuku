@@ -53,6 +53,8 @@ router.get('/:name/fbwebhook', function(req, res, next) {
 
 router.post('/:name/fbwebhook', function(req, res, next) {
   console.log("Got to post on /users/:name/fbwebhook", req.requester); 
+  console.log("Got to post on /users/:name/fbwebhook"); 
+  
   var data = req.body;
   var pageToken = req.fbRequester.pageToken;
   var businessId = req.fbRequester.businessId;

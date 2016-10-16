@@ -174,6 +174,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
 
 function callSendAPI(messageData, pageToken, businessId) {
   console.log("callSendAPI businessId", businessId)
+
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
