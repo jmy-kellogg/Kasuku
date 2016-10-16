@@ -9,84 +9,79 @@ import ContentEditable from 'react-contenteditable'
 
 const SingleForm = React.createClass({
 
-	getInitialState: function() {
+  getInitialState: function() {
     return {
-    		...this.state,
-    		currentAnswer: null,
+        ...this.state,
+        currentAnswer: null,
         questionValue: this.props.question,
         connectionToUpdate: null,
         questionId: null
-    	};
+      };
   },
   onTextChange: function(e){
     this.setState({questionValue: e.target.value})
 
   },
-	selectAnswer: function(answer, e){
-		e.preventDefault();
-		// console.log(answer);
-		this.state.currentAnswer= answer.id;
+  selectAnswer: function(answer, e){
+    e.preventDefault();
+    console.log(answer);
+    this.state.currentAnswer= answer.id;
     this.props.setSelected(answer, this.props.layer, this.props.node);
     this.setState({connectionToUpdate: null})
-	},
-	removeNode: function(e){
+  },
+  removeNode: function(e){
 
-		var nodes = this.props.node;
-		var connections = this.props.connection;
-		// id of this node is this.props.id
-		// get all connections that are associated with this node
-		// get all nodes that are connected to those connections
-		var nodesForRemoval = [];
-		var connsForRemoval = [];
+    var nodes = this.props.node;
+    var connections = this.props.connection;
+    // id of this node is this.props.id
+    // get all connections that are associated with this node
+    // get all nodes that are connected to those connections
+    var nodesForRemoval = [];
+    var connsForRemoval = [];
 
     var visited =[];
 
-		var getAllForRemoval = function(nodeId){
+    var getAllForRemoval = function(nodeId){
 
       if(nodes[nodeId].conns){
-  			nodes[nodeId].conns.forEach(connId => {
-  				connsForRemoval.push(connId);
+        nodes[nodeId].conns.forEach(connId => {
+          connsForRemoval.push(connId);
           if(connections[connId].toId && !visited.includes(connections[connId].toId)){
             visited.push(connections[connId].toId)
             getAllForRemoval(connections[connId].toId);
           }
         })
-    			    nodesForRemoval.push(nodeId);
+              nodesForRemoval.push(nodeId);
       }
-		}
-		getAllForRemoval(this.props.id);
-    //console.log(connsForRemoval);
-    //console.log(nodesForRemoval);
+    }
+    getAllForRemoval(this.props.id);
+    console.log(connsForRemoval);
+    console.log(nodesForRemoval);
 
-		//delete all nodes and associated connections branching from this node
-		axios.delete(`/api/nodes/${this.props.id}`)
-			.then(item => item.data)
-			.then(item => {
-				// console.log(item);
-			})
-			.catch(err => {
-				if(err) throw err;
-			})
+    //delete all nodes and associated connections branching from this node
+    axios.delete(`/api/nodes/${this.props.id}`)
+      .then(item => item.data)
+      .then(item => {
+        // console.log(item);
+      })
+      .catch(err => {
+        if(err) throw err;
+      })
 
-		// remove those nodes from state
-		this.props.removeNodesAction(nodesForRemoval);
+    // remove those nodes from state
+    this.props.removeNodesAction(nodesForRemoval);
 
-		// remove those connections from state
-		this.props.removeConnectionsAction(connsForRemoval);
+    // remove those connections from state
+    this.props.removeConnectionsAction(connsForRemoval);
 
 
-	},
-	addNewAnswer: function(e){
+  },
+  addNewAnswer: function(e){
 
-		e.preventDefault();
-
-		//var answer = "";
+    e.preventDefault();
     var answer = this.refs.answer.value;
-		// var price = +this.refs.price.value;
-		// var description = this.refs.description.value;
-
-
-		this.refs.answer.value = "";
+    // var price = +this.refs.price.value;
+    // var description = this.refs.description.value;
 
     // find the
     // // the array of top level nodes
@@ -98,74 +93,74 @@ const SingleForm = React.createClass({
     // console.log(this.props.data.topLevelNodeIndex)
     // console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
     var nextTreePointer;
-    if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
-      nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
-    }
-    else{
-      nextTreePointer = null;
-    }
+    // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
+    //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
+    // }
+    // else{
+    //   nextTreePointer = null;
+    // }
     console.log(this.props.data.topLevelNodeIndex);
-    //console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+    console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
     if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
       nextTreePointer = null;
     }
     else{
       nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
     }
-    //console.log(nextTreePointer);
+    console.log(nextTreePointer);
 
-		this.refs.answer.value = "";
-		var fromId = this.props.id;
-		axios.post('/api/connections', {
-			answer,
-			fromId,
-			productId: this.props.prodSelected,
+    this.refs.answer.value = "";
+    var fromId = this.props.id;
+    axios.post('/api/connections', {
+      answer,
+      fromId,
+      productId: this.props.prodSelected,
       toId: nextTreePointer,
       businessId: this.props.params.businessId
-			// price,
-			// description
-		})
-		.then(conn => conn.data)
-		.then(conn => {
-			// set business ID once business ids are set up.  but keep as null for now.
-			var businessId = null;
-			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, businessId);
-		})
-		.catch(e => {
-			if(e) throw e;
-		})
-	},
-	addNewNode: function(answerId, e){
-		e.preventDefault();
-		// var connId = this.refs.answerSelect.value;
+      // price,
+      // description
+    })
+    .then(conn => conn.data)
+    .then(conn => {
+      // set business ID once business ids are set up.  but keep as null for now.
+      var businessId = null;
+      this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, businessId);
+    })
+    .catch(e => {
+      if(e) throw e;
+    })
+  },
+  addNewNode: function(answerId, e){
+    e.preventDefault();
+    // var connId = this.refs.answerSelect.value;
     this.selectAnswer(answerId, e)
     var connId = this.state.currentAnswer;
-		var currentConn = this.props.connection[connId];
+    var currentConn = this.props.connection[connId];
 
 
-		var layer = this.props.layer+1;
+    var layer = this.props.layer+1;
     // add new node to the next level
     // commented out if statement is to prevent adding a new node if the connection already points to a node.  prevent duplicates.  but the new design has new nodes pointing to the next top level node by default.
     var createNewNode = function(){
-  		axios.post('/api/nodes/', {
-  			question: "default question",
-  			productId: this.props.prodSelected,
-  			topLevel: false,
-  			layer,
+      axios.post('/api/nodes/', {
+        question: "default question",
+        productId: this.props.prodSelected,
+        topLevel: false,
+        layer,
         topLevelNodeIndex: this.props.data.topLevelNodeIndex,
         leafNode: true
-  		})
-  		.then(node => node.data)
-  		.then(node => {
-  			this.props.addNewNode(answerId, node.id, node.layer, false, node.productId, this.props.data.topLevelNodeIndex, true);
+      })
+      .then(node => node.data)
+      .then(node => {
+        this.props.addNewNode(answerId, node.id, node.layer, false, node.productId, this.props.data.topLevelNodeIndex, true);
         this.props.removeLeafNode(this.props.id);
-  			return node;
-  		})
-  		.then(node => {
-  			axios.put(`/api/connections/${answerId}`, {
-  				toId: node.id
-  			})
-  		})
+        return node;
+      })
+      .then(node => {
+        axios.put(`/api/connections/${answerId}`, {
+          toId: node.id
+        })
+      })
       .catch(err => {
         if(err) throw err;
       })
@@ -180,8 +175,8 @@ const SingleForm = React.createClass({
       }
     }
 
-	},
-	handleChange: function(nodeId, e){
+  },
+  handleChange: function(nodeId, e){
     var val = e.target.value;
 
     axios.put(`/api/nodes/${nodeId}`, {
@@ -189,7 +184,7 @@ const SingleForm = React.createClass({
     })
     .then(updatedNode => updatedNode.data)
     .then(updatedNode => {
-    	this.props.saveNode(val, nodeId);
+      this.props.saveNode(val, nodeId);
     })
 
   },
@@ -217,23 +212,23 @@ const SingleForm = React.createClass({
     })
   },
 
-	render: function(){
+  render: function(){
 
-		const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
-		const repeatOption = options.map((item, i) => {
-			return (
-				<option key={i}>{item.name}</option>
-				)
-		});
+    const options = [{name:"YesNo", value:"YesNo"}, {name:"Multiple", value:"Multiple"}, {name:"Either", value:"Either"}, {name: "Quantity", value:"Quantity"}];
+    const repeatOption = options.map((item, i) => {
+      return (
+        <option key={i}>{item.name}</option>
+        )
+    });
 
-		const answers = [];
-		for(var key in this.props.connection){
-			if(this.props.connection[key].fromId === this.props.id){
-				answers.push(this.props.connection[key]);
-			}
-		}
+    const answers = [];
+    for(var key in this.props.connection){
+      if(this.props.connection[key].fromId === this.props.id){
+        answers.push(this.props.connection[key]);
+      }
+    }
 
-		const answersDiv = answers.map((ans, i) => {
+    const answersDiv = answers.map((ans, i) => {
       // added this //
       let divClassName = classNames({
         answer: true,
@@ -242,28 +237,28 @@ const SingleForm = React.createClass({
       });
       // TODO: GIVE ANSWER DIV A HEIGHT AND SET SCROLL / OVERFLOW
 
-			return (
+      return (
         <div key={i} className="form-group">
-  				<div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans)}>
-  					{/*<label><h4>{ans.answer}</h4></label>*/}
+          <div className={divClassName} key={i} value={ans.id} onClick={this.selectAnswer.bind(this, ans)}>
+            {/*<label><h4>{ans.answer}</h4></label>*/}
             <input className="form-control" value={ans.answer} onChange={this.changeOptionValue.bind(this, ans)} onBlur={this.updateConnection.bind(this, ans)} />
             <span className="input-group-btn">
               <button className="btn btn-primary btnAdd" onClick={this.addNewNode.bind(this, ans.id)}><span className="glyphicon glyphicon-plus"></span></button>
             </span>
-  				</div>
+          </div>
         </div>
-			)
-		})
+      )
+    })
 
 
-	    return (
+      return (
 
-	    	<div className="fade-in nodeBox">
+        <div className="panel panel-primary nodeBox fade-in">
 
-					<button className="btn-remove" onClick={this.removeNode}>x</button>
+          <button className="btn-remove" onClick={this.removeNode}>x</button>
 
-	    		<div className="formQuest">
-	    			<h4><b>Question: </b></h4>
+          <div className="formQuest">
+            <h4><b>Question: </b></h4>
             <ContentEditable
               html={this.props.question} // innerHTML of the editable div
               disabled={false}       // use true to disable edition
@@ -273,7 +268,7 @@ const SingleForm = React.createClass({
             {/*<p contentEditable={true}>{this.props.question}</p>*/}
 
           </div>
-          <div className="formAns">
+          <div className="panel-body">
             <div ref="answerSelect">
               <h4><b>Answers:</b></h4>
               {answersDiv}
@@ -297,10 +292,10 @@ const SingleForm = React.createClass({
               </form>
             </div>
 
-	    		</div>
-	    	</div>
-	    )
-	}
+          </div>
+        </div>
+      )
+  }
 });
 
 export default SingleForm
