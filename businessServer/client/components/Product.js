@@ -62,7 +62,7 @@ const Product = React.createClass({
     const productDiv = this.props.product.map((product, i) => {
       return (
 
-        <div key={i} onClick={this.selectProduct.bind(this, product)}>
+        <div className="product-div" key={i} onClick={this.selectProduct.bind(this, product)}>
            {product.name}
         </div>
 

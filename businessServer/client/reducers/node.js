@@ -1,5 +1,10 @@
 function node(state=[], action){
   switch(action.type){
+    case 'REMOVE_LEAF_NODE':
+      var newState = {...state};
+      newState[action.nodeId].leafNode = false;
+      return newState;
+      break;
     case 'LOAD_NODES':
       var newState = {};
       action.nodes.forEach(node => {
@@ -17,7 +22,6 @@ function node(state=[], action){
           }
         })
       })
-      console.log(newState);
       return newState;
       break;
 
@@ -37,11 +41,11 @@ function node(state=[], action){
         newState[action.fromId].conns = [];
       }
       newState[action.fromId].conns.push(action.connId);
-      console.log(newState);
       return newState;
       break;
 
     case 'ADD_NODE':
+      // find node that is connecting to the new node and change the leaf node value
       console.log(state);
       var newState = {...state};
       newState[action.newNodeId] = {
@@ -49,7 +53,9 @@ function node(state=[], action){
         layer: action.layer,
         topLevel: action.topLevel,
         productId: action.productId,
-        conns: []
+        conns: [],
+        topLevelNodeIndex: action.topLevelNodeIndex,
+        leafNode: action.leafNode
       }
       return newState;
       break;
@@ -57,23 +63,24 @@ function node(state=[], action){
     case 'SAVE_NODE':
 
       var newState = {...state};
-      console.log(newState);
       newState[action.thisNodeId].question = action.question;
 
       return newState;
       break;
 
-    case 'ADD_TOP_LAYER_NODE':
-      var newState = {...state};
-      newState[action.newNodeId] = {
-          id:action.newNodeId,
-          layer: action.layer,
-          productId: action.productId,
-          topLevel: action.topLevel,
-          conns: []
-      }
-      return newState;
-      break;
+    // case 'ADD_TOP_LAYER_NODE':
+    //   var newState = {...state};
+    //   newState[action.newNodeId] = {
+    //       id:action.newNodeId,
+    //       layer: action.layer,
+    //       productId: action.productId,
+    //       topLevel: action.topLevel,
+    //       conns: [],
+    //       topLevelNodeIndex: action.topLevelNodeIndex,
+    //       leafNode: action.leafNode
+    //   }
+    //   return newState;
+    //   break;
 
     default:
       return state;
