@@ -4,6 +4,7 @@ import Product from './Product';
 import Layer from './Layer';
 import TopLayer from './topLayer';
 import axios from 'axios';
+import TestBox from './TestBox';
 
 
 const MainContainer = React.createClass({
@@ -125,6 +126,7 @@ const MainContainer = React.createClass({
         <div className="extendConvo">
           {layersDiv}
         </div>
+        <TestBox/>
       </div>
 
     )
