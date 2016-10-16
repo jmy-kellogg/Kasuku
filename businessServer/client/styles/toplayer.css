@@ -8,15 +8,17 @@
  /* margin-top: 10px;*/
 /*  position: relative;*/
    position: absolute;
-   height: 1000px;
-   width: 300px;
+   height: 90vh;
+   width: 310px;
+   overflow-y: auto;
+   overflow-x: hidden;
 /*  overflow: scroll;*/
 }
 .addtoplayernode{
   height: 200px;
   width: 100%;
   text-align: center;
-  font-size: 5em; 
+  font-size: 5em;
   padding: 20%;
   background: rgba(63,62,58, 0.5)
 }
@@ -25,4 +27,21 @@
     background-image: none;
     color: white;
     border-radius: 5px;
+}
+
+#toplayer-container::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+#toplayer-container::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+#toplayer-container::-webkit-scrollbar-thumb
+{
+  background-color: #BBBBBB;
+  border: 0px;
 }

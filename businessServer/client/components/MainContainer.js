@@ -5,6 +5,7 @@ import Layer from './Layer';
 import TopLayer from './topLayer';
 import axios from 'axios';
 import TestBox from './TestBox';
+import Modal from './Modal';
 
 
 const MainContainer = React.createClass({
@@ -41,8 +42,7 @@ const MainContainer = React.createClass({
         axios.get(`/api/nodes/`)
           .then(res => res.data)
           .then(nodes => {
-            console.log(nodes);
-            console.log(_productIds)
+
             nodes.forEach(node => {
               if(_productIds.includes(+node.productId)){
                 _nodesIdArr.push(node.id);
@@ -63,7 +63,6 @@ const MainContainer = React.createClass({
                   _topLevelNodes[node.productId].push(node);
               }
             })
-            console.log(_topLevelNodes);
             this.props.loadTopLevelNodes(_topLevelNodes);
 
             this.props.loadNodes(_nodesArr);
@@ -90,12 +89,11 @@ const MainContainer = React.createClass({
   },
 
   render: function(){
+    console.log(this.props)
 
-    console.log(this.props.prodSelected);
     var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
-      console.log(layer);
       return (
         <div className="layerCol" key={i}>
         {/*layer {i+3}*/}

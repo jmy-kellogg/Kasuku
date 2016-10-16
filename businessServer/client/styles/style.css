@@ -117,10 +117,6 @@ body{
 
 
 
-
-
-
-
 @import ('./navbar.css');
 @import ('./product.css');
 @import ('./singleForm.css');
@@ -129,3 +125,4 @@ body{
 @import ('./home.css');
 @import ('./layer.css');
 @import ('./testbox.css');
+@import ('./modal.css');

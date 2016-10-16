@@ -6,17 +6,25 @@ import axios from 'axios';
 const TopLayer = React.createClass({
     addTopLayerNode: function(e){
     var currentConn;
+
+    var newTopLevelIndex = 0;
+    if(this.props.topLevelNodes[this.props.prodSelected]){
+      newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
+    }
     e.preventDefault();
     axios.post('/api/nodes', {
       question: "default question",
       productId: this.props.prodSelected,
       topLevel: true,
-      layer: 1
+      layer: 1,
+      topLevelNodeIndex: newTopLevelIndex,
+      leafNode: true
+
     })
     .then(node => node.data)
     .then(node => {
     // console.log(this.props);
-      this.props.addNewNode(node.productId, node.id, 1, true, node.productId);
+      this.props.addNewNode(node.productId, node.id, 1, true, node.productId, newTopLevelIndex, true);
       return node;
     })
     .then(node => {
@@ -31,9 +39,10 @@ const TopLayer = React.createClass({
   scrollTo: function(i, e){
         e.preventDefault();
         var place = "#nodeContainer" + i
-        console.log("scrooled", place)
-        $('html,body').animate({
-        scrollTop: $(place).offset().top-74},
+        console.log($(place).position())
+        console.log($('.toplayer-container').scrollTop())
+        $('.toplayer-container').animate({
+        scrollTop: $('.toplayer-container').scrollTop() + $(place).offset().top - 74},
         'slow');
   },
   handleSelected: function(node, e){
@@ -64,11 +73,10 @@ render: function(){
       </div>
     )
   })
-  console.log(nodesDiv);
   return (
-   <div className='toplayer-container'>
+   <div className='toplayer-container' id='toplayer-container'>
       {nodesDiv}
-      <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div>
+      {this.props.prodSelected >= 0 ? <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
    </div>
 )
    }

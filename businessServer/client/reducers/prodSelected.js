@@ -1,13 +1,9 @@
-function prodSelected(state=[], action){
+function prodSelected(state=-1, action){
   switch(action.type){
     case 'LOAD_CONNECTIONS':
-      if(action.connections.length > 0)
-      {
-        return action.connections[0];
-      }
-      else{
-        return state;
-      }
+      // maybe remove this case
+
+      return state;
       break;
     case 'SET_SELECTED_PRODUCT':
         return action.productId;

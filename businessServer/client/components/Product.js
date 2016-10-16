@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import axios from 'axios';
 import InlineEdit from './InlineEdit';
 import classNames from 'classnames';
-import TestBox from './TestBox';
+
+import Modal from './Modal';
 
 const Product = React.createClass({
 
@@ -36,7 +37,6 @@ const Product = React.createClass({
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
-    console.log(businessId);
     axios.post('/api/connections/', {
       answer: answer,
       fromId: null,
@@ -48,7 +48,6 @@ const Product = React.createClass({
     })
     .then(conn => conn.data)
     .then(conn => {
-      console.log(conn);
       axios.put(`/api/connections/${conn.id}`, {
         productId: conn.id
       })
@@ -69,7 +68,6 @@ const Product = React.createClass({
 
 
     const productDiv = this.props.product.map((product, i) => {
-      console.log(product.id)
       let divClassName = classNames({
         "product-box": true,
         "hightlight": this.state.currentProduct === product.id
@@ -110,6 +108,7 @@ const Product = React.createClass({
             <input ref="description" name="description"></input>*/}
           </form>
         </div>
+        <Modal/>
 
 
       </div>

@@ -29,9 +29,9 @@ const TestBox = React.createClass({
   },
 
   render: function(){
-    const messagesDiv = this.state.messages.map(message => {
+    const messagesDiv = this.state.messages.map((message,i) => {
       return (
-        <li className={message.fromUser ? "ChatLog__entry ChatLog__entry_mine" : "ChatLog__entry"}  >
+        <li key={i} className={message.fromUser ? "ChatLog__entry ChatLog__entry_mine" : "ChatLog__entry"}  >
           <p className="ChatLog__message">
             {message.message}
           </p>
