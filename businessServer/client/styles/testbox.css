@@ -1,23 +1,28 @@
 
 #test-container{
-  height: 301px;
-  width: 300px;
+  height: 65%;
+  width: 25%;
   margin: 0;
   padding: 0;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 10px;
+  right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   vertical-align: bottom;
 }
 
 .test-box {
+  overflow: hidden;
   border-width: 3px;
   border-style: solid;
   background: white;
-  border-radius: 10%;
+  border-radius: 20px;
 
+}
+
+#chat-input {
+  width: 90%;
 }
 
 .test-input{
@@ -37,9 +42,10 @@
 .test-form{
   position: fixed;
   bottom: 0;
-  right: 0;
+  width: auto;
   margin-bottom:  15px;
-  margin-right: 15px;
+  margin-left: 20px;
+  /*margin-right: 15px;*/
 }
 
 .test-input::focus{
@@ -47,21 +53,21 @@
 }
 
 .test-send-btn{
-  width: 30px;
-  height: 30px;
+  width: 33px;
+  height: 33px;
   background-color: #FFFFFF;
   outline: none;
   border: none;
 
 }
 .test-send-img{
-  margin-bottom:  25px;
-  margin-right: 25px;
+  /*margin-bottom:  25px;
+  margin-right: 25px;*/
   height: auto;
   width: auto;
   max-height: 30px;
   max-width: 30px;
-  position: fixed;
+  /*position: fixed;*/
   bottom: 0;
   right: 0;
 
@@ -70,6 +76,34 @@
 
 ul.ChatLog {
   list-style: none;
+}
+
+#ChatLog-container {
+  position: relative;
+  /*border: 1px solid red;*/
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 480px;
+  top: 30px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+#ChatLog-container::-webkit-scrollbar-track
+{
+  background-color: #FFFFFF;
+}
+
+#ChatLog-container::-webkit-scrollbar
+{
+  width: 5px;
+  background-color: #FFFFFF;
+}
+
+#ChatLog-container::-webkit-scrollbar-thumb
+{
+  background-color: #BBBBBB;
+  border: none;
 }
 
 .ChatLog {
@@ -171,7 +205,7 @@ ul.ChatLog {
 }
 
 
-#test-container::-webkit-scrollbar-track
+/*#test-container::-webkit-scrollbar-track
 {
   background-color: #FFFFFF;
 }
@@ -187,3 +221,4 @@ ul.ChatLog {
   background-color: #BBBBBB;
   border: none;
 }
+*/
