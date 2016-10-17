@@ -1,18 +1,15 @@
 .toplayer-container{
-/*  width: 500px;*/
-/*\\  height: 90vh;*/
+  width: 310px;
+  height: 90vh;
   display: block;
   margin-left: 200px;
   float: left;
   clear: both;
  /* margin-top: 10px;*/
 /*  position: relative;*/
-   position: absolute;
-   height: 90vh;
-   width: 310px;
-   overflow-y: auto;
-   overflow-x: hidden;
-/*  overflow: scroll;*/
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .addtoplayernode{
   height: 200px;
@@ -44,4 +41,33 @@
 {
   background-color: #BBBBBB;
   border: 0px;
+}
+.question.active div.nodeBox {
+  background-color: rgba(226,110,85, 0.5);
+  border-color: rgb(63,62,58);
+  margin-bottom: 0px;
+}
+.question.active div.formQuest{
+  background-color: rgb(226,110,85);
+}
+.question.active div.answer.active{
+  background-color: rgb(63,62,58);
+  color: white;
+}
+.question.active  div.answer.active input{
+  background-color:rgba(241,243,232, 0.2);
+  width: 100%;
+  color: white;
+  border: 1px rgb(63,62,58);
+  border-radius: 0px;
+}
+.question div.answer.active{
+  background: transparent;
+  color: black;
+}
+.question .answer.active input{
+  background-color: white;
+  color: black;
+  border: 1px rgb(63,62,58);
+  border-radius: 0px;
 }

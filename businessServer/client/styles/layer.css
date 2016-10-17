@@ -6,6 +6,7 @@
     width: 2000px;
     display: flex;
     overflow-x: scroll;
+    float: left;
 }
 
 .layerCol{

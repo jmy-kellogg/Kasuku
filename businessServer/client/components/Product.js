@@ -12,12 +12,14 @@ const Product = React.createClass({
   getInitialState: function(){
     return {
       showLayers: false,
-      showGreetingNode: false
+      showGreetingNode: false,
+      currentProduct: false
     }
   },
   selectProduct: function(product, e){
     this.setState({showLayers: true});
     this.props.setSelectedProduct(product.id);
+    this.state.currentProduct = product.id;
   },
 
 
@@ -78,8 +80,8 @@ const Product = React.createClass({
         <div>
          <div>
           <div>
-            <div>
-              <h2>Product List:</h2>
+            <div className="productHeader">
+              <h3>Product List:</h3>
             </div>
               {productDiv}
             </div>

@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var request = require('request');
 var fbAPI = require('../../ourFbHelpers/fbAPI');
+var chalk = require('chalk');
 module.exports = router;
 
 var db = require('../../models')
@@ -17,20 +18,21 @@ var BUSINESSID = 1;
 // Use puts the business on the req object as fbRequester;
 
 router.use('/:name', function(req, res, next) {
-  // console.log("***** USE ROUTE: /users/:name for name:", req.params.name);
+  console.log("********** USE ROUTE: /users/:name for name:", req.params.name);
   var requester = { userName: req.params.name};
   
-  Business.findOne({where: {businessName: req.params.name}})
+  Business.findOne({where: {username: req.params.name}})
   .then(function(business) {
     if (!business) { 
-      // console.log("user not found in database");
+      console.log("user not found in database ***************************");
       return res.send(403)
     }
-
     requester.webhookToken = business.webhookToken;
     requester.pageToken = business.pageToken;
+    requester.businessId = business.id;
     req.fbRequester = requester;
  
+    console.log("----------------------------------------------------user found", requester)
     next();
   })
 });
@@ -51,9 +53,12 @@ router.get('/:name/fbwebhook', function(req, res, next) {
 
 
 router.post('/:name/fbwebhook', function(req, res, next) {
+  console.log(chalk.red("Got to post on /users/:name/fbwebhook"), req.requester); 
   console.log("Got to post on /users/:name/fbwebhook"); 
+  
   var data = req.body;
   var pageToken = req.fbRequester.pageToken;
+  var businessId = req.fbRequester.businessId;
   //Make sure this is a page subscription 
   if (data.object === 'page') {
     // Iterate over each entry
@@ -68,11 +73,11 @@ router.post('/:name/fbwebhook', function(req, res, next) {
         if (messagingEvent.optin) {
           // receivedAuthentication(messagingEvent, pageToken);
         } else if (messagingEvent.message) {
-          fbAPI.receivedMessage(messagingEvent, pageToken);
+          fbAPI.receivedMessage(messagingEvent, pageToken, businessId);
         } else if (messagingEvent.delivery) {
           //receivedDeliveryConfirmation(messagingEvent);
         } else if (messagingEvent.postback) {
-          fbAPI.receivedPostback(messagingEvent, pageToken);
+          fbAPI.receivedPostback(messagingEvent, pageToken, businessId);
         } else {
           // console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
