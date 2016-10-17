@@ -246,11 +246,11 @@ function sendGenericMessage(recipientId, pageToken, businessId) {
 }
 
 function receivedPostback(event, pageToken, businessId) {
-    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var recipientId = '' + recipientID;
     var timeOfPostback = event.timestamp;
+    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
@@ -275,11 +275,11 @@ function receivedPostback(event, pageToken, businessId) {
           console.log("xyz found business", _business)
           headNodeId = _business.headNodeId
           console.log("xyz headNodeId", headNodeId)
-          return Chatter.findOne({ where: { fbAccount: recipientId } })
+          return Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         })
         .then( (_chatter) => {
           chatterId = _chatter[0].id
-          console.log("xyz OUND chatter", chatterId, "who is", _chatter)
+          console.log("xyz OUND chatter", chatterId, "who is", _chatter, _chatter.id)
           return Conversation.findOne({
                 where: { chatterId: chatterId, businessId: businessId }
             })
