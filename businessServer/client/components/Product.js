@@ -32,7 +32,7 @@ const Product = React.createClass({
     var businessId = this.props.params.businessId;
     axios.post('/api/connections/', {
       answer: answer,
-      fromId: null,
+      fromId: 1,
       // if fromId is null, must be product
       productId: null,
       businessId,
@@ -47,7 +47,7 @@ const Product = React.createClass({
         .then(res => res.data)
         .then(updatedConn => {
           // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
-          this.props.addProductAction(conn.id, answer, null, businessId, price, description, conn.id);
+          this.props.addProductAction(conn.id, answer, 1, businessId, price, description, conn.id);
         })
     })
     .catch(err => {
