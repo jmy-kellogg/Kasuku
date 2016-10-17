@@ -4,8 +4,6 @@ import axios from 'axios';
 import InlineEdit from './InlineEdit';
 import classNames from 'classnames';
 
-import Modal from './Modal';
-
 const Product = React.createClass({
 
 
@@ -102,8 +100,6 @@ const Product = React.createClass({
             <input ref="description" name="description"></input>*/}
           </form>
         </div>
-        <Modal/>
-
 
       </div>
     )

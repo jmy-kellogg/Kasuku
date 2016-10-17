@@ -22,10 +22,10 @@
   border-style: solid;
   border-width: 4px;
   border-color: rgb(134,211,191);
-  width: 300px;
+  width: 298px;
   height: 100%;
   display: block;
-  margin: 10px 0px;
+  margin: 0px 5px 10px 5px;
 }
 .nodeBox select{
   color: black;

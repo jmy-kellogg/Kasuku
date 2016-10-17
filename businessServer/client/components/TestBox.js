@@ -9,8 +9,10 @@ const TestBox = React.createClass({
       messages: []
     }
   },
+
   sendMessage: function(e){
     e.preventDefault();
+    $('#test-container').scrollTop = $('#test-container').scrollHeight;
 
     var message = this.refs.messageInput.value;
     this.refs.messageInput.value = "";
@@ -39,7 +41,7 @@ const TestBox = React.createClass({
       )
     })
     return (
-      <div className="test-box" id="messenger-test-container">
+      <div className="test-box" id="test-container">
 
         <div>
           <ul className="ChatLog">
@@ -47,9 +49,11 @@ const TestBox = React.createClass({
           </ul>
         </div>
 
-        <form>
-        <input ref="messageInput"/>
-        <button onClick={this.sendMessage}>send</button>
+        <form className="test-form">
+        <input className="test-input" ref="messageInput"/>
+        <button className="test-send-btn" onClick={this.sendMessage}>
+          <img className="test-send-img" src={require('./images/send2.jpg')}/>
+        </button>
         </form>
       </div>
     )

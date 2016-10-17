@@ -100,7 +100,7 @@ const MainContainer = React.createClass({
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
-        <div className="extendConvo">
+        <div id="extendConvo" className="extendConvo">
           {layersDiv}
         </div>
         <TestBox/>

@@ -1,8 +1,8 @@
 .toplayer-container{
-  width: 310px;
+  width: 313px;
   height: 90vh;
   display: block;
-  margin-left: 220px;
+  margin-left: 202px;
   float: left;
   clear: both;
  /* margin-top: 10px;*/
@@ -28,24 +28,23 @@
 
 #toplayer-container::-webkit-scrollbar-track
 {
-  background-color: #F5F5F5;
+  background-color: #FFFFFF;
 }
 
 #toplayer-container::-webkit-scrollbar
 {
-  width: 10px;
-  background-color: #F5F5F5;
+  width: 7px;
+  background-color: #FFFFFF;
 }
 
 #toplayer-container::-webkit-scrollbar-thumb
 {
-  background-color: #BBBBBB;
+  background-color: #CCCCCC;
   border: 0px;
 }
 .question.active div.nodeBox {
   background-color: rgba(226,110,85, 0.5);
   border-color: rgb(63,62,58);
-  margin-bottom: 0px;
 }
 .question.active div.formQuest{
   background-color: rgb(226,110,85);

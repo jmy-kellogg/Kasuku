@@ -1,10 +1,50 @@
-#messenger-test-container{
-  height: 300px;
-  width: 100%;
+
+#test-container{
+  height: 301px;
+  width: 300px;
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
   overflow-x: hidden;
+  vertical-align: bottom;
+}
+.test-input{
+  display: inline-block;
+  margin: 0;
+  right: 0;
+  width: 50%;
+  font-family: sans-serif;
+  font-size: 12px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+
+}
+.test-form{
+
+}
+
+.test-input::focus{
+  outline: none;
+}
+
+.test-send-btn{
+  width: 30px;
+  height: 30px;
+  background-color: #FFFFFF;
+  outline: none;
+  border: none;
+
+}
+.test-send-img{
+  height: auto;
+  width: auto;
+  max-height: 30px;
+  max-width: 30px;
+
 }
 
 
@@ -110,19 +150,18 @@ ul.ChatLog {
 }
 
 
-
-#messenger-test-container::-webkit-scrollbar-track
+#test-container::-webkit-scrollbar-track
 {
-  background-color: #F5F5F5;
+  background-color: #FFFFFF;
 }
 
-#messenger-test-container::-webkit-scrollbar
+#test-container::-webkit-scrollbar
 {
-  width: 10px;
-  background-color: #F5F5F5;
+  width: 5px;
+  background-color: #FFFFFF;
 }
 
-#messenger-test-container::-webkit-scrollbar-thumb
+#test-container::-webkit-scrollbar-thumb
 {
   background-color: #BBBBBB;
   border: none;
