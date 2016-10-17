@@ -43,11 +43,11 @@
   border: 0px;
 }
 .question.active div.nodeBox {
-  background-color: rgba(226,110,85, 0.5);
-  border-color: rgb(63,62,58);
+  background-color: rgb(188,235,215);
+  border-color: rgb(134,211,191);
 }
 .question.active div.formQuest{
-  background-color: rgb(226,110,85);
+  background-color: rgb(134,211,191);
 }
 .question.active div.answer.active{
   background-color: rgb(63,62,58);
@@ -59,6 +59,20 @@
   color: white;
   border: 1px rgb(63,62,58);
   border-radius: 0px;
+}
+.question.active button.btnAdd{
+  background-color: rgb(134,211,191);
+}
+
+.question div.nodeBox {
+  background-color: rgb(241,243,232);
+  border-color:rgb(219,225,189)
+}
+.question div.formQuest{
+  background-color: rgb(219,225,189);
+}
+.question button.btnAdd{
+  background-color: rgb(219,225,189);
 }
 .question div.answer.active{
   background: transparent;

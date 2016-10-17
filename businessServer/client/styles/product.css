@@ -2,8 +2,8 @@
 .ProductPage{
   width: 200px;
   height: 90vh;
-  background-color:rgb(226,110,85);
-  border: 3px solid rgb(63,62,58);
+  background-color:rgb(241,243,232);
+  border: 3px solid rgb(219,225,189);
   position: fixed;
   float: left;
   z-index : 1;
@@ -12,7 +12,7 @@
 .productHeader{
     text-align: center;
     font-weight: bold;
-    background: rgba(241,243,232, 0.1);
+    background: rgb(219,225,189);
     padding-top: 2px;
     padding-bottom: 2px;
     border: 0px 0px 2px 0px solid rgb(63,62,58);
@@ -22,15 +22,17 @@
 }
 .product-box{
   text-align: center;
+  background: rgba(219,225,189, 0.5);
   padding: 0 -2px 2px -2px;
   margin-bottom: -1px;
-  border: 2px solid rgb(63,62,58);
+  border: 2px solid rgb(219,225,189);
   width: 100%
 }
 .product-box:hover{
-  color: white;
+  color: rgb(51,122,183);
   cursor:pointer;
 }
+
 .hightlight{
   color: white;
   background-color: rgb(63,62,58);
@@ -67,7 +69,7 @@
 }
 .productName input{
    border: 1px solid rgb(63,62,58, 0.7);
-   background: rgb(241,243,232);
+   background:rgb(219,225,189);
    color: black;
    margin: 5px;
    width: 70%;
