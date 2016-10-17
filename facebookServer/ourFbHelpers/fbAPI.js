@@ -294,10 +294,15 @@ function receivedPostback(event, pageToken, businessId) {
             } else {
               return Business.findById(businessId)
                 .then((business) => {
-                  _convo.update({ nodeId: business.headNodeId }) 
+                    console.log(business)
+                  return _convo.update({ nodeId: business.headNodeId }) 
                 })
+
             }
         })
+        .then((_convo) => {
+                  console.log("UPDATED CONVO", _convo)
+              })
         break;
       }
       case 'CHECKOUT_ORDER': {
