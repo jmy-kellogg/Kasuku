@@ -280,7 +280,7 @@ function receivedPostback(event, pageToken, businessId) {
           chatterId = _chatter[0].id
           console.log("xyz OUND chatter", chatterId, "who is", _chatter)
           return Conversation.findOne({
-                where: { done: false, chatterId: chatterId, businessId: businessId }
+                where: { chatterId: chatterId, businessId: businessId }
             })
         })
         .then( (_convo) => {
