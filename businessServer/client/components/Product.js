@@ -92,7 +92,7 @@ const Product = React.createClass({
             <div className="productName">
             <input ref="productname" name="productname"/>
             <input type="submit" hidden />
-            <button className="btnAdd"onClick={this.addProduct}><span className="glyphicon glyphicon-plus"></span></button>
+            <button className="btnAdd btnAddProduct"onClick={this.addProduct}><span className="glyphicon glyphicon-plus"></span></button>
             </div>
             {/*<label htmlFor="price">Price:</label>
             <input ref="price" name="price"></input>
