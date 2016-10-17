@@ -73,6 +73,7 @@
 #navbar-logo-image-left {
   float: left;
   /*border: 2px solid red;*/
+  padding: 12px 10px 10px 10px;
   width: 9vh;
   height: 9vh;
 }
@@ -80,6 +81,7 @@
 #navbar-logo-image-right {
   float: right;
   /*border: 2px solid red;*/
+  padding: 12px 10px 10px 10px;
   width: 9vh;
   height: 9vh;
 }
