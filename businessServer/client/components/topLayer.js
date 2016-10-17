@@ -9,8 +9,6 @@ const TopLayer = React.createClass({
   scrollTo: function(node, e){
         e.preventDefault();
         var place = "#nodeContainer" + node.id
-        console.log($(place).position());
-        console.log($('.toplayer-container').scrollTop())
         $('.toplayer-container').animate({
         scrollTop: $('.toplayer-container').scrollTop() + $(place).offset().top - 74},
         'slow');
@@ -23,7 +21,6 @@ const TopLayer = React.createClass({
       };
   },
   addTopLayerNode: function(e){
-      // console.log(this.props.topLevelNodes[this.props.prodSelected])
       // this.props.topLevelNodes[this.props.prodSelected] this is an array of the top level nodes for the selected product
     var currentConn;
 
@@ -44,7 +41,6 @@ const TopLayer = React.createClass({
     })
     .then(node => node.data)
     .then(node => {
-    // console.log(this.props);
 
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId, newTopLevelIndex, true);
       return node;
@@ -79,7 +75,6 @@ render: function(){
     else{
       q = "I'm a question? Fill me out.";
     };
-    console.log("currentnode", node.id)
       // added this //
       let divClassName = classNames({
         "question": true,

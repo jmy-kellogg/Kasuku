@@ -16,9 +16,6 @@ const MainContainer = React.createClass({
     var _products = [];
     var _productIds = [];
     var _topLevelNodes = {};
-    var sortNumbers = function(a,b){
-      return a-b;
-    }
 
     if(this.props.params.businessId){
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
@@ -53,7 +50,6 @@ const MainContainer = React.createClass({
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
             // this.props.setHeadNode(headNodeId);
-            // console.log(_nodesIdArr);
 
             _nodesArr.forEach(node => {
               if(node.topLevel){
@@ -66,12 +62,8 @@ const MainContainer = React.createClass({
             this.props.loadTopLevelNodes(_topLevelNodes);
 
             this.props.loadNodes(_nodesArr);
-            // console.log(_nodesArr);
 
             this.props.loadNodeConnections(_nodesArr, _allConnections);
-            // TODO: INITIALIZE TOP LEVEL NODES
-            // object where product id is the key and the top layer nodes are in an array.
-
 
           })
 
@@ -89,14 +81,12 @@ const MainContainer = React.createClass({
   },
 
   render: function(){
-    console.log(this.props)
 
     var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
       return (
         <div className="layerCol" key={i}>
-        {/*layer {i+3}*/}
           <Layer {...this.props} key={i} layer={i+2} data={layer} />
         </div>
       )

@@ -52,24 +52,31 @@ router.post('/', function(req, res, next) {
 // });
 
 router.delete('/:id', (req, res, next) => {
+  var connVisited = [];
+  var nodeVisited = [];
 
   var removeAll = function(id){
+
     return Node.findById(id, {
       include: [
       {model: Connection, as: 'from'}
       ]
     })
     .then(node => {
+      nodeVisited.push(node.id);
       Promise.all(
       node.from.forEach(conn => {
-        if(conn.toId){
+        if(conn.toId && !nodeVisited.includes(conn.toId) && !node.leafNode){
           removeAll(conn.toId);
         }
-        return Connection.destroy({
-          where: {
-            id: conn.id
-          }
-        })
+        if(!connVisited.includes(conn.id)){
+          connVisited.push(conn.id);
+          return Connection.destroy({
+            where: {
+              id: conn.id
+            }
+          })
+        }
       }))
       return node;
     })

@@ -46,7 +46,7 @@ const SingleForm = React.createClass({
       if(nodes[nodeId].conns){
         nodes[nodeId].conns.forEach(connId => {
           connsForRemoval.push(connId);
-          if(connections[connId].toId && !visited.includes(connections[connId].toId)){
+          if(connections[connId].toId && !visited.includes(connections[connId].toId) && !nodes[connections[connId].fromId].leafNode){
             visited.push(connections[connId].toId)
             getAllForRemoval(connections[connId].toId);
           }
@@ -96,7 +96,6 @@ const SingleForm = React.createClass({
     else{
       nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
     }
-    console.log(nextTreePointer);
 
 		this.refs.answer.value = "";
 
@@ -113,8 +112,7 @@ const SingleForm = React.createClass({
 		.then(conn => conn.data)
 		.then(conn => {
 			// set business ID once business ids are set up.  but keep as null for now.
-			var businessId = null;
-			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, businessId);
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, this.props.params.businessId);
 		})
 		.catch(e => {
 			if(e) throw e;
@@ -150,6 +148,12 @@ const SingleForm = React.createClass({
       .then(node => {
         axios.put(`/api/connections/${answerId}`, {
           toId: node.id
+        })
+        .then(conn => conn.data)
+        .then(conn => {
+          axios.put(`/api/nodes/${conn.fromId}`, {
+            leafNode: false
+          })
         })
       })
       .catch(err => {
