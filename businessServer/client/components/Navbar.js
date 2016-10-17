@@ -4,8 +4,14 @@ import { Nav, Navbar, NavItem, MenuItem, NavDropdown, inverse } from 'react-boot
 // post name to database.  get id from database.  add id to product
 
 const NavBar = React.createClass({
-
+  getInitialState() {
+    return {
+      displaySave: true,
+      displayLogin: true
+    }
+  },
 	render: function() {
+    let displaySignupLogin = !(document.URL.match('/businesses') || document.URL.match('/chatbot'))
   return (
 
 <nav id="navbar-primary" className="navbar" role="navigation">
@@ -24,8 +30,8 @@ const NavBar = React.createClass({
         <li className="active"><a href="/chatbot/1" className="navbar-link" onClick={this.createHeadNode}>Make Bot</a></li>
         <li><a href="/businesses/1" className="navbar-link">Business</a></li>
         <li><a href="/" className="navbar-link" id="NavBarLogo">Kasuku</a></li>
-        <li><a href="/Signup" className="navbar-link">Sign Up</a></li>
-        <li><a href="/Login" className="navbar-link">Log In</a></li>
+        <li><a href="/Signup" className="navbar-link">{ displaySignupLogin ? 'Sign Up' : 'Help' }</a></li>
+        <li><a href="/Login" className="navbar-link">{ displaySignupLogin ? 'Log In' : 'Signout' }</a></li>
       </ul>
     </div>
   </div>
