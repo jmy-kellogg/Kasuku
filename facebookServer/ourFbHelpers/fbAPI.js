@@ -255,7 +255,7 @@ function receivedPostback(event, pageToken, businessId) {
     var payload = event.postback.payload;
     var chatterId, currentConvo;
 
-    console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
+    console.log("Postback-----", senderID, recipientID, timeOfPostback, payload);
     console.log("event", event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
@@ -268,7 +268,7 @@ function receivedPostback(event, pageToken, businessId) {
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
         console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
-        Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+        Chatter.findOrCreate({ where: { fbAccount: recipientID } })
         .then(chatter => {
             chatterId = chatter[0].id
             console.log("CHATTERID 1".repeat(100), chatterId);
