@@ -45,26 +45,27 @@ const TestBox = React.createClass({
       )
     })
     return (
-      <div className="test-box" id="test-container">
-
-        <div id="ChatLog-container">
-          <ul className="ChatLog">
-            {messagesDiv}
-          </ul>
-        </div>
-
-        <form className="test-form">
-          <div className="form-group" >
-            <div className="input-group" id="chat-input">
-              <input className="form-control" ref="messageInput"  />
-              <span className="input-group-btn">
-                <button className="test-send-btn" onClick={this.sendMessage}>
-                  <img className="test-send-img" src={require('./images/send2.jpg')}/>
-                </button>
-              </span>
-            </div>
+      <div className="test-phone">
+        <img src="http://www.fonestech.co.uk/DataImages/Service/item_4_iphone%205s%20white.png"/>
+        <div className="test-box" id="test-container">
+          <div id="ChatLog-container">
+            <ul className="ChatLog">
+              {messagesDiv}
+            </ul>
           </div>
-        </form>
+        </div>
+          <form className="test-form">
+            <div className="form-group" >
+              <div className="input-group" id="chat-input">
+                <input className="form-control" ref="messageInput"  />
+                <span className="input-group-btn">
+                  <button className="test-send-btn" onClick={this.sendMessage}>
+                    <img className="test-send-img" src={require('./images/send2.jpg')}/>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
       </div>
     )
 

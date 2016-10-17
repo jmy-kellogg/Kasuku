@@ -1,28 +1,40 @@
-
-#test-container{
-  height: 65%;
-  width: 25%;
-  margin: 0;
-  padding: 0;
+.test-phone{
+  height: 80%;
+  width: 30%;
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   vertical-align: bottom;
+  margin: 0 -2% -5% 0;
+}
+.test-phone img{
+  height: 100%;
+  width: 100%;
+}
+#test-container{
+  height: 55%;
+  width: 65%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 24%;
+  right: 18%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  vertical-align: middle;
 }
 
 .test-box {
   overflow: hidden;
-  border-width: 3px;
+  border-width: 2px;
   border-style: solid;
   background: white;
-  border-radius: 20px;
-
 }
 
 #chat-input {
-  width: 90%;
+  width: 100%;
 }
 
 .test-input{
@@ -40,11 +52,10 @@
 }
 
 .test-form{
-  position: fixed;
-  bottom: 0;
-  width: auto;
-  margin-bottom:  15px;
-  margin-left: 20px;
+  position: absolute;
+  width: 64%;
+  bottom: 17%;
+  left: 17%;
   /*margin-right: 15px;*/
 }
 
