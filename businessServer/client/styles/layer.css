@@ -1,5 +1,7 @@
 .extendConvo{
 /*  height: 60vh;*/
+  z-index: 1;
+  background: transparent;
   margin-left: 518px;
     position: static;
 /*    left: 600px;*/

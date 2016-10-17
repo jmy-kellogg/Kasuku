@@ -54,15 +54,16 @@ const TestBox = React.createClass({
       )
     })
     return (
-      <div id="text-box-container">
-        <div className="test-box" id="test-container" hidden={this.state.showTest} >
 
+      <div className="test-phone">
+        <img src={require('./images/message.jpg')}/>
+        <div className="test-box" id="test-container">
           <div id="ChatLog-container">
             <ul className="ChatLog">
               {messagesDiv}
             </ul>
           </div>
-
+        </div>
           <form className="test-form">
             <div className="form-group" >
               <div className="input-group" id="chat-input">
@@ -75,10 +76,6 @@ const TestBox = React.createClass({
               </div>
             </div>
           </form>
-        </div>
-        <div>
-          <button id="toggleChatbox" onClick={this.toggleChat} className="btn btn-xs btn-success">{this.state.showTest ? 'Test' : 'Hide'}</button>
-        </div>
       </div>
     )
 

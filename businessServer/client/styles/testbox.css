@@ -1,28 +1,42 @@
-
-#test-container{
-  height: 65%;
+.test-phone{
+  height: 59%;
   width: 25%;
-  margin: 0;
-  padding: 0;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 8%;
+  right: 5%;
   overflow-y: auto;
   overflow-x: hidden;
   vertical-align: bottom;
+  margin: 0 -2% -5% 0;
+  radius: 2em;
+}
+.test-phone img{
+  height: 100%;
+  width: 100%;
+}
+#test-container{
+  height: 75%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 18%;
+  right: 0%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  vertical-align: middle;
 }
 
 .test-box {
   overflow: hidden;
-  border-width: 3px;
+  border-width: 1px;
   border-style: solid;
+  border-color: rgb(221,221,221);
   background: white;
-  border-radius: 20px;
-
 }
 
 #chat-input {
-  width: 90%;
+  width: 100%;
 }
 
 .test-input{
@@ -40,11 +54,10 @@
 }
 
 .test-form{
-  position: fixed;
-  bottom: 0;
-  width: auto;
-  margin-bottom:  15px;
-  margin-left: 20px;
+  position: absolute;
+  width: 90%;
+  bottom: 6%;
+  left: 10%;
   /*margin-right: 15px;*/
 }
 
@@ -83,10 +96,10 @@ ul.ChatLog {
   /*border: 1px solid red;*/
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 80%;
-  top: 30px;
-  margin-left: 6px;
-  margin-right: 6px;
+  max-height: 100%;
+  top: 10px;
+  margin-left: 0px;
+  margin-right: 15px;
 }
 
 #ChatLog-container::-webkit-scrollbar-track
@@ -107,7 +120,7 @@ ul.ChatLog {
 }
 
 .ChatLog {
-  max-width: 20em;
+  max-width: 25em;
   margin: 0 auto;
   padding-left: 5px;
 }
