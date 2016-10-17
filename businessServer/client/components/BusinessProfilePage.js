@@ -14,7 +14,7 @@ const BusinessProfilePage = React.createClass({
   render () {
     const businessId = this.props.params.businessId
     return (
-      <div className='container'>
+      <div className='container businessPage'>
         <div className="row">
           <div className="col-sm-8 col-sm-offset-2">
             <Tabs onSelect={this.handleSelect}>
