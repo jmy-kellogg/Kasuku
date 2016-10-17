@@ -1,5 +1,13 @@
 function product(state=[], action){
   switch(action.type){
+    case 'UPDATE_PRODUCT_TO':
+      var newState = [...state];
+      newState.forEach(product => {
+        if(product.id === action.productId){
+          product.toId = action.nodeId;
+        }
+      })
+      return newState;
     case 'LOAD_PRODUCTS':
       var newState = [];
       action.products.forEach(product => {

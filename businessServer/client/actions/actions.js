@@ -167,3 +167,19 @@ export function updateQuestion(question, id) {
     id
   }
 }
+
+export function updateProductTo(productId, nodeId){
+    return{
+        type: 'UPDATE_PRODUCT_TO',
+        productId,
+        nodeId
+    }
+}
+
+export function updateLeafNodeConnections(connsToChange, nodeId){
+    return {
+        type: 'UPDATE_CONNECTIONS_TO',
+        conns: connsToChange,
+        nodeId: nodeId
+    }
+}

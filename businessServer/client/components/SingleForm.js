@@ -46,7 +46,7 @@ const SingleForm = React.createClass({
       if(nodes[nodeId].conns){
         nodes[nodeId].conns.forEach(connId => {
           connsForRemoval.push(connId);
-          if(connections[connId].toId && !visited.includes(connections[connId].toId) && !nodes[connections[connId].fromId].leafNode){
+          if(connections[connId].toId && !visited.includes(connections[connId].toId) && !nodes[connections[connId].fromId].productId === this.props.prodSelected){
             visited.push(connections[connId].toId)
             getAllForRemoval(connections[connId].toId);
           }

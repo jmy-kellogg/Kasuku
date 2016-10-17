@@ -80,6 +80,18 @@ router.post('/', function(req, res, next) {
     res.json(_connection);
   })
 });
+router.put('/leaf', (req, res, next) => {
+  console.log(req.body);
+  Promise.all(
+    req.body.conns.forEach(conn => {
+      Connection.findById(conn.id)
+        .then(connToUpdate => {
+          connToUpdate.update({toId: req.body.toId})
+        })
+    }))
+  res.sendStatus(200);
+
+})
 
 router.put('/:connectionId', function(req, res, next){
   // update toId on connection
@@ -99,3 +111,4 @@ router.put('/:connectionId', function(req, res, next){
 
 
 })
+
