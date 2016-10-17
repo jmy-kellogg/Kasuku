@@ -2,15 +2,23 @@ import React from 'react';
 import SingleForm from './SingleForm';
 import InlineEdit from './InlineEdit';
 import axios from 'axios';
+import classNames from 'classnames';
 
 const TopLayer = React.createClass({
+  getInitialState: function() {
+    return {
+        ...this.state,
+        currentQuestion: null,
+      };
+  },
   scrollTo: function(i, e){
         e.preventDefault();
-        var place = "#nodeContainer" + i
-        console.log("scrooled", place)
-        $('html,body').animate({
-        scrollTop: $(place).offset().top-74},
-        'slow');
+        this.state.currentQuestion = i.id
+        //var place = "#nodeContainer" + i;
+        //console.log("scrooled", place)
+        // $('html,body').animate({
+        // scrollTop: $(place).offset().top-74},
+        // 'slow');
   },
   addTopLayerNode: function(e){
       // console.log(this.props.topLevelNodes[this.props.prodSelected])
@@ -68,9 +76,16 @@ render: function(){
     }
     else{
       q = "I'm a question? Fill me out.";
-    }
+    };
+    console.log("currentnode", node.id)
+      // added this //
+      let divClassName = classNames({
+        "question": true,
+        active: this.state.currentQuestion === node.id
+        })
+
    return (
-      <div key={i} id={`nodeContainer${i}`}  onClick={this.scrollTo.bind(this, i)}>
+      <div className={divClassName}key={i} id={`nodeContainer${i}`}  onClick={this.scrollTo.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
     )
@@ -79,7 +94,7 @@ render: function(){
   return (
    <div className='toplayer-container'>
     {nodesDiv}
-    {this.props.prodSelected !== undefined ? <div className='metal addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
+    {this.props.prodSelected !== undefined ? <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
    </div>
 )
    }
