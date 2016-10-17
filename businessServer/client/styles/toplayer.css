@@ -2,13 +2,13 @@
   width: 310px;
   height: 90vh;
   display: block;
-  margin-left: 200px;
+  margin-left: 220px;
   float: left;
   clear: both;
  /* margin-top: 10px;*/
 /*  position: relative;*/
   position: absolute;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 .addtoplayernode{

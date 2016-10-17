@@ -1,6 +1,6 @@
 #navbar-primary .navbar-nav {
-//  background: #ededed;
-  background-color: rgba(241,243,232, 0.9);
+/*  background: #fff;*/
+  background-color: rgba(255,255,255, 1);
   display: box;
   width: 100%;
   padding-left: 25%;
@@ -21,11 +21,15 @@
 }
 
 #NavBarLogo{
-  //  background: #ededed;
+  //  background: #fff;
   font-size: 3em;
   font-family: Helvetica;
   font-weight: bold;
   height: 70px;
   padding-top: 20px;
-  padding-bottom: 0; 
+  padding-bottom: 0;
+}
+.navbar-link{
+  color: #5cceb0;
+
 }

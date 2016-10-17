@@ -51,7 +51,7 @@ const SingleForm = React.createClass({
             getAllForRemoval(connections[connId].toId);
           }
         })
-              nodesForRemoval.push(nodeId);
+        nodesForRemoval.push(nodeId);
       }
     }
     getAllForRemoval(this.props.id);

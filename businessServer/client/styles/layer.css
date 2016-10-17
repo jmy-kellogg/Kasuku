@@ -5,7 +5,7 @@
 /*    left: 600px;*/
     width: 2000px;
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     float: left;
 }
 

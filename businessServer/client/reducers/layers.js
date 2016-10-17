@@ -64,7 +64,6 @@ function layers(state=[], action){
       else{
         newState[action.layer-2].push(action.newNodeId);
       }
-      console.log(newState);
       return newState;
 
     default:

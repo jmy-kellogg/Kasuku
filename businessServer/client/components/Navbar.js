@@ -21,11 +21,11 @@ const NavBar = React.createClass({
     </div>
     <div className="collapse navbar-collapse" id="navbar-primary-collapse">
       <ul className="nav navbar-nav">
-        <li className="active"><a href="/chatbot/1" onClick={this.createHeadNode}>Make Bot</a></li>
-        <li><a href="/businesses/1">Business</a></li>
-        <li><a href="/" id="NavBarLogo">ChatterBot</a></li>
-        <li><a href="/Signup">Sign Up</a></li>
-        <li><a href="/Login">Log In</a></li>
+        <li className="active"><a href="/chatbot/1" className="navbar-link" onClick={this.createHeadNode}>Make Bot</a></li>
+        <li><a href="/businesses/1" className="navbar-link">Business</a></li>
+        <li><a href="/" className="navbar-link" id="NavBarLogo">Kasuku</a></li>
+        <li><a href="/Signup" className="navbar-link">Sign Up</a></li>
+        <li><a href="/Login" className="navbar-link">Log In</a></li>
       </ul>
     </div>
   </div>
