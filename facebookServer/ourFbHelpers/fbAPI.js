@@ -285,6 +285,7 @@ function receivedPostback(event, pageToken, businessId) {
         })
         .then( (_convo) => {
           console.log('xyz conversation', _convo)
+          _convo.destroy();
           return _convo.update({ nodeId: headNodeId });
         })
         .then( (_convo) => {
