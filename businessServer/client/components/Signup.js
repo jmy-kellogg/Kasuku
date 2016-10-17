@@ -32,6 +32,7 @@ const Signup = React.createClass({
 
   },
   render () {
+    console.log(this.props);
     return (
       <div className="SingleFormPage">
         <form onSubmit={this.handleSubmit} noValidate>
