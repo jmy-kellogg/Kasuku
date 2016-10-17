@@ -6,7 +6,8 @@ const TestBox = React.createClass({
   // messages will be an array of objects
   getInitialState: function(){
     return {
-      messages: []
+      messages: [],
+      showTest: false
     }
   },
 
@@ -33,6 +34,14 @@ const TestBox = React.createClass({
     })
   },
 
+  toggleChat (e) {
+    e.preventDefault();
+    let newStatus = !this.state.showTest;
+    this.setState( { showTest: newStatus})
+  },
+
+
+
 
   render: function(){
     const messagesDiv = this.state.messages.map((message,i) => {
@@ -45,26 +54,31 @@ const TestBox = React.createClass({
       )
     })
     return (
-      <div className="test-box" id="test-container">
+      <div id="text-box-container">
+        <div className="test-box" id="test-container" hidden={this.state.showTest} >
 
-        <div id="ChatLog-container">
-          <ul className="ChatLog">
-            {messagesDiv}
-          </ul>
-        </div>
-
-        <form className="test-form">
-          <div className="form-group" >
-            <div className="input-group" id="chat-input">
-              <input className="form-control" ref="messageInput"  />
-              <span className="input-group-btn">
-                <button className="test-send-btn" onClick={this.sendMessage}>
-                  <img className="test-send-img" src={require('./images/send2.jpg')}/>
-                </button>
-              </span>
-            </div>
+          <div id="ChatLog-container">
+            <ul className="ChatLog">
+              {messagesDiv}
+            </ul>
           </div>
-        </form>
+
+          <form className="test-form">
+            <div className="form-group" >
+              <div className="input-group" id="chat-input">
+                <input className="form-control" ref="messageInput"  />
+                <span className="input-group-btn">
+                  <button className="test-send-btn" onClick={this.sendMessage}>
+                    <img className="test-send-img" src={require('./images/send2.jpg')}/>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div>
+          <button id="toggleChatbox" onClick={this.toggleChat} className="btn btn-xs btn-success">{this.state.showTest ? 'Test' : 'Hide'}</button>
+        </div>
       </div>
     )
 
@@ -73,12 +87,3 @@ const TestBox = React.createClass({
 
 export default TestBox
 
-// <div className="form-group">
-//             <label htmlFor="page-token">Facebook Page Token:</label><TooltipGlyph tip={PAGE_TOKEN}/>
-//             <div className="input-group">
-//               <input type={this.state.pTokenType} className="form-control" id="page-token" ref="pageToken" value={this.state.pageToken} onChange={this.pageTokenChange}/>
-//               <span className="input-group-btn">
-//                 <button className="btn btn-danger" onClick={this.changePTokenType}>{this.state.pText}</button>
-//               </span>
-//             </div>
-//           </div>
