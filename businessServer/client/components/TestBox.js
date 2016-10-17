@@ -46,7 +46,7 @@ const TestBox = React.createClass({
     })
     return (
       <div className="test-phone">
-        <img src="http://www.fonestech.co.uk/DataImages/Service/item_4_iphone%205s%20white.png"/>
+        <img src={require('./images/message.jpg')}/>
         <div className="test-box" id="test-container">
           <div id="ChatLog-container">
             <ul className="ChatLog">
