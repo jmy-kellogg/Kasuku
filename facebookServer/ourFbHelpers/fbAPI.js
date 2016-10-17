@@ -16,7 +16,7 @@ var History = db.model('history');
 function receivedMessage(event, pageToken, businessId) {
     console.log(chalk.red("recieved message businessId"), businessId)
     var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
+    var recipientID = '' + event.recipient.id;
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
@@ -43,6 +43,7 @@ function receivedMessage(event, pageToken, businessId) {
 
 function divertMessage(recipientId, pageToken, businessId){
   console.log(chalk.red("divert message businessId"), businessId)
+    recipientId = '' + recipientId
     var messageData = {
         recipient: {
             id: recipientId
@@ -274,7 +275,7 @@ function receivedPostback(event, pageToken, businessId) {
           console.log("xyz found business", _business)
           headNodeId = _business.headNodeId
           console.log("xyz headNodeId", headNodeId)
-          return Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+          return Chatter.findOne({ where: { fbAccount: recipientId } })
         })
         .then( (_chatter) => {
           chatterId = _chatter[0].id
