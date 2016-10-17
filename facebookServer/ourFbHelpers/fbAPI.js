@@ -20,10 +20,6 @@ function receivedMessage(event, pageToken, businessId) {
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
-    // console.log("Received message for user %d and page %d at %d with message:",
-        // senderID, recipientID, timeOfMessage);
-    // console.log(JSON.stringify(message));
-
     var messageId = message.mid;
 
     // You may get a text or attachment but not both
@@ -84,10 +80,12 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                         return Node.findById(__convo.nodeId);
                     })
             }
+            console.log("found this convo abcdef", _convo)
             currentConvo = _convo;
             return Node.findById(_convo.nodeId)
         })
         .then(_node => {
+            console.log("found this node abcdef", _node)
             return Connection.findAll({ where: { fromId: _node.id } })
         })
         .then(_connections => {
