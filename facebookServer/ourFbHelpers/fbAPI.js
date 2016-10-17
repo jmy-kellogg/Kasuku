@@ -266,7 +266,49 @@ function receivedPostback(event, pageToken, businessId) {
 
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
-        console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+        .then( (chatter) => {
+          console.log("FOUND CHATTER abcdef", chatter)
+          return Conversation.findOne({ where: { chatterId: chatter.id, businessId: businessId}})
+        })
+        .then( (_convo) => {
+          console.log("FOUND THIS CONVO abcdef", _convo)
+          currentConvo = _convo;
+          return Business.findById(businessId)
+          .then( (business) => {
+            return currentConvo.update({ nodeId: business.headNodeId })
+          })
+          .then ( (updatedConvo) => {
+            console.log("updated convo abcdef", updatedConvo);
+          })
+        })
+        break;
+      }
+      case 'CHECKOUT_ORDER': {
+        console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
+        break;
+      }
+      default: {
+        console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
+      }
+    }
+
+
+}
+
+
+
+module.exports = {
+    receivedMessage,
+    sendTextMessage,
+    callSendAPI,
+    sendGenericMessage,
+    receivedPostback
+}
+
+/*
+
+console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
         Chatter.findOrCreate({ where: { fbAccount: recipientID } })
         .then(chatter => {
             chatterId = chatter[0].id
@@ -306,26 +348,5 @@ function receivedPostback(event, pageToken, businessId) {
         .then((_convo) => {
                   console.log("UPDATED CONVO", _convo)
               })
-        break;
-      }
-      case 'CHECKOUT_ORDER': {
-        console.log("CREATE AN APPROPRIATE RESPONSE FOR CHECKOUT_ORDER");
-        break;
-      }
-      default: {
-        console.log("CREATE A DEFAULT FOR UNKNOWN PAYLOAD ON POSTBACKS");
-      }
-    }
 
-
-}
-
-
-
-module.exports = {
-    receivedMessage,
-    sendTextMessage,
-    callSendAPI,
-    sendGenericMessage,
-    receivedPostback
-}
+              */
