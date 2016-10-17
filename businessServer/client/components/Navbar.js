@@ -14,28 +14,18 @@ const NavBar = React.createClass({
     let displaySignupLogin = !(document.URL.match('/businesses') || document.URL.match('/chatbot'))
   return (
 
-<nav id="navbar-primary" className="navbar" role="navigation">
-  <div>
+<div id="theNavbar" className="navbar-container" >
+  <img id="navbar-logo-image-left" src={require('./images/smallKasuku.jpg')} />
+  <img id="navbar-logo-image-right" src={require('./images/smallKasukuLeft.jpg')} />
+  <div className="navbar-mini-container">
 
-    <div className="navbar-header">
-      <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary-collapse">
-        <span className="sr-only">Toggle navigation</span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-        <span className="icon-bar"></span>
-      </button>
-    </div>
-    <div className="collapse navbar-collapse" id="navbar-primary-collapse">
-      <ul className="nav navbar-nav">
-        <li className="active"><a href="/chatbot/1" className="navbar-link" onClick={this.createHeadNode}>Make Bot</a></li>
-        <li><a href="/businesses/1" className="navbar-link">Business</a></li>
-        <li><a href="/" className="navbar-link" id="NavBarLogo">Kasuku</a></li>
-        <li><a href="/Signup" className="navbar-link">{ displaySignupLogin ? 'Sign Up' : 'Help' }</a></li>
-        <li><a href="/Login" className="navbar-link">{ displaySignupLogin ? 'Log In' : 'Signout' }</a></li>
-      </ul>
-    </div>
+    <span className="navbar-item active"><a href="/chatbot/1" className="navbar-link" onClick={this.createHeadNode}>Make Bot</a></span>
+    <span className="navbar-item"><a href="/businesses/1" className="navbar-link">Business</a></span>
+    <span id="navbar-logo"><a href="/" className="navbar-link" id="NavBarLogo">KASUKU</a></span>
+    <span className="navbar-item"><a href="/Signup" className="navbar-link">{ displaySignupLogin ? 'Sign Up' : 'Help Desk' }</a></span>
+    <span className="navbar-item"><a href="/Login" className="navbar-link">{ displaySignupLogin ? 'Log In' : ' Signout ' }</a></span>
   </div>
-</nav>
+</div>
 
   )
 }

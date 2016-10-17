@@ -1,18 +1,16 @@
-#navbar-primary .navbar-nav {
+#theNavbar {
 /*  background: #fff;*/
-  background-color: rgba(255,255,255, 1);
-  display: box;
+
+  z-index: 9999;
   width: 100%;
-  padding-left: 25%;
-  margin-left: -15px;
-  text-align: center;
-  position: fixed;
-  z-index: 1;
-  float: left;
-  clear: both;
+  height: 10vh;
+  border-bottom: 1px solid #DDDDDD;
+  background-color: transparent;
+
   > li {
     display: inline-block;
     float: none;
+    margin: 5px;
     > a {
       padding-left: 30px;
       padding-right: 30px;
@@ -23,7 +21,7 @@
 #NavBarLogo{
   //  background: #fff;
   font-size: 3em;
-  font-family: Helvetica;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
   font-weight: bold;
   height: 70px;
   padding-top: 20px;
@@ -31,5 +29,62 @@
 }
 .navbar-link{
   color: #5cceb0;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  vertical-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
 
+}
+.navbar-mini-container{
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  vertical-align: center;
+}
+.navbar-item{
+  position: relative;
+  /*top:40%;*/
+}
+#navbar-logo{
+  position: relative;
+  /*top:20%;*/
+}
+
+#navbar-logo a:hover {
+  text-shadow: 2px 2px black;
+  color: #5cceb0;
+  text-decoration: none;
+}
+
+.navbar-item a:hover {
+  /*font-size: 2em;*/
+  text-shadow: 1px 1px #CCCCFF;
+  text-decoration: none;
+  color: #5cceb0;
+}
+
+.navbar-mini-container span {
+  line-height: 10vh;
+  vertical-align: middle;
+}
+
+#navbar-logo-image-left {
+  float: left;
+  /*border: 2px solid red;*/
+  width: 9vh;
+  height: 9vh;
+}
+
+#navbar-logo-image-right {
+  float: right;
+  /*border: 2px solid red;*/
+  width: 9vh;
+  height: 9vh;
+}
+
+.navbar-mini-container span {
+  margin-left: 10px;
+  margin-right: 10px;
 }
