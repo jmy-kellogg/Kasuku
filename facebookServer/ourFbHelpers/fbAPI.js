@@ -16,16 +16,11 @@ var History = db.model('history');
 function receivedMessage(event, pageToken, businessId) {
     console.log(chalk.red("recieved message businessId"), businessId)
     var senderID = event.sender.id;
-    var recipientID = event.recipient.id;
+    var recipientID = '' + event.recipient.id;
     var timeOfMessage = event.timestamp;
     var message = event.message;
 
-    // console.log("Received message for user %d and page %d at %d with message:",
-        // senderID, recipientID, timeOfMessage);
-    // console.log(JSON.stringify(message));
-
     var messageId = message.mid;
-
     // You may get a text or attachment but not both
 
     var messageText = message.text;
@@ -47,6 +42,7 @@ function receivedMessage(event, pageToken, businessId) {
 
 function divertMessage(recipientId, pageToken, businessId){
   console.log(chalk.red("divert message businessId"), businessId)
+    recipientId = '' + recipientId
     var messageData = {
         recipient: {
             id: recipientId
@@ -84,13 +80,16 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                         return Node.findById(__convo.nodeId);
                     })
             }
+            console.log("found this convo abcdef", _convo)
             currentConvo = _convo;
             return Node.findById(_convo.nodeId)
         })
         .then(_node => {
+            console.log("found this node abcdef", _node)
             return Connection.findAll({ where: { fromId: _node.id } })
         })
         .then(_connections => {
+          console.log("found connects for node abcdef", _connections)
           let answerMap = _connections.map(_connection => _connection.answer);
           let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
           let eitherOrAnswer = wParse.parseEitherOr(chatterMsg, answerMap)[0];
@@ -246,15 +245,17 @@ function sendGenericMessage(recipientId, pageToken, businessId) {
 }
 
 function receivedPostback(event, pageToken, businessId) {
-    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
+    var recipientId = '' + recipientID;
     var timeOfPostback = event.timestamp;
+    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
-
-    console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
+    var chatterId, currentConvo;
+    var headNodeId;
+    console.log("Postback-----", senderID, recipientID, timeOfPostback, payload);
     console.log("event", event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
@@ -266,7 +267,31 @@ function receivedPostback(event, pageToken, businessId) {
 
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
-        console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        console.log("START_AT_HEAD_NODE");
+        let headNodeId, chatterId;
+        Business.findById(businessId)
+        .then( (_business) => {
+          console.log("xyz found business", _business)
+          headNodeId = _business.headNodeId
+          console.log("xyz headNodeId", headNodeId)
+          return Chatter.findOrCreate({ where: { fbAccount: '' + senderID } })
+        })
+        .then( (_chatter) => {
+          chatterId = _chatter[0].id
+          console.log("xyz OUND chatter", chatterId, "who is", _chatter, _chatter.id)
+          return Conversation.findOne({
+                where: { chatterId: chatterId, businessId: businessId }
+            })
+        })
+        .then( (_convo) => {
+          console.log('xyz conversation', _convo)
+          _convo.destroy();
+          return _convo.update({ nodeId: headNodeId });
+        })
+        .then( (_convo) => {
+          console.log("xyz THE UPDATED CONVO", _convo);
+        })
+        
         break;
       }
       case 'CHECKOUT_ORDER': {
@@ -290,3 +315,48 @@ module.exports = {
     sendGenericMessage,
     receivedPostback
 }
+
+/*
+
+console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        Chatter.findOrCreate({ where: { fbAccount: recipientID } })
+        .then(chatter => {
+            chatterId = chatter[0].id
+            console.log("CHATTERID 1".repeat(100), chatterId);
+            return Conversation.findOne({
+                //finding the only active conversation for 1b/1c
+                where: { done: false, chatterId: chatterId, businessId: businessId }
+            })
+        })
+        .then(_convo => {
+            console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
+            let headNodeId;
+            if (!_convo || _convo.done === true) {
+                return Business.findById(businessId)
+                    .then(business => {
+                        console.log("---------------CHATTERID 2", chatterId);
+                        return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
+                    })
+                    .then(__convo => {
+                        currentConvo = __convo;
+                        currentConvo.update({ nodeId: _connections[i].toId })
+                        return Node.findById(__convo.nodeId);
+                    })
+            } else {
+              return Business.findById(businessId)
+                .then((business) => {
+                    console.log(business)
+                  return _convo.update({ nodeId: business.headNodeId, done: true }) 
+                })
+                .then((__convo) => {
+                  console.log("defg convo", __convo)
+                  return __convo;
+                })
+
+            }
+        })
+        .then((_convo) => {
+                  console.log("UPDATED CONVO", _convo)
+              })
+
+              */
