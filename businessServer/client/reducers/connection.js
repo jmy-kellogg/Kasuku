@@ -1,5 +1,11 @@
-function connection(state=[], action){
+function connection(state={}, action){
   switch(action.type){
+    case 'UPDATE_CONNECTIONS_TO':
+      var newState = {...state};
+      action.conns.forEach(conn => {
+        newState[conn.id].toId = action.nodeId;
+      })
+      return newState;
     case 'LOAD_CONNECTIONS':
       var newState = {};
       action.connections.forEach(conn => {

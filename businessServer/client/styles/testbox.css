@@ -217,6 +217,16 @@ ul.ChatLog {
   display: none;
 }
 
+#text-box-container {
+ 
+
+}
+
+#toggleChatbox {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 
 /*#test-container::-webkit-scrollbar-track
 {

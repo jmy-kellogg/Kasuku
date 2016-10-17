@@ -6,7 +6,8 @@ const TestBox = React.createClass({
   // messages will be an array of objects
   getInitialState: function(){
     return {
-      messages: []
+      messages: [],
+      showTest: false
     }
   },
 
@@ -33,6 +34,14 @@ const TestBox = React.createClass({
     })
   },
 
+  toggleChat (e) {
+    e.preventDefault();
+    let newStatus = !this.state.showTest;
+    this.setState( { showTest: newStatus})
+  },
+
+
+
 
   render: function(){
     const messagesDiv = this.state.messages.map((message,i) => {
@@ -45,6 +54,7 @@ const TestBox = React.createClass({
       )
     })
     return (
+
       <div className="test-phone">
         <img src={require('./images/message.jpg')}/>
         <div className="test-box" id="test-container">
@@ -74,12 +84,3 @@ const TestBox = React.createClass({
 
 export default TestBox
 
-// <div className="form-group">
-//             <label htmlFor="page-token">Facebook Page Token:</label><TooltipGlyph tip={PAGE_TOKEN}/>
-//             <div className="input-group">
-//               <input type={this.state.pTokenType} className="form-control" id="page-token" ref="pageToken" value={this.state.pageToken} onChange={this.pageTokenChange}/>
-//               <span className="input-group-btn">
-//                 <button className="btn btn-danger" onClick={this.changePTokenType}>{this.state.pText}</button>
-//               </span>
-//             </div>
-//           </div>
