@@ -253,6 +253,7 @@ function receivedPostback(event, pageToken, businessId) {
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
+    var chatterId;
 
     console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
     console.log("event", event);    
@@ -267,6 +268,30 @@ function receivedPostback(event, pageToken, businessId) {
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
         console.log("CREATE AN APPROPRIATE RESPONSE FOR START_AT_HEAD_NODE")
+        Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+        .then(chatter => {
+            chatterId = chatter[0].id
+            console.log("CHATTERID 1".repeat(100), chatterId);
+            return Conversation.findOne({
+                //finding the only active conversation for 1b/1c
+                where: { done: false, chatterId: chatterId, businessId: businessId }
+            })
+        })
+        .then(_convo => {
+            console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
+            _convo.done = true
+            if (!_convo || _convo.done === true) {
+                return Business.findById(businessId)
+                    .then(business => {
+                        // console.log("CHATTERID 2", chatterId);
+                        return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
+                    })
+                    .then(__convo => {
+                        currentConvo = __convo;
+                        return Node.findById(__convo.nodeId);
+                    })
+            }
+        })
         break;
       }
       case 'CHECKOUT_ORDER': {
