@@ -273,7 +273,7 @@ function receivedPostback(event, pageToken, businessId) {
         .then( (_business) => {
           console.log("xyz found business", _business)
           headNodeId = _business.headNodeId
-          console.log("xyz headNodeId", _headNodeId)
+          console.log("xyz headNodeId", headNodeId)
           return Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         })
         .then( (_chatter) => {
@@ -288,7 +288,7 @@ function receivedPostback(event, pageToken, businessId) {
           return _convo.update({ nodeId: headNodeId });
         })
         .then( (_convo) => {
-          console.log("THE UPDATED CONVO", _convo);
+          console.log("xyz THE UPDATED CONVO", _convo);
         })
         
         break;
