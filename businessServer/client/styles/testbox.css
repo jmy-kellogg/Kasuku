@@ -83,7 +83,7 @@ ul.ChatLog {
   /*border: 1px solid red;*/
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 480px;
+  max-height: 80%;
   top: 30px;
   margin-left: 6px;
   margin-right: 6px;
