@@ -248,12 +248,13 @@ function receivedPostback(event, pageToken, businessId) {
     console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
+    var recipientId = '' + recipientID;
     var timeOfPostback = event.timestamp;
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
     var chatterId, currentConvo;
-
+    var headNodeId;
     console.log("Postback-----", senderID, recipientID, timeOfPostback, payload);
     console.log("event", event);    
 
@@ -266,21 +267,9 @@ function receivedPostback(event, pageToken, businessId) {
 
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
-        Chatter.findOrCreate({ where: { fbAccount: recipientID } })
-        .then( (chatter) => {
-          console.log("FOUND CHATTER xyz", chatter)
-          return Conversation.findOne({ where: { chatterId: chatter.id, businessId: businessId}})
-        })
-        .then( (_convo) => {
-          console.log("FOUND THIS CONVO xyz", _convo)
-          currentConvo = _convo;
-          return Business.findById(businessId)
-          .then( (business) => {
-            return currentConvo.update({ nodeId: business.headNodeId })
-          })
-          .then ( (updatedConvo) => {
-            console.log("updated convo xyz", updatedConvo);
-          })
+        Promise.all(Business.findById(businessId), Chatter.findOne({ where: { fbAccount: recipientId } }))
+        .then( (returnValues) => {
+          console.log("RETURN VALUES xyz", returnValues)
         })
         break;
       }
