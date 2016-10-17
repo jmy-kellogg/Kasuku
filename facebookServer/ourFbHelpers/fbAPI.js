@@ -89,6 +89,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
             return Connection.findAll({ where: { fromId: _node.id } })
         })
         .then(_connections => {
+          console.log("found connects for node abcdef", _connections)
           let answerMap = _connections.map(_connection => _connection.answer);
           let yesNoAnswer = wParse.parseYesOrNo(chatterMsg);
           let eitherOrAnswer = wParse.parseEitherOr(chatterMsg, answerMap)[0];
@@ -297,6 +298,7 @@ function receivedPostback(event, pageToken, businessId) {
                 })
                 .then((__convo) => {
                   console.log("defg convo", __convo)
+                  return __convo;
                 })
 
             }
