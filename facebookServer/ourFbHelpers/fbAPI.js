@@ -295,7 +295,7 @@ function receivedPostback(event, pageToken, businessId) {
                     console.log(business)
                   return _convo.update({ nodeId: business.headNodeId, done: true }) 
                 })
-                .then((__convo) {
+                .then((__convo) => {
                   console.log("defg convo", __convo)
                 })
 
