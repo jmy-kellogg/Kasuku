@@ -253,7 +253,7 @@ function receivedPostback(event, pageToken, businessId) {
     // The 'payload' param is a developer-defined field which is set in a postback 
     // button for Structured Messages. 
     var payload = event.postback.payload;
-    var chatterId;
+    var chatterId, currentConvo;
 
     console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
     console.log("event", event);    
@@ -279,17 +279,23 @@ function receivedPostback(event, pageToken, businessId) {
         })
         .then(_convo => {
             console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
-            _convo.done = true
+            let headNodeId;
             if (!_convo || _convo.done === true) {
                 return Business.findById(businessId)
                     .then(business => {
-                        // console.log("CHATTERID 2", chatterId);
+                        console.log("---------------CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
                     })
                     .then(__convo => {
                         currentConvo = __convo;
+                        currentConvo.update({ nodeId: _connections[i].toId })
                         return Node.findById(__convo.nodeId);
                     })
+            } else {
+              return Business.findById(businessId)
+                .then((business) => {
+                  _convo.update({ nodeId: business.headNodeId }) 
+                })
             }
         })
         break;
