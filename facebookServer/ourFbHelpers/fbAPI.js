@@ -268,10 +268,29 @@ function receivedPostback(event, pageToken, businessId) {
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
         console.log("START_AT_HEAD_NODE");
-        Promise.all(Business.findById(businessId), Chatter.findOne({ where: { fbAccount: recipientId } }))
-        .then( (returnValues) => {
-          console.log("RETURN VALUES xyz", returnValues)
+        let headNodeId, chatterId;
+        Business.findById(businessId)
+        .then( (_business) => {
+          console.log("xyz found business", _business)
+          headNodeId = _business.headNodeId
+          console.log("xyz headNodeId", _headNodeId)
+          return Chatter.findOrCreate({ where: { fbAccount: recipientId } })
         })
+        .then( (_chatter) => {
+          chatterId = _chatter[0].id
+          console.log("xyz OUND chatter", chatterId, "who is", _chatter)
+          return Conversation.findOne({
+                where: { done: false, chatterId: chatterId, businessId: businessId }
+            })
+        })
+        .then( (_convo) => {
+          console.log('xyz conversation', _convo)
+          return _convo.update({ nodeId: headNodeId });
+        })
+        .then( (_convo) => {
+          console.log("THE UPDATED CONVO", _convo);
+        })
+        
         break;
       }
       case 'CHECKOUT_ORDER': {
