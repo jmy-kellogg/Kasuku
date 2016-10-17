@@ -293,7 +293,10 @@ function receivedPostback(event, pageToken, businessId) {
               return Business.findById(businessId)
                 .then((business) => {
                     console.log(business)
-                  return _convo.update({ nodeId: business.headNodeId }) 
+                  return _convo.update({ nodeId: business.headNodeId, done: true }) 
+                })
+                .then((__convo) {
+                  console.log("defg convo", __convo)
                 })
 
             }
