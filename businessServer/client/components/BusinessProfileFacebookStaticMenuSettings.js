@@ -93,7 +93,7 @@ const BusinessProfileFacebookStaticMenuSettings = React.createClass({
     this.setState({saveButtonText: 'Saving Settings...', isSaving: true})
     axios.post('/api/menuSettings/' + this.props["data-id"], { menuSettingsArray: this.state.menuSettingsArray })
     .then((newMenuSettingsArray) => {
-      this.setState( { menuSettingsArray: newMenuSettingsArray.data, saveButtonText: 'Saving Menu Settings', isSaving: false });
+      this.setState( { menuSettingsArray: newMenuSettingsArray.data, saveButtonText: 'Save Menu Settings', isSaving: false });
     })
   },
   render () {

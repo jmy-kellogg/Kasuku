@@ -2,6 +2,7 @@
 var request = require('request');
 var db = require('../models')
 var wParse = require('./ai.js');
+var chalk = require('chalk');
 
 var Business = db.model('business');
 var Node = db.model('node');
@@ -10,9 +11,10 @@ var Conversation = db.model('conversation');
 var Chatter = db.model('chatter');
 var History = db.model('history');
 
-var BUSINESSID = 1;
 
-function receivedMessage(event, pageToken) {
+
+function receivedMessage(event, pageToken, businessId) {
+    console.log(chalk.red("recieved message businessId"), businessId)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
@@ -32,18 +34,19 @@ function receivedMessage(event, pageToken) {
     if (messageText) {
         switch (messageText) {
                 case 'thanks':
-                  divertMessage(senderID, pageToken);
+                  divertMessage(senderID, pageToken, businessId);
                   break;
 
             default:
-                sendTextMessage(senderID, messageText, pageToken);
+                sendTextMessage(senderID, messageText, pageToken, businessId);
         }
     } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received", pageToken);
+        sendTextMessage(senderID, "Message with attachment received", pageToken, businessId);
     }
 }
 
-function divertMessage(recipientId, pageToken){
+function divertMessage(recipientId, pageToken, businessId){
+  console.log(chalk.red("divert message businessId"), businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -52,10 +55,11 @@ function divertMessage(recipientId, pageToken){
             text: `You're very welcome!`
         }
     };
-    callSendAPI(messageData, pageToken);
+    callSendAPI(messageData, pageToken, businessId);
 }
 
-function sendTextMessage(recipientId, chatterMsg, pageToken) {
+function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
+    console.log(chalk.red("send text message businessId"), businessId)
     let currentConvo, chatterId;
     recipientId = '' + recipientId;
     Chatter.findOrCreate({ where: { fbAccount: recipientId } })
@@ -64,13 +68,13 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
             // console.log("CHATTERID 1", chatterId);
             return Conversation.findOne({
                 //finding the only active conversation for 1b/1c
-                where: { done: false, chatterId: chatterId, businessId: BUSINESSID }
+                where: { done: false, chatterId: chatterId, businessId: businessId }
             })
         })
         .then(_convo => {
             console.log('THIS SHOULDNT FIRE IF THE PREVIOUS FINDONE DOESNT ')
             if (!_convo || _convo.done === true) {
-                return Business.findById(BUSINESSID)
+                return Business.findById(businessId)
                     .then(business => {
                         // console.log("CHATTERID 2", chatterId);
                         return Conversation.create({ chatterId: chatterId, businessId: business.id, nodeId: business.headNodeId })
@@ -99,7 +103,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                   // console.log(_connections[i].answer, 'got it.')
                   
                   History.create({
-                    businessId: BUSINESSID,
+                    businessId: businessId,
                     chatterFbId: recipientId,
                     connectionId: _connections[i].id
                   })
@@ -123,10 +127,10 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                         text: node.question
                     }
                 };
-                callSendAPI(messageData, pageToken);
+                callSendAPI(messageData, pageToken, businessId);
             } else {
                 History.findAll({where: {
-                                  businessId: BUSINESSID,
+                                  businessId: businessId,
                                   chatterFbId: recipientId
                                 },
                                 include: [{model: Connection}]
@@ -143,14 +147,14 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                       table[history.connection.description] = history.connection.price
                     }
                   })
-                  console.log("PRICE".repeat(500), price, table)
+                  console.log("PRICE", price, table)
                   histories.forEach(h=>{
                     price2 += h.connection.price;
-                    console.log("CONNECTIONS: ".repeat(23), h.connection.description, connection.price, price2)
+                    console.log("CONNECTIONS: ", h.connection.description, connection.price, price2)
                 })
                 })
-                .catch(err => console.log("THIS IS AN ERROR".repeat(10), err))
-                Business.findById(BUSINESSID)
+                .catch(err => console.log("THIS IS AN ERROR", err))
+                Business.findById(businessId)
                 .then(_business => {
                     return currentConvo.update({nodeId: _business.headNodeId})
                 })
@@ -163,14 +167,15 @@ function sendTextMessage(recipientId, chatterMsg, pageToken) {
                             text: 'Perfect you order has been placed! Let me know if you need anything else'
                         }
                     };
-                    callSendAPI(messageData, pageToken);
+                    callSendAPI(messageData, pageToken, businessId);
                 })
             }
         })
 }
 
-function callSendAPI(messageData, pageToken) {
-  console.log("callSendAPI".repeat(100))
+function callSendAPI(messageData, pageToken, businessId) {
+  console.log(chalk.red("callSendAPI businessId"), businessId)
+
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: pageToken },
@@ -192,7 +197,8 @@ function callSendAPI(messageData, pageToken) {
     });
 }
 
-function sendGenericMessage(recipientId, pageToken) {
+function sendGenericMessage(recipientId, pageToken, businessId) {
+    console.log(chalk.red("sendGenericMessage businessId"), businessId)
     var messageData = {
         recipient: {
             id: recipientId
@@ -236,10 +242,11 @@ function sendGenericMessage(recipientId, pageToken) {
         }
     };
 
-    callSendAPI(messageData, pageToken);
+    callSendAPI(messageData, pageToken, businessId);
 }
 
-function receivedPostback(event, pageToken) {
+function receivedPostback(event, pageToken, businessId) {
+    console.log(chalk.red("recieved message businessId, recipientId"), businessId, recipientID)
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfPostback = event.timestamp;
@@ -247,8 +254,8 @@ function receivedPostback(event, pageToken) {
     // button for Structured Messages. 
     var payload = event.postback.payload;
 
-    console.log("Postback--".repeat(100), senderID, recipientID, timeOfPostback, payload);
-    console.log("event".repeat(100), event);    
+    console.log("Postback--", senderID, recipientID, timeOfPostback, payload);
+    console.log("event", event);    
 
     // console.log("Received postback for user %d and page %d with payload '%s' " +
     //     "at %d", senderID, recipientID, payload, timeOfPostback);
