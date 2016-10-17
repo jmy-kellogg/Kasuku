@@ -266,20 +266,20 @@ function receivedPostback(event, pageToken, businessId) {
 
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
-        Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+        Chatter.findOrCreate({ where: { fbAccount: recipientID } })
         .then( (chatter) => {
-          console.log("FOUND CHATTER abcdef", chatter)
+          console.log("FOUND CHATTER xyz", chatter)
           return Conversation.findOne({ where: { chatterId: chatter.id, businessId: businessId}})
         })
         .then( (_convo) => {
-          console.log("FOUND THIS CONVO abcdef", _convo)
+          console.log("FOUND THIS CONVO xyz", _convo)
           currentConvo = _convo;
           return Business.findById(businessId)
           .then( (business) => {
             return currentConvo.update({ nodeId: business.headNodeId })
           })
           .then ( (updatedConvo) => {
-            console.log("updated convo abcdef", updatedConvo);
+            console.log("updated convo xyz", updatedConvo);
           })
         })
         break;
