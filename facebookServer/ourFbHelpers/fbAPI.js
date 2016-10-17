@@ -21,7 +21,6 @@ function receivedMessage(event, pageToken, businessId) {
     var message = event.message;
 
     var messageId = message.mid;
-
     // You may get a text or attachment but not both
 
     var messageText = message.text;
@@ -275,7 +274,7 @@ function receivedPostback(event, pageToken, businessId) {
           console.log("xyz found business", _business)
           headNodeId = _business.headNodeId
           console.log("xyz headNodeId", headNodeId)
-          return Chatter.findOrCreate({ where: { fbAccount: recipientId } })
+          return Chatter.findOrCreate({ where: { fbAccount: '' + senderID } })
         })
         .then( (_chatter) => {
           chatterId = _chatter[0].id
