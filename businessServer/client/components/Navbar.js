@@ -15,13 +15,15 @@ const NavBar = React.createClass({
   return (
 
 <div id="theNavbar" className="navbar-container" >
+  <img id="navbar-logo-image-left" src={require('./images/smallKasuku.jpg')} />
+  <img id="navbar-logo-image-right" src={require('./images/smallKasukuLeft.jpg')} />
   <div className="navbar-mini-container">
 
     <span className="navbar-item active"><a href="/chatbot/1" className="navbar-link" onClick={this.createHeadNode}>Make Bot</a></span>
     <span className="navbar-item"><a href="/businesses/1" className="navbar-link">Business</a></span>
     <span id="navbar-logo"><a href="/" className="navbar-link" id="NavBarLogo">KASUKU</a></span>
-    <span className="navbar-item"><a href="/Signup" className="navbar-link">{ displaySignupLogin ? 'Sign Up' : 'Help' }</a></span>
-    <span className="navbar-item"><a href="/Login" className="navbar-link">{ displaySignupLogin ? 'Log In' : 'Signout' }</a></span>
+    <span className="navbar-item"><a href="/Signup" className="navbar-link">{ displaySignupLogin ? 'Sign Up' : 'Help Desk' }</a></span>
+    <span className="navbar-item"><a href="/Login" className="navbar-link">{ displaySignupLogin ? 'Log In' : ' Signout ' }</a></span>
   </div>
 </div>
 

@@ -31,6 +31,8 @@
   color: #5cceb0;
   font-family: Tahoma, Verdana, Segoe, sans-serif;
   vertical-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
 
 }
 .navbar-mini-container{
@@ -43,9 +45,41 @@
 }
 .navbar-item{
   position: relative;
-  top:40%;
+  /*top:40%;*/
 }
 #navbar-logo{
   position: relative;
-  top:20%;
+  /*top:20%;*/
+}
+
+#navbar-logo a:hover {
+  text-shadow: 2px 2px black;
+  color: #5cceb0;
+  text-decoration: none;
+}
+
+.navbar-item a:hover {
+  /*font-size: 2em;*/
+  text-shadow: 1px 1px #CCCCFF;
+  text-decoration: none;
+  color: #5cceb0;
+}
+
+.navbar-mini-container span {
+  line-height: 10vh;
+  vertical-align: middle;
+}
+
+#navbar-logo-image-left {
+  float: left;
+  /*border: 2px solid red;*/
+  width: 9vh;
+  height: 9vh;
+}
+
+#navbar-logo-image-right {
+  float: right;
+  /*border: 2px solid red;*/
+  width: 9vh;
+  height: 9vh;
 }
