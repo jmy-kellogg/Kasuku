@@ -267,6 +267,7 @@ function receivedPostback(event, pageToken, businessId) {
 
     switch (payload) {
       case 'START_AT_HEAD_NODE': {
+        console.log("START_AT_HEAD_NODE");
         Promise.all(Business.findById(businessId), Chatter.findOne({ where: { fbAccount: recipientId } }))
         .then( (returnValues) => {
           console.log("RETURN VALUES xyz", returnValues)
