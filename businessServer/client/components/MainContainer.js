@@ -4,6 +4,8 @@ import Product from './Product';
 import Layer from './Layer';
 import TopLayer from './topLayer';
 import axios from 'axios';
+import TestBox from './TestBox';
+import Modal from './Modal';
 
 
 const MainContainer = React.createClass({
@@ -14,9 +16,6 @@ const MainContainer = React.createClass({
     var _products = [];
     var _productIds = [];
     var _topLevelNodes = {};
-    var sortNumbers = function(a,b){
-      return a-b;
-    }
 
     if(this.props.params.businessId){
       axios.get(`/api/connections/?businessId=${this.props.params.businessId}`)
@@ -33,17 +32,6 @@ const MainContainer = React.createClass({
           }
         })
         this.props.loadProducts(_products);
-        // console.log(_products);
-        // console.log(_allConnections);
-
-        // connections.forEach(conn => {
-        //   if(conn.fromId && !_nodesIdArr.includes(conn.fromId)){
-        //     _nodesIdArr.push(conn.fromId);
-        //   }
-        //   if(conn.toId && !_nodesIdArr.includes(conn.toId)){
-        //     _nodesIdArr.push(conn.toId);
-        //   }
-        // })
 
       })
       .then(data => {
@@ -51,8 +39,7 @@ const MainContainer = React.createClass({
         axios.get(`/api/nodes/`)
           .then(res => res.data)
           .then(nodes => {
-            console.log(nodes);
-            console.log(_productIds)
+
             nodes.forEach(node => {
               if(_productIds.includes(+node.productId)){
                 _nodesIdArr.push(node.id);
@@ -63,7 +50,6 @@ const MainContainer = React.createClass({
               _nodesArr.push(getNodeById(nodeId, nodes))
             })
             // this.props.setHeadNode(headNodeId);
-            // console.log(_nodesIdArr);
 
             _nodesArr.forEach(node => {
               if(node.topLevel){
@@ -73,16 +59,11 @@ const MainContainer = React.createClass({
                   _topLevelNodes[node.productId].push(node);
               }
             })
-            console.log(_topLevelNodes);
             this.props.loadTopLevelNodes(_topLevelNodes);
 
             this.props.loadNodes(_nodesArr);
-            // console.log(_nodesArr);
 
             this.props.loadNodeConnections(_nodesArr, _allConnections);
-            // TODO: INITIALIZE TOP LEVEL NODES
-            // object where product id is the key and the top layer nodes are in an array.
-
 
           })
 
@@ -101,14 +82,11 @@ const MainContainer = React.createClass({
 
   render: function(){
 
-    console.log(this.props.prodSelected);
     var layersHTML = [];
 
     var layersDiv = this.props.layers.map((layer, i) => {
-      console.log(layer);
       return (
         <div className="layerCol" key={i}>
-        {/*layer {i+3}*/}
           <Layer {...this.props} key={i} layer={i+2} data={layer} />
         </div>
       )
@@ -122,9 +100,10 @@ const MainContainer = React.createClass({
       <div className="chatbotPage">
         <Product {...this.props} layer={0}/>
         <TopLayer {...this.props} layer={1}/>
-        <div className="extendConvo">
+        <div id="extendConvo" className="extendConvo">
           {layersDiv}
         </div>
+        <TestBox/>
       </div>
 
     )

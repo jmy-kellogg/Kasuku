@@ -9,8 +9,6 @@ const Layer = React.createClass({
   },
   addNodeSameLayer: function(e){
     var currentConnection = this.props.selected[this.props.layer-2];
-    // console.log(this.props.selected);
-    // console.log(currentConnection);
 
     e.preventDefault();
     axios.post('/api/nodes', {
@@ -47,22 +45,8 @@ const Layer = React.createClass({
   render: function(){
     // this.props.data is the array of all the node ids that should populate this layer
     // parentId must be the node selected from the row above.
-    // var parentId;
-    // if(this.props.selected){
-    //   parentId = this.props.selected[this.props.layer-2];
-    // }
-    // else{
-    //   parentId = null;
-    // }
 
-    // console.log(this.props.layer);
-    // console.log(this.props.selected);
-    // var connectionsArr = [];
-    // for(var key in this.props.connection){
-    //   if(this.props.connection[key].fromId === 1){
-    //     connectionsArr.push(this.props.connection[key].toId);
-    //   }
-    // }
+
     var nodesArr = [];
     for(var key in this.props.node){
       // if(connectionsArr.includes(this.props.node[key].id) && +this.props.node[key].productId === this.props.prodSelected){

@@ -30,10 +30,9 @@ const Product = React.createClass({
 
     this.refs.productname.value = "";
     var businessId = this.props.params.businessId;
-    console.log(businessId);
     axios.post('/api/connections/', {
       answer: answer,
-      fromId: null,
+      fromId: 1,
       // if fromId is null, must be product
       productId: null,
       businessId,
@@ -42,14 +41,13 @@ const Product = React.createClass({
     })
     .then(conn => conn.data)
     .then(conn => {
-      console.log(conn);
       axios.put(`/api/connections/${conn.id}`, {
         productId: conn.id
       })
         .then(res => res.data)
         .then(updatedConn => {
           // addProductAction(id, answer, fromId, businessId=null, price=null, description=null)
-          this.props.addProductAction(conn.id, answer, null, businessId, price, description, conn.id);
+          this.props.addProductAction(conn.id, answer, 1, businessId, price, description, conn.id);
         })
     })
     .catch(err => {
@@ -61,7 +59,6 @@ const Product = React.createClass({
   },
   render: function(){
     const productDiv = this.props.product.map((product, i) => {
-      console.log(product.id)
       let divClassName = classNames({
         "product-box": true,
         "hightlight": this.state.currentProduct === product.id

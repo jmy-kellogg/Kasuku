@@ -1,6 +1,5 @@
 body{
-  background-image: url("https://www.protolabs.com/resourceimages/united-states/cool-idea-follow-background.jpg");
-  background-repeat: no-repeat;
+
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
@@ -18,7 +17,7 @@ body{
 
 .fade-in {
   opacity:0;  /* make things invisible upon start */
-  -webkit-animation:fadeIn ease-in 1;   call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time 
+  -webkit-animation:fadeIn ease-in 1;   call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time
   -moz-animation:fadeIn ease-in 1;
   animation:fadeIn ease-in 1;
 
@@ -78,7 +77,8 @@ body{
   height: 100%;
   display: flex;
 /*  width: 5000px;*/
-  overflow-x: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
 
 }
 
@@ -118,10 +118,6 @@ body{
 
 
 
-
-
-
-
 @import ('./navbar.css');
 @import ('./product.css');
 @import ('./singleForm.css');
@@ -129,3 +125,5 @@ body{
 @import ('./business.profile.css');
 @import ('./home.css');
 @import ('./layer.css');
+@import ('./testbox.css');
+@import ('./modal.css');

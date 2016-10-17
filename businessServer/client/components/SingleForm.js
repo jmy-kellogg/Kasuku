@@ -46,12 +46,12 @@ const SingleForm = React.createClass({
       if(nodes[nodeId].conns){
         nodes[nodeId].conns.forEach(connId => {
           connsForRemoval.push(connId);
-          if(connections[connId].toId && !visited.includes(connections[connId].toId)){
+          if(connections[connId].toId && !visited.includes(connections[connId].toId) && !nodes[connections[connId].fromId].leafNode){
             visited.push(connections[connId].toId)
             getAllForRemoval(connections[connId].toId);
           }
         })
-              nodesForRemoval.push(nodeId);
+        nodesForRemoval.push(nodeId);
       }
     }
     getAllForRemoval(this.props.id);
@@ -80,59 +80,48 @@ const SingleForm = React.createClass({
 
     e.preventDefault();
     var answer = this.refs.answer.value;
-    // var price = +this.refs.price.value;
-    // var description = this.refs.description.value;
+    var price = null;
+    var description = null;
 
-    // find the
     // // the array of top level nodes
     // // this.props.topLevelNodes[this.props.prodSelected];
     // // the index of the array
     // // this.props.data.topLevelNodeIndex
-    // console.log(this.props.prodSelected);
-    // console.log(this.props.topLevelNodes);
-    // console.log(this.props.data.topLevelNodeIndex)
-    // console.log(this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1]);
+
     var nextTreePointer;
-    // if(this.props.topLevelNodeIndex < this.props.topLevelNodes[this.props.prodSelected].length-1){
-    //   nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
-    // }
-    // else{
-    //   nextTreePointer = null;
-    // }
-    console.log(this.props.data.topLevelNodeIndex);
-    console.log(this.props.topLevelNodes[this.props.prodSelected].length-1)
+
     if(this.props.data.topLevelNodeIndex === this.props.topLevelNodes[this.props.prodSelected].length-1){
       nextTreePointer = null;
     }
     else{
       nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
     }
-    console.log(nextTreePointer);
 
-    this.refs.answer.value = "";
-    var fromId = this.props.id;
-    axios.post('/api/connections', {
-      answer,
-      fromId,
-      productId: this.props.prodSelected,
+		this.refs.answer.value = "";
+
+		var fromId = this.props.id;
+		axios.post('/api/connections', {
+			answer,
+			fromId,
+			productId: this.props.prodSelected,
       toId: nextTreePointer,
-      businessId: this.props.params.businessId
-      // price,
-      // description
-    })
-    .then(conn => conn.data)
-    .then(conn => {
-      // set business ID once business ids are set up.  but keep as null for now.
-      var businessId = null;
-      this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, businessId);
-    })
-    .catch(e => {
-      if(e) throw e;
-    })
-  },
-  addNewNode: function(answerId, e){
-    e.preventDefault();
-    // var connId = this.refs.answerSelect.value;
+      businessId: this.props.params.businessId,
+			price,
+			description
+		})
+		.then(conn => conn.data)
+		.then(conn => {
+			// set business ID once business ids are set up.  but keep as null for now.
+			this.props.addAnswerAction(conn.id, conn.answer, conn.fromId, conn.toId, this.props.params.businessId);
+		})
+		.catch(e => {
+			if(e) throw e;
+		})
+	},
+	addNewNode: function(answerId, e){
+		e.preventDefault();
+		// var connId = this.refs.answerSelect.value;
+
     this.selectAnswer(answerId, e)
     var connId = this.state.currentAnswer;
     var currentConn = this.props.connection[connId];
@@ -159,6 +148,12 @@ const SingleForm = React.createClass({
       .then(node => {
         axios.put(`/api/connections/${answerId}`, {
           toId: node.id
+        })
+        .then(conn => conn.data)
+        .then(conn => {
+          axios.put(`/api/nodes/${conn.fromId}`, {
+            leafNode: false
+          })
         })
       })
       .catch(err => {

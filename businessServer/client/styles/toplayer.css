@@ -1,20 +1,21 @@
 .toplayer-container{
-  width: 300px;
+  width: 313px;
   height: 90vh;
   display: block;
-  margin-left: 200px;
+  margin-left: 202px;
   float: left;
   clear: both;
  /* margin-top: 10px;*/
 /*  position: relative;*/
   position: absolute;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .addtoplayernode{
   height: 200px;
   width: 100%;
   text-align: center;
-  font-size: 5em; 
+  font-size: 5em;
   padding: 20%;
   background: rgba(63,62,58, 0.5)
 }
@@ -24,10 +25,26 @@
     color: white;
     border-radius: 5px;
 }
+
+#toplayer-container::-webkit-scrollbar-track
+{
+  background-color: #FFFFFF;
+}
+
+#toplayer-container::-webkit-scrollbar
+{
+  width: 7px;
+  background-color: #FFFFFF;
+}
+
+#toplayer-container::-webkit-scrollbar-thumb
+{
+  background-color: #CCCCCC;
+  border: 0px;
+}
 .question.active div.nodeBox {
   background-color: rgba(226,110,85, 0.5);
   border-color: rgb(63,62,58);
-  margin-bottom: 0px;
 }
 .question.active div.formQuest{
   background-color: rgb(226,110,85);
@@ -48,7 +65,7 @@
   color: black;
 }
 .question .answer.active input{
-  background-color: white;  
+  background-color: white;
   color: black;
   border: 1px rgb(63,62,58);
   border-radius: 0px;

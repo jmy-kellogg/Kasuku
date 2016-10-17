@@ -10,7 +10,6 @@ export function removeLeafNode(nodeId){
 }
 
 export function setSelected(connection, layer, nodes){
-    console.log(nodes);
     return {
         type: 'CHANGE_SELECTED',
         connection,
@@ -86,7 +85,6 @@ export function saveNode(question, thisNodeId){
 }
 
 export function addNewNode(connId, newNodeId, layer, topLevel=false, productId, topLevelNodeIndex, leafNode) {
-    console.log(topLevelNodeIndex);
     return {
         type: 'ADD_NODE',
         connId,
@@ -120,7 +118,6 @@ export function addProductAction(id, answer, fromId, businessId=null, price=null
 }
 
 export function addAnswerAction(connId, answer, fromId, toId, businessId = null, price=null, description=null) {
-    console.log(fromId);
     return {
         type: 'ADD_ANSWER',
         connId,
@@ -164,10 +161,9 @@ export function removeConnectionsAction(connsForRemoval){
 }
 
 export function updateQuestion(question, id) {
-  console.log('question, id', question, id)
   return {
     type: 'UPDATE_QUESTION',
     question,
     id
   }
-} 
+}

@@ -5,32 +5,29 @@ import axios from 'axios';
 import classNames from 'classnames';
 
 const TopLayer = React.createClass({
+
+  scrollTo: function(node, e){
+        e.preventDefault();
+        var place = "#nodeContainer" + node.id
+        $('.toplayer-container').animate({
+        scrollTop: $('.toplayer-container').scrollTop() + $(place).offset().top - 74},
+        'slow');
+        this.state.currentQuestion = node.id;
+      },
   getInitialState: function() {
     return {
         ...this.state,
         currentQuestion: null,
       };
   },
-  scrollTo: function(i, e){
-        e.preventDefault();
-        this.state.currentQuestion = i.id
-        //var place = "#nodeContainer" + i;
-        //console.log("scrooled", place)
-        // $('html,body').animate({
-        // scrollTop: $(place).offset().top-74},
-        // 'slow');
-  },
   addTopLayerNode: function(e){
-      // console.log(this.props.topLevelNodes[this.props.prodSelected])
       // this.props.topLevelNodes[this.props.prodSelected] this is an array of the top level nodes for the selected product
     var currentConn;
-    console.log(this.props.prodSelected);
-    console.log(this.props.topLevelNodes);
+
     var newTopLevelIndex = 0;
     if(this.props.topLevelNodes[this.props.prodSelected]){
       newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
     }
-    // var newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
 
     e.preventDefault();
     axios.post('/api/nodes', {
@@ -40,10 +37,10 @@ const TopLayer = React.createClass({
       layer: 1,
       topLevelNodeIndex: newTopLevelIndex,
       leafNode: true
+
     })
     .then(node => node.data)
     .then(node => {
-      console.log(newTopLevelIndex)
 
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId, newTopLevelIndex, true);
       return node;
@@ -57,6 +54,7 @@ const TopLayer = React.createClass({
       if(e) throw e;
     })
   },
+
 
   handleSelected: function(node, e){
     this.props.changeSelected(node.id, node.layer);
@@ -77,7 +75,6 @@ render: function(){
     else{
       q = "I'm a question? Fill me out.";
     };
-    console.log("currentnode", node.id)
       // added this //
       let divClassName = classNames({
         "question": true,
@@ -85,16 +82,16 @@ render: function(){
         })
 
    return (
-      <div className={divClassName}key={i} id={`nodeContainer${i}`}  onClick={this.scrollTo.bind(this, node)}>
+      <div className={divClassName}key={i} id={`nodeContainer${node.id}`}  onClick={this.scrollTo.bind(this, node)}>
         <SingleForm {...this.props} id={node.id} question={q} data={node} layer={this.props.layer} />
       </div>
     )
   })
-  console.log(nodesDiv);
   return (
-   <div className='toplayer-container'>
+
+   <div className='toplayer-container' id='toplayer-container'>
     {nodesDiv}
-    {this.props.prodSelected !== undefined ? <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
+    {this.props.prodSelected >= 0 ? <div className='addtoplayernode' onClick={this.addTopLayerNode}> <span className="glyphicon glyphicon-plus"></span></div> : null}
    </div>
 )
    }

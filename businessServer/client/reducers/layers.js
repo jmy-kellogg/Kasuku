@@ -22,9 +22,7 @@ function layers(state=[], action){
     // layer of parent node
     // nodes
       var newState = [];
-      console.log(action.layer);
       for(var y = 0; y < action.layer; y++){
-        console.log(state[y]);
         if(y === action.layer-1){
           for(var key in action.nodes){
             if(action.connection.toId === action.nodes[key].id){
@@ -39,7 +37,6 @@ function layers(state=[], action){
           newState[y] = [...state[y]];
         }
       }
-      console.log(newState);
       // console.log(action.nodes);
       // var newState = [...state];
       // for(var key in action.nodes){
@@ -67,7 +64,6 @@ function layers(state=[], action){
       else{
         newState[action.layer-2].push(action.newNodeId);
       }
-      console.log(newState);
       return newState;
 
     default:
