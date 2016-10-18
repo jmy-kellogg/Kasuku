@@ -8,4 +8,5 @@ Run `npm build` to create a distro folder and a bundle.js file.
 
 
 Logo credit: Deividas Bielskis
+
 more work from Deividas Bielskis can be found here https://dribbble.com/contrast8
