@@ -15,11 +15,11 @@ let chatters = [
 ]
 let nodes = [
     {
-        question: 'Welcome to coffee shop. What order can I get for you?',
+        question: 'Welcome to our coffee shop! What can I get started for you?',
         layer: 0
     },
     {
-        question: 'Does coffee caf or decaf sound better?',
+        question: 'Does caf or decaf sound better?',
         productId: 1,
         topLevel: true,
         layer: 1,
@@ -28,7 +28,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: 'Would you like any coffee cream with that?',
+        question: 'Would you like any cream with that?',
         productId: 1,
         topLevel: true,
         layer: 1,
@@ -36,7 +36,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: 'coffee Milk, cream, or powder?',
+        question: 'Great! Milk, cream, or powder?',
         productId: 1,
         topLevel: false,
         layer: 2,
@@ -44,7 +44,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: 'coffee 1, 2, or 3?',
+        question: '1, 2, or 3?',
         productId: 1,
         topLevel: false,
         layer: 3,
@@ -52,7 +52,7 @@ let nodes = [
         leafNode: true
     },
     {
-        question: 'What about coffee sugar. Should I throw some of that goodness in there?',
+        question: 'What about sugar. Should I throw some of that goodness in there?',
         productId: 1,
         topLevel: true,
         layer: 1,
@@ -60,7 +60,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: 'Splenda, cane, or coffee agave? ',
+        question: 'Cool! Splenda, cane, or agave? ',
         productId: 1,
         topLevel: false,
         layer: 2,
@@ -68,7 +68,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: '1, 2, or 3 coffee scoops?',
+        question: '1, 2, or 3 scoops?',
         productId: 1,
         topLevel: false,
         layer: 2,
@@ -76,7 +76,7 @@ let nodes = [
         leafNode: true
     },
     {
-        question: 'What size coffee works best? Small, medium, or large?',
+        question: 'Gotcha. And what size works best? Small, medium, or large?',
         productId: 1,
         topLevel: true,
         layer: 1,
@@ -84,7 +84,7 @@ let nodes = [
         leafNode: false
     },
     {
-        question: 'Perfect! Your coffee order has been placed.',
+        question: 'Perfect! Your coffee order has been placed :)',
         productId: 1,
         topLevel: false,
         layer: 2,

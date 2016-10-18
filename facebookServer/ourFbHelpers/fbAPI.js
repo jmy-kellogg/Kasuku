@@ -163,7 +163,7 @@ function sendTextMessage(recipientId, chatterMsg, pageToken, businessId) {
                             id: recipientId
                         },
                         message: {
-                            text: 'Perfect you order has been placed! Let me know if you need anything else'
+                            text: 'Perfect! Your order has been placed! Please let me know if there is anything else I can do for you :)'
                         }
                     };
                     callSendAPI(messageData, pageToken, businessId);
