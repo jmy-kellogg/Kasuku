@@ -29,6 +29,8 @@ const TopLayer = React.createClass({
       newTopLevelIndex = this.props.topLevelNodes[this.props.prodSelected].length;
     }
 
+    console.log(newTopLevelIndex);
+
     e.preventDefault();
     axios.post('/api/nodes', {
       question: "default question",
@@ -42,26 +44,30 @@ const TopLayer = React.createClass({
     .then(node => node.data)
     .then(node => {
 
+
       this.props.addNewNode(node.productId, node.id, 1, true, node.productId, newTopLevelIndex, true);
       return node;
     })
     .then(node => {
       // console.log(node);
       this.props.updateProductTo(node.productId, node.id);
-      const previousTopLevelNodeId = this.props.topLevelNodes[this.props.prodSelected][newTopLevelIndex-1];
       var _connsToChange = [];
 
-      for(var key in this.props.node){
-        if(this.props.node[key].productId === this.props.prodSelected){
-          this.props.node[key].conns.forEach(conn => {
-            console.log(conn);
-            if(this.props.connection[conn].toId === null){
-              _connsToChange.push(this.props.connection[conn]);
-            }
-          })
+      if(newTopLevelIndex > 0){
+        const previousTopLevelNodeId = this.props.topLevelNodes[this.props.prodSelected][newTopLevelIndex-1].id;
+        for(var key in this.props.node){
+          if(this.props.node[key].productId === this.props.prodSelected){
+            this.props.node[key].conns.forEach(conn => {
+              if(this.props.connection[conn].toId === null){
+                _connsToChange.push(this.props.connection[conn]);
+              }
+            })
+          }
         }
+        this.props.updateLeafNodeConnections(_connsToChange, previousTopLevelNodeId);
       }
-      this.props.updateLeafNodeConnections(_connsToChange, previousTopLevelNodeId);
+
+
       // var changeAllLeafNodes = function(nodeId){
       //   this.props.node[nodeId].conns.forEach(conn => {
       //     if(conn.toId === null){
@@ -76,6 +82,7 @@ const TopLayer = React.createClass({
       // }
       // changeAllLeafNodes(previousTopLevelNodeId);
       //change all leaf nodes from previous top layer node
+
       axios.put(`/api/connections/leaf`, {
         conns: _connsToChange,
         toId: node.id
@@ -83,13 +90,19 @@ const TopLayer = React.createClass({
       .then(res => {
         console.log(res.data);
       })
+
+      console.log(node.productId);
+      console.log(newTopLevelIndex);
       //change product toId
-      axios.put(`/api/connections/${node.productId}`, {
-        toId: node.id
-      })
-      .then(res => {
-        // console.log(res.data);
-      })
+      if(newTopLevelIndex === 0){
+        console.log('inside here');
+        axios.put(`/api/connections/${node.productId}`, {
+          toId: node.id
+        })
+        .then(res => {
+          // console.log(res.data);
+        })
+      }
 
       // this.props.connection[node.productId]
       // update product to point to node.
