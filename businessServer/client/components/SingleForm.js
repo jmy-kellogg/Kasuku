@@ -94,7 +94,7 @@ const SingleForm = React.createClass({
       nextTreePointer = null;
     }
     else{
-      nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1].id;
+      nextTreePointer = this.props.topLevelNodes[this.props.prodSelected][this.props.data.topLevelNodeIndex+1];
     }
 
 		this.refs.answer.value = "";
