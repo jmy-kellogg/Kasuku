@@ -104,7 +104,7 @@ const SingleForm = React.createClass({
 			answer,
 			fromId,
 			productId: this.props.prodSelected,
-      toId: nextTreePointer,
+      toId: nextTreePointer.id,
       businessId: this.props.params.businessId,
 			price,
 			description
@@ -169,6 +169,7 @@ const SingleForm = React.createClass({
         createNewNode.call(this);
       }
     }
+
 
   },
   handleChange: function(nodeId, e){
