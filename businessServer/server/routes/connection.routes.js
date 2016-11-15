@@ -81,7 +81,6 @@ router.post('/', function(req, res, next) {
   })
 });
 router.put('/leaf', (req, res, next) => {
-  console.log(req.body);
   Promise.all(
     req.body.conns.forEach(conn => {
       Connection.findById(conn.id)
